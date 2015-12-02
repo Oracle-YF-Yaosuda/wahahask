@@ -144,6 +144,14 @@
         
         
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+            NSString*path=[NSString stringWithFormat:@"%@/Ducuments/userInfo.plist",NSHomeDirectory()];
+            NSDictionary*datadic=[responseObject valueForKey:@"data"];
+            [datadic writeToFile:path atomically:YES];
+            
+            
+            
+            
+            
            ChaxunViewController*chaxun=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
             [self presentViewController:chaxun animated:YES completion:^{
                [self setModalTransitionStyle: UIModalTransitionStyleCrossDissolve];
