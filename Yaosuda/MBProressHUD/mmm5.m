@@ -1,22 +1,28 @@
 //
-//  MD5_sdk.m
-//  安邦盟信线上订单系统
+//  mmm5.m
+//  NSString+MD5HexDigest
 //
 //  Created by 小狼 on 15/11/26.
-//  Copyright © 2015年 sk. All rights reserved.
+//  Copyright © 2015年 oracle. All rights reserved.
 //
 
-#import "MD5_sdk.h"
+#import "mmm5.h"
 
-@implementation MD5_sdk
+@implementation mmm5
+
 + (NSString *)md5HexDigest:(NSString *)url
 {
+    
+    
+    
     const char *original_str = [url UTF8String];
     unsigned char result[CC_MD5_DIGEST_LENGTH];
     CC_MD5(original_str, strlen(original_str), result);
     NSMutableString *hash = [NSMutableString string];
     for (int i = 0; i < 16; i++)
-        [hash appendFormat:@"%02X", result[i]];
+        [hash appendFormat:@"%02X", result[i] ];
+    
+    
     return [hash lowercaseString];
     
 }

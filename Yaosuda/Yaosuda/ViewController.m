@@ -7,13 +7,13 @@
 //
 
 #import "ViewController.h"
+
+#import "ChaxunViewController.h"
 #import "WarningBox.h"
+#import "lianjie.h"
+#import "hongdingyi.h"
 #import "SBJsonWriter.h"
 #import "AFHTTPRequestOperationManager.h"
-#import "MD5_sdk.h"
-#import "ChaxunViewController.h"
-
-
 @interface ViewController ()
 
 @end
@@ -28,6 +28,12 @@
 //设置圆角
     self.diview.layer.cornerRadius = 5.0;
     self.denglu.layer.cornerRadius = 5.0;
+    
+    
+    
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,20 +45,8 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
     
-    if (textField == self.user) {
-        
-        int len = (int)self.user.text.length;
-        if (len > 10 && string.length >0) {
-            if (![self isMobileNumberClassification:self.user.text]) {
-                [self.view endEditing:YES];
-                [WarningBox warningBoxModeText:@"请输入正确的手机号" andView:self.view];
-            }
-            return NO;
-        }
-        BOOL basic = [self panduanshuzi:string];
-        return basic;
-    }
-    else if (textField == self.pass){
+   
+    if (textField == self.pass){
         
         int len = (int)self.pass.text.length;
         if (len >10 && string.length > 0) {
@@ -68,7 +62,7 @@
 //判断密码
 - (BOOL) validatePass:(NSString *)pass{
     
-    NSString *password = @"^[a-zA-Z0-9]{6,16}";
+    NSString *password = @"^[a-zA-Z0-9]{5,16}";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", password];
     BOOL isMatch = [pred evaluateWithObject:pass];
     return isMatch;
@@ -85,46 +79,6 @@
 }
 
 
-//判断手机号是否正确
--(BOOL)isMobileNumberClassification:(NSString *)mobile{
-    if (mobile.length != 11){
-        
-        return NO;
-        
-    }else{
-        /**
-         * 移动号段正则表达式
-         */
-        NSString *CM_NUM = @"^((13[4-9])|(147)|(15[0-2,7-9])|(178)|(18[2-4,7-8]))\\d{8}|(1705)\\d{7}$";
-        /**
-         * 联通号段正则表达式
-         */
-        NSString *CU_NUM = @"^((13[0-2])|(145)|(15[5-6])|(176)|(18[5,6]))\\d{8}|(1709)\\d{7}$";
-        /**
-         * 电信号段正则表达式
-         */
-        NSString *CT_NUM = @"^((133)|(153)|(177)|(18[0,1,9]))\\d{8}$";
-        
-        //        //手机号正则表达式
-        //        NSString *mm = @"[1][34578]\\d{9}";
-        
-        NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM_NUM];
-        BOOL isMatch1 = [pred1 evaluateWithObject:mobile];
-        
-        NSPredicate *pred2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU_NUM];
-        BOOL isMatch2 = [pred2 evaluateWithObject:mobile];
-        
-        NSPredicate *pred3 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT_NUM];
-        BOOL isMatch3 = [pred3 evaluateWithObject:mobile];
-        
-        if (isMatch1 || isMatch2 || isMatch3) {
-            return YES;
-        }else{
-            return NO;
-        }
-    }
-    return NO;
-}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
@@ -135,83 +89,79 @@
 
 - (IBAction)denglu:(UIButton *)sender {
     [self.view endEditing:YES];
-    /**
-     *  获取手机唯一标识～
-     */
-    /**/
-    CFUUIDRef cfuuid =CFUUIDCreate(kCFAllocatorDefault);
-    NSString *cfuuidString =(NSString*)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, cfuuid));/**/
+   
+ 
+        
+    [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
+        
+        
     
+    //获取设备唯一码
+    NSString *imei = [[UIDevice currentDevice].identifierForVendor UUIDString];
+    NSLog(@"imei－－－－》%@",imei);
     
+    //userID    暂时不用改
+    NSString * userID=@"0";
     
-    NSLog(@"获取手机唯一标识为:%@",cfuuidString);
+    //请求地址   地址不同 必须要改
+    NSString * url =@"/login";
     
+    //时间戳
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    NSDate *datenow = [NSDate date];
+    NSString *nowtimeStr = [formatter stringFromDate:datenow];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    NSLog(@"时间戳:%@",timeSp); //时间戳的值
     
-    //    if (self.xluser.text.length > 0 && self.xlmima.text.length > 0) {
-    if (![self isMobileNumberClassification:self.user.text])
-    {
-        [WarningBox warningBoxModeText:@"请输入正确的手机号!" andView:self.view];
-    }
-    else if(![self validatePass:self.pass.text])
-    {
-        [WarningBox warningBoxModeText:@"密码格式不对哟-.-!" andView:self.view];
-    }
-    else
-    {
-        
-        [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
-        
-        
-        
-        
-        
-        
-        
-        
-        NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:self.user.text,@"loginName",/*密码加密*/[MD5_sdk md5HexDigest: self.pass.text],@"password", nil];
-        
-        SBJsonWriter *write = [[SBJsonWriter alloc]init];
-        NSString *jsonString = [write stringWithObject:data];
-        
-        NSString *url = [NSString stringWithFormat:@"   %@",jsonString];
-        NSString *url2 = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        AFHTTPRequestOperationManager *manger = [AFHTTPRequestOperationManager manager];
-        
-        manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html",nil];
+    //将上传对象转换为json格式字符串
+    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+    //出入参数：
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"chengdu",@"loginName",@"admin",@"password",@"867246020234069"/*imei*/,@"imei", nil];
+    
+    NSString*jsonstring=[writer stringWithObject:datadic];
+    
+    //获取签名
+    NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
+    NSLog(@"%@",sign);
+    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+    
+    NSLog(@"url1==========================%@",url1);
+    //电泳借口需要上传的数据
+    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+    NSLog(@"dic============%@",dic);
+    [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
         
         
+        NSLog(@"%@",[responseObject objectForKey:@"msg"]);
         
-        [manger POST:url2 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [WarningBox warningBoxHide:YES andView:self.view];
-            if ([[responseObject valueForKey:@"flag"] integerValue] == 1) {
-                
-                
-                
-                
-                
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {[WarningBox warningBoxHide:YES andView:self.view];
+        
+        NSLog(@"%@",[ NSString stringWithFormat:@"%@",responseObject]);
+        
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
+        
+        
+        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+           ChaxunViewController*chaxun=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
+            [self presentModalViewController:chaxun animated:YES];
             
-            [WarningBox warningBoxModeText:@"登录失败" andView:self.view];
-            
-            
-        }];
+        }
         
         
         
+       
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+       
+    }];
         
-        /**
-         *  放在接口返回成功的地方
-         */
-        ChaxunViewController*chaxun=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
-        [self.navigationController pushViewController:chaxun animated:YES];
         
-    }
-    //    }
-    //    else
-    //    {
-    //        [WarningBox warningBoxModeText:@"输入的内容不能为空" andView:self.view];
-    //    }
+    
+    
+   
 }
 
 - (IBAction)genghuan:(UIButton *)sender {
@@ -222,7 +172,7 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://18828888888"]];
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [WarningBox warningBoxModeText:@"不打电话你乱按啥！！！" andView:self.view];
+       // [WarningBox warningBoxModeText:@"不打电话你乱按啥！！！" andView:self.view];
     }];
     
     [alert addAction:action1];
