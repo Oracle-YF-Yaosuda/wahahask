@@ -145,7 +145,10 @@
         
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
            ChaxunViewController*chaxun=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
-            [self presentModalViewController:chaxun animated:YES];
+//            [self presentModalViewController:chaxun animated:YES];
+            [self presentViewController:chaxun animated:YES completion:^{
+                
+            }];
             
         }
         

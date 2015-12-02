@@ -229,7 +229,7 @@
         UIImageView *imag = [[UIImageView alloc]initWithFrame:CGRectMake(5, 4, width-10, 317)];
         imag.image = [UIImage imageNamed:@"a.png"];
         
-        UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, height-50, 60, 55)];
+        UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, -50, 60, 55)];
         imag1.image = [UIImage imageNamed:@"@2x_dd_22_22_22.png"];
         [cell.contentView addSubview:imag];
         [cell.contentView addSubview:imag1];
