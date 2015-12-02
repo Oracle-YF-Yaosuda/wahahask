@@ -164,10 +164,10 @@
             </objects>
             <point key="canvasLocation" x="-163" y="-87"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation-->
         <scene sceneID="7xL-5y-FMh">
             <objects>
-                <navigationController id="lok-cn-cQ0" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigation" id="lok-cn-cQ0" customClass="navigation" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CP2-c6-JHG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

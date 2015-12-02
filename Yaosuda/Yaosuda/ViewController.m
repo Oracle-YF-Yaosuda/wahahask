@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#import "ChaxunViewController.h"
+#import "navigation.h"
 #import "WarningBox.h"
 #import "lianjie.h"
 #import "hongdingyi.h"
@@ -142,36 +142,26 @@
         
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
         
-        
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
-            NSString*path=[NSString stringWithFormat:@"%@/Ducuments/userInfo.plist",NSHomeDirectory()];
+            NSString*path=[NSString stringWithFormat:@"%@/Documents/userInfo.plist",NSHomeDirectory()];
+            NSLog(@"%@",[NSString stringWithFormat:@"%@",NSHomeDirectory()]);
+            
             NSDictionary*datadic=[responseObject valueForKey:@"data"];
             [datadic writeToFile:path atomically:YES];
             
-            
-            
-            
-            
-           ChaxunViewController*chaxun=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
+           navigation*chaxun=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"navigation"];
             [self presentViewController:chaxun animated:YES completion:^{
                [self setModalTransitionStyle: UIModalTransitionStyleCrossDissolve];
             }];
             
         }
         
-        
-        
-       
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
        
     }];
-        
-        
     
-    
-   
 }
 
 - (IBAction)genghuan:(UIButton *)sender {
@@ -179,10 +169,11 @@
     
     UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示" message:@"更换登录设备,需要联系系统管理员,是否要拨打电话?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction*action1=[UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //调用手机拨打电话
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://18828888888"]];
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-       // [WarningBox warningBoxModeText:@"不打电话你乱按啥！！！" andView:self.view];
+        [WarningBox warningBoxModeText:@"不打电话你乱按啥！！！" andView:self.view];
     }];
     
     [alert addAction:action1];
@@ -192,8 +183,5 @@
     }];
     
 }
-
-
-
 
 @end

@@ -148,6 +148,7 @@
 		D23DC3C41C0EB3D6007C66DF /* URLEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C31C0EB3D6007C66DF /* URLEncode.m */; };
 		D23DC3C81C0EB3E6007C66DF /* lianjie.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C71C0EB3E6007C66DF /* lianjie.m */; };
 		D2F30C351C0EC33300B07A99 /* WarningBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F30C341C0EC33300B07A99 /* WarningBox.m */; };
+		D2F30C381C0ED51D00B07A99 /* navigation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F30C371C0ED51D00B07A99 /* navigation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -359,6 +360,8 @@
 		D23DC3C71C0EB3E6007C66DF /* lianjie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lianjie.m; sourceTree = "<group>"; };
 		D2F30C331C0EC33300B07A99 /* WarningBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningBox.h; sourceTree = "<group>"; };
 		D2F30C341C0EC33300B07A99 /* WarningBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarningBox.m; sourceTree = "<group>"; };
+		D2F30C361C0ED51D00B07A99 /* navigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = navigation.h; sourceTree = "<group>"; };
+		D2F30C371C0ED51D00B07A99 /* navigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = navigation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -519,6 +522,8 @@
 			children = (
 				95F709611C0BDE2400BEC51C /* ViewController.h */,
 				95F709621C0BDE2400BEC51C /* ViewController.m */,
+				D2F30C361C0ED51D00B07A99 /* navigation.h */,
+				D2F30C371C0ED51D00B07A99 /* navigation.m */,
 			);
 			name = "登录";
 			sourceTree = "<group>";
@@ -1055,6 +1060,7 @@
 				957094031C0C19FA007E27C3 /* Color+Hex.m in Sources */,
 				957093BD1C0BF3AD007E27C3 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				957093BE1C0BF3AD007E27C3 /* SBJsonStreamWriterState.m in Sources */,
+				D2F30C381C0ED51D00B07A99 /* navigation.m in Sources */,
 				957093C01C0BF3AD007E27C3 /* SBJsonUTF8Stream.m in Sources */,
 				95E7D6C91C0D8D5300E95058 /* XiangqingViewController.m in Sources */,
 				957093E11C0BF3B6007E27C3 /* AFSecurityPolicy.m in Sources */,
