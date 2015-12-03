@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface yonghuziliao : NSObject
-
++(NSDictionary*)getUserInfo;
++(NSDictionary*)getZiJinzhanghao;
 @end

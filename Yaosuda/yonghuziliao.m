@@ -9,6 +9,19 @@
 #import "yonghuziliao.h"
 
 @implementation yonghuziliao
-//NSString*path=[NSString stringWithFormat:@"%@/Documents/userInfo.plist"];
++(NSDictionary*)getUserInfo{
+    NSString*path=[NSString stringWithFormat:@"%@/Documents/userInfo.plist",NSHomeDirectory()];
+   
+    NSDictionary*huyong=[NSDictionary dictionaryWithContentsOfFile:path];
+    NSDictionary*UserInfo=[huyong valueForKey:@"user"];
+    return UserInfo;
+}
++(NSDictionary*)getZiJinzhanghao{
+    NSString*path=[NSString stringWithFormat:@"%@/Documents/userInfo.plist",NSHomeDirectory()];
+    
+    NSDictionary*huyong=[NSDictionary dictionaryWithContentsOfFile:path];
+    NSDictionary*zijinInfo=[huyong valueForKey:@"fundAccount"];
+    return zijinInfo;
+}
 
 @end
