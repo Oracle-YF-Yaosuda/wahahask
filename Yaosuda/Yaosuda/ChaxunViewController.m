@@ -9,6 +9,12 @@
 #import "ChaxunViewController.h"
 #import "Color+Hex.h"
 #import "XiadanViewController.h"
+#import "XinxiTableViewController.h"
+#import "lianjie.h"
+#import "hongdingyi.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "SBJson.h"
+#import "WarningBox.h"
 
 @interface ChaxunViewController ()
 {
@@ -35,8 +41,67 @@
 
     a=1;
     
-   
+    [self huoqu];
 }
+
+-(void)huoqu{
+    
+    //userID    暂时不用改
+    NSString * userID=@"0";
+    
+    //请求地址   地址不同 必须要改
+    NSString *url = @"/order/list";
+    
+    //时间戳
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    NSDate *datenow = [NSDate date];
+    NSString *nowtimeStr = [formatter stringFromDate:datenow];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    NSLog(@"时间戳:%@",timeSp); //时间戳的值
+
+    //将上传对象转换为json格式字符串
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    SBJsonWriter *writer = [[SBJsonWriter alloc]init];
+    //出入参数：
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1008",@"loginUserId",@"2015-11-11",@"startDate",@"2015-11-21",@"endDate", @"2",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
+    
+    NSString*jsonstring=[writer stringWithObject:datadic];
+
+    //获取签名
+    NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
+    NSLog(@"%@",sign);
+    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+    
+    NSLog(@"url1==========================%@",url1);
+    //电泳借口需要上传的数据
+    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+    NSLog(@"dic============%@",dic);
+    [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
+
+        
+        if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
+        
+            NSDictionary *datadic = [responseObject valueForKey:@"data"];
+            NSLog(@"++++++++%@",datadic);
+//            NSDictionary *dic= [responseObject valueForKey:@"orderList"];
+//            NSLog(@"----------------%@",dic);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+
+        NSLog(@"%@",error);
+    }];
+    
+    
+    
+    
+}
+
+
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -221,7 +286,7 @@
         UIImageView *imag = [[UIImageView alloc]initWithFrame:CGRectMake(5, 4, width-10, 317)];
         imag.image = [UIImage imageNamed:@"b.png"];
         
-        UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, 325-50, 60, 55)];
+        UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, 320-50, 60, 55)];
         imag1.image = [UIImage imageNamed:@"@2x_dd_22_22.png"];
         [cell.contentView addSubview:imag];
         [cell.contentView addSubview:imag1];
@@ -229,7 +294,7 @@
         UIImageView *imag = [[UIImageView alloc]initWithFrame:CGRectMake(5, 4, width-10, 317)];
         imag.image = [UIImage imageNamed:@"a.png"];
         
-        UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, 325-50, 60, 55)];
+        UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, 320-50, 60, 55)];
         imag1.image = [UIImage imageNamed:@"@2x_dd_22_22_22.png"];
         [cell.contentView addSubview:imag];
         [cell.contentView addSubview:imag1];
@@ -285,7 +350,15 @@
 }
 
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (a == 2) {
+        
+        XinxiTableViewController*xinxi =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"Xinxi"];
+        [self.navigationController pushViewController:xinxi animated:YES];
+        
+    }
+}
 
 
 
