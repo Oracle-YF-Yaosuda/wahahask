@@ -163,6 +163,7 @@
 		D2E834041C0FD53B00F53E7E /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E833F21C0FD53B00F53E7E /* UIImageView+HighlightedWebCache.m */; };
 		D2E834051C0FD53B00F53E7E /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E833F41C0FD53B00F53E7E /* UIImageView+WebCache.m */; };
 		D2E834061C0FD53B00F53E7E /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E833F61C0FD53B00F53E7E /* UIView+WebCacheOperation.m */; };
+		D2E834091C100EAA00F53E7E /* yonghuziliao.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E834081C100EAA00F53E7E /* yonghuziliao.m */; };
 		D2F30C351C0EC33300B07A99 /* WarningBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F30C341C0EC33300B07A99 /* WarningBox.m */; };
 		D2F30C381C0ED51D00B07A99 /* navigation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F30C371C0ED51D00B07A99 /* navigation.m */; };
 /* End PBXBuildFile section */
@@ -407,6 +408,8 @@
 		D2E833F41C0FD53B00F53E7E /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		D2E833F51C0FD53B00F53E7E /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		D2E833F61C0FD53B00F53E7E /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		D2E834071C100EAA00F53E7E /* yonghuziliao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = yonghuziliao.h; sourceTree = "<group>"; };
+		D2E834081C100EAA00F53E7E /* yonghuziliao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = yonghuziliao.m; sourceTree = "<group>"; };
 		D2F30C331C0EC33300B07A99 /* WarningBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningBox.h; sourceTree = "<group>"; };
 		D2F30C341C0EC33300B07A99 /* WarningBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarningBox.m; sourceTree = "<group>"; };
 		D2F30C361C0ED51D00B07A99 /* navigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = navigation.h; sourceTree = "<group>"; };
@@ -850,6 +853,8 @@
 				D23DC3C71C0EB3E6007C66DF /* lianjie.m */,
 				D2F30C331C0EC33300B07A99 /* WarningBox.h */,
 				D2F30C341C0EC33300B07A99 /* WarningBox.m */,
+				D2E834071C100EAA00F53E7E /* yonghuziliao.h */,
+				D2E834081C100EAA00F53E7E /* yonghuziliao.m */,
 			);
 			name = "宏定义和sign转化";
 			sourceTree = "<group>";
@@ -1129,6 +1134,7 @@
 				957094211C0C3A4F007E27C3 /* XinxiTableViewController.m in Sources */,
 				957093DF1C0BF3B6007E27C3 /* AFHTTPSessionManager.m in Sources */,
 				D23DC3C81C0EB3E6007C66DF /* lianjie.m in Sources */,
+				D2E834091C100EAA00F53E7E /* yonghuziliao.m in Sources */,
 				D2E834031C0FD53B00F53E7E /* UIImage+WebP.m in Sources */,
 				957093BF1C0BF3AD007E27C3 /* SBJsonTokeniser.m in Sources */,
 				95E7D6C21C0D6AB300E95058 /* XuanzeViewController.m in Sources */,

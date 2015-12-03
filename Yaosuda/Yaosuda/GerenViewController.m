@@ -31,6 +31,7 @@
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
+    
 
 }
 
