@@ -9,15 +9,25 @@
 #import "XuanzeViewController.h"
 #import "Color+Hex.h"
 #import "XiangqingViewController.h"
+#import "hongdingyi.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "SBJsonWriter.h"
+#import "WarningBox.h"
+#import "lianjie.h"
+#import "hongdingyi.h"
+#import "UIImageView+WebCache.h"
+
 @interface XuanzeViewController ()
 {
     
     CGFloat width;
     CGFloat height;
-    
+    UIButton *gengduo;
     UITableViewCell *cell;
+    NSArray*productionsList;
     
 }
+@property(strong , nonatomic)UIImageView *imagr;
 @end
 
 @implementation XuanzeViewController
@@ -30,6 +40,70 @@
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
+    
+    //userID    暂时不用改
+    NSString * userID=@"0";
+    
+    //请求地址   地址不同 必须要改
+    NSString * url =@"/prod/productionsList";
+    
+    //时间戳
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    NSDate *datenow = [NSDate date];
+    NSString *nowtimeStr = [formatter stringFromDate:datenow];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    NSLog(@"时间戳:%@",timeSp); //时间戳的值
+    
+    //将上传对象转换为json格式字符串
+    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+    //出入参数：
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",@"",@"proName",@"",@"proCatalog",@"1",@"pageNo",@"100",@"pageSize", nil];
+    
+    NSString*jsonstring=[writer stringWithObject:datadic];
+    
+    //获取签名
+    NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
+    NSLog(@"%@",sign);
+    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+    
+    NSLog(@"url1==========================%@",url1);
+    //电泳借口需要上传的数据
+    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+    NSLog(@"dic============%@",dic);
+    [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        
+        
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
+        
+        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+            NSDictionary*data=[responseObject valueForKey:@"data"];
+            productionsList=[data objectForKey:@"productionsList"];
+            NSLog(@"*******************************%@",productionsList);
+            //[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"pics"]
+            
+            
+            
+            
+            [_tableview reloadData];
+            
+            
+            
+        }else{
+            
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        
+    }];
+    
+    
+    
 }
 
 
@@ -38,7 +112,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return productionsList.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 115;//cell高度
@@ -51,10 +125,37 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
     
-    UIImageView *imagr = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,115 , 115)];
-    imagr.image = [UIImage imageNamed:@"9205.jpg"];
+    _imagr = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,115 , 115)];
+   
+        
+    NSString*tupian=[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"pics"]];
+        
+    NSLog(@"tupian************%@",tupian);
+        
+    
+    NSArray*arr=[tupian componentsSeparatedByString:@"|"];
+    
+    NSLog(@"arr000000****************%@",arr);
+
     
     
+    
+    if (tupian.length<10) {
+    
+     _imagr.image=[UIImage imageNamed:@"1.jpg"];
+    
+    }
+     else{
+                 NSString*lian=[NSString stringWithFormat:@"%@",service_host];
+         NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",lian,arr[1]]];
+         
+         NSLog(@" url***************    %@",url);
+         
+         [_imagr sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"1.jpg"]];
+     }
+ 
+    
+   
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(120, 5,60, 15)];
     name.font= [UIFont systemFontOfSize:12];
     name.text = @"商品名称:";
@@ -120,22 +221,23 @@
     shuru.borderStyle=UITextBorderStyleNone;
     
     
-    UIButton *gengduo = [[UIButton alloc]initWithFrame:CGRectMake(271, 87, 30, 20)];
+    gengduo = [[UIButton alloc]initWithFrame:CGRectMake(271, 87, 30, 20)];
+    [gengduo setTag:indexPath.row];
     [gengduo setImage:[UIImage imageNamed:@"@2x_sp_16.png"] forState:UIControlStateNormal];
     [gengduo addTarget:self action:@selector(gengduo) forControlEvents:UIControlEventTouchUpInside];
     
     
     
-    name1.text = @"惠氏 善存 多维元素片";
-    changjia1.text = @"惠氏制药有限公司";
-    guige1.text = @"100片";
-    danwei1.text = @"0.22kg";
+    name1.text = [NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"proName" ]];
+    changjia1.text = [NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"proEnterprise" ]];
+    guige1.text =[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"etalon" ]];
+    danwei1.text = [NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"unit" ]];
     
     
     
     
     
-    [cell.contentView addSubview:imagr];
+    [cell.contentView addSubview:_imagr];
 
     [cell.contentView addSubview:name];
     [cell.contentView addSubview:changjia];
@@ -159,9 +261,6 @@
     return cell;
 }
 
-
-
-
 #pragma mark - button点击事件
 
 -(void)tianjia{
@@ -176,10 +275,10 @@
 -(void)gengduo{
     
     XiangqingViewController *xiangqing = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiangqing"];
+    xiangqing.shangID=[NSString stringWithFormat:@"%ld",gengduo.tag];
     [self.navigationController pushViewController:xiangqing animated:YES];
 
 }
-
 
 
 
@@ -192,6 +291,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

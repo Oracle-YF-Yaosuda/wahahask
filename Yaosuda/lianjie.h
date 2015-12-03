@@ -10,5 +10,5 @@
 #import <UIKit/UIKit.h>
 @interface lianjie : NSObject
 +(NSString*)postSign:(NSString*)url :(NSString*)userID :(NSString*)jsonstring :(NSString*)timeSP;
-
++(NSString*)getSign:(NSString*)url :(NSString*)userID :(NSString*)jsonstring :(NSString*)timeSP;
 @end

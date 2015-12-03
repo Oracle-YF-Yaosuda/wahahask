@@ -11,6 +11,6 @@
 @interface XiangqingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
-
+@property( strong , nonatomic)NSString*shangID;
 
 @end

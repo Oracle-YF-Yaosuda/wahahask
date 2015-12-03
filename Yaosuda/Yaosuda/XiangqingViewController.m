@@ -8,12 +8,18 @@
 
 #import "XiangqingViewController.h"
 #import "Color+Hex.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "hongdingyi.h"
+#import "lianjie.h"
+#import "SBJsonWriter.h"
+#import "WarningBox.h"
+
 
 @interface XiangqingViewController ()
 {
     CGFloat width;
     CGFloat height;
-    
+    NSDictionary*shangpin;
     UITableViewCell *cell;
 }
 @end
@@ -28,6 +34,73 @@
     
     self.tableview.delegate = self;
     self.tableview.dataSource =self;
+    
+    //userID    暂时不用改
+    NSString * userID=@"0";
+    
+    //请求地址   地址不同 必须要改
+    NSString * url =@"/prod/productions";
+    
+    //时间戳
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    NSDate *datenow = [NSDate date];
+    NSString *nowtimeStr = [formatter stringFromDate:datenow];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    NSLog(@"时间戳:%@",timeSp); //时间戳的值
+    
+    //将上传对象转换为json格式字符串
+    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+    //出入参数：
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:/*_shangID*/@"11",@"productionsId", nil];
+    
+    NSString*jsonstring=[writer stringWithObject:datadic];
+    
+    //获取签名
+    NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
+    NSLog(@"%@",sign);
+    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+    
+    NSLog(@"url1==========================%@",url1);
+    //电泳借口需要上传的数据
+    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+    NSLog(@"dic============%@",dic);
+    [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+            NSDictionary*data=[responseObject valueForKey:@"data"];
+           
+            shangpin=(NSDictionary*)[data objectForKey:@"productions"];
+            
+            //NSLog(@"shangpin----------------%@",shangpin);
+            for (NSString *s in [shangpin allKeys]) {
+                NSLog(@"    zidian*********--->%@", [NSString stringWithFormat:@"%@",s]);
+            }
+            for (NSString *s in [shangpin allValues]) {
+                NSLog(@"    zidian*********--->%@", [NSString stringWithFormat:@"%@",s]);
+            }
+            
+            
+            [_tableview reloadData];
+            
+            
+            
+        }else{
+            
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        
+    }];
+    
+
+    
+    
+    
   
 }
 
@@ -36,19 +109,20 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0) {
-        return 1;
-    }
-    else if (section == 1){
-        return 1;
-    }
-    else if (section == 2){
-        return 1;
-    }
-    else if (section == 3){
-        return 1;
-    }
-    return 0;
+//    if (section == 0) {
+//        return 1;
+//    }
+//    else if (section == 1){
+//        return 1;
+//    }
+//    else if (section == 2){
+//        return 1;
+//    }
+//    else if (section == 3){
+//        return 1;
+//    }
+//    return 0;
+    return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
@@ -121,10 +195,10 @@
         
 //***************************
         
-        name1.text = @"惠氏 善存 多维元素片";
-        changjia1.text = @"惠氏制药有限公司";
-        guige1.text = @"100片";
-        danwei1.text = @"0.22kg";
+        name1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"proName"]];
+        changjia1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"proEnterprise"]];
+        guige1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"etalon"]];
+        danwei1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"unit"]];
         
 //****************************
         [viewForHeader addSubview:name];
