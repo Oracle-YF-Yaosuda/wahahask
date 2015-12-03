@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XiugaiViewController : UIViewController
+@interface XiugaiViewController : UIViewController<UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *oldpass;
+
+@property (weak, nonatomic) IBOutlet UITextField *newpass;
+
+@property (weak, nonatomic) IBOutlet  UITextField*newpass1;
+
+@property (weak, nonatomic) IBOutlet UIButton *queren;
+
+- (IBAction)queren:(id)sender;
 
 @end

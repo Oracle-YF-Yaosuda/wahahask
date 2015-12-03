@@ -327,13 +327,13 @@
                                         <rect key="frame" x="135" y="65" width="455" height="30"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请在次输入新密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RTq-dm-nFa">
                                         <rect key="frame" x="135" y="115" width="455" height="30"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKF-1I-DJU">
                                         <rect key="frame" x="0.0" y="50" width="600" height="1"/>
@@ -358,7 +358,7 @@
                                             <constraint firstAttribute="height" constant="30" id="kdg-PC-Q21"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                     </textField>
                                 </subviews>
                                 <animations/>
@@ -401,6 +401,9 @@
                                 <state key="normal" title="确认">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="queren:" destination="0Tq-BS-qrh" eventType="touchUpInside" id="iAw-ia-gZg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
@@ -415,6 +418,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="修改密码" id="OtG-gT-uqR"/>
+                    <connections>
+                        <outlet property="newpass" destination="RmU-pz-GfX" id="SSw-qE-gHB"/>
+                        <outlet property="newpass1" destination="RTq-dm-nFa" id="CKe-Rd-dSp"/>
+                        <outlet property="oldpass" destination="E3A-RN-L4B" id="sCf-Vh-tvw"/>
+                        <outlet property="queren" destination="WZJ-JS-fQI" id="9dP-mI-6yx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPD-ID-SJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

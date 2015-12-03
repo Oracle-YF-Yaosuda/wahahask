@@ -88,6 +88,7 @@
 
 
 - (IBAction)denglu:(UIButton *)sender {
+    //键盘消失
     [self.view endEditing:YES];
    
  
