@@ -8,6 +8,12 @@
 
 #import "KehuViewController.h"
 #import "Color+Hex.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "SBJsonWriter.h"
+#import "hongdingyi.h"
+#import "lianjie.h"
+#import "WarningBox.h"
+#import "yonghuziliao.h"
 
 @interface KehuViewController ()
 {
@@ -35,6 +41,66 @@
     //解决tableview多出的白条
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    NSString*businesspersonId=[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"];
+//    //userID    暂时不用改
+//    NSString * userID=@"0";
+//    
+//    //请求地址   地址不同 必须要改
+//    NSString * url =@"/customer";
+//    
+//    //时间戳
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+//    NSDate *datenow = [NSDate date];
+//    NSString *nowtimeStr = [formatter stringFromDate:datenow];
+//    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+//    NSLog(@"时间戳:%@",timeSp); //时间戳的值
+//    
+//    //将上传对象转换为json格式字符串
+//    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+//    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+//    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+//    //出入参数：
+//    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",businesspersonId],@"businesspersonId", nil];
+//    
+//    NSString*jsonstring=[writer stringWithObject:datadic];
+//    
+//    //获取签名
+//    NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
+//    NSLog(@"%@",sign);
+//    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+//    
+//    NSLog(@"url1==========================%@",url1);
+//    //电泳借口需要上传的数据
+//    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+//    NSLog(@"dic============%@",dic);
+//    [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        
+//        
+//        
+//        
+//        
+//        
+//        NSLog(@"%@",[ NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]]);
+//        NSLog(@"%@",responseObject);
+//       
+//        
+//        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+//          
+//            
+//                   
+//            
+//            
+//           
+//            
+//        }
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [WarningBox warningBoxHide:YES andView:self.view];
+//        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+//        NSLog(@"%@",error);
+//    }];
+
+   
 }
 
 - (void)didReceiveMemoryWarning {
