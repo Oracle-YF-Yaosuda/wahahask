@@ -36,10 +36,18 @@
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
     
+    self.qian.delegate = self;
+    self.hou.delegate =self;
+    
+    
+    
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.width;
 
     a=1;
+    
+    self.beijing.hidden = YES;
+    
     
     [self huoqu];
 }
@@ -359,7 +367,20 @@
         
     }
 }
-
+- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField{
+    if (textField == self.qian){
+        self.beijing.hidden = NO;
+        a=3;
+        return NO;
+    }
+    else if (textField == self.hou){
+        self.beijing.hidden = NO;
+        a=4;
+        return NO;
+    }
+    
+    return YES;
+}
 
 
 
@@ -378,10 +399,14 @@
     index = (int)_fenduan.selectedSegmentIndex;
     if (index == 0 ) {
         a = 1;
+        self.qian.text=nil;
+        self.hou.text=nil;
         [self.tableview reloadData];
     }
     else if(index == 1){
         a = 2;
+        self.qian.text=nil;
+        self.hou.text=nil;
         [self.tableview reloadData];
     }
 }
@@ -389,6 +414,39 @@
 - (IBAction)Zuo:(id)sender {
 }
 
-- (IBAction)You:(id)sender {
+- (IBAction)queding:(id)sender {
+    //获取用户设置的时间
+    NSDate *selected = [self.picker date];
+    //创建一个日期格式器
+    NSDateFormatter *dataFoematter = [[NSDateFormatter alloc]init];
+    //为日期格式器设置格式字符串
+    [dataFoematter setDateFormat:@"yyyy-MM-dd"];
+    //使用日期格式器格式化时间
+    NSString *destDateString = [dataFoematter stringFromDate:selected];
+    
+    NSLog(@"%@",destDateString);
+
+    self.beijing.hidden = YES;
+    if (a == 3) {
+        self.qian.text = destDateString;
+    }
+    else if (a == 4){
+        self.hou.text = destDateString;
+    }
+    
+    
+}
+
+- (IBAction)quxiao:(id)sender {
+    
+    self.beijing.hidden = YES;
+    
+}
+
+
+- (IBAction)chaxun:(id)sender {
+    
+   
+    
 }
 @end
