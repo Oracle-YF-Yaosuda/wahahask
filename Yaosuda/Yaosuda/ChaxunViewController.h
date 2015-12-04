@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *hou;
 
 - (IBAction)chaxun:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *chaxun;
+
+
 
 @property (weak, nonatomic) IBOutlet UIView *beijing;
 

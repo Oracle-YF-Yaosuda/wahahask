@@ -47,6 +47,10 @@
     a=1;
     
     self.beijing.hidden = YES;
+    self.chaxun.layer.cornerRadius = 5.0;
+    
+    
+  
     
     
     [self huoqu];
