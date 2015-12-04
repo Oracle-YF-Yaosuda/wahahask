@@ -16,6 +16,8 @@
 #import "lianjie.h"
 #import "hongdingyi.h"
 #import "UIImageView+WebCache.h"
+#import "XiadanViewController.h"
+
 
 @interface XuanzeViewController ()
 {
@@ -23,6 +25,7 @@
     CGFloat width;
     CGFloat height;
     UIButton *gengduo;
+    UIButton *tianjia;
     UITableViewCell *cell;
     NSArray*productionsList;
     
@@ -187,7 +190,8 @@
 
     
     
-    UIButton *tianjia = [[UIButton alloc]initWithFrame:CGRectMake(width-60, 45, 50, 30)];
+    tianjia = [[UIButton alloc]initWithFrame:CGRectMake(width-60, 45, 50, 30)];
+    [tianjia setTag:indexPath.row+2000];
     [tianjia setImage:[UIImage imageNamed:@"@2x_sp_07.png"] forState:UIControlStateNormal];
     [tianjia addTarget:self action:@selector(tianjia) forControlEvents:UIControlEventTouchUpInside];
     
@@ -222,7 +226,7 @@
     
     
     gengduo = [[UIButton alloc]initWithFrame:CGRectMake(271, 87, 30, 20)];
-    [gengduo setTag:indexPath.row];
+    [gengduo setTag:indexPath.row+1000];
     [gengduo setImage:[UIImage imageNamed:@"@2x_sp_16.png"] forState:UIControlStateNormal];
     [gengduo addTarget:self action:@selector(gengduo) forControlEvents:UIControlEventTouchUpInside];
     
@@ -265,6 +269,9 @@
 
 -(void)tianjia{
     
+    XiadanViewController*xiadan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
+    [xiadan.chuan addObject: productionsList[tianjia.tag-2000]];
+    
 }
 -(void)jia{
     
@@ -275,7 +282,7 @@
 -(void)gengduo{
     
     XiangqingViewController *xiangqing = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiangqing"];
-    xiangqing.shangID=[NSString stringWithFormat:@"%ld",gengduo.tag];
+    xiangqing.shangID=[NSString stringWithFormat:@"%ld",gengduo.tag-1000];
     [self.navigationController pushViewController:xiangqing animated:YES];
 
 }
