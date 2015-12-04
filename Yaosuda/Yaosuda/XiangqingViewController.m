@@ -13,6 +13,7 @@
 #import "lianjie.h"
 #import "SBJsonWriter.h"
 #import "WarningBox.h"
+#import "ZizunViewController.h"
 
 
 @interface XiangqingViewController ()
@@ -468,10 +469,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 2) {
-        UIViewController *viewController = [[UIViewController alloc] init];
-        viewController.title = @"商品资质";
-        viewController.view.backgroundColor = [UIColor whiteColor];
-        [self.navigationController pushViewController:viewController animated:YES];
+      
+        ZizunViewController *zixun = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"zixun"];
+        [self.navigationController pushViewController:zixun animated:YES];
     }
     
 }
