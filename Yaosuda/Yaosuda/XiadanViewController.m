@@ -21,10 +21,15 @@
 @end
 
 @implementation XiadanViewController
-
+-(void)viewWillAppear:(BOOL)animated{
+    
+    NSLog(@"%@",_chuan);
+    NSSet * set = [NSSet setWithArray: _chuan ];
+    NSLog(@"set.count     %ld",set.count);
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+   _chuan=[NSMutableArray array];
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
     

@@ -270,7 +270,8 @@
 -(void)tianjia{
     
     XiadanViewController*xiadan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
-    [xiadan.chuan addObject: productionsList[tianjia.tag-2000]];
+    [(NSMutableArray*)xiadan.chuan addObject: productionsList[tianjia.tag-2000]];
+    NSLog(@"%@",productionsList[tianjia.tag-2000]);
     
 }
 -(void)jia{
