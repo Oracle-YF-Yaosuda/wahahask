@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZizunViewController : UIViewController
+@interface ZizunViewController : UIViewController<UIScrollViewDelegate>
 
 
 
