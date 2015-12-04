@@ -90,15 +90,18 @@
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     NSLog(@"dic============%@",dic);
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
+        
 
         
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
         
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
             NSLog(@"++++++++%@",datadic);
-//            NSDictionary *dic= [responseObject valueForKey:@"orderList"];
-//            NSLog(@"----------------%@",dic);
+
+            
+            
+            
+            
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
