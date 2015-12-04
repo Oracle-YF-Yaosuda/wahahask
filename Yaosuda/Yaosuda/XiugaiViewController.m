@@ -97,12 +97,11 @@
     
     //键盘消失
     [self.view endEditing:YES];
-    
     //userID    暂时不用改
     NSString * userID=@"0";
     
     //请求地址   地址不同 必须要改
-    NSString * url =@"/login";
+    NSString * url =@"/modifypwd";
     
     //时间戳
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
@@ -110,14 +109,14 @@
     NSString *nowtimeStr = [formatter stringFromDate:datenow];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
     NSLog(@"时间戳:%@",timeSp); //时间戳的值
-
+    
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1008",@"loginName",@"admin",@"oldpassword",@"111111",@"newspassword", nil];
-
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"chengdu",@"loginName",@"admin",@"oldpassword",@"111111",@"newspassword", nil];
+    
     NSString*jsonstring=[writer stringWithObject:datadic];
     
     //获取签名
@@ -129,25 +128,23 @@
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     NSLog(@"dic============%@",dic);
-
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
-            [WarningBox warningBoxHide:YES andView:self.view];
+        
+        NSLog(@"%@",[ NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]]);
+        NSLog(@"*********************%@",responseObject);
+        
+        
+        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             
-            
-            NSLog(@"%@",[responseObject objectForKey:@"msg"]);
-            
-            
-            NSLog(@"%@",[ NSString stringWithFormat:@"%@",responseObject]);
-            
-            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
         }
-        else
-            NSLog(@"%@",[responseObject objectForKey:@"msg"]);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        NSLog(@"%@",error);
     }];
+  
+    
        // }
 //    }
 //    else{

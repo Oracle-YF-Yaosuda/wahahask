@@ -14,23 +14,28 @@
 {
     CGFloat width;
     CGFloat height;
-    
+    NSArray*jieshou;
     UITableViewCell *cell;
 }
 
 @end
 
 @implementation XiadanViewController
--(void)passTrendValue:(NSDictionary *)values{
-    NSLog(@"%@",values);
+-(void)passTrendValue:(NSArray *)values{
+    
+    jieshou=[NSArray arrayWithArray:values];
+    NSLog(@"jieshou/**************************/%@",jieshou);
+    NSLog(@"%ld",jieshou.count);
+   
 }
 -(void)viewWillAppear:(BOOL)animated{
-   
-  
+    [super viewDidLoad];
+    [_tableview reloadData];
+    
 }
 - (void)viewDidLoad {
-    [super viewDidLoad];
-   
+    
+   [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
     
@@ -41,7 +46,7 @@
     
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(tiao)];
     self.navigationItem.rightBarButtonItem = right;
-    
+  
 }
 
 -(void)tiao{
@@ -53,7 +58,8 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    //return 3;
+    return jieshou.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

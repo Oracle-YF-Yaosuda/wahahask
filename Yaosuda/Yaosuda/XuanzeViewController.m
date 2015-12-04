@@ -26,7 +26,7 @@
     CGFloat height;
     UIButton *gengduo;
     UIButton *tianjia;
-    NSMutableDictionary*chuande;
+    NSMutableArray*chuande;
     UITableViewCell *cell;
     NSArray*productionsList;
     
@@ -38,13 +38,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    chuande=[NSMutableDictionary dictionary];
+    chuande=[NSMutableArray array];
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
-    
+    UIBarButtonItem *left = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(fanhui)];
+    self.navigationItem.leftBarButtonItem = left;
+  
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -110,7 +112,16 @@
     
 }
 
-
+-(void)fanhui{
+//    XiadanViewController*xiadan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
+//    
+       // 放到返回上一页面
+        XiadanViewController*memeda=[[XiadanViewController alloc] init];
+        self.trendDelegate= memeda;
+        [self.trendDelegate passTrendValue:chuande];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -227,7 +238,7 @@
     
     
     gengduo = [[UIButton alloc]initWithFrame:CGRectMake(271, 87, 30, 20)];
-    [gengduo setTag:indexPath.row+1000];
+   
     [gengduo setImage:[UIImage imageNamed:@"@2x_sp_16.png"] forState:UIControlStateNormal];
     [gengduo addTarget:self action:@selector(gengduo) forControlEvents:UIControlEventTouchUpInside];
     
@@ -263,20 +274,20 @@
     [cell.contentView addSubview:shuru];
     
     [cell.contentView addSubview:gengduo];
+    cell.selectionStyle =UITableViewCellSelectionStyleNone;
     return cell;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    XiangqingViewController *xiangqing = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiangqing"];
+    xiangqing.shangID=[NSString stringWithFormat:@"%ld",indexPath.row];
+    [self.navigationController pushViewController:xiangqing animated:YES];
+}
 #pragma mark - button点击事件
 
 -(void)tianjia{
-//    放到返回上一页面
-//    XiadanViewController*xiadan=[[XiadanViewController alloc] init];
-//    xiadan.transitioningDelegate=xiadan;
-//    [self.trendDelegate passTrendValue:chuande];
     
-    [chuande addEntriesFromDictionary:(NSDictionary*) productionsList[tianjia.tag-2000]];
-    NSLog(@"-----------------%@",productionsList[tianjia.tag-2000]);
-    NSLog(@"%@",chuande);
+    [chuande addObject:productionsList[tianjia.tag-2000]];
+    
 }
 -(void)jia{
     
@@ -286,9 +297,7 @@
 }
 -(void)gengduo{
     
-    XiangqingViewController *xiangqing = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiangqing"];
-    xiangqing.shangID=[NSString stringWithFormat:@"%ld",gengduo.tag-1000];
-    [self.navigationController pushViewController:xiangqing animated:YES];
+   
 
 }
 

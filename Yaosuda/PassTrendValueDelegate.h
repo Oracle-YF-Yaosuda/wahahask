@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol PassTrendValueDelegate
 
--(void)passTrendValue:(NSDictionary *)values;
+-(void)passTrendValue:(NSArray *)values;
 
 
 @end
