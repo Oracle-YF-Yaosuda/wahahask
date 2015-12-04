@@ -1177,6 +1177,25 @@
             </objects>
             <point key="canvasLocation" x="2438" y="1207"/>
         </scene>
+        <!--Zizun View Controller-->
+        <scene sceneID="pia-Up-1L5">
+            <objects>
+                <viewController storyboardIdentifier="zixun" id="Oto-2G-FtR" customClass="ZizunViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Au-tv-awm"/>
+                        <viewControllerLayoutGuide type="bottom" id="NRr-lw-2tZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SWt-jh-83Y">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w7g-cB-c6x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2438" y="1884"/>
+        </scene>
         <!--选择商品-->
         <scene sceneID="85O-hl-xyl">
             <objects>
@@ -2513,25 +2532,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qH9-Po-I2R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1779" y="555"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="VtW-Ja-5sU">
-            <objects>
-                <viewController id="7gB-CE-6Ao" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cZK-Gc-q6T"/>
-                        <viewControllerLayoutGuide type="bottom" id="kiO-eH-iiA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="72x-eC-WCq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wb4-aD-TeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="962" y="983"/>
         </scene>
     </scenes>
     <resources>

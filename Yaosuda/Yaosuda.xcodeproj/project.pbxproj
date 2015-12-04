@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9521ABD21C11817F0036B052 /* ZizunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9521ABD11C11817F0036B052 /* ZizunViewController.m */; settings = {ASSET_TAGS = (); }; };
 		957093B61C0BF3AD007E27C3 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 9570939E1C0BF3AD007E27C3 /* NSObject+SBJson.m */; };
 		957093B71C0BF3AD007E27C3 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 957093A11C0BF3AD007E27C3 /* SBJsonParser.m */; };
 		957093B81C0BF3AD007E27C3 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 957093A31C0BF3AD007E27C3 /* SBJsonStreamParser.m */; };
@@ -186,6 +187,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9521ABD01C11817F0036B052 /* ZizunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZizunViewController.h; sourceTree = "<group>"; };
+		9521ABD11C11817F0036B052 /* ZizunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZizunViewController.m; sourceTree = "<group>"; };
 		9570939D1C0BF3AD007E27C3 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		9570939E1C0BF3AD007E27C3 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		9570939F1C0BF3AD007E27C3 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -586,6 +589,8 @@
 			children = (
 				95E7D6C71C0D8D5300E95058 /* XiangqingViewController.h */,
 				95E7D6C81C0D8D5300E95058 /* XiangqingViewController.m */,
+				9521ABD01C11817F0036B052 /* ZizunViewController.h */,
+				9521ABD11C11817F0036B052 /* ZizunViewController.m */,
 				95E7D6C01C0D6AB300E95058 /* XuanzeViewController.h */,
 				95E7D6C11C0D6AB300E95058 /* XuanzeViewController.m */,
 				95E7D6B71C0D3DF700E95058 /* XiadanbianjiViewController.h */,
@@ -1185,6 +1190,7 @@
 				D2E834061C0FD53B00F53E7E /* UIView+WebCacheOperation.m in Sources */,
 				95F7095D1C0BDE2400BEC51C /* main.m in Sources */,
 				957093DE1C0BF3B6007E27C3 /* AFHTTPRequestOperationManager.m in Sources */,
+				9521ABD21C11817F0036B052 /* ZizunViewController.m in Sources */,
 				957093BA1C0BF3AD007E27C3 /* SBJsonStreamParserAdapter.m in Sources */,
 				D2E833F81C0FD53B00F53E7E /* NSData+ImageContentType.m in Sources */,
 				D2F30C351C0EC33300B07A99 /* WarningBox.m in Sources */,
