@@ -233,7 +233,7 @@
     UITextField *shuru = [[UITextField alloc]initWithFrame:CGRectMake(201, 87, 23,20)];
     shuru.text = @"0";
     shuru.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    shuru.textAlignment = UITextAlignmentCenter;
+    shuru.textAlignment = NSTextAlignmentCenter;
     shuru.borderStyle=UITextBorderStyleNone;
     
     

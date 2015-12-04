@@ -176,7 +176,7 @@
     lab11.text = @"还没显示";
     lab11.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     lab11.font = [UIFont systemFontOfSize:13];
-    lab11.textAlignment = UITextAlignmentCenter;
+    lab11.textAlignment = NSTextAlignmentCenter;
 
     
     
@@ -190,7 +190,7 @@
     lab21.text = @"还没显示";
     lab21.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     lab21.font = [UIFont systemFontOfSize:13];
-    lab21.textAlignment = UITextAlignmentCenter;
+    lab21.textAlignment = NSTextAlignmentCenter;
 
     
     
@@ -206,7 +206,7 @@
     lab31.text = @"还没显示";
     lab31.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     lab31.font = [UIFont systemFontOfSize:13];
-    lab31.textAlignment = UITextAlignmentCenter;
+    lab31.textAlignment = NSTextAlignmentCenter;
 
     
     
@@ -223,7 +223,7 @@
     lab41.text = @"还没显示";
     lab41.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     lab41.font = [UIFont systemFontOfSize:13];
-    lab41.textAlignment = UITextAlignmentCenter;
+    lab41.textAlignment = NSTextAlignmentCenter;
 
     
     
@@ -241,7 +241,7 @@
     lab51.text = @"还没显示";
     lab51.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     lab51.font = [UIFont systemFontOfSize:13];
-    lab51.textAlignment = UITextAlignmentCenter;
+    lab51.textAlignment = NSTextAlignmentCenter;
 
     
     
@@ -258,7 +258,7 @@
     lab61.text = @"还没显示";
     lab61.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     lab61.font = [UIFont systemFontOfSize:13];
-    lab61.textAlignment = UITextAlignmentCenter;
+    lab61.textAlignment = NSTextAlignmentCenter;
 
     
     
@@ -275,7 +275,7 @@
     lab71.text = @"还没显示";
     lab71.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     lab71.font = [UIFont systemFontOfSize:13];
-    lab71.textAlignment = UITextAlignmentCenter;
+    lab71.textAlignment = NSTextAlignmentCenter;
 
     
     
@@ -292,7 +292,7 @@
     lab81.text = @"还没显示";
     lab81.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     lab81.font = [UIFont systemFontOfSize:13];
-    lab81.textAlignment = UITextAlignmentCenter;
+    lab81.textAlignment = NSTextAlignmentCenter;
 
     
     

@@ -88,15 +88,15 @@
     UILabel *la11 = [[UILabel alloc]initWithFrame:CGRectMake(70, 10, width-80, 30)];
     la11.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     la11.font = [UIFont systemFontOfSize:13];
-    la11.textAlignment = UITextAlignmentCenter;
+    la11.textAlignment = NSTextAlignmentCenter;
     UILabel *la22 = [[UILabel alloc]initWithFrame:CGRectMake(70, 45, width-80, 30)];
     la22.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     la22.font = [UIFont systemFontOfSize:13];
-    la22.textAlignment = UITextAlignmentCenter;
+    la22.textAlignment = NSTextAlignmentCenter;
     UILabel *la33 = [[UILabel alloc]initWithFrame:CGRectMake(70, 80, width-80, 30)];
     la33.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     la33.font = [UIFont systemFontOfSize:13];
-    la33.textAlignment = UITextAlignmentCenter;
+    la33.textAlignment = NSTextAlignmentCenter;
     
     
     

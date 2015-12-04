@@ -190,7 +190,7 @@
     KHmingzi1.text = @"小明";
     KHmingzi1.font = [UIFont systemFontOfSize:13];
     KHmingzi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-    KHmingzi1.textAlignment = UITextAlignmentCenter;
+    KHmingzi1.textAlignment = NSTextAlignmentCenter;
     UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, 40, width, 1)];
     xian1.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
     
@@ -204,7 +204,7 @@
     LXdianhua1.text = @"18345559961";
     LXdianhua1.font = [UIFont systemFontOfSize:14];
     LXdianhua1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-    LXdianhua1.textAlignment = UITextAlignmentCenter;
+    LXdianhua1.textAlignment = NSTextAlignmentCenter;
    
 
     
@@ -218,7 +218,7 @@
     CKdizhi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     CKdizhi1.text = @"黑龙江省哈尔滨市松北区科技创新城";
     CKdizhi1.font = [UIFont systemFontOfSize:13];
-    CKdizhi1.textAlignment = UITextAlignmentCenter;
+    CKdizhi1.textAlignment = NSTextAlignmentCenter;
     UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(0, 75, width, 1)];
     xian2.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
     
@@ -232,7 +232,7 @@
     ZCdizhi1.text = @"黑龙江省大庆市让胡路区大庆师范学院";
     ZCdizhi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     ZCdizhi1.font = [UIFont systemFontOfSize:13];
-    ZCdizhi1.textAlignment = UITextAlignmentCenter;
+    ZCdizhi1.textAlignment = NSTextAlignmentCenter;
     
 
     UILabel *FZren = [[UILabel alloc]initWithFrame:CGRectMake(10, 115, width/4-10, 30)];
@@ -243,7 +243,7 @@
     FZren1.text = @"小红";
     FZren1.font = [UIFont systemFontOfSize:13];
     FZren1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-    FZren1.textAlignment = UITextAlignmentCenter;
+    FZren1.textAlignment = NSTextAlignmentCenter;
 
     
     
@@ -256,7 +256,7 @@
     LXren1.text = @"小华";
     LXren1.font = [UIFont systemFontOfSize:13];
     LXren1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-    LXren1.textAlignment = UITextAlignmentCenter;
+    LXren1.textAlignment = NSTextAlignmentCenter;
     UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(0, 115, width, 1)];
     xian3.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
 

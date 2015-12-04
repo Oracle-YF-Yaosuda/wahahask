@@ -94,7 +94,7 @@
     name1.text = @"暂无数据";
     name1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     name1.font = [UIFont systemFontOfSize:15];
-    name1.textAlignment = UITextAlignmentCenter;
+    name1.textAlignment = NSTextAlignmentCenter;
     
     
     
@@ -111,7 +111,7 @@
     shuliang1.text = @"暂无数据";
     shuliang1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     shuliang1.font = [UIFont systemFontOfSize:15];
-    shuliang1.textAlignment = UITextAlignmentCenter;
+    shuliang1.textAlignment = NSTextAlignmentCenter;
 
     
     
@@ -128,7 +128,7 @@
     danjia1.text = @"暂无数据";
     danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     danjia1.font = [UIFont systemFontOfSize:15];
-    danjia1.textAlignment = UITextAlignmentCenter;
+    danjia1.textAlignment = NSTextAlignmentCenter;
     
     
 
