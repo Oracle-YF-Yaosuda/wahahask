@@ -368,7 +368,7 @@
 		95F709E51C0BDE6300BEC51C /* green_23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_23.png; sourceTree = "<group>"; };
 		95F709E61C0BDE6300BEC51C /* rt_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rt_03.png; sourceTree = "<group>"; };
 		95F709E71C0BDE6300BEC51C /* yellow_23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_23.png; sourceTree = "<group>"; };
-		D21BDF931C112F900031F431 /* shujuchuansong.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shujuchuansong.h; sourceTree = "<group>"; };
+		D21BDF931C112F900031F431 /* PassTrendValueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassTrendValueDelegate.h; sourceTree = "<group>"; };
 		D23DC3BF1C0EB3C1007C66DF /* mmm5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmm5.h; sourceTree = "<group>"; };
 		D23DC3C01C0EB3C1007C66DF /* mmm5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mmm5.m; sourceTree = "<group>"; };
 		D23DC3C21C0EB3D6007C66DF /* URLEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLEncode.h; sourceTree = "<group>"; };
@@ -852,7 +852,7 @@
 			children = (
 				D2E834071C100EAA00F53E7E /* yonghuziliao.h */,
 				D2E834081C100EAA00F53E7E /* yonghuziliao.m */,
-				D21BDF931C112F900031F431 /* shujuchuansong.h */,
+				D21BDF931C112F900031F431 /* PassTrendValueDelegate.h */,
 			);
 			name = "协议与本地数据";
 			sourceTree = "<group>";

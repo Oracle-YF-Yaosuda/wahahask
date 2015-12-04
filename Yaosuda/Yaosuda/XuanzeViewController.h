@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PassTrendValueDelegate.h"
 
 @interface XuanzeViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
-
+@property (retain , nonatomic) id<PassTrendValueDelegate>trendDelegate;
 
 @end

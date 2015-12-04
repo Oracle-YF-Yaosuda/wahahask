@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PassTrendValueDelegate.h"
 
-@interface XiadanViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface XiadanViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,PassTrendValueDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
-@property (strong , nonatomic) NSMutableArray * chuan;
+
 
 
 

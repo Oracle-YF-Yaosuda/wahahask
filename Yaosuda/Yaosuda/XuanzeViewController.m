@@ -26,6 +26,7 @@
     CGFloat height;
     UIButton *gengduo;
     UIButton *tianjia;
+    NSMutableDictionary*chuande;
     UITableViewCell *cell;
     NSArray*productionsList;
     
@@ -37,7 +38,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    chuande=[NSMutableDictionary dictionary];
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
     
@@ -268,11 +269,14 @@
 #pragma mark - button点击事件
 
 -(void)tianjia{
+//    放到返回上一页面
+//    XiadanViewController*xiadan=[[XiadanViewController alloc] init];
+//    xiadan.transitioningDelegate=xiadan;
+//    [self.trendDelegate passTrendValue:chuande];
     
-    XiadanViewController*xiadan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
-    [(NSMutableArray*)xiadan.chuan addObject: productionsList[tianjia.tag-2000]];
-    NSLog(@"%@",productionsList[tianjia.tag-2000]);
-    
+    [chuande addEntriesFromDictionary:(NSDictionary*) productionsList[tianjia.tag-2000]];
+    NSLog(@"-----------------%@",productionsList[tianjia.tag-2000]);
+    NSLog(@"%@",chuande);
 }
 -(void)jia{
     
