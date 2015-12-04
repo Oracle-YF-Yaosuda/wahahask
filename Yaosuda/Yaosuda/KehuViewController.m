@@ -21,7 +21,7 @@
     CGFloat height;
     
     UITableViewCell *cell;
-    
+    NSArray*customerList;
     UIImageView *image;
     UIImageView *image1;
 }
@@ -42,70 +42,12 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     NSString*businesspersonId=[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"];
-//    //userID    暂时不用改
-//    NSString * userID=@"0";
-//    
-//    //请求地址   地址不同 必须要改
-//    NSString * url =@"/customer";
-//    
-//    //时间戳
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-//    NSDate *datenow = [NSDate date];
-//    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-//    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-//    NSLog(@"时间戳:%@",timeSp); //时间戳的值
-//    
-//    //将上传对象转换为json格式字符串
-//    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
-//    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
-//    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
-//    //出入参数：
-//    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",businesspersonId],@"businesspersonId", nil];
-//    
-//    NSString*jsonstring=[writer stringWithObject:datadic];
-//    
-//    //获取签名
-//    NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-//    NSLog(@"%@",sign);
-//    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
-//    
-//    NSLog(@"url1==========================%@",url1);
-//    //电泳借口需要上传的数据
-//    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-//    NSLog(@"dic============%@",dic);
-//    [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//        
-//        
-//        
-//        
-//        
-//        NSLog(@"%@",[ NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]]);
-//        NSLog(@"%@",responseObject);
-//       
-//        
-//        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
-//          
-//            
-//                   
-//            
-//            
-//           
-//            
-//        }
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [WarningBox warningBoxHide:YES andView:self.view];
-//        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
-//        NSLog(@"%@",error);
-//    }];
 
-   
     //userID    暂时不用改
     NSString * userID=@"0";
     
     //请求地址   地址不同 必须要改
-    NSString * url =@"/prod/priceByNum";
+    NSString * url =@"/customer/customerList";
     
     //时间戳
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
@@ -119,7 +61,7 @@
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",@"300",@"acount",@"1",@"customerId",@"1",@"productionsId", nil];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",@"1",@"pageNo",@"10",@"pageSize", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     
@@ -134,11 +76,15 @@
     NSLog(@"dic============%@",dic);
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"msg======%@",[ NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]]);
-        NSLog(@"     ***************************      %@",responseObject);
+        NSLog(@"%@",[ NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]]);
+        NSLog(@"*********************%@",responseObject);
         
         
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+            NSDictionary*data=[responseObject valueForKey:@"data"];
+            customerList=[data objectForKey:@"customerList"];
+            
+            [_tableview reloadData];
             
         }
         
@@ -147,7 +93,6 @@
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
         NSLog(@"%@",error);
     }];
-    
 
     
     
@@ -159,7 +104,7 @@
     // Dispose of any resources that can be recreated.
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return customerList.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -187,7 +132,7 @@
     KHmingzi.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     KHmingzi.font = [UIFont systemFontOfSize:13];
     UILabel *KHmingzi1 = [[UILabel alloc]initWithFrame:CGRectMake(width/4-10, 10, width/4, 30)];
-    KHmingzi1.text = @"小明";
+    KHmingzi1.text = [customerList[indexPath.row] objectForKey:@"customerName" ];
     KHmingzi1.font = [UIFont systemFontOfSize:13];
     KHmingzi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     KHmingzi1.textAlignment = NSTextAlignmentCenter;
@@ -201,7 +146,11 @@
     LXdianhua.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     LXdianhua.font = [UIFont systemFontOfSize:13];
     UILabel *LXdianhua1 = [[UILabel alloc]initWithFrame:CGRectMake(width/2+width/4-30, 10, width/4+30, 30)];
-    LXdianhua1.text = @"18345559961";
+    
+    
+    
+    
+    LXdianhua1.text = [customerList[indexPath.row] objectForKey:@"linkmanPhone" ];
     LXdianhua1.font = [UIFont systemFontOfSize:14];
     LXdianhua1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     LXdianhua1.textAlignment = NSTextAlignmentCenter;
@@ -216,7 +165,11 @@
     CKdizhi.font = [UIFont systemFontOfSize:13];
     UILabel *CKdizhi1 = [[UILabel alloc]initWithFrame:CGRectMake(80, 45, width-90, 30)];
     CKdizhi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-    CKdizhi1.text = @"黑龙江省哈尔滨市松北区科技创新城";
+    
+    
+    
+    
+    CKdizhi1.text = [customerList[indexPath.row] objectForKey:@"warehouseAddress" ];
     CKdizhi1.font = [UIFont systemFontOfSize:13];
     CKdizhi1.textAlignment = NSTextAlignmentCenter;
     UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(0, 75, width, 1)];
@@ -229,7 +182,11 @@
     ZCdizhi.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     ZCdizhi.font = [UIFont systemFontOfSize:13];
     UILabel *ZCdizhi1 = [[UILabel alloc]initWithFrame:CGRectMake(80, 80, width-90, 30)];
-    ZCdizhi1.text = @"黑龙江省大庆市让胡路区大庆师范学院";
+    
+    
+    
+    
+    ZCdizhi1.text = [customerList[indexPath.row] objectForKey:@"registerAddress" ];
     ZCdizhi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     ZCdizhi1.font = [UIFont systemFontOfSize:13];
     ZCdizhi1.textAlignment = NSTextAlignmentCenter;
@@ -240,7 +197,11 @@
     FZren.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     FZren.font = [UIFont systemFontOfSize:13];
     UILabel *FZren1 = [[UILabel alloc]initWithFrame:CGRectMake(width/4-10, 115, width/4, 30)];
-    FZren1.text = @"小红";
+    
+    
+    
+    
+    FZren1.text = [customerList[indexPath.row] objectForKey:@"officer" ];
     FZren1.font = [UIFont systemFontOfSize:13];
     FZren1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     FZren1.textAlignment = NSTextAlignmentCenter;
@@ -253,7 +214,10 @@
     LXren.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     LXren.font = [UIFont systemFontOfSize:13];
     UILabel *LXren1 = [[UILabel alloc]initWithFrame:CGRectMake(width/2+width/4-30, 115, width/4+30, 30)];
-    LXren1.text = @"小华";
+   
+    
+    
+    LXren1.text = [customerList[indexPath.row] objectForKey:@"linkman" ];
     LXren1.font = [UIFont systemFontOfSize:13];
     LXren1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     LXren1.textAlignment = NSTextAlignmentCenter;
