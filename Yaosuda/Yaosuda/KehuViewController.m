@@ -14,6 +14,7 @@
 #import "lianjie.h"
 #import "WarningBox.h"
 #import "yonghuziliao.h"
+#import "XiadanViewController.h"
 
 @interface KehuViewController ()
 {
@@ -132,7 +133,7 @@
     KHmingzi.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     KHmingzi.font = [UIFont systemFontOfSize:13];
     UILabel *KHmingzi1 = [[UILabel alloc]initWithFrame:CGRectMake(width/4-10, 10, width/4, 30)];
-    KHmingzi1.text = [customerList[indexPath.row] objectForKey:@"customerName" ];
+    KHmingzi1.text = [customerList[indexPath.section] objectForKey:@"customerName" ];
     KHmingzi1.font = [UIFont systemFontOfSize:13];
     KHmingzi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     KHmingzi1.textAlignment = NSTextAlignmentCenter;
@@ -150,7 +151,7 @@
     
     
     
-    LXdianhua1.text = [customerList[indexPath.row] objectForKey:@"linkmanPhone" ];
+    LXdianhua1.text = [customerList[indexPath.section] objectForKey:@"linkmanPhone" ];
     LXdianhua1.font = [UIFont systemFontOfSize:14];
     LXdianhua1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     LXdianhua1.textAlignment = NSTextAlignmentCenter;
@@ -169,7 +170,7 @@
     
     
     
-    CKdizhi1.text = [customerList[indexPath.row] objectForKey:@"warehouseAddress" ];
+    CKdizhi1.text = [customerList[indexPath.section] objectForKey:@"warehouseAddress" ];
     CKdizhi1.font = [UIFont systemFontOfSize:13];
     CKdizhi1.textAlignment = NSTextAlignmentCenter;
     UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(0, 75, width, 1)];
@@ -186,7 +187,7 @@
     
     
     
-    ZCdizhi1.text = [customerList[indexPath.row] objectForKey:@"registerAddress" ];
+    ZCdizhi1.text = [customerList[indexPath.section] objectForKey:@"registerAddress" ];
     ZCdizhi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     ZCdizhi1.font = [UIFont systemFontOfSize:13];
     ZCdizhi1.textAlignment = NSTextAlignmentCenter;
@@ -201,7 +202,7 @@
     
     
     
-    FZren1.text = [customerList[indexPath.row] objectForKey:@"officer" ];
+    FZren1.text = [customerList[indexPath.section] objectForKey:@"officer" ];
     FZren1.font = [UIFont systemFontOfSize:13];
     FZren1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     FZren1.textAlignment = NSTextAlignmentCenter;
@@ -217,7 +218,7 @@
    
     
     
-    LXren1.text = [customerList[indexPath.row] objectForKey:@"linkman" ];
+    LXren1.text = [customerList[indexPath.section] objectForKey:@"linkman" ];
     LXren1.font = [UIFont systemFontOfSize:13];
     LXren1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     LXren1.textAlignment = NSTextAlignmentCenter;
@@ -267,13 +268,13 @@
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    XiadanViewController*xiadan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
+    
+    xiadan.kehumingzi.text=[NSString stringWithFormat:@"%@",[customerList[indexPath.section]objectForKey:@"customerName"]];
+    
+    [self.navigationController pushViewController:xiadan animated:YES];
     
     
-    if (indexPath.section == 0) {
-        
-        
-        
-    }
 
     
     
