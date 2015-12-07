@@ -251,7 +251,7 @@
         for (int i =0 ; i< 4; i++) {
             UIImageView *image = [[UIImageView alloc] init];
             
-            NSString *imgName = [NSString stringWithFormat:@"img_%02d.jpg",i+1];
+            NSString *imgName = [NSString stringWithFormat:@"%d.jpg",i+1];
             image.image = [UIImage imageNamed:imgName];
             CGFloat imgX = i * imgW;
             image.frame = CGRectMake(imgX, imgY, imgW, imgH);
