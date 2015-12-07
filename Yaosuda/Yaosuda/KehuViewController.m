@@ -21,7 +21,7 @@
     CGFloat width;
     CGFloat height;
     
-    UITableViewCell *cell;
+    
     NSArray*customerList;
     UIImageView *image;
     UIImageView *image1;
@@ -124,8 +124,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *id1 =@"mycell1";
+    UITableViewCell * cell;
     
     cell = [tableView cellForRowAtIndexPath:indexPath ];
+    
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
@@ -228,6 +230,15 @@
     xian3.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
 
     
+    image = [[UIImageView alloc]initWithFrame:CGRectMake(1, 0, width-2, 150)];
+    image.image = [UIImage imageNamed:@"b.png"];
+    
+    image1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-20, 3, 15, 15)];
+    image1.image = [UIImage imageNamed:@"@2x_kh_03.png"];
+    
+
+   
+
     [cell.contentView addSubview:KHmingzi];
     [cell.contentView addSubview:KHmingzi1];
     [cell.contentView addSubview:LXdianhua];
@@ -241,6 +252,7 @@
     [cell.contentView addSubview:LXren];
     [cell.contentView addSubview:LXren1];
    
+    
     [cell.contentView addSubview:xian1];
     [cell.contentView addSubview:xian2];
     [cell.contentView addSubview:xian3];
@@ -253,7 +265,7 @@
     self.tableview.showsVerticalScrollIndicator =NO;
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    NSLog(@"----------------%ld",indexPath.section);
     
     
     return cell;
@@ -262,38 +274,23 @@
 //    XiadanViewController*xiadan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
 //    xiadan.kehumingzi.text=[NSString stringWithFormat:@"%@",[customerList[indexPath.section]objectForKey:@"customerName"]];
 //    [self.navigationController pushViewController:xiadan animated:YES];
-    
-    if (indexPath.section == 0) {
-        
-        [self btnActionForUserSetting:self];
+    long cc;
+    cc=indexPath.section;
+    UITableViewCell *cell1 = [tableView cellForRowAtIndexPath:indexPath];
 
-    }
-    else if (indexPath.section){
-        
-        [self btnActionForUserSetting:self];
-        
-    }
+    [cell1.contentView viewWithTag:cc];
     
-    [cell.contentView addSubview:image];
-    [cell.contentView addSubview:image1];
+    [cell1.contentView addSubview:image];
+    [cell1.contentView addSubview:image1];
+
+    
+    NSLog(@".............%ld",(long)indexPath.section);
+    
+   
+    
 
 //返回上一页
     [[self navigationController] popViewControllerAnimated:YES];
-    
-}
-//修改cell内容
-- (void)btnActionForUserSetting:(id) sender {
-    
-    NSIndexPath *indexPath = [self.tableview indexPathForSelectedRow];
-    cell = [self.tableview cellForRowAtIndexPath:indexPath];
-    image = [[UIImageView alloc]initWithFrame:CGRectMake(1, 0, width-2, 150)];
-    image.image = [UIImage imageNamed:@"b.png"];
-    image1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-20, 3, 15, 15)];
-    image1.image = [UIImage imageNamed:@"@2x_kh_03.png"];
-   
-    [[NSUserDefaults standardUserDefaults]setObject:KHmingzi1.text forKey:@"kehumingzi"];
-    
-    
     
 }
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9521ABD21C11817F0036B052 /* ZizunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9521ABD11C11817F0036B052 /* ZizunViewController.m */; settings = {ASSET_TAGS = (); }; };
+		956160471C155FDC005F92C9 /* KehuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 956160461C155FDC005F92C9 /* KehuViewController.m */; settings = {ASSET_TAGS = (); }; };
 		957093B61C0BF3AD007E27C3 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 9570939E1C0BF3AD007E27C3 /* NSObject+SBJson.m */; };
 		957093B71C0BF3AD007E27C3 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 957093A11C0BF3AD007E27C3 /* SBJsonParser.m */; };
 		957093B81C0BF3AD007E27C3 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 957093A31C0BF3AD007E27C3 /* SBJsonStreamParser.m */; };
@@ -50,7 +51,6 @@
 		9570941E1C0C292C007E27C3 /* 确认订单_MarkMan.png in Resources */ = {isa = PBXBuildFile; fileRef = 957094111C0C292C007E27C3 /* 确认订单_MarkMan.png */; };
 		957094211C0C3A4F007E27C3 /* XinxiTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957094201C0C3A4F007E27C3 /* XinxiTableViewController.m */; };
 		957094271C0C619B007E27C3 /* XiadanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957094261C0C619B007E27C3 /* XiadanViewController.m */; };
-		95E7D6B61C0D238D00E95058 /* KehuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6B51C0D238D00E95058 /* KehuViewController.m */; };
 		95E7D6B91C0D3DF700E95058 /* XiadanbianjiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6B81C0D3DF700E95058 /* XiadanbianjiViewController.m */; };
 		95E7D6BC1C0D4A3A00E95058 /* GerenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6BB1C0D4A3A00E95058 /* GerenViewController.m */; };
 		95E7D6BF1C0D64E800E95058 /* XiugaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6BE1C0D64E800E95058 /* XiugaiViewController.m */; };
@@ -189,6 +189,7 @@
 /* Begin PBXFileReference section */
 		9521ABD01C11817F0036B052 /* ZizunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZizunViewController.h; sourceTree = "<group>"; };
 		9521ABD11C11817F0036B052 /* ZizunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZizunViewController.m; sourceTree = "<group>"; };
+		956160461C155FDC005F92C9 /* KehuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KehuViewController.m; sourceTree = "<group>"; };
 		9570939D1C0BF3AD007E27C3 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		9570939E1C0BF3AD007E27C3 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		9570939F1C0BF3AD007E27C3 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -263,7 +264,6 @@
 		957094251C0C619B007E27C3 /* XiadanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XiadanViewController.h; sourceTree = "<group>"; };
 		957094261C0C619B007E27C3 /* XiadanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XiadanViewController.m; sourceTree = "<group>"; };
 		95E7D6B41C0D238D00E95058 /* KehuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KehuViewController.h; sourceTree = "<group>"; };
-		95E7D6B51C0D238D00E95058 /* KehuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KehuViewController.m; sourceTree = "<group>"; };
 		95E7D6B71C0D3DF700E95058 /* XiadanbianjiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XiadanbianjiViewController.h; sourceTree = "<group>"; };
 		95E7D6B81C0D3DF700E95058 /* XiadanbianjiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XiadanbianjiViewController.m; sourceTree = "<group>"; };
 		95E7D6BA1C0D4A3A00E95058 /* GerenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GerenViewController.h; sourceTree = "<group>"; };
@@ -596,7 +596,7 @@
 				95E7D6B71C0D3DF700E95058 /* XiadanbianjiViewController.h */,
 				95E7D6B81C0D3DF700E95058 /* XiadanbianjiViewController.m */,
 				95E7D6B41C0D238D00E95058 /* KehuViewController.h */,
-				95E7D6B51C0D238D00E95058 /* KehuViewController.m */,
+				956160461C155FDC005F92C9 /* KehuViewController.m */,
 				957094251C0C619B007E27C3 /* XiadanViewController.h */,
 				957094261C0C619B007E27C3 /* XiadanViewController.m */,
 			);
@@ -1163,7 +1163,6 @@
 				957093B61C0BF3AD007E27C3 /* NSObject+SBJson.m in Sources */,
 				957093BC1C0BF3AD007E27C3 /* SBJsonStreamWriter.m in Sources */,
 				957094001C0BF51E007E27C3 /* ChaxunViewController.m in Sources */,
-				95E7D6B61C0D238D00E95058 /* KehuViewController.m in Sources */,
 				957093B81C0BF3AD007E27C3 /* SBJsonStreamParser.m in Sources */,
 				D2E834051C0FD53B00F53E7E /* UIImageView+WebCache.m in Sources */,
 				D2E834001C0FD53B00F53E7E /* UIButton+WebCache.m in Sources */,
@@ -1198,6 +1197,7 @@
 				D2E833FD1C0FD53B00F53E7E /* SDWebImageDownloaderOperation.m in Sources */,
 				957093FB1C0BF3E0007E27C3 /* MBProgressHUD.m in Sources */,
 				D2E833FC1C0FD53B00F53E7E /* SDWebImageDownloader.m in Sources */,
+				956160471C155FDC005F92C9 /* KehuViewController.m in Sources */,
 				D23DC3C41C0EB3D6007C66DF /* URLEncode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
