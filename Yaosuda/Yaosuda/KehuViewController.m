@@ -25,6 +25,8 @@
     NSArray*customerList;
     UIImageView *image;
     UIImageView *image1;
+    
+    UILabel *KHmingzi1 ;
 }
 @end
 
@@ -132,7 +134,7 @@
     KHmingzi.text = @"客户姓名:";
     KHmingzi.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     KHmingzi.font = [UIFont systemFontOfSize:13];
-    UILabel *KHmingzi1 = [[UILabel alloc]initWithFrame:CGRectMake(width/4-10, 10, width/4, 30)];
+    KHmingzi1 = [[UILabel alloc]initWithFrame:CGRectMake(width/4-10, 10, width/4, 30)];
     KHmingzi1.text = [customerList[indexPath.section] objectForKey:@"customerName" ];
     KHmingzi1.font = [UIFont systemFontOfSize:13];
     KHmingzi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
@@ -226,17 +228,6 @@
     xian3.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
 
     
-    
-
-    image = [[UIImageView alloc]initWithFrame:CGRectMake(1, 0, width-2, 150)];
-    image.image = [UIImage imageNamed:@"b.png"];
-   
-    image1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-20, 3, 15, 15)];
-    image1.image = [UIImage imageNamed:@"@2x_kh_03.png"];
-    
-    
-    
-    
     [cell.contentView addSubview:KHmingzi];
     [cell.contentView addSubview:KHmingzi1];
     [cell.contentView addSubview:LXdianhua];
@@ -249,9 +240,7 @@
     [cell.contentView addSubview:FZren1];
     [cell.contentView addSubview:LXren];
     [cell.contentView addSubview:LXren1];
-    [cell.contentView addSubview:image];
-    [cell.contentView addSubview:image1];
-    
+   
     [cell.contentView addSubview:xian1];
     [cell.contentView addSubview:xian2];
     [cell.contentView addSubview:xian3];
@@ -271,14 +260,41 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //    XiadanViewController*xiadan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
-//    
 //    xiadan.kehumingzi.text=[NSString stringWithFormat:@"%@",[customerList[indexPath.section]objectForKey:@"customerName"]];
-    
 //    [self.navigationController pushViewController:xiadan animated:YES];
     
-    [[self navigationController] popViewControllerAnimated:YES];
+    if (indexPath.section == 0) {
+        
+        [self btnActionForUserSetting:self];
 
+    }
+    else if (indexPath.section){
+        
+        [self btnActionForUserSetting:self];
+        
+    }
+    
+    [cell.contentView addSubview:image];
+    [cell.contentView addSubview:image1];
+
+//返回上一页
+    [[self navigationController] popViewControllerAnimated:YES];
+    
+}
+//修改cell内容
+- (void)btnActionForUserSetting:(id) sender {
+    
+    NSIndexPath *indexPath = [self.tableview indexPathForSelectedRow];
+    cell = [self.tableview cellForRowAtIndexPath:indexPath];
+    image = [[UIImageView alloc]initWithFrame:CGRectMake(1, 0, width-2, 150)];
+    image.image = [UIImage imageNamed:@"b.png"];
+    image1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-20, 3, 15, 15)];
+    image1.image = [UIImage imageNamed:@"@2x_kh_03.png"];
+   
+    [[NSUserDefaults standardUserDefaults]setObject:KHmingzi1.text forKey:@"kehumingzi"];
+    
     
     
 }
+
 @end
