@@ -91,9 +91,9 @@
     }else{
         page ++;
     }
-    CGFloat offsetX = page * self.scrollView.frame.size.width;
+    CGFloat offsetX = page *self.scrollView.frame.size.width;
     
-    [self .scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
+    [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
 }
 //scrollview滚动方法
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView

@@ -262,19 +262,21 @@
     self.tableview.separatorStyle = UITableViewCellSelectionStyleNone;
     //隐藏滑动条
     self.tableview.showsVerticalScrollIndicator =NO;
+    //cell不可点击
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     
     
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    XiadanViewController*xiadan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
+//    XiadanViewController*xiadan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
+//    
+//    xiadan.kehumingzi.text=[NSString stringWithFormat:@"%@",[customerList[indexPath.section]objectForKey:@"customerName"]];
     
-    xiadan.kehumingzi.text=[NSString stringWithFormat:@"%@",[customerList[indexPath.section]objectForKey:@"customerName"]];
+//    [self.navigationController pushViewController:xiadan animated:YES];
     
-    [self.navigationController pushViewController:xiadan animated:YES];
-    
-    
+    [[self navigationController] popViewControllerAnimated:YES];
 
     
     
