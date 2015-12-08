@@ -56,7 +56,7 @@
     zhi = 1;
     
     [self huoququanbu];
-    [self huoqudaishenhe];
+   
 }
 //获取全部订单网络数据
 -(void)huoququanbu
@@ -101,10 +101,6 @@
         
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
             NSLog(@"++++++++%@",datadic);
-
-            
-            
-            
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -119,6 +115,57 @@
 //获取待审核数据
 -(void)huoqudaishenhe
 {
+    
+    //userID    暂时不用改
+    NSString * userID=@"0";
+    
+    //请求地址   地址不同 必须要改
+    NSString *url = @"/order/auditList";
+    
+    //时间戳
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    NSDate *datenow = [NSDate date];
+    NSString *nowtimeStr = [formatter stringFromDate:datenow];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    //NSLog(@"时间戳:%@",timeSp); //时间戳的值
+    
+    //将上传对象转换为json格式字符串
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    SBJsonWriter *writer = [[SBJsonWriter alloc]init];
+    //出入参数：
+
+    NSDictionary*datadic1=[NSDictionary dictionaryWithObjectsAndKeys:@"53",@"businesspersonId",nil];
+    
+    NSString*jsonstring=[writer stringWithObject:datadic1];
+    
+    //获取签名
+    NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
+    //NSLog(@"%@",sign);
+    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+    
+    //NSLog(@"url1%@",url1);
+    //电泳借口需要上传的数据
+    NSDictionary*dic1=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+    //NSLog(@"dic============%@",dic1);
+
+    [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
+            
+            NSDictionary *data1 = [responseObject valueForKey:@"data"];
+            NSLog(@"返回数据***********%@***********返回数据",data1);
+            
+        }
+        //NSLog(@"%@",responseObject);
+        //NSLog(@"-----------------------%@",[NSString stringWithFormat:@"%@", [responseObject objectForKey:@"msg"]]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        
+        NSLog(@"%@",error);
+
+    }];
+    
     
 }
 //section
@@ -461,6 +508,7 @@
     }
     else if(index == 1){
         zhi = 2;
+        [self huoqudaishenhe];
         self.qian.text=nil;
         self.hou.text=nil;
         [self.tableview reloadData];
@@ -473,7 +521,7 @@
     //创建一个日期格式器
     NSDateFormatter *dataFoematter = [[NSDateFormatter alloc]init];
     //为日期格式器设置格式字符串
-    [dataFoematter setDateFormat:@"yyyy-MM-dd"];
+    [dataFoematter setDateFormat:@"  yyyy-MM-dd"];
     //使用日期格式器格式化时间
     NSString *destDateString = [dataFoematter stringFromDate:selected];
     
