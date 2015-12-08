@@ -12,7 +12,7 @@
 - (NSString *)encodeToPercentEscapeString: (NSString *) input
 {
     NSString*
-    outputStr = (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(                           NULL, /* allocator */(__bridge CFStringRef)input,NULL, /* charactersToLeaveUnescaped */(CFStringRef)@"!*'();:@&=$,/?%#[]",kCFStringEncodingUTF8);
+    outputStr = (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes( NULL, /* allocator */(__bridge CFStringRef)input,NULL, /* charactersToLeaveUnescaped */(CFStringRef)@"!*'();:@&=$,/?%#[]",kCFStringEncodingUTF8);
     
     
     return outputStr;

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9521ABD21C11817F0036B052 /* ZizunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9521ABD11C11817F0036B052 /* ZizunViewController.m */; settings = {ASSET_TAGS = (); }; };
-		956160471C155FDC005F92C9 /* KehuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 956160461C155FDC005F92C9 /* KehuViewController.m */; settings = {ASSET_TAGS = (); }; };
+		9521ABD21C11817F0036B052 /* ZizunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9521ABD11C11817F0036B052 /* ZizunViewController.m */; };
+		956160471C155FDC005F92C9 /* KehuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 956160461C155FDC005F92C9 /* KehuViewController.m */; };
 		957093B61C0BF3AD007E27C3 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 9570939E1C0BF3AD007E27C3 /* NSObject+SBJson.m */; };
 		957093B71C0BF3AD007E27C3 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 957093A11C0BF3AD007E27C3 /* SBJsonParser.m */; };
 		957093B81C0BF3AD007E27C3 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 957093A31C0BF3AD007E27C3 /* SBJsonStreamParser.m */; };
@@ -145,7 +145,7 @@
 		95F70A351C0BDE6300BEC51C /* green_23.png in Resources */ = {isa = PBXBuildFile; fileRef = 95F709E51C0BDE6300BEC51C /* green_23.png */; };
 		95F70A361C0BDE6300BEC51C /* rt_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 95F709E61C0BDE6300BEC51C /* rt_03.png */; };
 		95F70A371C0BDE6300BEC51C /* yellow_23.png in Resources */ = {isa = PBXBuildFile; fileRef = 95F709E71C0BDE6300BEC51C /* yellow_23.png */; };
-		D23DC3C11C0EB3C1007C66DF /* mmm5.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C01C0EB3C1007C66DF /* mmm5.m */; };
+		D23DC3C11C0EB3C1007C66DF /* mmm5.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C01C0EB3C1007C66DF /* mmm5.m */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
 		D23DC3C41C0EB3D6007C66DF /* URLEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C31C0EB3D6007C66DF /* URLEncode.m */; };
 		D23DC3C81C0EB3E6007C66DF /* lianjie.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C71C0EB3E6007C66DF /* lianjie.m */; };
 		D2E833F71C0FD53B00F53E7E /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E833D71C0FD53B00F53E7E /* MKAnnotationView+WebCache.m */; };
