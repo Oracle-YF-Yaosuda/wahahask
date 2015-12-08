@@ -360,7 +360,6 @@
             [self.chaxun setTitle:@"查询" forState:UIControlStateNormal];
             self.chaxun.layer.cornerRadius = 5.0;
             self.chaxun.titleLabel.font = [UIFont systemFontOfSize:15];
-
             
             //textfield代理
             self.qian.delegate = self;

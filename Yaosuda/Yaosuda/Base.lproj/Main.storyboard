@@ -2251,7 +2251,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3u-E2-2bk">
-                                <rect key="frame" x="305" y="9" width="277" height="37"/>
+                                <rect key="frame" x="306" y="9" width="277" height="37"/>
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="0.59607843140000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="退回">
@@ -2263,7 +2263,7 @@
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="0.59607843140000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="G6v-jc-IKB"/>
+                                    <constraint firstAttribute="height" constant="37" id="P5q-zi-fkn"/>
                                 </constraints>
                                 <state key="normal" title="通过">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2273,13 +2273,13 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="b3u-E2-2bk" secondAttribute="trailing" constant="10" id="15t-hf-gzu"/>
-                            <constraint firstItem="b3u-E2-2bk" firstAttribute="leading" secondItem="fWm-xR-Ol4" secondAttribute="trailing" constant="10" id="BDl-Q7-SG2"/>
-                            <constraint firstItem="fWm-xR-Ol4" firstAttribute="leading" secondItem="PQi-cr-Wl0" secondAttribute="leadingMargin" constant="10" id="ILh-UT-fd6"/>
-                            <constraint firstItem="b3u-E2-2bk" firstAttribute="height" secondItem="fWm-xR-Ol4" secondAttribute="height" id="WZv-T1-4h7"/>
-                            <constraint firstItem="b3u-E2-2bk" firstAttribute="width" secondItem="fWm-xR-Ol4" secondAttribute="width" id="XYr-WP-zDL"/>
-                            <constraint firstItem="fWm-xR-Ol4" firstAttribute="top" secondItem="PQi-cr-Wl0" secondAttribute="topMargin" id="eRL-0e-fCJ"/>
-                            <constraint firstItem="b3u-E2-2bk" firstAttribute="centerY" secondItem="fWm-xR-Ol4" secondAttribute="centerY" id="gMT-nN-gTZ"/>
+                            <constraint firstItem="b3u-E2-2bk" firstAttribute="height" secondItem="fWm-xR-Ol4" secondAttribute="height" id="Ic2-yC-Dsi"/>
+                            <constraint firstItem="b3u-E2-2bk" firstAttribute="top" secondItem="PQi-cr-Wl0" secondAttribute="top" constant="9" id="QMp-V0-CFO"/>
+                            <constraint firstAttribute="trailing" secondItem="b3u-E2-2bk" secondAttribute="trailing" constant="18" id="bU4-Ue-g71"/>
+                            <constraint firstItem="b3u-E2-2bk" firstAttribute="leading" secondItem="fWm-xR-Ol4" secondAttribute="trailing" constant="11" id="cwb-dw-gh9"/>
+                            <constraint firstItem="b3u-E2-2bk" firstAttribute="width" secondItem="fWm-xR-Ol4" secondAttribute="width" id="iiA-cy-066"/>
+                            <constraint firstItem="fWm-xR-Ol4" firstAttribute="leading" secondItem="PQi-cr-Wl0" secondAttribute="leading" constant="18" id="sOS-i0-ZYL"/>
+                            <constraint firstItem="fWm-xR-Ol4" firstAttribute="top" secondItem="PQi-cr-Wl0" secondAttribute="top" constant="8" id="y8U-C6-Co5"/>
                         </constraints>
                     </tableViewCellContentView>
                     <animations/>
