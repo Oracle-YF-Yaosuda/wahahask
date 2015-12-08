@@ -233,7 +233,6 @@
         self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, width, 250)];
         //穿件uipageconrol
         self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 230, width, 10)];
-        
         //设置uipageconrol的圆点颜色
         self.pageControl.pageIndicatorTintColor = [UIColor redColor];
         //设置uipageconrol的高亮圆点颜色
@@ -525,12 +524,6 @@
     
 }
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 @end
