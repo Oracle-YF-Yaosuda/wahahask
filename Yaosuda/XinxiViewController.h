@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface XinxiViewController : ViewController
+@interface XinxiViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @end

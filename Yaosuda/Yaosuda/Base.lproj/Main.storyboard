@@ -393,7 +393,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZJ-JS-fQI">
                                 <rect key="frame" x="20" y="240" width="560" height="40"/>
                                 <animations/>
-                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.49803921568627452" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="tSu-dG-i0u"/>
                                 </constraints>
@@ -404,6 +404,13 @@
                                 <connections>
                                     <action selector="queren:" destination="0Tq-BS-qrh" eventType="touchUpInside" id="iAw-ia-gZg"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzW-w2-cb7">
+                                <rect key="frame" x="352" y="419" width="46" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                             </button>
                         </subviews>
                         <animations/>
@@ -571,6 +578,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="订单查询" id="b2s-jc-Pc4">
+                        <barButtonItem key="backBarButtonItem" title=" " id="YfQ-eJ-ASl"/>
                         <barButtonItem key="leftBarButtonItem" image="@2x_dd_22_03.png" id="UFW-9M-ikv">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -735,6 +743,7 @@
                                 <rect key="frame" x="0.0" y="104" width="600" height="458"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Aa2-oi-2No" id="dAU-nB-ckp"/>
                                     <outlet property="delegate" destination="Aa2-oi-2No" id="bX4-1e-Tkn"/>
