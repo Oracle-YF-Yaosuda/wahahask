@@ -59,7 +59,6 @@
     NSDate *datenow = [NSDate date];
     NSString *nowtimeStr = [formatter stringFromDate:datenow];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-    NSLog(@"时间戳:%@",timeSp); //时间戳的值
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -72,7 +71,7 @@
     
     //获取签名
     NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
-    NSLog(@"%@",sign);
+   
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
     NSLog(@"url1==========================%@",url1);
@@ -88,14 +87,8 @@
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
             productionsList=[data objectForKey:@"productionsList"];
-            NSLog(@"*******************************%@",productionsList);
-            //[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"pics"]
-            
-            
-            
             
             [_tableview reloadData];
-            
             
             
         }else{
@@ -114,8 +107,7 @@
 }
 
 -(void)fanhui{
-//    XiadanViewController*xiadan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
-//    
+ 
        // 放到返回上一页面
         XiadanViewController*memeda=[[XiadanViewController alloc] init];
         self.trendDelegate= memeda;
@@ -146,13 +138,10 @@
         
     NSString*tupian=[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"pics"]];
         
-    NSLog(@"tupian************%@",tupian);
+   
         
     
     NSArray*arr=[tupian componentsSeparatedByString:@"|"];
-    
-    NSLog(@"arr000000****************%@",arr);
-
     
     
     
@@ -164,8 +153,6 @@
      else{
                  NSString*lian=[NSString stringWithFormat:@"%@",service_host];
          NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",lian,arr[1]]];
-         
-         NSLog(@" url***************    %@",url);
          
          [_imagr sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"1.jpg"]];
      }
@@ -233,6 +220,7 @@
     [jia addTarget:self action:@selector(jia) forControlEvents:UIControlEventTouchUpInside];
     shuru = [[UITextField alloc]initWithFrame:CGRectMake(201, 87, 23,20)];
     shuru.text = @"0";
+    [shuru setTag:indexPath.row+1000];
     shuru.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     shuru.textAlignment = NSTextAlignmentCenter;
     shuru.borderStyle=UITextBorderStyleNone;
@@ -283,7 +271,9 @@
 #pragma mark - button点击事件
 -(void)tianjia{
     NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:productionsList[tianjia.tag-2000]];
+    UITextField*xixi=(UITextField*)[cell viewWithTag :shuru.tag-1000];
     [dd setValue:shuru.text forKey:@"shuliang"];
+    NSLog(@"%@",xixi.text);
     [chuande addObject:dd];
 }
 -(void)jia{
@@ -292,6 +282,7 @@
     
     
 }
+
 -(void)jian{
     
 }

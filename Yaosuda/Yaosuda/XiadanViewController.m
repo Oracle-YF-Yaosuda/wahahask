@@ -23,41 +23,41 @@
 
 @implementation XiadanViewController
 -(void)passTrendValue:(NSArray *)values{
-  
+    
     NSString *path =[NSHomeDirectory() stringByAppendingString:@"/Documents/xiadanmingxi.plist"];
     NSFileManager*fm=[NSFileManager defaultManager];
     if (![fm fileExistsAtPath:path]) {
-         [values writeToFile:path atomically:YES];
+        [values writeToFile:path atomically:YES];
     }
     
     else{
-      
+        
         NSMutableArray*arr=[NSMutableArray arrayWithContentsOfFile:path];
-    NSArray*guo=[NSArray arrayWithArray:values];
-    for (NSDictionary*d in guo) {
-        [arr addObject:d];
-    }
+        NSArray*guo=[NSArray arrayWithArray:values];
+        for (NSDictionary*d in guo) {
+            [arr addObject:d];
+        }
         [arr writeToFile:path atomically:YES];
     }
-
-   // jieshou=[NSArray arrayWithArray:values];
-  //  NSLog(@"方法里的 接受数据－－－－－－－－－－－－－%@",jieshou);
-   // [_tableview reloadData];
-   
+    
+    //    jieshou=[NSArray arrayWithArray:values];
+    //    NSLog(@"方法里的 接受数据－－－－－－－－－－－－－%@",jieshou);
+    //    [_tableview reloadData];
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidLoad];
-
-//    NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-//  
-//    jieshou=[NSArray arrayWithContentsOfFile:path];
-  //  NSLog(@"viewwill的接受 数据＊＊＊＊＊＊＊%@",jieshou);
+    
+    NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+    jieshou=[[NSMutableArray alloc] init];
+    jieshou=[NSArray arrayWithContentsOfFile:path];
+    //  NSLog(@"viewwill的接受 数据＊＊＊＊＊＊＊%@",jieshou);
     [_tableview reloadData];
     
 }
 - (void)viewDidLoad {
     
-   [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
     
@@ -68,19 +68,19 @@
     
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(tiao)];
     self.navigationItem.rightBarButtonItem = right;
-  
+    
 }
 
 -(void)tiao{
     
     XiadanbianjiViewController*xiadan =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadanbianji"];
     [self.navigationController pushViewController:xiadan animated:YES];
-
+    
     
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  // NSLog(@"返回组数的接受数据／／／／／／／／%@",jieshou);
+    // NSLog(@"返回组数的接受数据／／／／／／／／%@",jieshou);
     return jieshou.count;
     
 }
@@ -104,7 +104,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
-
+    
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 80, 30)];
     name.text = @"商品名称:";
     name.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
@@ -126,7 +126,7 @@
     shuliang.text = @"商品数量:";
     shuliang.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     shuliang.font = [UIFont systemFontOfSize:15];
-
+    
     UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, 75, width, 1)];
     xian1.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
     
@@ -135,7 +135,7 @@
     shuliang1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     shuliang1.font = [UIFont systemFontOfSize:15];
     shuliang1.textAlignment = NSTextAlignmentCenter;
-
+    
     
     
     
@@ -146,7 +146,7 @@
     danjia.text = @"商品单价:";
     danjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     danjia.font = [UIFont systemFontOfSize:15];
-
+    
     UILabel *danjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 85, width-40-80, 30 )];
     danjia1.text = @"暂无数据";
     danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
@@ -171,7 +171,7 @@
     self.tableview.separatorStyle = UITableViewCellSelectionStyleNone;
     //隐藏滑动条
     self.tableview.showsVerticalScrollIndicator =NO;
-
+    
     return cell;
     
 }
