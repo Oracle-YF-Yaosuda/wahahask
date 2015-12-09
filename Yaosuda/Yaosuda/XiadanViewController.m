@@ -32,9 +32,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidLoad];
-<<<<<<< Updated upstream
 
-=======
 //传值
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"kehumingzi"] == nil) {
         self.kehumingzi.text = @"请选择客户";
@@ -43,7 +41,7 @@
     self.kehumingzi.text = [[NSUserDefaults standardUserDefaults]objectForKey:@"kehumingzi"];
     }
     NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
->>>>>>> Stashed changes
+
     
     jieshou=[NSArray arrayWithContentsOfFile:path];
     [_tableview reloadData];
