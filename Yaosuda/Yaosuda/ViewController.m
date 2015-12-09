@@ -29,7 +29,7 @@
     self.diview.layer.cornerRadius = 5.0;
     self.denglu.layer.cornerRadius = 5.0;
     
-    
+  
     
     
     

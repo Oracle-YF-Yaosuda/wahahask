@@ -23,20 +23,35 @@
 
 @implementation XiadanViewController
 -(void)passTrendValue:(NSArray *)values{
-    NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-   // NSLog(@"%@",[NSString stringWithFormat:@"%@",NSHomeDirectory()]);
+  
+    NSString *path =[NSHomeDirectory() stringByAppendingString:@"/Documents/xiadanmingxi.plist"];
+    NSFileManager*fm=[NSFileManager defaultManager];
+    if (![fm fileExistsAtPath:path]) {
+         [values writeToFile:path atomically:YES];
+    }
     
-    
-    [values writeToFile:path atomically:YES];
+    else{
+      
+        NSMutableArray*arr=[NSMutableArray arrayWithContentsOfFile:path];
+    NSArray*guo=[NSArray arrayWithArray:values];
+    for (NSDictionary*d in guo) {
+        [arr addObject:d];
+    }
+        [arr writeToFile:path atomically:YES];
+    }
+
+   // jieshou=[NSArray arrayWithArray:values];
+  //  NSLog(@"方法里的 接受数据－－－－－－－－－－－－－%@",jieshou);
+   // [_tableview reloadData];
    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidLoad];
 
-    NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-
-    
-    jieshou=[NSArray arrayWithContentsOfFile:path];
+//    NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+//  
+//    jieshou=[NSArray arrayWithContentsOfFile:path];
+  //  NSLog(@"viewwill的接受 数据＊＊＊＊＊＊＊%@",jieshou);
     [_tableview reloadData];
     
 }
@@ -65,7 +80,9 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  // NSLog(@"返回组数的接受数据／／／／／／／／%@",jieshou);
     return jieshou.count;
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

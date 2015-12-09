@@ -24,8 +24,9 @@
     
     CGFloat width;
     CGFloat height;
-    UIButton *gengduo;
+    UIButton *jian;
     UIButton *tianjia;
+    UITextField *shuru;
     NSMutableArray*chuande;
     UITableViewCell *cell;
     NSArray*productionsList;
@@ -224,26 +225,23 @@
     shuliang.font= [UIFont systemFontOfSize:12];
     shuliang.text = @"下单数量:";
     shuliang.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    UIButton *jian = [[UIButton alloc]initWithFrame:CGRectMake(180, 87, 20, 20)];
+    jian = [[UIButton alloc]initWithFrame:CGRectMake(180, 87, 20, 20)];
     [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
     [jian addTarget:self action:@selector(jian) forControlEvents:UIControlEventTouchUpInside];
     UIButton *jia = [[UIButton alloc]initWithFrame:CGRectMake(225, 87, 20, 20)];
     [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
     [jia addTarget:self action:@selector(jia) forControlEvents:UIControlEventTouchUpInside];
-    UITextField *shuru = [[UITextField alloc]initWithFrame:CGRectMake(201, 87, 23,20)];
+    shuru = [[UITextField alloc]initWithFrame:CGRectMake(201, 87, 23,20)];
     shuru.text = @"0";
     shuru.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     shuru.textAlignment = NSTextAlignmentCenter;
     shuru.borderStyle=UITextBorderStyleNone;
     
     
-    gengduo = [[UIButton alloc]initWithFrame:CGRectMake(271, 87, 30, 20)];
+    UIButton *gengduo= [[UIButton alloc]initWithFrame:CGRectMake(271, 87, 30, 20)];
    
     [gengduo setImage:[UIImage imageNamed:@"@2x_sp_16.png"] forState:UIControlStateNormal];
-    [gengduo addTarget:self action:@selector(gengduo) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    
+   
     name1.text = [NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"proName" ]];
     changjia1.text = [NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"proEnterprise" ]];
     guige1.text =[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"etalon" ]];
@@ -283,34 +281,23 @@
     [self.navigationController pushViewController:xiangqing animated:YES];
 }
 #pragma mark - button点击事件
-
 -(void)tianjia{
-    
-    [chuande addObject:productionsList[tianjia.tag-2000]];
-    
+    NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:productionsList[tianjia.tag-2000]];
+    [dd setValue:shuru.text forKey:@"shuliang"];
+    [chuande addObject:dd];
 }
 -(void)jia{
+    
+    
+    
     
 }
 -(void)jian{
     
 }
--(void)gengduo{
-    
-   
-
-}
-
-
-
-
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
