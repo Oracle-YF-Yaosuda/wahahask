@@ -148,6 +148,15 @@
 		D23DC3C11C0EB3C1007C66DF /* mmm5.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C01C0EB3C1007C66DF /* mmm5.m */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
 		D23DC3C41C0EB3D6007C66DF /* URLEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C31C0EB3D6007C66DF /* URLEncode.m */; };
 		D23DC3C81C0EB3E6007C66DF /* lianjie.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C71C0EB3E6007C66DF /* lianjie.m */; };
+		D2E47FD71C17CC1F00F33E5A /* PlausibleDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E47FBF1C17CC1F00F33E5A /* PlausibleDatabase.m */; };
+		D2E47FD81C17CC1F00F33E5A /* PLDatabaseMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E47FC41C17CC1F00F33E5A /* PLDatabaseMigrationManager.m */; };
+		D2E47FD91C17CC1F00F33E5A /* PLSqliteConnectionProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E47FCA1C17CC1F00F33E5A /* PLSqliteConnectionProvider.m */; };
+		D2E47FDA1C17CC1F00F33E5A /* PLSqliteDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E47FCC1C17CC1F00F33E5A /* PLSqliteDatabase.m */; };
+		D2E47FDB1C17CC1F00F33E5A /* PLSqliteMigrationVersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E47FCE1C17CC1F00F33E5A /* PLSqliteMigrationVersionManager.m */; };
+		D2E47FDC1C17CC1F00F33E5A /* PLSqlitePreparedStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E47FD01C17CC1F00F33E5A /* PLSqlitePreparedStatement.m */; };
+		D2E47FDD1C17CC1F00F33E5A /* PLSqliteResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E47FD21C17CC1F00F33E5A /* PLSqliteResultSet.m */; };
+		D2E47FDE1C17CC1F00F33E5A /* Scrollview.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E47FD41C17CC1F00F33E5A /* Scrollview.m */; };
+		D2E47FE01C17CC4C00F33E5A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E47FDF1C17CC4C00F33E5A /* libsqlite3.0.tbd */; };
 		D2E833F71C0FD53B00F53E7E /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E833D71C0FD53B00F53E7E /* MKAnnotationView+WebCache.m */; };
 		D2E833F81C0FD53B00F53E7E /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E833D91C0FD53B00F53E7E /* NSData+ImageContentType.m */; };
 		D2E833F91C0FD53B00F53E7E /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E833DB1C0FD53B00F53E7E /* SDImageCache.m */; };
@@ -379,6 +388,30 @@
 		D23DC3C51C0EB3E6007C66DF /* hongdingyi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hongdingyi.h; sourceTree = "<group>"; };
 		D23DC3C61C0EB3E6007C66DF /* lianjie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lianjie.h; sourceTree = "<group>"; };
 		D23DC3C71C0EB3E6007C66DF /* lianjie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lianjie.m; sourceTree = "<group>"; };
+		D2E47FBE1C17CC1F00F33E5A /* PlausibleDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlausibleDatabase.h; sourceTree = "<group>"; };
+		D2E47FBF1C17CC1F00F33E5A /* PlausibleDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlausibleDatabase.m; sourceTree = "<group>"; };
+		D2E47FC01C17CC1F00F33E5A /* PLDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDatabase.h; sourceTree = "<group>"; };
+		D2E47FC11C17CC1F00F33E5A /* PLDatabaseConnectionProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDatabaseConnectionProvider.h; sourceTree = "<group>"; };
+		D2E47FC21C17CC1F00F33E5A /* PLDatabaseMigrationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDatabaseMigrationDelegate.h; sourceTree = "<group>"; };
+		D2E47FC31C17CC1F00F33E5A /* PLDatabaseMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDatabaseMigrationManager.h; sourceTree = "<group>"; };
+		D2E47FC41C17CC1F00F33E5A /* PLDatabaseMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLDatabaseMigrationManager.m; sourceTree = "<group>"; };
+		D2E47FC51C17CC1F00F33E5A /* PLDatabaseMigrationTransactionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDatabaseMigrationTransactionManager.h; sourceTree = "<group>"; };
+		D2E47FC61C17CC1F00F33E5A /* PLDatabaseMigrationVersionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDatabaseMigrationVersionManager.h; sourceTree = "<group>"; };
+		D2E47FC71C17CC1F00F33E5A /* PLPreparedStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPreparedStatement.h; sourceTree = "<group>"; };
+		D2E47FC81C17CC1F00F33E5A /* PLResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLResultSet.h; sourceTree = "<group>"; };
+		D2E47FC91C17CC1F00F33E5A /* PLSqliteConnectionProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSqliteConnectionProvider.h; sourceTree = "<group>"; };
+		D2E47FCA1C17CC1F00F33E5A /* PLSqliteConnectionProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSqliteConnectionProvider.m; sourceTree = "<group>"; };
+		D2E47FCB1C17CC1F00F33E5A /* PLSqliteDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSqliteDatabase.h; sourceTree = "<group>"; };
+		D2E47FCC1C17CC1F00F33E5A /* PLSqliteDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSqliteDatabase.m; sourceTree = "<group>"; };
+		D2E47FCD1C17CC1F00F33E5A /* PLSqliteMigrationVersionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSqliteMigrationVersionManager.h; sourceTree = "<group>"; };
+		D2E47FCE1C17CC1F00F33E5A /* PLSqliteMigrationVersionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSqliteMigrationVersionManager.m; sourceTree = "<group>"; };
+		D2E47FCF1C17CC1F00F33E5A /* PLSqlitePreparedStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSqlitePreparedStatement.h; sourceTree = "<group>"; };
+		D2E47FD01C17CC1F00F33E5A /* PLSqlitePreparedStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSqlitePreparedStatement.m; sourceTree = "<group>"; };
+		D2E47FD11C17CC1F00F33E5A /* PLSqliteResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSqliteResultSet.h; sourceTree = "<group>"; };
+		D2E47FD21C17CC1F00F33E5A /* PLSqliteResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSqliteResultSet.m; sourceTree = "<group>"; };
+		D2E47FD31C17CC1F00F33E5A /* Scrollview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scrollview.h; sourceTree = "<group>"; };
+		D2E47FD41C17CC1F00F33E5A /* Scrollview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scrollview.m; sourceTree = "<group>"; };
+		D2E47FDF1C17CC4C00F33E5A /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		D2E833D61C0FD53B00F53E7E /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		D2E833D71C0FD53B00F53E7E /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		D2E833D81C0FD53B00F53E7E /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -425,6 +458,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E47FE01C17CC4C00F33E5A /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -842,6 +876,7 @@
 		95F70A381C0BF2A200BEC51C /* SDk */ = {
 			isa = PBXGroup;
 			children = (
+				D2E47FBD1C17CC1F00F33E5A /* 数据库包 PLDatabase */,
 				957094011C0C19FA007E27C3 /* Color+Hex.h */,
 				957094021C0C19FA007E27C3 /* Color+Hex.m */,
 				D2E833D51C0FD53B00F53E7E /* SDWebImage */,
@@ -872,6 +907,53 @@
 				D2F30C341C0EC33300B07A99 /* WarningBox.m */,
 			);
 			name = "宏定义和sign转化";
+			sourceTree = "<group>";
+		};
+		D2E47FBD1C17CC1F00F33E5A /* 数据库包 PLDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				D2E47FDF1C17CC4C00F33E5A /* libsqlite3.0.tbd */,
+				D2E47FBE1C17CC1F00F33E5A /* PlausibleDatabase.h */,
+				D2E47FBF1C17CC1F00F33E5A /* PlausibleDatabase.m */,
+				D2E47FC01C17CC1F00F33E5A /* PLDatabase.h */,
+				D2E47FC11C17CC1F00F33E5A /* PLDatabaseConnectionProvider.h */,
+				D2E47FC21C17CC1F00F33E5A /* PLDatabaseMigrationDelegate.h */,
+				D2E47FC31C17CC1F00F33E5A /* PLDatabaseMigrationManager.h */,
+				D2E47FC41C17CC1F00F33E5A /* PLDatabaseMigrationManager.m */,
+				D2E47FC51C17CC1F00F33E5A /* PLDatabaseMigrationTransactionManager.h */,
+				D2E47FC61C17CC1F00F33E5A /* PLDatabaseMigrationVersionManager.h */,
+				D2E47FC71C17CC1F00F33E5A /* PLPreparedStatement.h */,
+				D2E47FC81C17CC1F00F33E5A /* PLResultSet.h */,
+				D2E47FC91C17CC1F00F33E5A /* PLSqliteConnectionProvider.h */,
+				D2E47FCA1C17CC1F00F33E5A /* PLSqliteConnectionProvider.m */,
+				D2E47FCB1C17CC1F00F33E5A /* PLSqliteDatabase.h */,
+				D2E47FCC1C17CC1F00F33E5A /* PLSqliteDatabase.m */,
+				D2E47FCD1C17CC1F00F33E5A /* PLSqliteMigrationVersionManager.h */,
+				D2E47FCE1C17CC1F00F33E5A /* PLSqliteMigrationVersionManager.m */,
+				D2E47FCF1C17CC1F00F33E5A /* PLSqlitePreparedStatement.h */,
+				D2E47FD01C17CC1F00F33E5A /* PLSqlitePreparedStatement.m */,
+				D2E47FD11C17CC1F00F33E5A /* PLSqliteResultSet.h */,
+				D2E47FD21C17CC1F00F33E5A /* PLSqliteResultSet.m */,
+				D2E47FD31C17CC1F00F33E5A /* Scrollview.h */,
+				D2E47FD41C17CC1F00F33E5A /* Scrollview.m */,
+				D2E47FD51C17CC1F00F33E5A /* UIDevice+ */,
+				D2E47FD61C17CC1F00F33E5A /* 需要导入libsqlite3.0 */,
+			);
+			path = "数据库包 PLDatabase";
+			sourceTree = "<group>";
+		};
+		D2E47FD51C17CC1F00F33E5A /* UIDevice+ */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "UIDevice+";
+			sourceTree = "<group>";
+		};
+		D2E47FD61C17CC1F00F33E5A /* 需要导入libsqlite3.0 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "需要导入libsqlite3.0";
 			sourceTree = "<group>";
 		};
 		D2E833D51C0FD53B00F53E7E /* SDWebImage */ = {
@@ -1165,10 +1247,14 @@
 				957094001C0BF51E007E27C3 /* ChaxunViewController.m in Sources */,
 				957093B81C0BF3AD007E27C3 /* SBJsonStreamParser.m in Sources */,
 				D2E834051C0FD53B00F53E7E /* UIImageView+WebCache.m in Sources */,
+				D2E47FDC1C17CC1F00F33E5A /* PLSqlitePreparedStatement.m in Sources */,
 				D2E834001C0FD53B00F53E7E /* UIButton+WebCache.m in Sources */,
 				957093B71C0BF3AD007E27C3 /* SBJsonParser.m in Sources */,
 				957093B91C0BF3AD007E27C3 /* SBJsonStreamParserAccumulator.m in Sources */,
+				D2E47FD81C17CC1F00F33E5A /* PLDatabaseMigrationManager.m in Sources */,
+				D2E47FDB1C17CC1F00F33E5A /* PLSqliteMigrationVersionManager.m in Sources */,
 				D2E833F91C0FD53B00F53E7E /* SDImageCache.m in Sources */,
+				D2E47FD91C17CC1F00F33E5A /* PLSqliteConnectionProvider.m in Sources */,
 				D2E833FA1C0FD53B00F53E7E /* SDWebImageCompat.m in Sources */,
 				957093BB1C0BF3AD007E27C3 /* SBJsonStreamParserState.m in Sources */,
 				D2E833FF1C0FD53B00F53E7E /* SDWebImagePrefetcher.m in Sources */,
@@ -1180,13 +1266,17 @@
 				D23DC3C11C0EB3C1007C66DF /* mmm5.m in Sources */,
 				D2E834041C0FD53B00F53E7E /* UIImageView+HighlightedWebCache.m in Sources */,
 				957094031C0C19FA007E27C3 /* Color+Hex.m in Sources */,
+				D2E47FDA1C17CC1F00F33E5A /* PLSqliteDatabase.m in Sources */,
+				D2E47FDE1C17CC1F00F33E5A /* Scrollview.m in Sources */,
 				957093BD1C0BF3AD007E27C3 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				957093BE1C0BF3AD007E27C3 /* SBJsonStreamWriterState.m in Sources */,
 				D2F30C381C0ED51D00B07A99 /* navigation.m in Sources */,
 				957093C01C0BF3AD007E27C3 /* SBJsonUTF8Stream.m in Sources */,
+				D2E47FD71C17CC1F00F33E5A /* PlausibleDatabase.m in Sources */,
 				95E7D6C91C0D8D5300E95058 /* XiangqingViewController.m in Sources */,
 				957093E11C0BF3B6007E27C3 /* AFSecurityPolicy.m in Sources */,
 				D2E834061C0FD53B00F53E7E /* UIView+WebCacheOperation.m in Sources */,
+				D2E47FDD1C17CC1F00F33E5A /* PLSqliteResultSet.m in Sources */,
 				95F7095D1C0BDE2400BEC51C /* main.m in Sources */,
 				957093DE1C0BF3B6007E27C3 /* AFHTTPRequestOperationManager.m in Sources */,
 				9521ABD21C11817F0036B052 /* ZizunViewController.m in Sources */,

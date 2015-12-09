@@ -23,16 +23,29 @@
 
 @implementation XiadanViewController
 -(void)passTrendValue:(NSArray *)values{
+    NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+   // NSLog(@"%@",[NSString stringWithFormat:@"%@",NSHomeDirectory()]);
     
-    jieshou=[NSArray arrayWithArray:values];
-    NSLog(@"jieshou/**************************/%@",jieshou);
-    NSLog(@"%ld",jieshou.count);
+    
+    [values writeToFile:path atomically:YES];
    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidLoad];
+<<<<<<< Updated upstream
 
+=======
+//传值
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"kehumingzi"] == nil) {
+        self.kehumingzi.text = @"请选择客户";
+    }else{
     
+    self.kehumingzi.text = [[NSUserDefaults standardUserDefaults]objectForKey:@"kehumingzi"];
+    }
+    NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+>>>>>>> Stashed changes
+    
+    jieshou=[NSArray arrayWithContentsOfFile:path];
     [_tableview reloadData];
     
 }
