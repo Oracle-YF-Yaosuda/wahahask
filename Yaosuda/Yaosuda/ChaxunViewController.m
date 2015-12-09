@@ -9,7 +9,7 @@
 #import "ChaxunViewController.h"
 #import "Color+Hex.h"
 #import "XiadanViewController.h"
-#import "XinxiTableViewController.h"
+#import "XinxiViewController.h"
 #import "lianjie.h"
 #import "hongdingyi.h"
 #import "AFHTTPRequestOperationManager.h"
@@ -507,7 +507,7 @@
     
     if (zhi == 2) {
         
-        XinxiTableViewController*xinxi =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"Xinxi"];
+        XinxiViewController*xinxi =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xinxi"];
         [self.navigationController pushViewController:xinxi animated:YES];
         
     }

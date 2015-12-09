@@ -49,8 +49,8 @@
 		9570941C1C0C292C007E27C3 /* 商品详情_MarkMan.png in Resources */ = {isa = PBXBuildFile; fileRef = 9570940F1C0C292B007E27C3 /* 商品详情_MarkMan.png */; };
 		9570941D1C0C292C007E27C3 /* 确认订单.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 957094101C0C292B007E27C3 /* 确认订单.jpg */; };
 		9570941E1C0C292C007E27C3 /* 确认订单_MarkMan.png in Resources */ = {isa = PBXBuildFile; fileRef = 957094111C0C292C007E27C3 /* 确认订单_MarkMan.png */; };
-		957094211C0C3A4F007E27C3 /* XinxiTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957094201C0C3A4F007E27C3 /* XinxiTableViewController.m */; };
 		957094271C0C619B007E27C3 /* XiadanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957094261C0C619B007E27C3 /* XiadanViewController.m */; };
+		9580C3541C17DCFA00FB6C4A /* XinxiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9580C3531C17DCFA00FB6C4A /* XinxiViewController.m */; settings = {ASSET_TAGS = (); }; };
 		95E7D6B91C0D3DF700E95058 /* XiadanbianjiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6B81C0D3DF700E95058 /* XiadanbianjiViewController.m */; };
 		95E7D6BC1C0D4A3A00E95058 /* GerenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6BB1C0D4A3A00E95058 /* GerenViewController.m */; };
 		95E7D6BF1C0D64E800E95058 /* XiugaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6BE1C0D64E800E95058 /* XiugaiViewController.m */; };
@@ -259,10 +259,10 @@
 		9570940F1C0C292B007E27C3 /* 商品详情_MarkMan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "商品详情_MarkMan.png"; sourceTree = "<group>"; };
 		957094101C0C292B007E27C3 /* 确认订单.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "确认订单.jpg"; sourceTree = "<group>"; };
 		957094111C0C292C007E27C3 /* 确认订单_MarkMan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "确认订单_MarkMan.png"; sourceTree = "<group>"; };
-		9570941F1C0C3A4F007E27C3 /* XinxiTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XinxiTableViewController.h; sourceTree = "<group>"; };
-		957094201C0C3A4F007E27C3 /* XinxiTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XinxiTableViewController.m; sourceTree = "<group>"; };
 		957094251C0C619B007E27C3 /* XiadanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XiadanViewController.h; sourceTree = "<group>"; };
 		957094261C0C619B007E27C3 /* XiadanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XiadanViewController.m; sourceTree = "<group>"; };
+		9580C3521C17DCFA00FB6C4A /* XinxiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XinxiViewController.h; path = ../XinxiViewController.h; sourceTree = "<group>"; };
+		9580C3531C17DCFA00FB6C4A /* XinxiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XinxiViewController.m; path = ../XinxiViewController.m; sourceTree = "<group>"; };
 		95E7D6B41C0D238D00E95058 /* KehuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KehuViewController.h; sourceTree = "<group>"; };
 		95E7D6B71C0D3DF700E95058 /* XiadanbianjiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XiadanbianjiViewController.h; sourceTree = "<group>"; };
 		95E7D6B81C0D3DF700E95058 /* XiadanbianjiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XiadanbianjiViewController.m; sourceTree = "<group>"; };
@@ -565,8 +565,8 @@
 		95C12C821C0EA0B0002A1CDE /* 订单 */ = {
 			isa = PBXGroup;
 			children = (
-				9570941F1C0C3A4F007E27C3 /* XinxiTableViewController.h */,
-				957094201C0C3A4F007E27C3 /* XinxiTableViewController.m */,
+				9580C3521C17DCFA00FB6C4A /* XinxiViewController.h */,
+				9580C3531C17DCFA00FB6C4A /* XinxiViewController.m */,
 				957093FE1C0BF51E007E27C3 /* ChaxunViewController.h */,
 				957093FF1C0BF51E007E27C3 /* ChaxunViewController.m */,
 			);
@@ -1146,7 +1146,6 @@
 				957093C11C0BF3AD007E27C3 /* SBJsonWriter.m in Sources */,
 				95E7D6B91C0D3DF700E95058 /* XiadanbianjiViewController.m in Sources */,
 				95F709601C0BDE2400BEC51C /* AppDelegate.m in Sources */,
-				957094211C0C3A4F007E27C3 /* XinxiTableViewController.m in Sources */,
 				957093DF1C0BF3B6007E27C3 /* AFHTTPSessionManager.m in Sources */,
 				D23DC3C81C0EB3E6007C66DF /* lianjie.m in Sources */,
 				D2E834091C100EAA00F53E7E /* yonghuziliao.m in Sources */,
@@ -1159,6 +1158,7 @@
 				957093E31C0BF3B6007E27C3 /* AFURLRequestSerialization.m in Sources */,
 				957093E21C0BF3B6007E27C3 /* AFURLConnectionOperation.m in Sources */,
 				957093E51C0BF3B6007E27C3 /* AFURLSessionManager.m in Sources */,
+				9580C3541C17DCFA00FB6C4A /* XinxiViewController.m in Sources */,
 				95E7D6BF1C0D64E800E95058 /* XiugaiViewController.m in Sources */,
 				957093B61C0BF3AD007E27C3 /* NSObject+SBJson.m in Sources */,
 				957093BC1C0BF3AD007E27C3 /* SBJsonStreamWriter.m in Sources */,

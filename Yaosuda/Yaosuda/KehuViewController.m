@@ -237,6 +237,8 @@
     image1.image = [UIImage imageNamed:@"@2x_kh_03.png"];
     
 
+    [cell.contentView addSubview:image];
+    [cell.contentView addSubview:image1];
    
 
     [cell.contentView addSubview:KHmingzi];
@@ -271,24 +273,7 @@
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    XiadanViewController*xiadan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
-//    xiadan.kehumingzi.text=[NSString stringWithFormat:@"%@",[customerList[indexPath.section]objectForKey:@"customerName"]];
-//    [self.navigationController pushViewController:xiadan animated:YES];
-    long cc;
-    cc=indexPath.section;
-    UITableViewCell *cell1 = [tableView cellForRowAtIndexPath:indexPath];
-
-    [cell1.contentView viewWithTag:cc];
-    
-    [cell1.contentView addSubview:image];
-    [cell1.contentView addSubview:image1];
-
-    
-    NSLog(@".............%ld",(long)indexPath.section);
-    
-   
-    
-
+  
 //返回上一页
     [[self navigationController] popViewControllerAnimated:YES];
     

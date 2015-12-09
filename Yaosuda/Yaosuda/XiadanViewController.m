@@ -33,13 +33,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidLoad];
 
-//传值
-    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"kehumingzi"] == nil) {
-        self.kehumingzi.text = @"请选择客户";
-    }else{
-    
-    self.kehumingzi.text = [[NSUserDefaults standardUserDefaults]objectForKey:@"kehumingzi"];
-    }
     NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
 
     
@@ -144,9 +137,6 @@
     danjia1.textAlignment = NSTextAlignmentCenter;
     
     
-
-    
-    
     [cell.contentView addSubview:name];
     [cell.contentView addSubview:name1];
     [cell.contentView addSubview:xian];
@@ -158,8 +148,6 @@
     [cell.contentView addSubview:danjia];
     [cell.contentView addSubview:danjia1];
     
-    
-    
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //线消失
@@ -167,8 +155,6 @@
     //隐藏滑动条
     self.tableview.showsVerticalScrollIndicator =NO;
 
-    
-    
     return cell;
     
 }
