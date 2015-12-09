@@ -31,13 +31,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidLoad];
-//传值
-    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"kehumingzi"] == nil) {
-        self.kehumingzi.text = @"请选择客户";
-    }else{
-    
-    self.kehumingzi.text = [[NSUserDefaults standardUserDefaults]objectForKey:@"kehumingzi"];
-    }
+
     
     [_tableview reloadData];
     

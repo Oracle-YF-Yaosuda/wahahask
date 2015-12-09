@@ -217,8 +217,41 @@
 //编辑section内容
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    return nil;
+    UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
+    baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+    
+    UILabel *groupName = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 35)];
+    groupName.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
+    groupName.text =@"订单信息";
+    groupName.font = [UIFont systemFontOfSize:13];
+
+    UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-80, 10, 15, 15)];
+    [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
+
+    UILabel *shenhe = [[UILabel alloc]initWithFrame:CGRectMake(width-10-50, 0, 50, 35)];
+    shenhe.text = @"已审核";
+    shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
+    shenhe.font = [UIFont systemFontOfSize:13];
+
+    
+    [baseView addSubview:shenhe];
+    [baseView addSubview:groupName];
+    [baseView addSubview:tu];
+
+    
+    if (zhi == 1)
+    {
+        if (section == 0)
+        {
+            return nil;
+        }else if(zhi == 2)
+        {
+            return baseView;
+        }
+    }
+            return baseView;
 }
+
 //编辑cell内容
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *id1 =@"cell1";
