@@ -25,10 +25,6 @@
     
 //解决tableview多出的白条
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    
-    
-    
 //获取设备宽和高
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
