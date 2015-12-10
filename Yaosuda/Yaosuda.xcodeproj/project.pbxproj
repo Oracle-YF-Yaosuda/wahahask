@@ -50,7 +50,7 @@
 		9570941D1C0C292C007E27C3 /* 确认订单.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 957094101C0C292B007E27C3 /* 确认订单.jpg */; };
 		9570941E1C0C292C007E27C3 /* 确认订单_MarkMan.png in Resources */ = {isa = PBXBuildFile; fileRef = 957094111C0C292C007E27C3 /* 确认订单_MarkMan.png */; };
 		957094271C0C619B007E27C3 /* XiadanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957094261C0C619B007E27C3 /* XiadanViewController.m */; };
-		9580C3541C17DCFA00FB6C4A /* XinxiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9580C3531C17DCFA00FB6C4A /* XinxiViewController.m */; settings = {ASSET_TAGS = (); }; };
+		9580C3541C17DCFA00FB6C4A /* XinxiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9580C3531C17DCFA00FB6C4A /* XinxiViewController.m */; };
 		95E7D6B91C0D3DF700E95058 /* XiadanbianjiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6B81C0D3DF700E95058 /* XiadanbianjiViewController.m */; };
 		95E7D6BC1C0D4A3A00E95058 /* GerenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6BB1C0D4A3A00E95058 /* GerenViewController.m */; };
 		95E7D6BF1C0D64E800E95058 /* XiugaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6BE1C0D64E800E95058 /* XiugaiViewController.m */; };
@@ -981,6 +981,7 @@
 				TargetAttributes = {
 					95F709571C0BDE2400BEC51C = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = Q893CLHQS4;
 					};
 					95F709701C0BDE2400BEC51C = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -1339,10 +1340,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Yaosuda/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sk.Yaosuda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1350,10 +1354,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Yaosuda/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sk.Yaosuda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

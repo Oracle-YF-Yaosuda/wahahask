@@ -20,14 +20,14 @@
 
 @interface XuanzeViewController ()
 {
-    
+    NSMutableArray*jiahao;
+    NSMutableArray*shuzi;
     CGFloat width;
     CGFloat height;
     UIButton *jian;
     UIButton *tianjia;
     UITextField *shuru;
     NSMutableArray*chuande;
-    UITableViewCell *cell;
     NSArray*productionsList;
     
 }
@@ -38,6 +38,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    shuzi=[NSMutableArray array];
+    jiahao=[NSMutableArray array];
     chuande=[NSMutableArray array];
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
@@ -86,6 +88,12 @@
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
             productionsList=[data objectForKey:@"productionsList"];
+            for (int i=0; i<productionsList.count; i++) {
+                [shuzi addObject:[NSString stringWithFormat:@"shuzi%d",i]];
+                [jiahao addObject:[NSString stringWithFormat:@"jiahao%d",i]];
+            }
+        
+            
             
             [_tableview reloadData];
             
@@ -127,7 +135,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *id1 =@"mycell2";
     
-    cell = [tableView cellForRowAtIndexPath:indexPath ];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath ];
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
@@ -214,6 +222,8 @@
     jian = [[UIButton alloc]initWithFrame:CGRectMake(180, 87, 20, 20)];
     [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
     [jian addTarget:self action:@selector(jian) forControlEvents:UIControlEventTouchUpInside];
+   
+    
     UIButton *jia = [[UIButton alloc]initWithFrame:CGRectMake(225, 87, 20, 20)];
     [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
     [jia addTarget:self action:@selector(jia) forControlEvents:UIControlEventTouchUpInside];
@@ -266,13 +276,24 @@
     XiangqingViewController *xiangqing = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiangqing"];
     xiangqing.shangID=[NSString stringWithFormat:@"%ld",indexPath.row];
     [self.navigationController pushViewController:xiangqing animated:YES];
+    
+    
+    
+    
 }
 #pragma mark - button点击事件
 -(void)tianjia{
     NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:productionsList[tianjia.tag-2000]];
-    UITextField*xixi=(UITextField*)[cell viewWithTag :shuru.tag-1000];
-    [dd setValue:shuru.text forKey:@"shuliang"];
-    NSLog(@"%@",xixi.text);
+    
+//    UITableViewCell* cell = [self.tableview cellForRowAtIndexPath:(long)tianjia.tag-2000 ];
+//    if (cell != nil)
+//    {
+//        field = (UITextField*)[cell viewWithTag:indexPath.row+1000];
+//    };
+//
+//    UITextField*xixi=(UITextField*)[cell viewWithTag :shuru.tag-1000];
+//    [dd setValue:shuru.text forKey:@"shuliang"];
+//    NSLog(@"%@",xixi.text);
     [chuande addObject:dd];
 }
 -(void)jia{
