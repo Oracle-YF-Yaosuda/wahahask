@@ -16,6 +16,9 @@
     NSMutableArray *shuzu;
     NSMutableArray *shuju;
     
+    UISegmentedControl *segmentedControl;
+    
+    int index;
     int zhi;
 }
 @end
@@ -32,19 +35,49 @@
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
     
+    zhi = 1;
+    
+    [self huoqudingdanxinxi];
+    [self huoqushangpinxinxi];
     [self array];
     [self fenduan];
     [self anniu];
 }
+//获取订单数据
+-(void)huoqudingdanxinxi{
+    
+}
+//获取商品信息数据
+-(void)huoqushangpinxinxi{
+    
+}
+
 //创建分段控制器
 -(void)fenduan{
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"订单信息",@"商品信息",nil];
     //初始化UISegmentedControl
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc]initWithItems:segmentedArray];
+    segmentedControl = [[UISegmentedControl alloc]initWithItems:segmentedArray];
     segmentedControl.frame = CGRectMake(0,0,width/2,30);
     segmentedControl.selectedSegmentIndex = 0;//设置默认选择项索引
     segmentedControl.tintColor = [UIColor whiteColor];
     self.navigationItem.titleView = segmentedControl;
+    [segmentedControl addTarget:self action:@selector(change:) forControlEvents:UIControlEventValueChanged];
+}
+//分段控制器点击方法
+-(void)change:(UISegmentedControl *)segmentControl{
+    index = (int)segmentedControl.selectedSegmentIndex;
+    if (index == 0 ) {
+        zhi = 1;
+        [self.tableview reloadData];
+        NSLog(@"%d",zhi);
+        
+    }
+    else if(index == 1){
+        zhi = 2;
+        [self.tableview reloadData];
+        NSLog(@"%d",zhi);
+    }
+
 }
 //创建按钮
 -(void)anniu{
@@ -75,6 +108,7 @@
 }
 //需要改得地方
 -(void)array{
+    
     shuzu = [[NSMutableArray alloc]init];
     [shuzu addObject:@"订单详情:"];
     [shuzu addObject:@"订单详情:"];
@@ -108,7 +142,7 @@
     [shuju addObject:@"121212122222"];
     [shuju addObject:@"121212122222"];
     [shuju addObject:@"121212122222"];
-
+   
 }
 
 //tableview 分组
@@ -154,15 +188,23 @@
     rightLable.textAlignment = NSTextAlignmentCenter;
     
     
-    
-    
-    [cell.contentView addSubview:xian];
-    [cell.contentView addSubview:leftlabel];
-    [cell.contentView addSubview:rightLable];
-    
-    
    
+    if (zhi == 1)
+    {
+        [cell.contentView addSubview:xian];
+        [cell.contentView addSubview:leftlabel];
+        [cell.contentView addSubview:rightLable];
+    }
+    else if (zhi == 2)
+    {
+        [cell.contentView addSubview:xian];
+    }
+   
+
+ 
     
+    
+      
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //线消失
