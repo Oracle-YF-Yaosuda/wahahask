@@ -14,7 +14,6 @@
 #import "SBJsonWriter.h"
 #import "WarningBox.h"
 #import "lianjie.h"
-#import "hongdingyi.h"
 #import "UIImageView+WebCache.h"
 #import "XiadanViewController.h"
 
