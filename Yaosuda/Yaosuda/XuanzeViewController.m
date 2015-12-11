@@ -29,6 +29,10 @@
     UITextField *shuru;
     NSMutableArray*chuande;
     NSArray*productionsList;
+    UIButton *jia ;
+    
+//  数组中存放各个产品的下单  数量
+    NSMutableArray *xiadanshuliang;
     
 }
 @property(strong , nonatomic)UIImageView *imagr;
@@ -41,6 +45,9 @@
     shuzi=[NSMutableArray array];
     jiahao=[NSMutableArray array];
     chuande=[NSMutableArray array];
+//    初始化
+    xiadanshuliang=[NSMutableArray array];
+    
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
     
@@ -91,6 +98,10 @@
             for (int i=0; i<productionsList.count; i++) {
                 [shuzi addObject:[NSString stringWithFormat:@"shuzi%d",i]];
                 [jiahao addObject:[NSString stringWithFormat:@"jiahao%d",i]];
+                
+    //       下单数量默认为0
+                [xiadanshuliang addObject:@"0"];
+                
             }
         
             
@@ -200,7 +211,7 @@
     tianjia = [[UIButton alloc]initWithFrame:CGRectMake(width-60, 45, 50, 30)];
     [tianjia setTag:indexPath.row+2000];
     [tianjia setImage:[UIImage imageNamed:@"@2x_sp_07.png"] forState:UIControlStateNormal];
-    [tianjia addTarget:self action:@selector(tianjia) forControlEvents:UIControlEventTouchUpInside];
+    [tianjia addTarget:self action:@selector(tianjia:) forControlEvents:UIControlEventTouchUpInside];
     
     
     UILabel *danwei = [[UILabel alloc]initWithFrame:CGRectMake(120, 65, 60, 15)];
@@ -219,16 +230,24 @@
     shuliang.font= [UIFont systemFontOfSize:12];
     shuliang.text = @"下单数量:";
     shuliang.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    
+//   减创建
     jian = [[UIButton alloc]initWithFrame:CGRectMake(180, 87, 20, 20)];
     [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
     [jian addTarget:self action:@selector(jian:) forControlEvents:UIControlEventTouchUpInside];
-   
-    
-    UIButton *jia = [[UIButton alloc]initWithFrame:CGRectMake(225, 87, 20, 20)];
+    jian.tag=indexPath.row+20000;
+//   加创建
+  jia = [[UIButton alloc]initWithFrame:CGRectMake(225, 87, 20, 20)];
     [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
     [jia addTarget:self action:@selector(jia:) forControlEvents:UIControlEventTouchUpInside];
+    jia.tag=indexPath.row+10000 ;
+    
+    
     shuru = [[UITextField alloc]initWithFrame:CGRectMake(201, 87, 23,20)];
-    shuru.text = @"0";
+    
+
+//   下单的产品数量
+    shuru.text = xiadanshuliang[indexPath.row];
     [shuru setTag:indexPath.row+1000];
     shuru.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     shuru.textAlignment = NSTextAlignmentCenter;
@@ -282,29 +301,53 @@
     
 }
 #pragma mark - button点击事件
--(void)tianjia{
-    NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:productionsList[tianjia.tag-2000]];
-    
-//    UITableViewCell* cell = [self.tableview cellForRowAtIndexPath:(long)tianjia.tag-2000 ];
-//    if (cell != nil)
-//    {
-//        field = (UITextField*)[cell viewWithTag:indexPath.row+1000];
-//    };
-//
-//    UITextField*xixi=(UITextField*)[cell viewWithTag :shuru.tag-1000];
-//    [dd setValue:shuru.text forKey:@"shuliang"];
-//    NSLog(@"%@",xixi.text);
+-(void)tianjia:(UIButton*)tt{
+    NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:productionsList[tt.tag-2000]];
+    NSLog(@"%ld",tt.tag);
+    [dd setObject:xiadanshuliang[tt.tag-2000] forKey:@"shuliang"];
     [chuande addObject:dd];
 }
--(void)jia:(UIButton*)btn{
+-(void)jia:(UIButton*)tt{
+//找到当前cell
+     UITableViewCell *cell=(UITableViewCell*)[[tt superview] superview ];
     
-    NSLog(@"%ld",btn.tag);
+//    找到里面的uilable
+//    UILabel *ll=(UILabel *)[cell viewWithTag:tt.tag-10000+1000];
+//    ll.text=@"111";
     
-    
+// 找到当前 没值 ?
+    NSIndexPath *index=[self.tableview indexPathForCell:cell];
+
+
+//计算的
+    NSString *shuliang=[NSString stringWithFormat:@"%@", xiadanshuliang[index.row]];
+   int shuliangInt=  [shuliang intValue];
+        shuliang =[NSString stringWithFormat:@"%d", shuliangInt+1];
+    xiadanshuliang[index.row]=shuliang;
+//  刷新
+    [self.tableview reloadData];
 }
 
--(void)jian:(UIButton*)btn{
+-(void)jian:(UIButton*)tt{
+    //找到当前cell
+    UITableViewCell *cell=(UITableViewCell*)[[tt superview] superview ];
+    NSIndexPath *index=[self.tableview indexPathForCell:cell];
+  //计算的
+    NSString *shuliang=[NSString stringWithFormat:@"%@", xiadanshuliang[index.row]];
+    int shuliangInt=  [shuliang intValue];
+    if(shuliangInt==0){
+        
     
+        return;
+    }
+    else{
+    
+    shuliang =[NSString stringWithFormat:@"%d", shuliangInt-1];
+    xiadanshuliang[index.row]=shuliang;
+        
+    }
+    //  刷新
+    [self.tableview reloadData];
     
 }
 
