@@ -40,19 +40,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//解决tableview多出的白条
+    //解决tableview多出的白条
     self.automaticallyAdjustsScrollViewInsets = NO;
-//获取设备宽和高
+    //获取设备宽和高
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
-//遵守 tableview 代理协议
+    //遵守 tableview 代理协议
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
     
     zhi = 1;
     
     [self huoqudingdanxinxi];
-    [self huoqushangpinxinxi];
+    
     [self array];
     [self fenduan];
     [self anniu];
@@ -79,7 +79,7 @@
     SBJsonWriter *writer = [[SBJsonWriter alloc]init];
     //出入参数：
     
-    NSDictionary*datadic1=[NSDictionary dictionaryWithObjectsAndKeys:@"94",@"orderId",nil];
+    NSDictionary*datadic1=[NSDictionary dictionaryWithObjectsAndKeys:_orderId,@"orderId",nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic1];
     
@@ -95,24 +95,15 @@
     
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
-            //NSLog(@"-------------------%@",[[responseObject objectForKey:@"data"]objectForKey:@"orderDetailList"][0] );
-            
+           
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             orderDetailList = [data1 objectForKey:@"orderDetailList"];
-            //NSLog(@"订单***********%@***********订单",orderDetailList);
-            
-            [DDshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"orderDetailList"] [0]objectForKey:@"amount"]];
-            [DDshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"orderDetailList"] [0]objectForKey:@"costPrice"]];
-            [DDshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"orderDetailList"] [0]objectForKey:@"favorablePrice"]];
-            [DDshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"orderDetailList"] [0]objectForKey:@"orderCode"]];
-            [DDshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"orderDetailList"] [0]objectForKey:@"totalPrice"]];
-
+            [self huoqushangpinxinxi];
             [self.tableview reloadData];
-
+            
             
         }
-//        NSLog(@"%@",responseObject);
-//        NSLog(@"-----------------------%@",[NSString stringWithFormat:@"%@", [responseObject objectForKey:@"msg"]]);
+       
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
@@ -121,67 +112,55 @@
         
     }];
     
-
+    
 }
 //获取商品信息数据
 -(void)huoqushangpinxinxi{
     //userID    暂时不用改
-    NSString *userID = @"0";
+    NSString *userI = @"0";
     //请求地址   地址不同 必须要改
-    NSString *url = @"/prod/productions";
+    NSString *ur = @"/prod/productions";
     //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld",(long)nowtimeStr];
+    NSDateFormatter *formatte = [[NSDateFormatter alloc]init];
+    NSDate *dateno = [NSDate date];
+    NSString *nowtimeSt = [formatte stringFromDate:dateno];
+    NSString *timeS = [NSString stringWithFormat:@"%ld",(long)nowtimeSt];
     //将上传对象转换为json格式字符串
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
-    SBJsonWriter *write = [[SBJsonWriter alloc]init];
+    AFHTTPRequestOperationManager *manage = [AFHTTPRequestOperationManager manager];
+    manage.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    SBJsonWriter *writ = [[SBJsonWriter alloc]init];
     //出入参数：
-    NSDictionary *datadic = [NSDictionary dictionaryWithObjectsAndKeys:@"52",@"productionsId", nil];
+    NSString*productionsI=[NSString stringWithFormat:@"%@",[orderDetailList[0] objectForKey:@"id"]];
+    NSLog(@"dididididididididi%@",productionsI);
+    NSDictionary *datadi = [NSDictionary dictionaryWithObjectsAndKeys:productionsI,@"productionsId", nil];
     
-    NSString *jsonstring = [write stringWithObject:datadic];
+    NSString *jsonstrin = [writ stringWithObject:datadi];
     //获取签名
-    NSString *sign = [lianjie getSign:url :userID :jsonstring :timeSp];
-    NSString *url1 = [NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
-    NSLog(@"url111111111111111111%@",url1);
+    NSString *sig = [lianjie getSign:ur :userI :jsonstrin :timeS];
+    NSString *url11 = [NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,ur];
+    
     //调用接口需要上传的数据
-    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    NSLog(@"dic============%@",dic);
-
-    [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary*di=[NSDictionary dictionaryWithObjectsAndKeys:jsonstrin,@"params",appkey, @"appkey",userI,@"userid",sig,@"sign",timeS,@"timestamp", nil];
+    NSLog(@"dic============%@",di);
+    
+    [manage GET:url11 parameters:di success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
+        NSLog(@"youyouyouyouyou%@",[responseObject objectForKey:@"msg"]);
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
             NSDictionary *data = [responseObject valueForKey:@"data"];
-        
+            
             productions = [data objectForKey:@"productions"];
             
             //名称
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proName"]];
-            //剂型
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"dosageForm"]];
-//            //规格
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"erpProId"]];
-//            //单位
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"unit"]];
-//            //供应商
-            [SPshuju addObject:[[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"provider"] objectForKey:@"corporateName"]];
-//            //生产企业
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proEnterprise"]];
-//            //批准文号
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"auditingFileNo"]];
-//            //储存条件
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"storageCondition"]];
             
             [self.tableview reloadData];
             
             NSLog(@"***********%@***********返回数据",data);
         }else{
             
-           // NSLog(@"%@",responseObject);
-           // NSLog(@"-----------------------%@",[NSString stringWithFormat:@"%@", [responseObject objectForKey:@"msg"]]);
-
+            // NSLog(@"%@",responseObject);
+            // NSLog(@"-----------------------%@",[NSString stringWithFormat:@"%@", [responseObject objectForKey:@"msg"]]);
+            
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
@@ -210,7 +189,7 @@
         zhi = 2;
         [self.tableview reloadData];
     }
-
+    
 }
 //创建按钮
 -(void)anniu{
@@ -233,7 +212,7 @@
     [backButton setTitleColor:[UIColor colorWithHexString:@"ffffff" alpha:1] forState:UIControlStateNormal];
     backButton.backgroundColor = [UIColor colorWithHexString:@"FF7F00" alpha:0.6];
     backButton.layer.cornerRadius = 5.0;
-
+    
     
     [self.view addSubview:underView];
     [underView addSubview:passButton];
@@ -249,8 +228,8 @@
     [DDxinxi addObject:@"订单编码"];
     [DDxinxi addObject:@"总价"];
     DDshuju = [[NSMutableArray alloc]init];
-   
-   
+    
+    
     SPxinxi = [[NSMutableArray alloc]init];
     [SPxinxi addObject:@"名称"];
     [SPxinxi addObject:@"剂型"];
@@ -265,14 +244,20 @@
 }
 //tableview 分组
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    if (zhi==1) {
+        return orderDetailList.count;
+    }
+    else if(zhi==2){
+        return productions.count;
+    }else
+    return 0;
 }
 //tableview 行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (zhi == 1)
     {
         
-      
+        
         return DDxinxi.count;
     }
     else if (zhi == 2)
@@ -295,16 +280,41 @@
 }
 //编辑cell内容
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     static NSString *id1 = @"cell3";
     UITableViewCell *cell= [tableView cellForRowAtIndexPath:indexPath];
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
+    if (orderDetailList.count!=0) {
+        [DDshuju addObject:[orderDetailList [indexPath.section] objectForKey:@"amount"]];
+        [DDshuju addObject:[orderDetailList [indexPath.section] objectForKey:@"costPrice"]];
+        [DDshuju addObject:[orderDetailList [indexPath.section] objectForKey:@"favorablePrice"]];
+        [DDshuju addObject:[orderDetailList [indexPath.section] objectForKey:@"orderCode"]];
+        [DDshuju addObject:[orderDetailList [indexPath.section] objectForKey:@"totalPrice"]];
+    }
+    if (productions.count!=0) {
+        [SPshuju addObject:[productions[indexPath.section] objectForKey:@"proName"]];
+        //剂型
+        [SPshuju addObject:[productions[indexPath.section] objectForKey:@"dosageForm"]];
+        //            //规格
+        [SPshuju addObject:[productions[indexPath.section] objectForKey:@"erpProId"]];
+        //            //单位
+        [SPshuju addObject:[productions[indexPath.section] objectForKey:@"unit"]];
+        //            //供应商
+        [SPshuju addObject:[[productions[indexPath.section] objectForKey:@"provider"] objectForKey:@"corporateName"]];
+        //            //生产企业
+        [SPshuju addObject:[productions[indexPath.section] objectForKey:@"proEnterprise"]];
+        //            //批准文号
+        [SPshuju addObject:[productions[indexPath.section] objectForKey:@"auditingFileNo"]];
+        //            //储存条件
+        [SPshuju addObject:[productions[indexPath.section] objectForKey:@"storageCondition"]];
 
- 
+    }
+    
     UIView *xian = [[UIView alloc]initWithFrame:CGRectMake(15, 39, width-30, 1)];
     xian.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-
+    
     if (zhi == 1)//订单信息
     {
         UILabel *leftlabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 7, 120, 30)];
@@ -317,12 +327,12 @@
         rightLable.font = [UIFont systemFontOfSize:13];
         
         if(DDshuju.count==0){
-           rightLable.text =@"无网络";
+            rightLable.text =@"无网络";
         }else{
-        rightLable.text =[NSString stringWithFormat:@"%@" ,DDshuju[indexPath.row] ];
+            rightLable.text =[NSString stringWithFormat:@"%@" ,DDshuju[indexPath.row] ];
         }
         //rightLable.textAlignment = NSTextAlignmentCenter;
-
+        
         [cell.contentView addSubview:xian];
         [cell.contentView addSubview:leftlabel];
         [cell.contentView addSubview:rightLable];
@@ -339,12 +349,12 @@
         rightLable1.font = [UIFont systemFontOfSize:13];
         rightLable1.text = SPshuju[indexPath.row];
         //rightLable1.textAlignment = NSTextAlignmentCenter;
-
+        
         [cell.contentView addSubview:xian];
         [cell.contentView addSubview:leftlabel1];
         [cell.contentView addSubview:rightLable1];
     }
-      
+    
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //线消失

@@ -221,12 +221,12 @@
     shuliang.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     jian = [[UIButton alloc]initWithFrame:CGRectMake(180, 87, 20, 20)];
     [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
-    [jian addTarget:self action:@selector(jian) forControlEvents:UIControlEventTouchUpInside];
+    [jian addTarget:self action:@selector(jian:) forControlEvents:UIControlEventTouchUpInside];
    
     
     UIButton *jia = [[UIButton alloc]initWithFrame:CGRectMake(225, 87, 20, 20)];
     [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
-    [jia addTarget:self action:@selector(jia) forControlEvents:UIControlEventTouchUpInside];
+    [jia addTarget:self action:@selector(jia:) forControlEvents:UIControlEventTouchUpInside];
     shuru = [[UITextField alloc]initWithFrame:CGRectMake(201, 87, 23,20)];
     shuru.text = @"0";
     [shuru setTag:indexPath.row+1000];
@@ -296,14 +296,15 @@
 //    NSLog(@"%@",xixi.text);
     [chuande addObject:dd];
 }
--(void)jia{
+-(void)jia:(UIButton*)btn{
     
-    
+    NSLog(@"%ld",btn.tag);
     
     
 }
 
--(void)jian{
+-(void)jian:(UIButton*)btn{
+    
     
 }
 
