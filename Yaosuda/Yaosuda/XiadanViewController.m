@@ -40,9 +40,6 @@
         [arr writeToFile:path atomically:YES];
     }
     
-    //    jieshou=[NSArray arrayWithArray:values];
-    //    NSLog(@"方法里的 接受数据－－－－－－－－－－－－－%@",jieshou);
-    //    [_tableview reloadData];
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -51,7 +48,14 @@
     NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
     jieshou=[[NSMutableArray alloc] init];
     jieshou=[NSArray arrayWithContentsOfFile:path];
-    //  NSLog(@"viewwill的接受 数据＊＊＊＊＊＊＊%@",jieshou);
+    NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
+    NSFileManager*fm=[NSFileManager defaultManager];
+    if (![fm fileExistsAtPath:pathkehu]) {
+        
+    }
+    else{
+        _kehumingzi.text=[[NSDictionary dictionaryWithContentsOfFile:pathkehu] objectForKey:@"customerName"];
+    }
     [_tableview reloadData];
     
 }

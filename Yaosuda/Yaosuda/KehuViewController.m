@@ -26,7 +26,7 @@
     UIImageView *image;
     UIImageView *image1;
     
-    UILabel *KHmingzi1 ;
+   
 }
 @end
 
@@ -57,7 +57,7 @@
     NSDate *datenow = [NSDate date];
     NSString *nowtimeStr = [formatter stringFromDate:datenow];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-    NSLog(@"时间戳:%@",timeSp); //时间戳的值
+    
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -70,10 +70,10 @@
     
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-    NSLog(@"%@",sign);
+   
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-    NSLog(@"url1==========================%@",url1);
+    
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     NSLog(@"dic============%@",dic);
@@ -136,7 +136,7 @@
     KHmingzi.text = @"客户姓名:";
     KHmingzi.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     KHmingzi.font = [UIFont systemFontOfSize:13];
-    KHmingzi1 = [[UILabel alloc]initWithFrame:CGRectMake(width/4-10, 10, width/4, 30)];
+    UILabel *KHmingzi1  = [[UILabel alloc]initWithFrame:CGRectMake(width/4-10, 10, width/4, 30)];
     KHmingzi1.text = [customerList[indexPath.section] objectForKey:@"customerName" ];
     KHmingzi1.font = [UIFont systemFontOfSize:13];
     KHmingzi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
@@ -235,12 +235,15 @@
     
     image1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-20, 3, 15, 15)];
     image1.image = [UIImage imageNamed:@"@2x_kh_03.png"];
-    
-
-    [cell.contentView addSubview:image];
-    [cell.contentView addSubview:image1];
-   
-
+    NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
+    NSFileManager*fm=[NSFileManager defaultManager];
+    if ([fm fileExistsAtPath:pathkehu]) {
+        if ([[customerList[indexPath.section] objectForKey:@"customerName"]  isEqualToString:[[NSDictionary dictionaryWithContentsOfFile:pathkehu] objectForKey:@"customerName"]]) {
+            
+            [cell.contentView addSubview:image];
+            [cell.contentView addSubview:image1];
+        }
+    }
     [cell.contentView addSubview:KHmingzi];
     [cell.contentView addSubview:KHmingzi1];
     [cell.contentView addSubview:LXdianhua];
@@ -267,13 +270,23 @@
     self.tableview.showsVerticalScrollIndicator =NO;
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSLog(@"----------------%ld",indexPath.section);
+    
     
     
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   
+    NSDictionary* dd=[NSDictionary dictionaryWithDictionary:customerList[indexPath.section]];
+    NSString *path =[NSHomeDirectory() stringByAppendingString:@"/Documents/kehuxinxi.plist"];
+    [dd writeToFile:path atomically:YES];
+
+    
+    
+    
+    
+    
+    
 //返回上一页
     [[self navigationController] popViewControllerAnimated:YES];
     
