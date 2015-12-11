@@ -178,7 +178,7 @@
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
             
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
-            NSLog(@"返回数据***********%@***********返回数据",data1);
+            
             
         }
         //NSLog(@"%@",responseObject);
