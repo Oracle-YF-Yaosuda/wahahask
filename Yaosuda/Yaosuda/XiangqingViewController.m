@@ -101,12 +101,6 @@
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
         
     }];
-    
-
-    
-    
-    
-  
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -114,19 +108,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    if (section == 0) {
-//        return 1;
-//    }
-//    else if (section == 1){
-//        return 1;
-//    }
-//    else if (section == 2){
-//        return 1;
-//    }
-//    else if (section == 3){
-//        return 1;
-//    }
-//    return 0;
+
     return 1;
 }
 

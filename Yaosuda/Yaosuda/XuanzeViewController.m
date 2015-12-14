@@ -226,7 +226,7 @@
     [jian addTarget:self action:@selector(jian:) forControlEvents:UIControlEventTouchUpInside];
     jian.tag=indexPath.row+20000;
 //   加创建
-  jia = [[UIButton alloc]initWithFrame:CGRectMake(225, 87, 20, 20)];
+    jia = [[UIButton alloc]initWithFrame:CGRectMake(225, 87, 20, 20)];
     [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
     [jia addTarget:self action:@selector(jia:) forControlEvents:UIControlEventTouchUpInside];
     jia.tag=indexPath.row+10000 ;

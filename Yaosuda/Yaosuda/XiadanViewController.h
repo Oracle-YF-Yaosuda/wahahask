@@ -17,6 +17,8 @@
 
 - (IBAction)fanhui:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIButton *queren;
+- (IBAction)queren:(id)sender;
 
 
 @end

@@ -10,6 +10,7 @@
 #import "Color+Hex.h"
 #import "XiadanbianjiViewController.h"
 #import "KehuViewController.h"
+#import "QuerenViewController.h"
 
 @interface XiadanViewController ()
 {
@@ -193,6 +194,12 @@
 - (IBAction)fanhui:(id)sender {
     
     [self.navigationController popViewControllerAnimated:YES];
+    
+}
+- (IBAction)queren:(id)sender {
+    
+    QuerenViewController *qu = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"queren"];
+    [self.navigationController pushViewController:qu animated:YES];
     
 }
 @end
