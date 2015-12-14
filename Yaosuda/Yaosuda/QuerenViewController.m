@@ -8,6 +8,17 @@
 
 #import "QuerenViewController.h"
 
-@implementation QuerenViewController
+@interface QuerenViewController ()
 
+
+@end
+
+
+@implementation QuerenViewController
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    
+    
+}
 @end
