@@ -63,13 +63,13 @@
 //获取全部订单网络数据
 -(void)huoququanbu
 {
-    NSString*businesspersonId=[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"];
+ NSString*loginUserID=[[yonghuziliao getUserInfo] objectForKey:@"id"];
     //userID    暂时不用改
     NSString * userID=@"0";
     
     //请求地址   地址不同 必须要改
     NSString *url = @"/order/list";
-    NSString*url11=@"/order/auditList";
+
     //时间戳
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     NSDate *datenow = [NSDate date];
@@ -81,50 +81,31 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter *writer = [[SBJsonWriter alloc]init];
-    AFHTTPRequestOperationManager *manage = [AFHTTPRequestOperationManager manager];
-    manage.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
-    SBJsonWriter *wri = [[SBJsonWriter alloc]init];
+
     //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1008",@"loginUserId",@"2015-11-11",@"startDate",@"2015-11-21",@"endDate", @"2",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
-    NSDictionary*datadic11=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId", nil];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",@"2015-11-11",@"startDate",@"2015-11-21",@"endDate", @"2",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
+
     NSString*jsonstring=[writer stringWithObject:datadic];
-    NSString*jsonstring11=[wri stringWithObject:datadic11];
+
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-    NSString*sign1=[lianjie getSign:url11 :userID :jsonstring11 :timeSp];
+
     
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
-    NSString*url2=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url11];
+
     
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    NSDictionary*dic1=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring11,@"params",appkey, @"appkey",userID,@"userid",sign1,@"sign",timeSp,@"timestamp", nil];
+ 
     NSLog(@"dic============%@",dic);
-    [manage GET:url2 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       
-        
-     
-        
-        if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
-            
-            NSDictionary *datadic = [responseObject valueForKey:@"data"];
-            youbian=[datadic objectForKey:@"orderList"];
-            NSLog(@"you%@",youbian);
-            
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
-        
-        NSLog(@"%@",error);
-    }];
+
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
         
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
             zuobian=[datadic objectForKey:@"orderList"];
+            [_tableview reloadData];
             NSLog(@"zuo%@",zuobian);
             
         }
@@ -140,7 +121,7 @@
 //获取待审核数据
 -(void)huoqudaishenhe
 {
-    
+    NSString*businesspersonId=[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"];
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -160,7 +141,7 @@
     SBJsonWriter *writer = [[SBJsonWriter alloc]init];
     //出入参数：
 
-    NSDictionary*datadic1=[NSDictionary dictionaryWithObjectsAndKeys:@"53",@"businesspersonId",nil];
+    NSDictionary*datadic1=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic1];
     
@@ -172,17 +153,17 @@
     //NSLog(@"url1%@",url1);
     //电泳借口需要上传的数据
     NSDictionary*dic1=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    //NSLog(@"dic============%@",dic1);
+    
 
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
             
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
-            
+            youbian=[data1 objectForKey:@"orderList"];
+            [_tableview reloadData];
             
         }
-        //NSLog(@"%@",responseObject);
-        //NSLog(@"-----------------------%@",[NSString stringWithFormat:@"%@", [responseObject objectForKey:@"msg"]]);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
@@ -197,10 +178,10 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 //2是返回的数据
     if (zhi == 1) {
-        return 1+5;
+        return zuobian.count;
     }
     else if (zhi == 2){
-        return 4;
+        return youbian.count;
     }
     return 0;
 }
