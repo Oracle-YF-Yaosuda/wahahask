@@ -14,4 +14,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (retain , nonatomic) id<PassTrendValueDelegate>trendDelegate;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *fanhui;
+
+- (IBAction)fanhui:(id)sender;
+
 @end

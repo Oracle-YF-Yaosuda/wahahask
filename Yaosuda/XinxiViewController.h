@@ -11,4 +11,6 @@
 @interface XinxiViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong , nonatomic) NSString*orderId;
+
+
 @end

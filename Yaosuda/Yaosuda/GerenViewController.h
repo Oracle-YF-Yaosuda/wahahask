@@ -12,5 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *fanhui;
+- (IBAction)fanhui:(id)sender;
 
 @end

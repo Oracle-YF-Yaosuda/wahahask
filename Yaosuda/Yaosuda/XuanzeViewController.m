@@ -53,9 +53,7 @@
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
-    UIBarButtonItem *left = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(fanhui)];
-    self.navigationItem.leftBarButtonItem = left;
-  
+
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -124,15 +122,6 @@
     
 }
 
--(void)fanhui{
- 
-       // 放到返回上一页面
-        XiadanViewController*memeda=[[XiadanViewController alloc] init];
-        self.trendDelegate= memeda;
-        [self.trendDelegate passTrendValue:chuande];
-    [self.navigationController popViewControllerAnimated:YES];
-    
-}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -355,4 +344,13 @@
     [super didReceiveMemoryWarning];
 }
 
+- (IBAction)fanhui:(id)sender {
+    
+    // 放到返回上一页面
+    XiadanViewController*memeda=[[XiadanViewController alloc] init];
+    self.trendDelegate= memeda;
+    [self.trendDelegate passTrendValue:chuande];
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
 @end

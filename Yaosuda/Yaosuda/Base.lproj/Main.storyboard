@@ -266,8 +266,15 @@
                             <constraint firstAttribute="trailing" secondItem="K0f-vL-jTp" secondAttribute="trailing" id="s3C-cX-01L"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="个人中心" id="aZA-u7-G8p"/>
+                    <navigationItem key="navigationItem" title="个人中心" id="aZA-u7-G8p">
+                        <barButtonItem key="leftBarButtonItem" image="@2x_xj_03_06.png" id="Clg-SK-dsR">
+                            <connections>
+                                <action selector="fanhui:" destination="oQC-Hq-qMi" id="x33-FB-ji4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="fanhui" destination="Clg-SK-dsR" id="Qjl-6n-meg"/>
                         <outlet property="ninhao" destination="3Sl-1n-b2F" id="7Zr-Zr-Znv"/>
                         <outlet property="tableview" destination="jyR-Cs-oKA" id="tnb-00-VsI"/>
                     </connections>
@@ -763,7 +770,14 @@
                             <constraint firstAttribute="trailing" secondItem="9c8-We-eyK" secondAttribute="trailing" id="wxj-Ov-gO8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="请下单" id="cs2-Cf-yuD"/>
+                    <navigationItem key="navigationItem" title="请下单" id="cs2-Cf-yuD">
+                        <barButtonItem key="backBarButtonItem" title=" " id="cIp-H9-KhJ"/>
+                        <barButtonItem key="leftBarButtonItem" image="@2x_xj_03_06.png" id="tsd-dp-78n">
+                            <connections>
+                                <action selector="fanhui:" destination="Aa2-oi-2No" id="NZ6-tL-cr2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="kehumingzi" destination="6rE-Ff-PAA" id="xqe-6U-K9X"/>
                         <outlet property="tableview" destination="Qqo-X6-aJC" id="eM4-49-ptc"/>
@@ -1165,8 +1179,15 @@
                             <constraint firstAttribute="trailing" secondItem="zpu-I2-zdm" secondAttribute="trailing" id="aKq-kh-48K"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="选择商品" id="n4u-JJ-TAA"/>
+                    <navigationItem key="navigationItem" title="选择商品" id="n4u-JJ-TAA">
+                        <barButtonItem key="leftBarButtonItem" image="@2x_xj_03_06.png" id="Yam-XV-2zf">
+                            <connections>
+                                <action selector="fanhui:" destination="nhN-IB-jcv" id="ZYg-B2-dwx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="fanhui" destination="Yam-XV-2zf" id="suP-BT-eNs"/>
                         <outlet property="tableview" destination="zpu-I2-zdm" id="ehG-bk-5i6"/>
                     </connections>
                 </viewController>
@@ -1307,6 +1328,7 @@
         <image name="@2x_dl_03.png" width="278" height="310"/>
         <image name="@2x_dl_07.png" width="34" height="50"/>
         <image name="@2x_dl_10.png" width="34" height="50"/>
+        <image name="@2x_xj_03_06.png" width="20" height="32"/>
         <image name="bg.jpg" width="750" height="1334"/>
         <image name="bg_02.png" width="750" height="350"/>
         <image name="icon.png" width="18" height="32"/>

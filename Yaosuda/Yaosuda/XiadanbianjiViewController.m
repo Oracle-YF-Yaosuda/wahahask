@@ -31,13 +31,17 @@
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(tiao)];
     self.navigationItem.rightBarButtonItem = right;
     
+    
 }
 
 -(void)tiao{
     
-    XiadanViewController*xiadan =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
-    [self.navigationController pushViewController:xiadan animated:YES];
+//    XiadanViewController*xiadan =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
+//    [self.navigationController pushViewController:xiadan animated:YES];
+
     
+    [self.navigationController popViewControllerAnimated:YES];
+
     
 }
 - (void)didReceiveMemoryWarning {

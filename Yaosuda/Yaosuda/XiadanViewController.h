@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
+- (IBAction)fanhui:(id)sender;
 
 
 
