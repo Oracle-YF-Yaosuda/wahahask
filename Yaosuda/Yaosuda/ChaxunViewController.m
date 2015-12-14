@@ -93,20 +93,20 @@
     
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
 
-    
+    NSLog(@"%@",url1);
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
  
     NSLog(@"dic============%@",dic);
 
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+        NSLog(@"rerererere%@",responseObject);
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
         
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
             zuobian=[datadic objectForKey:@"orderList"];
             [_tableview reloadData];
-            NSLog(@"zuo%@",zuobian);
+         //   NSLog(@"zuo%@",zuobian);
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -156,8 +156,9 @@
     
 
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@",responseObject);
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
-            
+        
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             youbian=[data1 objectForKey:@"orderList"];
             [_tableview reloadData];

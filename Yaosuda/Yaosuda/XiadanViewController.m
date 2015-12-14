@@ -11,6 +11,13 @@
 #import "XiadanbianjiViewController.h"
 #import "KehuViewController.h"
 #import "QuerenViewController.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "WarningBox.h"
+#import "yonghuziliao.h"
+#import "SBJsonWriter.h"
+#import "lianjie.h"
+#import "hongdingyi.h"
+
 
 @interface XiadanViewController ()
 {
@@ -18,6 +25,7 @@
     CGFloat height;
     NSArray*jieshou;
     UITableViewCell *cell;
+    NSMutableArray*jiage;
 }
 
 @end
@@ -45,21 +53,89 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidLoad];
-    
+    //接取商品价格
+    jiage=[NSMutableArray array];
+    //接受订单数据
     NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
     jieshou=[[NSMutableArray alloc] init];
     jieshou=[NSArray arrayWithContentsOfFile:path];
+    //接受客户数据
     NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
+    NSDictionary*kehuxinxi=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
+    
+    
     NSFileManager*fm=[NSFileManager defaultManager];
     if (![fm fileExistsAtPath:pathkehu]) {
-        
+        jieshou=[NSArray array];
     }
     else{
         _kehumingzi.text=[[NSDictionary dictionaryWithContentsOfFile:pathkehu] objectForKey:@"customerName"];
+    
+   
+    //用户id
+    NSString*businesspersonId=[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"];
+    //提取客户id
+    NSString*kehuID=[NSString stringWithFormat:@"%@",[kehuxinxi objectForKey:@"id"]];
+    if (kehuID!=nil&&![kehuID isEqual:[NSNull null]]) {
+        
+    
+    for (int i=0; i<jieshou.count; i++) {
+      
+        //userID    暂时不用改
+        NSString * userID=@"0";
+        
+        //请求地址   地址不同 必须要改
+        NSString * url =@"/prod/priceByNum";
+        
+        //时间戳
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+        NSDate *datenow = [NSDate date];
+        NSString *nowtimeStr = [formatter stringFromDate:datenow];
+        NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+        NSLog(@"时间戳:%@",timeSp); //时间戳的值
+        
+        //将上传对象转换为json格式字符串
+        AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+        manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+        SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+        //数量
+        NSString*acount=[NSString stringWithFormat:@"%@",[jieshou[i] objectForKey:@"shuliang"]];
+        //商品id
+        NSString*shangpinID= [ NSString stringWithFormat:@"%@",[jieshou[i] objectForKey:@"id"]];
+        //出入参数：
+        NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",businesspersonId],@"businesspersonId",acount,@"acount",kehuID,@"customerId",shangpinID,@"productionsId", nil];
+        
+        NSString*jsonstring=[writer stringWithObject:datadic];
+        
+        //获取签名
+        NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
+        NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+        
+        //电泳借口需要上传的数据
+        NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+        [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+                NSDictionary*data=[responseObject valueForKey:@"data"];
+                [jiage addObject:[data objectForKey:@"customerPrice"]];
+                
+                NSLog(@"%@",jiage);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [WarningBox warningBoxHide:YES andView:self.view];
+            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+            NSLog(@"%@",error);
+        }];
+        
+
     }
-    [_tableview reloadData];
+    
+    }
+        [_tableview reloadData];
     
 }
+    }
 - (void)viewDidLoad {
     
     [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -104,6 +180,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *id1 =@"mycell";
+   
     
     cell = [tableView cellForRowAtIndexPath:indexPath ];
     if (cell == nil) {
@@ -119,7 +196,7 @@
     xian.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
     
     UILabel *name1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 5, width-40-80, 30 )];
-    name1.text = @"暂无数据";
+    name1.text = [NSString stringWithFormat:@"%@", [jieshou[indexPath.section] objectForKey:@"proName"]];
     name1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     name1.font = [UIFont systemFontOfSize:15];
     name1.textAlignment = NSTextAlignmentCenter;
@@ -136,7 +213,7 @@
     xian1.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
     
     UILabel *shuliang1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 45, width-40-80, 30 )];
-    shuliang1.text = @"暂无数据";
+    shuliang1.text = [NSString stringWithFormat:@"%@",[jieshou[indexPath.section] objectForKey:@"shuliang"]];
     shuliang1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     shuliang1.font = [UIFont systemFontOfSize:15];
     shuliang1.textAlignment = NSTextAlignmentCenter;
@@ -148,12 +225,12 @@
     
     
     UILabel *danjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 85, 80, 30)];
-    danjia.text = @"商品单价:";
+    danjia.text = @"商品总价:";
     danjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     danjia.font = [UIFont systemFontOfSize:15];
     
     UILabel *danjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 85, width-40-80, 30 )];
-    danjia1.text = @"暂无数据";
+    danjia1.text = [NSString stringWithFormat:@"%@",jiage[indexPath.section]];
     danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     danjia1.font = [UIFont systemFontOfSize:15];
     danjia1.textAlignment = NSTextAlignmentCenter;

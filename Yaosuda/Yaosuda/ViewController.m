@@ -14,14 +14,17 @@
 #import "hongdingyi.h"
 #import "SBJsonWriter.h"
 #import "AFHTTPRequestOperationManager.h"
-@interface ViewController ()
+#import "yonghuziliao.h"
 
+@interface ViewController ()
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
+    
     
     self.user.delegate = self;
     self.pass.delegate = self;
@@ -29,10 +32,7 @@
     self.diview.layer.cornerRadius = 5.0;
     self.denglu.layer.cornerRadius = 5.0;
     
-  
-    
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
