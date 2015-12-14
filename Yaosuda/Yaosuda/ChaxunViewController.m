@@ -58,6 +58,7 @@
     zhi = 1;
     
     [self huoququanbu];
+    [self huoqudaishenhe];
    
 }
 //获取全部订单网络数据
@@ -177,7 +178,7 @@
 }
 //section
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-//2是返回的数据
+
     if (zhi == 1) {
         return zuobian.count;
     }
@@ -240,12 +241,10 @@
     shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     shenhe.font = [UIFont systemFontOfSize:13];
 
-    
     [baseView addSubview:shenhe];
     [baseView addSubview:groupName];
     [baseView addSubview:tu];
 
-    
     if (zhi == 1)
     {
         if (section == 0)

@@ -157,7 +157,6 @@
     XiadanbianjiViewController*xiadan =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadanbianji"];
     [self.navigationController pushViewController:xiadan animated:YES];
     
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

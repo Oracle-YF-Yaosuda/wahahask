@@ -269,8 +269,6 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (zhi == 1)
     {
-        
-      
         return DDxinxi.count;
     }
     else if (zhi == 2)
