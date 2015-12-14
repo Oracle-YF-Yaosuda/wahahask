@@ -36,13 +36,8 @@
 
 -(void)tiao{
     
-//    XiadanViewController*xiadan =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadan"];
-//    [self.navigationController pushViewController:xiadan animated:YES];
-
-    
     [self.navigationController popViewControllerAnimated:YES];
 
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
