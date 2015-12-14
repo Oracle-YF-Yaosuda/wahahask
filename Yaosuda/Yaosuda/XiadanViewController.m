@@ -111,31 +111,26 @@
         NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
         NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
         
-        //电泳借口需要上传的数据
+        //需要上传的数据
         NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
         [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             if ([[responseObject objectForKey:@"code"] intValue]==0000) {
                 NSDictionary*data=[responseObject valueForKey:@"data"];
                 [jiage addObject:[data objectForKey:@"customerPrice"]];
-                
                 NSLog(@"%@",jiage);
             }
-            
+            [_tableview reloadData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
             [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
             NSLog(@"%@",error);
         }];
-        
-
-    }
-    
-    }
-        [_tableview reloadData];
-    
+       }
+      }
+     }
+     
 }
-    }
 - (void)viewDidLoad {
     
     [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -229,8 +224,12 @@
     danjia.font = [UIFont systemFontOfSize:15];
     
     UILabel *danjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 85, width-40-80, 30 )];
-    danjia1.text=@"接受不到啊";
-    //danjia1.text = [NSString stringWithFormat:@"%@",jiage[indexPath.section]];
+  
+    if (jiage.count!=jieshou.count) {
+          danjia1.text=@"?";
+    }
+    else
+    danjia1.text = [NSString stringWithFormat:@"%@",jiage[indexPath.section]];
     danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     danjia1.font = [UIFont systemFontOfSize:15];
     danjia1.textAlignment = NSTextAlignmentCenter;

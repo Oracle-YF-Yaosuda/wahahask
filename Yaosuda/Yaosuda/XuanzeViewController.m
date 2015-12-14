@@ -40,8 +40,90 @@
 
 @implementation XuanzeViewController
 
+//取消按钮
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+    searchBar.text=@"";
+    [self diaoyong:searchBar.text];
+}
+
+
+//按键搜索
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [self diaoyong:searchBar.text];
+    [searchBar resignFirstResponder];
+}
+-(void)diaoyong:(NSString*)zhao{
+    //userID    暂时不用改
+    NSString * userID=@"0";
+    
+    //请求地址   地址不同 必须要改
+    NSString * url =@"/prod/productionsList";
+    
+    //时间戳
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    NSDate *datenow = [NSDate date];
+    NSString *nowtimeStr = [formatter stringFromDate:datenow];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    
+    //将上传对象转换为json格式字符串
+    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+    //出入参数：
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",zhao,@"proName",@"",@"proCatalog",@"1",@"pageNo",@"100",@"pageSize", nil];
+    
+    NSString*jsonstring=[writer stringWithObject:datadic];
+    
+    //获取签名
+    NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
+    
+    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+    
+    NSLog(@"url1==========================%@",url1);
+    //电泳借口需要上传的数据
+    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+    NSLog(@"dic============%@",dic);
+    [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        
+        
+        //[WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
+        
+        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+            NSDictionary*data=[responseObject valueForKey:@"data"];
+            productionsList=[data objectForKey:@"productionsList"];
+            for (int i=0; i<productionsList.count; i++) {
+                [shuzi addObject:[NSString stringWithFormat:@"shuzi%d",i]];
+                [jiahao addObject:[NSString stringWithFormat:@"jiahao%d",i]];
+                
+                //       下单数量默认为0
+                [xiadanshuliang addObject:@"0"];
+                
+            }
+            
+            
+            
+            [_tableview reloadData];
+            
+            
+        }else{
+            
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        
+    }];
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _search.delegate=self;
+    
     shuzi=[NSMutableArray array];
     jiahao=[NSMutableArray array];
     chuande=[NSMutableArray array];
@@ -117,9 +199,7 @@
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
         
     }];
-    
-    
-    
+  
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -299,10 +379,6 @@
 -(void)jia:(UIButton*)tt{
 //找到当前cell
      UITableViewCell *cell=(UITableViewCell*)[[tt superview] superview ];
-    
-//    找到里面的uilable
-//    UILabel *ll=(UILabel *)[cell viewWithTag:tt.tag-10000+1000];
-//    ll.text=@"111";
     
 // 找到当前 没值 ?
     NSIndexPath *index=[self.tableview indexPathForCell:cell];
