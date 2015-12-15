@@ -118,15 +118,13 @@
         //需要上传的数据
         NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
         [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            NSLog(@"%@",responseObject);
+
             if ([[responseObject objectForKey:@"code"] intValue]==0000) {
-//                NSDictionary*data=[responseObject objectForKey:@"data"];
-//                NSDictionary*customerPrice =[data objectForKey:@"customerPrice"];
-//                [dicc setObject:customerPrice forKey:[NSString stringWithFormat:@"%d",i]];
-//                [jiage addObject:@"1"];
-//            
-                NSDictionary*data=[responseObject valueForKey:@"data"];
-                [jiage addObject:[data objectForKey:@"customerPrice"]];
+                NSDictionary*data=[responseObject objectForKey:@"data"];
+                NSString*customerPrice=[NSString stringWithFormat:@"%@",[data objectForKey:@"customerPrice"]];
+                [dicc setObject:customerPrice forKey:[NSString stringWithFormat:@"%d",i]];
+                [jiage addObject:@"1"];
+
                          }
             [_tableview reloadData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -238,9 +236,9 @@
           danjia1.text=@"?";
     }
     else
-    //danjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section]];
+    danjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section]];
 
-    danjia1.text =[NSString stringWithFormat:@"%@",jiage[indexPath.section]];
+    
     danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     danjia1.font = [UIFont systemFontOfSize:15];
     danjia1.textAlignment = NSTextAlignmentCenter;
