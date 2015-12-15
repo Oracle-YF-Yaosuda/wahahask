@@ -26,13 +26,14 @@
     NSArray*jieshou;
     UITableViewCell *cell;
     NSMutableArray*jiage;
-    int qq;
+    NSMutableDictionary*dicc;
+   
 }
 
 @end
 
 @implementation XiadanViewController
-qq=0;
+
 -(void)passTrendValue:(NSArray *)values{
     
     NSString *path =[NSHomeDirectory() stringByAppendingString:@"/Documents/xiadanmingxi.plist"];
@@ -112,12 +113,18 @@ qq=0;
         //获取签名
         NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
         NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
-        
+       
+       
         //需要上传的数据
         NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
         [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
+//            NSLog(@"%@",responseObject);
             if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+//                NSDictionary*data=[responseObject objectForKey:@"data"];
+//                NSDictionary*customerPrice =[data objectForKey:@"customerPrice"];
+//                [dicc setObject:customerPrice forKey:[NSString stringWithFormat:@"%d",i]];
+//                [jiage addObject:@"1"];
+//            
                 NSDictionary*data=[responseObject valueForKey:@"data"];
                 [jiage addObject:[data objectForKey:@"customerPrice"]];
                          }
@@ -132,7 +139,7 @@ qq=0;
      
 }
 - (void)viewDidLoad {
-    
+    dicc=[NSMutableDictionary dictionary];
     [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
@@ -224,12 +231,16 @@ qq=0;
     danjia.font = [UIFont systemFontOfSize:15];
     
     UILabel *danjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 85, width-40-80, 30 )];
-  
+    
+    
+    
     if (jiage.count!=jieshou.count) {
           danjia1.text=@"?";
     }
     else
-    danjia1.text = [NSString stringWithFormat:@"%@",jiage[indexPath.section]];
+    //danjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section]];
+
+    danjia1.text =[NSString stringWithFormat:@"%@",jiage[indexPath.section]];
     danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     danjia1.font = [UIFont systemFontOfSize:15];
     danjia1.textAlignment = NSTextAlignmentCenter;
@@ -273,7 +284,7 @@ qq=0;
     
 }
 - (IBAction)queren:(id)sender {
-    qq=1;
+  
     if (jiage.count==0) {
         [WarningBox warningBoxModeText:@"请选择商品及客户！" andView:self.view];
     }else{
@@ -338,12 +349,5 @@ qq=0;
    
        }
 }
--(void)viewWillDisappear:(BOOL)animated{
-    if (qq==1) {
-        qq=0;
-    
-   
-    }
 
-}
 @end

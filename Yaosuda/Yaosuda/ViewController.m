@@ -25,13 +25,13 @@
     [super viewDidLoad];
   
   
-    NSFileManager *defaultManager;
-    defaultManager = [NSFileManager defaultManager];
-    NSString*path=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
-    NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-    [defaultManager removeItemAtPath:path error:NULL];
-    [defaultManager removeItemAtPath:path1 error:NULL];
-    
+//    NSFileManager *defaultManager;
+//    defaultManager = [NSFileManager defaultManager];
+//    NSString*path=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
+//    NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+//    [defaultManager removeItemAtPath:path error:NULL];
+//    [defaultManager removeItemAtPath:path1 error:NULL];
+//    
     
     self.user.delegate = self;
     self.pass.delegate = self;
