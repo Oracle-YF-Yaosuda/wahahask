@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hWu-xc-F7h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hWu-xc-F7h">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -209,11 +209,11 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tx_03.png" translatesAutoresizingMaskIntoConstraints="NO" id="4U6-g4-QtW">
-                                        <rect key="frame" x="261" y="25" width="80" height="80"/>
+                                        <rect key="frame" x="250" y="8" width="100" height="100"/>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="eTc-QB-esa"/>
-                                            <constraint firstAttribute="width" constant="80" id="gOk-4Y-cqk"/>
+                                            <constraint firstAttribute="height" constant="100" id="eTc-QB-esa"/>
+                                            <constraint firstAttribute="width" constant="100" id="gOk-4Y-cqk"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您好,18345559961" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sl-1n-b2F">
@@ -238,11 +238,11 @@
                                     <constraint firstAttribute="trailing" secondItem="3Sl-1n-b2F" secondAttribute="trailing" id="S34-0Y-PLF"/>
                                     <constraint firstItem="2WN-cr-s92" firstAttribute="top" secondItem="K0f-vL-jTp" secondAttribute="top" id="dcx-O4-kJd"/>
                                     <constraint firstAttribute="trailing" secondItem="2WN-cr-s92" secondAttribute="trailing" id="eJZ-Vd-5Ye"/>
-                                    <constraint firstItem="4U6-g4-QtW" firstAttribute="top" secondItem="K0f-vL-jTp" secondAttribute="top" constant="25" id="fCw-ht-EOa"/>
-                                    <constraint firstItem="3Sl-1n-b2F" firstAttribute="top" secondItem="4U6-g4-QtW" secondAttribute="bottom" constant="11" id="fmS-bo-Sou"/>
+                                    <constraint firstItem="4U6-g4-QtW" firstAttribute="top" secondItem="K0f-vL-jTp" secondAttribute="top" constant="8" id="fCw-ht-EOa"/>
+                                    <constraint firstItem="3Sl-1n-b2F" firstAttribute="top" secondItem="4U6-g4-QtW" secondAttribute="bottom" constant="8" id="fmS-bo-Sou"/>
                                     <constraint firstAttribute="height" constant="150" id="g8e-o6-P1w"/>
                                     <constraint firstItem="3Sl-1n-b2F" firstAttribute="leading" secondItem="K0f-vL-jTp" secondAttribute="leading" id="or5-4c-ugX"/>
-                                    <constraint firstItem="4U6-g4-QtW" firstAttribute="centerX" secondItem="2WN-cr-s92" secondAttribute="centerX" constant="1" id="ubZ-p8-aOo"/>
+                                    <constraint firstItem="4U6-g4-QtW" firstAttribute="centerX" secondItem="2WN-cr-s92" secondAttribute="centerX" id="ubZ-p8-aOo"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jyR-Cs-oKA">
@@ -1025,11 +1025,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-<<<<<<< Updated upstream
                                     <action selector="tijiao:" destination="HBt-ph-xEl" eventType="touchUpInside" id="gdk-tQ-Qba"/>
-=======
-                                    <action selector="tijiao:" destination="HBt-ph-xEl" eventType="touchUpInside" id="jXH-eq-kD6"/>
->>>>>>> Stashed changes
                                 </connections>
                             </button>
                         </subviews>
@@ -1050,21 +1046,9 @@
                             <constraint firstAttribute="trailing" secondItem="OGL-V8-XXd" secondAttribute="trailing" id="ydA-40-yBj"/>
                         </constraints>
                     </view>
-<<<<<<< Updated upstream
                     <navigationItem key="navigationItem" title="确认下单" id="Qfq-sj-QkV"/>
                     <connections>
                         <outlet property="yingfu" destination="UaP-DN-Zlh" id="lci-pI-M6J"/>
-=======
-                    <navigationItem key="navigationItem" title="确认下单" id="Qfq-sj-QkV">
-                        <barButtonItem key="leftBarButtonItem" image="@2x_xj_03_06.png" id="7Vm-TC-egJ">
-                            <connections>
-                                <action selector="fanhui:" destination="HBt-ph-xEl" id="2Cb-Cb-tRB"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="tijiao" destination="PEf-jE-rSc" id="Tl2-Su-78q"/>
->>>>>>> Stashed changes
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="im3-ui-eyi" userLabel="First Responder" sceneMemberID="firstResponder"/>

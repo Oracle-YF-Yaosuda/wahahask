@@ -24,6 +24,8 @@
     NSString*loginUserId;
 }
 
+
+- (IBAction)tijiao:(id)sender;
 @end
 
 
@@ -146,6 +148,4 @@
     }];
     
 }
-
-
 @end

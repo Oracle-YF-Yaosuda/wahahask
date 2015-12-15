@@ -226,7 +226,7 @@
     baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
     UILabel *groupName = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 35)];
-    groupName.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
+    groupName.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     groupName.text =@"订单信息";
     groupName.font = [UIFont systemFontOfSize:13];
 
@@ -235,7 +235,7 @@
 
     UILabel *shenhe = [[UILabel alloc]initWithFrame:CGRectMake(width-10-50, 0, 50, 35)];
     shenhe.text = @"已审核";
-    shenhe.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
+    shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     shenhe.font = [UIFont systemFontOfSize:13];
 
     [baseView addSubview:shenhe];
