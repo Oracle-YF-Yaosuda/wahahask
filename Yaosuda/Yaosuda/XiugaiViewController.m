@@ -64,7 +64,6 @@
         return NO;
     }
     return YES;
-    
 }
 -(BOOL)NewpassWord:(NSString *)newpass{
     if (self.newpass.text.length==0) {
