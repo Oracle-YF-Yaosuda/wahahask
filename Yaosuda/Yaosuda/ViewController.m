@@ -23,19 +23,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
-  
-//    NSFileManager *defaultManager;
-//    defaultManager = [NSFileManager defaultManager];
-//    NSString*path=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
-//    NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-//    [defaultManager removeItemAtPath:path error:NULL];
-//    [defaultManager removeItemAtPath:path1 error:NULL];
-//    
+    
+    
+    //    NSFileManager *defaultManager;
+    //    defaultManager = [NSFileManager defaultManager];
+    //    NSString*path=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
+    //    NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+    //    [defaultManager removeItemAtPath:path error:NULL];
+    //    [defaultManager removeItemAtPath:path1 error:NULL];
+    //
     
     self.user.delegate = self;
     self.pass.delegate = self;
-//设置圆角
+    //设置圆角
     self.diview.layer.cornerRadius = 5.0;
     self.denglu.layer.cornerRadius = 5.0;
     
@@ -48,7 +48,7 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
     
-   
+    
     if (textField == self.pass){
         
         int len = (int)self.pass.text.length;
@@ -95,10 +95,10 @@
     [self.view endEditing:YES];
     
     [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
-   
+    
     //获取设备唯一码
-    NSString *imei = [[UIDevice currentDevice].identifierForVendor UUIDString];
-   
+    //    NSString *imei = [[UIDevice currentDevice].identifierForVendor UUIDString];
+    
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -110,7 +110,7 @@
     NSDate *datenow = [NSDate date];
     NSString *nowtimeStr = [formatter stringFromDate:datenow];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-   
+    
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -123,12 +123,12 @@
     
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-   
+    
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     NSLog(@"%@",url1);
-       //电泳借口需要上传的数据
+    //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-        [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
@@ -140,16 +140,17 @@
             NSDictionary*datadic=[responseObject valueForKey:@"data"];
             [datadic writeToFile:path atomically:YES];
             
-           navigation*chaxun=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"navigation"];
+            navigation*chaxun=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"navigation"];
             [self presentViewController:chaxun animated:YES completion:^{
-               [self setModalTransitionStyle: UIModalTransitionStyleCrossDissolve];
+                [self setModalTransitionStyle: UIModalTransitionStyleCrossDissolve];
             }];
             
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络连接失败！" andView:self.view];
-
+        
     }];
     
 }
