@@ -71,7 +71,7 @@
     else{
         _kehumingzi.text=[[NSDictionary dictionaryWithContentsOfFile:pathkehu] objectForKey:@"customerName"];
     
-        NSLog(@"jieshoujieshou%@",jieshou);
+     
     //用户id
     NSString*businesspersonId=[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"];
     //提取客户id
@@ -118,8 +118,7 @@
             if ([[responseObject objectForKey:@"code"] intValue]==0000) {
                 NSDictionary*data=[responseObject valueForKey:@"data"];
                 [jiage addObject:[data objectForKey:@"customerPrice"]];
-                NSLog(@"jiage%@",jiage);
-            }
+                         }
             [_tableview reloadData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
@@ -154,7 +153,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // NSLog(@"返回组数的接受数据／／／／／／／／%@",jieshou);
+   
     return jieshou.count;
     
 }
@@ -278,11 +277,10 @@
     float m;
     for (int i=0; i<jiage.count; i++) {
         m+=[jiage[i] floatValue];
-        NSLog(@"11111%.2f",m);
+       
     }
-        NSLog(@"%.2f",m);
     QuerenViewController *qu = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"queren"];
-    qu.yingfu.text=[NSString stringWithFormat:@"%.2f元",m];
+    qu.meme =[NSString stringWithFormat:@"%.2f元",m];
     [self.navigationController pushViewController:qu animated:YES];
     }
 }

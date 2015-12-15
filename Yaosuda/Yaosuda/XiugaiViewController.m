@@ -108,7 +108,6 @@
     NSDate *datenow = [NSDate date];
     NSString *nowtimeStr = [formatter stringFromDate:datenow];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-    NSLog(@"时间戳:%@",timeSp); //时间戳的值
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -121,17 +120,14 @@
     
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-    NSLog(@"%@",sign);
+   
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-    NSLog(@"url1==========================%@",url1);
+  
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    NSLog(@"dic============%@",dic);
-    [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"%@",[ NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]]);
-        NSLog(@"*********************%@",responseObject);
+     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+   
         
         
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
@@ -141,8 +137,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
-        NSLog(@"%@",error);
-    }];
+        }];
   
     
        // }

@@ -31,8 +31,8 @@
 
 @implementation QuerenViewController
 - (void)viewDidLoad {
+    _yingfu.text=_meme;
     
-    NSLog(@"%@",_yingfu.text);
     [super viewDidLoad];
     loginUserId=[NSString stringWithFormat:@"%@",[[yonghuziliao getUserInfo] objectForKey:@"id"]];
     businesspersonId=[NSString stringWithFormat:@"%@",[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"]];
@@ -84,18 +84,21 @@
   
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"%@",[ NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]]);
-        NSLog(@"*********************%@",responseObject);
-        
         
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
-            
+            [WarningBox warningBoxModeText:@"下单成功" andView:self.view];
+            NSFileManager *defaultManager;
+            defaultManager = [NSFileManager defaultManager];
+            NSString*path=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
+            NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+            [defaultManager removeItemAtPath:path error:NULL];
+            [defaultManager removeItemAtPath:path1 error:NULL];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
-        NSLog(@"%@",[NSString stringWithFormat:@"%@",error]);
+        NSLog(@"%@",error);
     }];
     
 }

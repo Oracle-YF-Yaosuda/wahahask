@@ -80,10 +80,10 @@
     
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-    NSLog(@"url1==========================%@",url1);
+  
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    NSLog(@"dic============%@",dic);
+   
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         
@@ -162,10 +162,10 @@
    
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-    NSLog(@"url1==========================%@",url1);
+ 
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    NSLog(@"dic============%@",dic);
+   
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         
@@ -372,7 +372,7 @@
 #pragma mark - button点击事件
 -(void)tianjia:(UIButton*)tt{
     NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:productionsList[tt.tag-2000]];
-    NSLog(@"%ld",tt.tag);
+   
     [dd setObject:xiadanshuliang[tt.tag-2000] forKey:@"shuliang"];
     [chuande addObject:dd];
 }

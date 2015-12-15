@@ -53,7 +53,7 @@
     zhi = 1;
     
     [self huoqudingdanxinxi];
-   // [self huoqushangpinxinxi];
+  
     [self array];
     [self fenduan];
     [self anniu];
@@ -86,13 +86,13 @@
     
     //获取签名
     NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
-    //NSLog(@"%@",sign);
+    
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-    //NSLog(@"url1%@",url1);
+   
     //电泳借口需要上传的数据
     NSDictionary*dic1=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    //NSLog(@"dic============%@",dic1);
+   
     
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
@@ -382,13 +382,13 @@
     
     //获取签名
     NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
-    NSLog(@"%@",sign);
+   
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-    NSLog(@"url1==========================%@",url1);
+   
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    NSLog(@"dic============%@",dic);
+   
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
       [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.navigationController.view];
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
@@ -430,7 +430,7 @@
     
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-    NSLog(@"%@",sign);
+   
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
     

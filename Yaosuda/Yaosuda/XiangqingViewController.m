@@ -51,7 +51,7 @@
     NSDate *datenow = [NSDate date];
     NSString *nowtimeStr = [formatter stringFromDate:datenow];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-    NSLog(@"时间戳:%@",timeSp); //时间戳的值
+   
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -64,28 +64,20 @@
     
     //获取签名
     NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
-    NSLog(@"%@",sign);
+   
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-    NSLog(@"url1==========================%@",url1);
+  
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    NSLog(@"dic============%@",dic);
+    
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
            
             shangpin=(NSDictionary*)[data objectForKey:@"productions"];
-            
-            //NSLog(@"shangpin----------------%@",shangpin);
-            for (NSString *s in [shangpin allKeys]) {
-                NSLog(@"    zidian*********--->%@", [NSString stringWithFormat:@"%@",s]);
-            }
-            for (NSString *s in [shangpin allValues]) {
-                NSLog(@"    zidian*********--->%@", [NSString stringWithFormat:@"%@",s]);
-            }
-            
+       
             
             [_tableview reloadData];
             
