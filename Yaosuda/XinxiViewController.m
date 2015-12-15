@@ -96,7 +96,7 @@
     
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
-            NSLog(@"zuobianfanhuishuju*********%@",responseObject);
+            NSLog(@"左边返回数据--------%@",responseObject);
             
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             orderDetailList = [data1 objectForKey:@"orderDetailList"];

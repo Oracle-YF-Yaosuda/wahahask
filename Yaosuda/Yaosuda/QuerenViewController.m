@@ -37,7 +37,7 @@
     _shouhuoren.text=_haha;
     NSLog(@"%@****%@*****%@",_dizhi.text,_shouhuoren.text,_yingfu.text);
    
-        
+    
     loginUserId=[NSString stringWithFormat:@"%@",[[yonghuziliao getUserInfo] objectForKey:@"id"]];
     businesspersonId=[NSString stringWithFormat:@"%@",[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"]];
     shangid=[NSMutableArray array];
