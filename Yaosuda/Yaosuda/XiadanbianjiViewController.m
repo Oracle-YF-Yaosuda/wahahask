@@ -15,6 +15,8 @@
     CGFloat height;
     
     UITableViewCell *cell;
+    
+    int temp;
 }
 
 @end
@@ -83,8 +85,6 @@
     name1.textAlignment = NSTextAlignmentCenter;
     
     
-    
-    
     UILabel *shuliang = [[UILabel alloc]initWithFrame:CGRectMake(20, 45, 80, 30)];
     shuliang.text = @"商品数量:";
     shuliang.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
@@ -100,11 +100,6 @@
     shuliang1.textAlignment = NSTextAlignmentCenter;
     
     
-    
-    
-    
-    
-    
     UILabel *danjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 85, 80, 30)];
     danjia.text = @"商品单价:";
     danjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
@@ -115,9 +110,6 @@
     danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     danjia1.font = [UIFont systemFontOfSize:15];
     danjia1.textAlignment = NSTextAlignmentCenter;
-    
-    
-    
     
     
     [cell.contentView addSubview:name];
@@ -132,7 +124,6 @@
     [cell.contentView addSubview:danjia1];
     
     
-    
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //线消失
@@ -140,10 +131,47 @@
     //隐藏滑动条
     self.tableview.showsVerticalScrollIndicator =NO;
     
-    
-    
     return cell;
     
+}
+#pragma mark - 滑动删除
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
+
+           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath      //当在Cell上滑动时会调用此函数
+
+{
+        NSLog(@"你侧划了...");
+        return  UITableViewCellEditingStyleNone;   //返回此值时,Cell上不会出现Delete按键,即Cell不做任何响应
+}
+- (void) tableView:(UITableView *)tableView
+
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+
+ forRowAtIndexPath:(NSIndexPath *)indexPath //对选中的Cell根据editingStyle进行操作
+
+{
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+       // [ removeObjectAtIndex:indexPath.row];
+        // Delete the row from the data source.
+        [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert)
+    {
+
+    }
+ 
+}
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+    
+//按钮起名
+-(NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
 }
 
 
