@@ -26,11 +26,13 @@
     NSArray*jieshou;
     UITableViewCell *cell;
     NSMutableArray*jiage;
+    int qq;
 }
 
 @end
 
 @implementation XiadanViewController
+qq=0;
 -(void)passTrendValue:(NSArray *)values{
     
     NSString *path =[NSHomeDirectory() stringByAppendingString:@"/Documents/xiadanmingxi.plist"];
@@ -271,6 +273,7 @@
     
 }
 - (IBAction)queren:(id)sender {
+    qq=1;
     if (jiage.count==0) {
         [WarningBox warningBoxModeText:@"请选择商品及客户！" andView:self.view];
     }else{
@@ -279,9 +282,68 @@
         m+=[jiage[i] floatValue];
        
     }
-    QuerenViewController *qu = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"queren"];
-    qu.meme =[NSString stringWithFormat:@"%.2f元",m];
-    [self.navigationController pushViewController:qu animated:YES];
+        NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
+        NSDictionary*kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
+        NSString*customerId=[NSString stringWithFormat:@"%@",[kehu objectForKey:@"id"]];
+        //userID    暂时不用改
+        NSString * userID=@"0";
+        
+        //请求地址   地址不同 必须要改
+        NSString * url =@"/orderdict/consign";
+        
+        //时间戳
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+        NSDate *datenow = [NSDate date];
+        NSString *nowtimeStr = [formatter stringFromDate:datenow];
+        NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+        
+        
+        //将上传对象转换为json格式字符串
+        AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+        manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+        SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+        //出入参数：
+        NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:customerId,@"customerId", nil];
+        
+        NSString*jsonstring=[writer stringWithObject:datadic];
+        
+        //获取签名
+        NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
+        
+        NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+        
+        
+        //需要上传的数据
+        NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+        
+        [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           
+            if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+                NSDictionary*data=[responseObject valueForKey:@"data"];
+                NSArray*consignList=[data objectForKey:@"consignList"];
+                QuerenViewController *qu = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"queren"];
+                
+                qu.xixi=[NSString stringWithFormat:@"%@",[consignList[0] objectForKey:@"customerdepotId"]];
+                qu.haha=[NSString stringWithFormat:@"%@",[consignList[0] objectForKey:@"contactPerson"]];
+                qu.meme =[NSString stringWithFormat:@"%.2f元",m];
+                [self.navigationController pushViewController:qu animated:YES];
+
+                
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [WarningBox warningBoxHide:YES andView:self.view];
+            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+           
+        }];
+   
+       }
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    if (qq==1) {
+        qq=0;
+    
+   
     }
+
 }
 @end

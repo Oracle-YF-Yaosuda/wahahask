@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface QuerenViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *dizhi;
+@property (weak, nonatomic) IBOutlet UILabel *shouhuoren;
 @property (weak, nonatomic) IBOutlet UILabel *yingfu;
 @property (strong , nonatomic)NSString*meme;
+@property (strong , nonatomic)NSString*xixi;
+@property (strong , nonatomic)NSString*haha;
+
 @end

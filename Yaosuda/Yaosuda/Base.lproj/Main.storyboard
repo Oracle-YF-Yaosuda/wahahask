@@ -843,6 +843,7 @@
                                         <rect key="frame" x="23" y="14" width="66" height="18"/>
                                         <animations/>
                                         <constraints>
+                                            <constraint firstAttribute="width" constant="66" id="Cdr-l4-ZIR"/>
                                             <constraint firstAttribute="height" constant="18" id="FWy-hU-yMj"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -852,20 +853,65 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货地址:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hkx-Sk-Tnc">
                                         <rect key="frame" x="23" y="38" width="65" height="18"/>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="65" id="h8Y-ku-SI8"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbw-1m-VzR">
+                                        <rect key="frame" x="96" y="14" width="496" height="21"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="Rt8-LM-DVd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCI-mb-Rl1">
+                                        <rect key="frame" x="96" y="38" width="496" height="25"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.27450980392156865" green="0.45098039215686275" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="SCI-mb-Rl1" firstAttribute="top" secondItem="mbw-1m-VzR" secondAttribute="bottom" constant="3" id="0zT-EF-2Ke"/>
+                                    <constraint firstItem="Hkx-Sk-Tnc" firstAttribute="top" secondItem="5SC-zA-pWf" secondAttribute="bottom" constant="6" id="27n-fw-GvU"/>
+                                    <constraint firstAttribute="trailing" secondItem="SCI-mb-Rl1" secondAttribute="trailing" constant="8" id="7Fs-oW-qzx"/>
+                                    <constraint firstItem="5SC-zA-pWf" firstAttribute="leading" secondItem="6qK-VH-QKg" secondAttribute="leading" constant="23" id="A77-Mc-4DH"/>
                                     <constraint firstItem="Hkx-Sk-Tnc" firstAttribute="top" secondItem="5SC-zA-pWf" secondAttribute="bottom" constant="6" id="Hbq-Pd-FRk"/>
+                                    <constraint firstItem="Hkx-Sk-Tnc" firstAttribute="leading" secondItem="6qK-VH-QKg" secondAttribute="leading" constant="23" id="JdN-1Z-zeo"/>
+                                    <constraint firstAttribute="bottom" secondItem="SCI-mb-Rl1" secondAttribute="bottom" constant="15" id="Jft-yp-uQI"/>
+                                    <constraint firstItem="SCI-mb-Rl1" firstAttribute="leading" secondItem="Hkx-Sk-Tnc" secondAttribute="trailing" constant="8" id="L47-CX-MfT"/>
+                                    <constraint firstItem="SCI-mb-Rl1" firstAttribute="top" secondItem="mbw-1m-VzR" secondAttribute="bottom" constant="8" id="PrG-Me-KUR"/>
                                     <constraint firstItem="5SC-zA-pWf" firstAttribute="leading" secondItem="6qK-VH-QKg" secondAttribute="leading" constant="23" id="Qtj-dw-jnf"/>
+                                    <constraint firstItem="mbw-1m-VzR" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="top" constant="14" id="RdW-7T-W9B"/>
+                                    <constraint firstAttribute="trailing" secondItem="SCI-mb-Rl1" secondAttribute="trailing" constant="8" id="Rhb-sE-bAB"/>
+                                    <constraint firstAttribute="trailing" secondItem="mbw-1m-VzR" secondAttribute="trailing" constant="8" id="VTv-WM-xtS"/>
+                                    <constraint firstItem="Hkx-Sk-Tnc" firstAttribute="top" secondItem="5SC-zA-pWf" secondAttribute="bottom" constant="6" id="Zil-P3-aDg"/>
+                                    <constraint firstItem="mbw-1m-VzR" firstAttribute="leading" secondItem="5SC-zA-pWf" secondAttribute="trailing" constant="7" id="dhW-nh-3A9"/>
+                                    <constraint firstAttribute="bottom" secondItem="SCI-mb-Rl1" secondAttribute="bottom" constant="37" id="f5Z-5y-yMi"/>
                                     <constraint firstItem="Hkx-Sk-Tnc" firstAttribute="leading" secondItem="5SC-zA-pWf" secondAttribute="leading" id="ghC-0r-uLY"/>
+                                    <constraint firstItem="SCI-mb-Rl1" firstAttribute="leading" secondItem="Hkx-Sk-Tnc" secondAttribute="trailing" constant="8" id="jfo-Q7-TfO"/>
                                     <constraint firstItem="5SC-zA-pWf" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="top" constant="14" id="l3R-RG-p14"/>
+                                    <constraint firstItem="5SC-zA-pWf" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="top" constant="14" id="mSQ-A6-3ap"/>
+                                    <constraint firstAttribute="bottom" secondItem="Hkx-Sk-Tnc" secondAttribute="bottom" constant="44" id="myy-rW-VYH"/>
+                                    <constraint firstItem="SCI-mb-Rl1" firstAttribute="top" secondItem="mbw-1m-VzR" secondAttribute="bottom" constant="3" id="pNj-d2-ap7"/>
                                     <constraint firstAttribute="height" constant="100" id="whT-Rj-lpl"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0zT-EF-2Ke"/>
+                                        <exclude reference="Jft-yp-uQI"/>
+                                        <exclude reference="PrG-Me-KUR"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CvT-us-k0U" userLabel="View2">
                                 <rect key="frame" x="0.0" y="135" width="600" height="140"/>
@@ -1048,12 +1094,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="确认下单" id="Qfq-sj-QkV"/>
                     <connections>
+                        <outlet property="dizhi" destination="SCI-mb-Rl1" id="UXA-LE-EZ0"/>
+                        <outlet property="shouhuoren" destination="mbw-1m-VzR" id="Frc-Ra-Es2"/>
                         <outlet property="yingfu" destination="UaP-DN-Zlh" id="lci-pI-M6J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="im3-ui-eyi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2204" y="582"/>
+            <point key="canvasLocation" x="2271" y="589"/>
         </scene>
         <!--商品详情-->
         <scene sceneID="qQt-hn-aQ2">
