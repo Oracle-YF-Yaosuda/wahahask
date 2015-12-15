@@ -148,8 +148,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        [WarningBox warningBoxModeText:@"网络连接失败！" andView:self.view];
 
     }];
     
@@ -161,7 +160,7 @@
     UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示" message:@"更换登录设备,需要联系系统管理员,是否要拨打电话?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction*action1=[UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //调用手机拨打电话
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://18828888888"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://15545457012"]];
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [WarningBox warningBoxModeText:@"不打电话你乱按啥！！！" andView:self.view];

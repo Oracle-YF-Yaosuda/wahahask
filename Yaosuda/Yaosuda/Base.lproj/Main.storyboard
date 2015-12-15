@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hWu-xc-F7h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hWu-xc-F7h">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -295,6 +295,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZJ-JS-fQI">
+                                <rect key="frame" x="20" y="240" width="560" height="40"/>
+                                <animations/>
+                                <color key="backgroundColor" red="1" green="0.49803921568627452" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="tSu-dG-i0u"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="确认">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="queren:" destination="0Tq-BS-qrh" eventType="touchUpInside" id="iAw-ia-gZg"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N52-vQ-L5S">
                                 <rect key="frame" x="0.0" y="40" width="600" height="150"/>
                                 <subviews>
@@ -330,14 +345,8 @@
                                         <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入新密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-pz-GfX">
-                                        <rect key="frame" x="135" y="65" width="455" height="30"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
-                                    </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请在次输入新密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RTq-dm-nFa">
-                                        <rect key="frame" x="135" y="115" width="455" height="30"/>
+                                        <rect key="frame" x="100" y="115" width="490" height="30"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
@@ -359,11 +368,17 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入旧密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E3A-RN-L4B">
-                                        <rect key="frame" x="135" y="15" width="455" height="30"/>
+                                        <rect key="frame" x="100" y="15" width="490" height="30"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="kdg-PC-Q21"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入新密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-pz-GfX">
+                                        <rect key="frame" x="100" y="65" width="490" height="30"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                     </textField>
@@ -374,7 +389,7 @@
                                     <constraint firstItem="RTq-dm-nFa" firstAttribute="centerY" secondItem="Flw-H2-kJa" secondAttribute="centerY" id="03V-BT-4ta"/>
                                     <constraint firstItem="HWJ-Bh-0rk" firstAttribute="top" secondItem="hKF-1I-DJU" secondAttribute="bottom" constant="18" id="0dX-pM-TaV"/>
                                     <constraint firstAttribute="trailing" secondItem="fYU-pC-mIW" secondAttribute="trailing" id="0hP-hK-m3V"/>
-                                    <constraint firstItem="E3A-RN-L4B" firstAttribute="leading" secondItem="AqH-4L-hdT" secondAttribute="trailing" constant="80" id="56t-Ku-2bD"/>
+                                    <constraint firstItem="E3A-RN-L4B" firstAttribute="leading" secondItem="AqH-4L-hdT" secondAttribute="trailing" constant="45" id="56t-Ku-2bD"/>
                                     <constraint firstItem="RTq-dm-nFa" firstAttribute="width" secondItem="RmU-pz-GfX" secondAttribute="width" id="5LU-nE-QAd"/>
                                     <constraint firstAttribute="height" constant="150" id="7Cx-6W-xpQ"/>
                                     <constraint firstItem="AqH-4L-hdT" firstAttribute="leading" secondItem="N52-vQ-L5S" secondAttribute="leading" constant="10" id="8Bh-bG-bHw"/>
@@ -397,32 +412,25 @@
                                     <constraint firstItem="fYU-pC-mIW" firstAttribute="leading" secondItem="N52-vQ-L5S" secondAttribute="leading" id="zIA-eE-qoW"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZJ-JS-fQI">
-                                <rect key="frame" x="20" y="240" width="560" height="40"/>
-                                <animations/>
-                                <color key="backgroundColor" red="1" green="0.49803921568627452" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="tSu-dG-i0u"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="确认">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="queren:" destination="0Tq-BS-qrh" eventType="touchUpInside" id="iAw-ia-gZg"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="N52-vQ-L5S" firstAttribute="leading" secondItem="2ju-zL-u3c" secondAttribute="leadingMargin" id="1Yt-p8-Dk7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WZJ-JS-fQI" secondAttribute="trailing" id="Uck-fD-gmN"/>
                             <constraint firstItem="WZJ-JS-fQI" firstAttribute="top" secondItem="N52-vQ-L5S" secondAttribute="bottom" constant="50" id="cJO-Q1-vns"/>
                             <constraint firstItem="N52-vQ-L5S" firstAttribute="leading" secondItem="2ju-zL-u3c" secondAttribute="leading" id="dGm-PY-BrT"/>
                             <constraint firstAttribute="trailing" secondItem="N52-vQ-L5S" secondAttribute="trailing" id="ff9-kl-8QZ"/>
+                            <constraint firstItem="N52-vQ-L5S" firstAttribute="trailing" secondItem="2ju-zL-u3c" secondAttribute="trailingMargin" id="g8d-1n-auU"/>
                             <constraint firstItem="N52-vQ-L5S" firstAttribute="top" secondItem="09m-wG-hXk" secondAttribute="bottom" constant="20" id="rU1-xk-QEt"/>
                             <constraint firstItem="WZJ-JS-fQI" firstAttribute="leading" secondItem="2ju-zL-u3c" secondAttribute="leadingMargin" id="uWR-xW-pQm"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1Yt-p8-Dk7"/>
+                                <exclude reference="g8d-1n-auU"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="修改密码" id="OtG-gT-uqR"/>
                     <connections>
@@ -434,7 +442,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPD-ID-SJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-775" y="555"/>
+            <point key="canvasLocation" x="-560" y="326"/>
         </scene>
         <!--订单查询-->
         <scene sceneID="Dxz-1Y-XxE">

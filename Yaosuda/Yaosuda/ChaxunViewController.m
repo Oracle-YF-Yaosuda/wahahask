@@ -234,7 +234,24 @@
     [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
 
     UILabel *shenhe = [[UILabel alloc]initWithFrame:CGRectMake(width-10-50, 0, 50, 35)];
-    shenhe.text = @"已审核";
+    if([[zuobian[section] objectForKey:@"state"] intValue]==0){
+        shenhe.text = @"完成";
+    }else if([[zuobian[section] objectForKey:@"state"] intValue]==2){
+        shenhe.text = @"联系人审核";
+    }else if([[zuobian[section] objectForKey:@"state"] intValue]==4){
+        shenhe.text = @"开票员审核";
+    }else if([[zuobian[section] objectForKey:@"state"] intValue]==6){
+        shenhe.text = @"财务审核";
+    }else if([[zuobian[section] objectForKey:@"state"] intValue]==7){
+        shenhe.text = @"撤销";
+    }else if([[zuobian[section] objectForKey:@"state"] intValue]==8){
+        shenhe.text = @"退货";
+    }else if([[zuobian[section] objectForKey:@"state"] intValue]==9){
+        shenhe.text = @"退货确认";
+    }else{
+         shenhe.text =@"未审核";
+    }
+    
     shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     shenhe.font = [UIFont systemFontOfSize:13];
 

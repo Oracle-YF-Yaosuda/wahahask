@@ -374,7 +374,11 @@
     NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:productionsList[tt.tag-2000]];
    
     [dd setObject:xiadanshuliang[tt.tag-2000] forKey:@"shuliang"];
+    if([xiadanshuliang[tt.tag-2000] intValue]==0){
+        [WarningBox warningBoxModeText:@"数量不能为空哟～" andView:self.view];
+    }else{
     [chuande addObject:dd];
+    }
 }
 -(void)jia:(UIButton*)tt{
 //找到当前cell

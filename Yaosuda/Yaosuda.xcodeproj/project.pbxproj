@@ -986,7 +986,7 @@
 				TargetAttributes = {
 					95F709571C0BDE2400BEC51C = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = Q893CLHQS4;
+						DevelopmentTeam = KBRTKNG36Q;
 					};
 					95F709701C0BDE2400BEC51C = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -1351,7 +1351,7 @@
 				INFOPLIST_FILE = Yaosuda/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sk.Yaosuda;
+				PRODUCT_BUNDLE_IDENTIFIER = xl.Yaosuda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1366,7 +1366,7 @@
 				INFOPLIST_FILE = Yaosuda/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sk.Yaosuda;
+				PRODUCT_BUNDLE_IDENTIFIER = xl.Yaosuda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

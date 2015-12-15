@@ -47,17 +47,6 @@
     self.queren.layer.cornerRadius = 5.0;
 }
 
--(void)waringBox:(NSString*)tt{
-    
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES ];
-    hud.mode = MBProgressHUDModeText;
-    hud.labelText = tt;
-    hud.yOffset = 0;
-    [hud setRemoveFromSuperViewOnHide:YES];
-    [hud hide:YES afterDelay:2];
-    
-}
-
 -(BOOL)Oldpassword:(NSString *)chusheng{
     
     if (self.oldpass.text.length==0) {

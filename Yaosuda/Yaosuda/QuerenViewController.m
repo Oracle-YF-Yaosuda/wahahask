@@ -56,6 +56,14 @@
 }
 
 - (IBAction)tijiao:(id)sender {
+    
+    NSFileManager *defaultManager;
+    defaultManager = [NSFileManager defaultManager];
+    NSString*path=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
+    NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+    [defaultManager removeItemAtPath:path error:NULL];
+    [defaultManager removeItemAtPath:path1 error:NULL];
+    
     //userID    暂时不用改
     NSString * userID=@"0";
     

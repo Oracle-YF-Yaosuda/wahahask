@@ -56,6 +56,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidLoad];
+    
     //接取商品价格
     jiage=[NSMutableArray array];
     //接受订单数据
@@ -69,6 +70,7 @@
     
     NSFileManager*fm=[NSFileManager defaultManager];
     if (![fm fileExistsAtPath:pathkehu]) {
+        _kehumingzi.text=@"请选择客户";
         jieshou=[NSArray array];
     }
     else{
@@ -133,8 +135,8 @@
                    }];
        }
       }
-     }
-     
+    }[_tableview reloadData];
+    
 }
 - (void)viewDidLoad {
     dicc=[NSMutableDictionary dictionary];
@@ -287,10 +289,11 @@
         [WarningBox warningBoxModeText:@"请选择商品及客户！" andView:self.view];
     }else{
     float m;
-    for (int i=0; i<jiage.count; i++) {
-        m+=[jiage[i] floatValue];
-       
-    }
+        for (NSString* a in [dicc allValues]) {
+            m+=[a intValue];
+        }
+        
+        
         NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
         NSDictionary*kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
         NSString*customerId=[NSString stringWithFormat:@"%@",[kehu objectForKey:@"id"]];
