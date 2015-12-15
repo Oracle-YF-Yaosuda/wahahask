@@ -867,7 +867,7 @@
                                     <constraint firstAttribute="height" constant="100" id="whT-Rj-lpl"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CvT-us-k0U">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CvT-us-k0U" userLabel="View2">
                                 <rect key="frame" x="0.0" y="135" width="600" height="140"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="应付金额：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8Y-bW-M2C">
@@ -894,7 +894,7 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="jMu-f9-DQW"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999.00元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UaP-DN-Zlh">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UaP-DN-Zlh">
                                         <rect key="frame" x="300" y="17" width="300" height="24"/>
                                         <animations/>
                                         <constraints>
@@ -974,7 +974,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGL-V8-XXd">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGL-V8-XXd" userLabel="View3">
                                 <rect key="frame" x="0.0" y="300" width="600" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发票类型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSy-bV-5Ce">
@@ -1024,6 +1024,9 @@
                                 <state key="normal" title="提交订单">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="tijiao:" destination="HBt-ph-xEl" eventType="touchUpInside" id="gdk-tQ-Qba"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
@@ -1044,10 +1047,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="确认下单" id="Qfq-sj-QkV"/>
+                    <connections>
+                        <outlet property="yingfu" destination="UaP-DN-Zlh" id="lci-pI-M6J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="im3-ui-eyi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2407" y="555"/>
+            <point key="canvasLocation" x="2204" y="582"/>
         </scene>
         <!--商品详情-->
         <scene sceneID="qQt-hn-aQ2">

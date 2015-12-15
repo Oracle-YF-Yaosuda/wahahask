@@ -71,7 +71,7 @@
     else{
         _kehumingzi.text=[[NSDictionary dictionaryWithContentsOfFile:pathkehu] objectForKey:@"customerName"];
     
-   
+        NSLog(@"jieshoujieshou%@",jieshou);
     //用户id
     NSString*businesspersonId=[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"];
     //提取客户id
@@ -92,7 +92,7 @@
         NSDate *datenow = [NSDate date];
         NSString *nowtimeStr = [formatter stringFromDate:datenow];
         NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-        NSLog(@"时间戳:%@",timeSp); //时间戳的值
+        
         
         //将上传对象转换为json格式字符串
         AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -118,14 +118,13 @@
             if ([[responseObject objectForKey:@"code"] intValue]==0000) {
                 NSDictionary*data=[responseObject valueForKey:@"data"];
                 [jiage addObject:[data objectForKey:@"customerPrice"]];
-                NSLog(@"%@",jiage);
+                NSLog(@"jiage%@",jiage);
             }
             [_tableview reloadData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
             [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
-            NSLog(@"%@",error);
-        }];
+                   }];
        }
       }
      }
@@ -273,9 +272,18 @@
     
 }
 - (IBAction)queren:(id)sender {
-    
+    if (jiage.count==0) {
+        [WarningBox warningBoxModeText:@"请选择商品及客户！" andView:self.view];
+    }else{
+    float m;
+    for (int i=0; i<jiage.count; i++) {
+        m+=[jiage[i] floatValue];
+        NSLog(@"11111%.2f",m);
+    }
+        NSLog(@"%.2f",m);
     QuerenViewController *qu = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"queren"];
+    qu.yingfu.text=[NSString stringWithFormat:@"%.2f元",m];
     [self.navigationController pushViewController:qu animated:YES];
-    
+    }
 }
 @end
