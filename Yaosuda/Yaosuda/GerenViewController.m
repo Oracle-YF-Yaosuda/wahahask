@@ -114,7 +114,7 @@
         la3.text = @"手  机  号:";
         
         la11.text = [NSString stringWithFormat:@"%@",[yonghu objectForKey:@"loginName"] ];
-        la22.text =@"suogay";
+        la22.text =@"四川成都";
         la33.text = [NSString stringWithFormat:@"%@",[yonghu objectForKey:@"mobile"] ];
         
     }
