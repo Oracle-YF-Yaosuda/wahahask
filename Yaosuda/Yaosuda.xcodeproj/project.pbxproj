@@ -52,7 +52,6 @@
 		957094271C0C619B007E27C3 /* XiadanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957094261C0C619B007E27C3 /* XiadanViewController.m */; };
 		9580C3541C17DCFA00FB6C4A /* XinxiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9580C3531C17DCFA00FB6C4A /* XinxiViewController.m */; };
 		9596E4631C1E6B73008AEB8A /* QuerenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9596E4621C1E6B73008AEB8A /* QuerenViewController.m */; };
-		95E7D6B91C0D3DF700E95058 /* XiadanbianjiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6B81C0D3DF700E95058 /* XiadanbianjiViewController.m */; };
 		95E7D6BC1C0D4A3A00E95058 /* GerenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6BB1C0D4A3A00E95058 /* GerenViewController.m */; };
 		95E7D6BF1C0D64E800E95058 /* XiugaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6BE1C0D64E800E95058 /* XiugaiViewController.m */; };
 		95E7D6C21C0D6AB300E95058 /* XuanzeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6C11C0D6AB300E95058 /* XuanzeViewController.m */; };
@@ -267,8 +266,6 @@
 		9596E4611C1E6B73008AEB8A /* QuerenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuerenViewController.h; sourceTree = "<group>"; };
 		9596E4621C1E6B73008AEB8A /* QuerenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuerenViewController.m; sourceTree = "<group>"; };
 		95E7D6B41C0D238D00E95058 /* KehuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KehuViewController.h; sourceTree = "<group>"; };
-		95E7D6B71C0D3DF700E95058 /* XiadanbianjiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XiadanbianjiViewController.h; sourceTree = "<group>"; };
-		95E7D6B81C0D3DF700E95058 /* XiadanbianjiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XiadanbianjiViewController.m; sourceTree = "<group>"; };
 		95E7D6BA1C0D4A3A00E95058 /* GerenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GerenViewController.h; sourceTree = "<group>"; };
 		95E7D6BB1C0D4A3A00E95058 /* GerenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GerenViewController.m; sourceTree = "<group>"; };
 		95E7D6BD1C0D64E800E95058 /* XiugaiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XiugaiViewController.h; sourceTree = "<group>"; };
@@ -596,8 +593,6 @@
 				9521ABD11C11817F0036B052 /* ZizunViewController.m */,
 				95E7D6C01C0D6AB300E95058 /* XuanzeViewController.h */,
 				95E7D6C11C0D6AB300E95058 /* XuanzeViewController.m */,
-				95E7D6B71C0D3DF700E95058 /* XiadanbianjiViewController.h */,
-				95E7D6B81C0D3DF700E95058 /* XiadanbianjiViewController.m */,
 				95E7D6B41C0D238D00E95058 /* KehuViewController.h */,
 				956160461C155FDC005F92C9 /* KehuViewController.m */,
 				957094251C0C619B007E27C3 /* XiadanViewController.h */,
@@ -1150,7 +1145,6 @@
 				95F709631C0BDE2400BEC51C /* ViewController.m in Sources */,
 				D2E833FE1C0FD53B00F53E7E /* SDWebImageManager.m in Sources */,
 				957093C11C0BF3AD007E27C3 /* SBJsonWriter.m in Sources */,
-				95E7D6B91C0D3DF700E95058 /* XiadanbianjiViewController.m in Sources */,
 				95F709601C0BDE2400BEC51C /* AppDelegate.m in Sources */,
 				957093DF1C0BF3B6007E27C3 /* AFHTTPSessionManager.m in Sources */,
 				D23DC3C81C0EB3E6007C66DF /* lianjie.m in Sources */,

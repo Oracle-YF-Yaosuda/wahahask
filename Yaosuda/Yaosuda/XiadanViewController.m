@@ -6,7 +6,6 @@
 //  Copyright © 2015年 sk. All rights reserved.
 #import "XiadanViewController.h"
 #import "Color+Hex.h"
-#import "XiadanbianjiViewController.h"
 #import "KehuViewController.h"
 #import "QuerenViewController.h"
 #import "AFHTTPRequestOperationManager.h"
@@ -25,6 +24,8 @@
     UITableViewCell *cell;
     NSMutableArray*jiage;
     NSMutableDictionary*dicc;
+    UIBarButtonItem *right;
+    UIBarButtonItem *right1;
    
 }
 
@@ -147,15 +148,22 @@
     
     
     
-    UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(tiao)];
-    self.navigationItem.rightBarButtonItem = right;
-    
+    right = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(bianij)];
+    right1 = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(baocun)];
+     self.navigationItem.rightBarButtonItem = right;
 }
 
--(void)tiao{
+-(void)bianij{
+      self.navigationItem.rightBarButtonItem = right1;
     
-    XiadanbianjiViewController*xiadan =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiadanbianji"];
-    [self.navigationController pushViewController:xiadan animated:YES];
+    
+    
+}
+-(void)baocun{
+    self.navigationItem.rightBarButtonItem = right;
+    
+    
+    
     
 }
 
