@@ -208,14 +208,6 @@
                                             <constraint firstAttribute="height" constant="150" id="5l8-X4-AsC"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tx_03.png" translatesAutoresizingMaskIntoConstraints="NO" id="4U6-g4-QtW">
-                                        <rect key="frame" x="250" y="8" width="100" height="100"/>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="eTc-QB-esa"/>
-                                            <constraint firstAttribute="width" constant="100" id="gOk-4Y-cqk"/>
-                                        </constraints>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您好,18345559961" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sl-1n-b2F">
                                         <rect key="frame" x="0.0" y="116" width="600" height="21"/>
                                         <animations/>
@@ -226,6 +218,14 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tx_03.png" translatesAutoresizingMaskIntoConstraints="NO" id="4U6-g4-QtW">
+                                        <rect key="frame" x="262" y="20" width="75" height="75"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="eTc-QB-esa"/>
+                                            <constraint firstAttribute="width" constant="75" id="gOk-4Y-cqk"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -238,8 +238,8 @@
                                     <constraint firstAttribute="trailing" secondItem="3Sl-1n-b2F" secondAttribute="trailing" id="S34-0Y-PLF"/>
                                     <constraint firstItem="2WN-cr-s92" firstAttribute="top" secondItem="K0f-vL-jTp" secondAttribute="top" id="dcx-O4-kJd"/>
                                     <constraint firstAttribute="trailing" secondItem="2WN-cr-s92" secondAttribute="trailing" id="eJZ-Vd-5Ye"/>
-                                    <constraint firstItem="4U6-g4-QtW" firstAttribute="top" secondItem="K0f-vL-jTp" secondAttribute="top" constant="8" id="fCw-ht-EOa"/>
-                                    <constraint firstItem="3Sl-1n-b2F" firstAttribute="top" secondItem="4U6-g4-QtW" secondAttribute="bottom" constant="8" id="fmS-bo-Sou"/>
+                                    <constraint firstItem="4U6-g4-QtW" firstAttribute="top" secondItem="K0f-vL-jTp" secondAttribute="top" constant="20" id="fCw-ht-EOa"/>
+                                    <constraint firstItem="3Sl-1n-b2F" firstAttribute="top" secondItem="4U6-g4-QtW" secondAttribute="bottom" constant="21" id="fmS-bo-Sou"/>
                                     <constraint firstAttribute="height" constant="150" id="g8e-o6-P1w"/>
                                     <constraint firstItem="3Sl-1n-b2F" firstAttribute="leading" secondItem="K0f-vL-jTp" secondAttribute="leading" id="or5-4c-ugX"/>
                                     <constraint firstItem="4U6-g4-QtW" firstAttribute="centerX" secondItem="2WN-cr-s92" secondAttribute="centerX" id="ubZ-p8-aOo"/>
@@ -442,7 +442,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPD-ID-SJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-560" y="326"/>
+            <point key="canvasLocation" x="-799" y="555"/>
         </scene>
         <!--订单查询-->
         <scene sceneID="Dxz-1Y-XxE">
@@ -1134,7 +1134,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g0K-yN-ChT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1779" y="1207"/>
+            <point key="canvasLocation" x="1769" y="1312"/>
         </scene>
         <!--请下单-->
         <scene sceneID="ICx-Wc-7Ff">
