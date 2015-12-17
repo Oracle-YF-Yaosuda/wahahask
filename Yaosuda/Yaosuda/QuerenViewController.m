@@ -21,7 +21,7 @@
     NSMutableArray*shuliangji;
     NSString*businesspersonId;
     NSString*customerId;
-    NSNumber*loginUserId;
+    NSString*loginUserId;
 }
 
 
@@ -35,10 +35,9 @@
     _yingfu.text=_meme;
     _dizhi.text=_xixi;
     _shouhuoren.text=_haha;
-    NSLog(@"%@****%@*****%@",_dizhi.text,_shouhuoren.text,_yingfu.text);
    
-    
-    loginUserId=[[yonghuziliao getUserInfo] objectForKey:@"id"];
+   
+    loginUserId= [NSString stringWithFormat:@"%@",[[yonghuziliao getUserInfo] objectForKey:@"id"]];
     businesspersonId=[NSString stringWithFormat:@"%@",[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"]];
     shangid=[NSMutableArray array];
     shuliangji=[NSMutableArray array];
@@ -51,10 +50,8 @@
     NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
     NSDictionary*kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
     customerId=[NSString stringWithFormat:@"%@",[kehu objectForKey:@"id"]];
-    
-    
+ 
 }
-
 - (IBAction)tijiao:(id)sender {
     
     NSFileManager *defaultManager;
@@ -75,8 +72,7 @@
     NSDate *datenow = [NSDate date];
     NSString *nowtimeStr = [formatter stringFromDate:datenow];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-   
-    
+  
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -92,13 +88,12 @@
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
   
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
-    NSLog(@"url1********%@",url1);
+    
     
     //需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    NSLog(@"////////*************//////////%@",dic);
+ 
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
         
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             [WarningBox warningBoxModeText:@"下单成功" andView:self.view];
@@ -115,6 +110,5 @@
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
         NSLog(@"%@",[NSString stringWithFormat:@"%@",error]);
     }];
-    
 }
 @end

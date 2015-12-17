@@ -373,7 +373,7 @@
         
         for (NSString* a in [dicc allValues]) {
             m+=[a intValue];
-            NSLog(@"\n xixi");
+       
         }
         
         NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
