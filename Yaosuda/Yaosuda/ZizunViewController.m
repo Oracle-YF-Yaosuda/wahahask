@@ -32,22 +32,21 @@
     [self lunbo];
 }
 -(void)lunbo{
-    //轮播
-    //创建scrollview
+//轮播
+//创建scrollview
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, width, 250)];
-    //穿件uipageconrol
+//穿件uipageconrol
     self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 230, width, 10)];
-    
-    //设置uipageconrol的圆点颜色
+//设置uipageconrol的圆点颜色
     self.pageControl.pageIndicatorTintColor = [UIColor redColor];
-    //设置uipageconrol的高亮圆点颜色
+//设置uipageconrol的高亮圆点颜色
     self.pageControl.currentPageIndicatorTintColor = [UIColor greenColor];
-    //设置uipagecontrol控件当前显示第几页
+//设置uipagecontrol控件当前显示第几页
     self.pageControl.currentPage = 0;
-    // 设置uipageconcrol控件总共包含几页
+// 设置uipageconcrol控件总共包含几页
     self.pageControl.numberOfPages = 4;
     self.pageControl.hidesForSinglePage = YES;
-    //imag
+//imag
     CGFloat imgW = width;
     CGFloat imgH = 300;
     CGFloat imgY = 0;
@@ -77,10 +76,6 @@
     [self.view addSubview:self.scrollView];
     [self.view addSubview:self.pageControl];
 }
-
-
-
-
 //自动滚动图片
 -(void)dong{
     
@@ -123,5 +118,4 @@
     [runLoop addTimer:self.timer forMode:NSRunLoopCommonModes];
     
 }
-
 @end

@@ -51,6 +51,7 @@
 		9570941E1C0C292C007E27C3 /* 确认订单_MarkMan.png in Resources */ = {isa = PBXBuildFile; fileRef = 957094111C0C292C007E27C3 /* 确认订单_MarkMan.png */; };
 		957094271C0C619B007E27C3 /* XiadanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957094261C0C619B007E27C3 /* XiadanViewController.m */; };
 		9580C3541C17DCFA00FB6C4A /* XinxiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9580C3531C17DCFA00FB6C4A /* XinxiViewController.m */; };
+		9588ACB21C225F1400AE9720 /* huadong.png in Resources */ = {isa = PBXBuildFile; fileRef = 9588ACB11C225F1400AE9720 /* huadong.png */; settings = {ASSET_TAGS = (); }; };
 		9596E4631C1E6B73008AEB8A /* QuerenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9596E4621C1E6B73008AEB8A /* QuerenViewController.m */; };
 		95E7D6BC1C0D4A3A00E95058 /* GerenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6BB1C0D4A3A00E95058 /* GerenViewController.m */; };
 		95E7D6BF1C0D64E800E95058 /* XiugaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6BE1C0D64E800E95058 /* XiugaiViewController.m */; };
@@ -263,6 +264,7 @@
 		957094261C0C619B007E27C3 /* XiadanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XiadanViewController.m; sourceTree = "<group>"; };
 		9580C3521C17DCFA00FB6C4A /* XinxiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XinxiViewController.h; path = ../XinxiViewController.h; sourceTree = "<group>"; };
 		9580C3531C17DCFA00FB6C4A /* XinxiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XinxiViewController.m; path = ../XinxiViewController.m; sourceTree = "<group>"; };
+		9588ACB11C225F1400AE9720 /* huadong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = huadong.png; sourceTree = "<group>"; };
 		9596E4611C1E6B73008AEB8A /* QuerenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuerenViewController.h; sourceTree = "<group>"; };
 		9596E4621C1E6B73008AEB8A /* QuerenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuerenViewController.m; sourceTree = "<group>"; };
 		95E7D6B41C0D238D00E95058 /* KehuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KehuViewController.h; sourceTree = "<group>"; };
@@ -683,6 +685,7 @@
 		95F7098E1C0BDE6300BEC51C /* @2x */ = {
 			isa = PBXGroup;
 			children = (
+				9588ACB11C225F1400AE9720 /* huadong.png */,
 				957094041C0C292B007E27C3 /* tupian */,
 				95F7098F1C0BDE6300BEC51C /* 1.jpg */,
 				95F709901C0BDE6300BEC51C /* 10.jpg */,
@@ -1058,6 +1061,7 @@
 				95F70A151C0BDE6300BEC51C /* 2_MarkMan.png in Resources */,
 				95F709FD1C0BDE6300BEC51C /* @2x_sp_16.png in Resources */,
 				95F70A0F1C0BDE6300BEC51C /* @2x_kh_03.png in Resources */,
+				9588ACB21C225F1400AE9720 /* huadong.png in Resources */,
 				95F709EA1C0BDE6300BEC51C /* 11.jpg in Resources */,
 				95F70A2F1C0BDE6300BEC51C /* @3x_xd_11.png in Resources */,
 				95F709F21C0BDE6300BEC51C /* 9.jpg in Resources */,

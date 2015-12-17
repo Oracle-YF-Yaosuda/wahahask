@@ -20,13 +20,21 @@
 {
     CGFloat width;
     CGFloat height;
-    NSArray*jieshou;
+    NSMutableArray *jieshou;
     UITableViewCell *cell;
-    NSMutableArray*jiage;
-    NSMutableDictionary*dicc;
+    NSMutableArray *jiage;
+    NSMutableDictionary *dicc;
     UIBarButtonItem *right;
     UIBarButtonItem *right1;
    
+    int aa;
+    
+    UIButton *jia;
+    UIButton *jian;
+    
+    NSMutableArray *xiadanshuliang;
+    
+    UIView * di;
 }
 
 @end
@@ -56,12 +64,15 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidLoad];
     
+    di.hidden = YES;
+    aa = 1;
+    
     //接取商品价格
     jiage=[NSMutableArray array];
     //接受订单数据
     NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
     jieshou=[[NSMutableArray alloc] init];
-    jieshou=[NSArray arrayWithContentsOfFile:path];
+    jieshou=[NSMutableArray arrayWithContentsOfFile:path];
     //接受客户数据
     NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
     NSDictionary*kehuxinxi=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
@@ -70,7 +81,7 @@
     NSFileManager*fm=[NSFileManager defaultManager];
     if (![fm fileExistsAtPath:pathkehu]) {
         _kehumingzi.text=@"请选择客户";
-        jieshou=[NSArray array];
+        jieshou=[NSMutableArray array];
     }
     else{
         _kehumingzi.text=[[NSDictionary dictionaryWithContentsOfFile:pathkehu] objectForKey:@"customerName"];
@@ -126,6 +137,10 @@
                 [dicc setObject:customerPrice forKey:[NSString stringWithFormat:@"%d",i]];
                 [jiage addObject:@"1"];
 
+                //       下单数量默认为0
+                [xiadanshuliang addObject:@"0"];
+                
+
                          }
             [_tableview reloadData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -138,6 +153,8 @@
     
 }
 - (void)viewDidLoad {
+     xiadanshuliang=[NSMutableArray array];
+    
     dicc=[NSMutableDictionary dictionary];
     [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     width = [UIScreen mainScreen].bounds.size.width;
@@ -154,27 +171,53 @@
 }
 
 -(void)bianij{
-      self.navigationItem.rightBarButtonItem = right1;
+    aa=2;
+    self.navigationItem.rightBarButtonItem = right1;
+    [self.tableview reloadData];
+    
+    di = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+    di.backgroundColor = [UIColor colorWithHexString:@"000000" alpha:0.3];
+    UIButton *quan = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+    [quan addTarget:self action:@selector(xiaoshi) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImageView *iam = [[UIImageView alloc]initWithFrame:CGRectMake(50, 200, width-100, 100)];
+    iam.image = [UIImage imageNamed:@"huadong.png"];
+    
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 320, width, 25)];
+    lab.font = [UIFont systemFontOfSize:17];
+    lab.textColor = [UIColor redColor];
+    lab.textAlignment = NSTextAlignmentCenter;
+    lab.text = @"*  向左侧拉删除";
     
     
+    [self.view addSubview:di];
+    [di addSubview:quan];
+    [quan addSubview:iam];
+    [quan addSubview:lab];
     
+    
+    NSLog(@"%d",aa);
 }
 -(void)baocun{
+    aa=1;
     self.navigationItem.rightBarButtonItem = right;
+    [self.tableview reloadData];
+    NSLog(@"%d",aa);
+}
+-(void)xiaoshi{
     
-    
-    
+    di.hidden = YES;
     
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-   
-    return jieshou.count;
-    
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//   
+//    return jieshou.count;
+//    
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return jieshou.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -182,7 +225,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 120;//cell高度
+    return 135;//cell高度
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -216,7 +259,7 @@
     UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, 75, width, 1)];
     xian1.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
     
-    UILabel *shuliang1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 45, width-40-80, 30 )];
+    UITextField *shuliang1 = [[UITextField alloc]initWithFrame:CGRectMake(100, 45, width-40-80, 30 )];
     shuliang1.text = [NSString stringWithFormat:@"%@",[jieshou[indexPath.section] objectForKey:@"shuliang"]];
     shuliang1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     shuliang1.font = [UIFont systemFontOfSize:15];
@@ -227,6 +270,9 @@
     danjia.text = @"商品总价:";
     danjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     danjia.font = [UIFont systemFontOfSize:15];
+    
+    UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(0, 115, width, 20)];
+    xian2.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
     UILabel *danjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 85, width-40-80, 30 )];
     
@@ -242,16 +288,56 @@
     danjia1.textAlignment = NSTextAlignmentCenter;
     
     
-    [cell.contentView addSubview:name];
-    [cell.contentView addSubview:name1];
-    [cell.contentView addSubview:xian];
     
-    [cell.contentView addSubview:shuliang];
-    [cell.contentView addSubview:shuliang1];
-    [cell.contentView addSubview:xian1];
+    if (aa == 1)
+    {
+        
+        [cell.contentView addSubview:name];
+        [cell.contentView addSubview:name1];
+        [cell.contentView addSubview:xian];
+        
+        [cell.contentView addSubview:shuliang];
+        [cell.contentView addSubview:shuliang1];
+        [cell.contentView addSubview:xian1];
+        
+        [cell.contentView addSubview:danjia];
+        [cell.contentView addSubview:danjia1];
+        [cell.contentView addSubview:xian2];
+
+    }
+    else if (aa == 2)
+    {
     
-    [cell.contentView addSubview:danjia];
-    [cell.contentView addSubview:danjia1];
+        //   减创建
+        jian = [[UIButton alloc]initWithFrame:CGRectMake(width/3*1.5,50 , 20, 20)];
+        [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
+        [jian addTarget:self action:@selector(jian:) forControlEvents:UIControlEventTouchUpInside];
+        jian.tag=indexPath.row+20000;
+        //   加创建
+        jia = [[UIButton alloc]initWithFrame:CGRectMake(width/3*1.5+60, 50, 20, 20)];
+        [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
+        [jia addTarget:self action:@selector(jia:) forControlEvents:UIControlEventTouchUpInside];
+        jia.tag=indexPath.row+10000 ;
+
+        
+        
+        [cell.contentView addSubview:name];
+        [cell.contentView addSubview:name1];
+        [cell.contentView addSubview:xian];
+        
+        [cell.contentView addSubview:shuliang];
+        [cell.contentView addSubview:shuliang1];
+        [cell.contentView addSubview:xian1];
+        
+        [cell.contentView addSubview:danjia];
+        [cell.contentView addSubview:danjia1];
+        [cell.contentView addSubview:xian2];
+
+        [cell.contentView addSubview:jia];
+        [cell.contentView addSubview:jian];
+        
+        
+    }
     
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -342,5 +428,78 @@
    
        }
 }
+
+#pragma mark - 滑动删除
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath      //当在Cell上滑动时会调用此函数
+{
+    NSLog(@"你侧划了...");
+    return  UITableViewCellEditingStyleDelete;   //返回此值时,Cell上不会出现Delete按键,即Cell不做任何响应
+}
+- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath //对选中的Cell根据editingStyle进行操作
+{
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //long gg = (long) indexPath.row;
+        [jieshou removeObjectAtIndex:indexPath.row];
+        // Delete the row from the data source.
+        [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert)
+    {
+         [self.tableview reloadData];
+    }
+    
+}
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+//按钮起名
+-(NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
+
+
+-(void)jia:(UIButton*)tt{
+    //找到当前cell
+    UITableViewCell *cell=(UITableViewCell*)[[tt superview] superview ];
+    
+    // 找到当前 没值 ?
+    NSIndexPath *index=[self.tableview indexPathForCell:cell];
+    
+    
+    //计算的
+    NSString *shuliang=[NSString stringWithFormat:@"%@", xiadanshuliang[index.row]];
+    int shuliangInt=  [shuliang intValue];
+    shuliang =[NSString stringWithFormat:@"%d", shuliangInt+1];
+    xiadanshuliang[index.row]=shuliang;
+    //  刷新
+    [self.tableview reloadData];
+}
+
+-(void)jian:(UIButton*)tt{
+    //找到当前cell
+    UITableViewCell *cell=(UITableViewCell*)[[tt superview] superview ];
+    NSIndexPath *index=[self.tableview indexPathForCell:cell];
+    //计算的
+    NSString *shuliang=[NSString stringWithFormat:@"%@", xiadanshuliang[index.row]];
+    int shuliangInt=  [shuliang intValue];
+    if(shuliangInt==0){
+        
+        
+        return;
+    }
+    else{
+        
+        shuliang =[NSString stringWithFormat:@"%d", shuliangInt-1];
+        xiadanshuliang[index.row]=shuliang;
+        
+    }
+    //  刷新
+    [self.tableview reloadData];
+    
+}
+
 
 @end
