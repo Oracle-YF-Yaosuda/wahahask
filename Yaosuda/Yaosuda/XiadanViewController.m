@@ -208,9 +208,6 @@
     name1.font = [UIFont systemFontOfSize:15];
     name1.textAlignment = NSTextAlignmentCenter;
     
-    
-    
-    
     UILabel *shuliang = [[UILabel alloc]initWithFrame:CGRectMake(20, 45, 80, 30)];
     shuliang.text = @"商品数量:";
     shuliang.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
@@ -226,19 +223,12 @@
     shuliang1.textAlignment = NSTextAlignmentCenter;
     
     
-    
-    
-    
-    
-    
     UILabel *danjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 85, 80, 30)];
     danjia.text = @"商品总价:";
     danjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     danjia.font = [UIFont systemFontOfSize:15];
     
     UILabel *danjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 85, width-40-80, 30 )];
-    
-    
     
     if (jiage.count!=jieshou.count) {
           danjia1.text=@"?";
@@ -274,9 +264,6 @@
     
 }
 
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -298,7 +285,6 @@
         for (NSString* a in [dicc allValues]) {
             m+=[a intValue];
         }
-        
         
         NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
         NSDictionary*kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
