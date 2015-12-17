@@ -545,12 +545,12 @@
         [arr writeToFile:path atomically:YES];
             
         }
-        
     }
     else{
       
 //        也判断一下是否为添加的是否为0
-        if([shuliangCunFang isEqualToString:@"0"]){
+        if([shuliangCunFang isEqualToString:@"0"])
+        {
            
         }
   else
