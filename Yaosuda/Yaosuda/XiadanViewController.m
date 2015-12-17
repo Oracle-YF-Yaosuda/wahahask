@@ -432,19 +432,21 @@
 #pragma mark - 滑动删除
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath      //当在Cell上滑动时会调用此函数
 {
-   
-    NSLog(@"你侧划了...");
     return  UITableViewCellEditingStyleDelete;   //返回此值时,Cell上不会出现Delete按键,即Cell不做任何响应
-  
 }
 - (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath //对选中的Cell根据editingStyle进行操作
 {
     if (aa == 2) {
         if (editingStyle == UITableViewCellEditingStyleDelete) {
-            //long gg = (long) indexPath.row;
+            
             [jieshou removeObjectAtIndex:indexPath.row];
-            // Delete the row from the data source.
+          
             [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+            //删除字典内容
+            
+            
+             [self.tableview reloadData];
         }
         else if (editingStyle == UITableViewCellEditingStyleInsert)
         {

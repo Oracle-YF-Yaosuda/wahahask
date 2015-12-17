@@ -96,7 +96,11 @@
     
     //需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+<<<<<<< Updated upstream
     NSLog(@"dic---------%@",dic);
+=======
+    NSLog(@"***************%@",dic);
+>>>>>>> Stashed changes
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
