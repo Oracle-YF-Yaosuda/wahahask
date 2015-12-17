@@ -154,11 +154,12 @@
     
 
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       
+        NSLog(@"youbiande    --------   %@",responseObject);
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
         
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             youbian=[data1 objectForKey:@"orderList"];
+            //NSLog(@"youbiande    --------   %@",youbian);
             [_tableview reloadData];
             
         }
@@ -222,54 +223,103 @@
 //编辑section内容
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
-    baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
-    
-    UILabel *groupName = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 35)];
-    groupName.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-    groupName.text =@"订单信息";
-    groupName.font = [UIFont systemFontOfSize:13];
-
-    UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-80, 10, 15, 15)];
-    [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
-
-    UILabel *shenhe = [[UILabel alloc]initWithFrame:CGRectMake(width-10-50, 0, 50, 35)];
-    if([[zuobian[section] objectForKey:@"state"] intValue]==0){
-        shenhe.text = @"完成";
-    }else if([[zuobian[section] objectForKey:@"state"] intValue]==2){
-        shenhe.text = @"联系人审核";
-    }else if([[zuobian[section] objectForKey:@"state"] intValue]==4){
-        shenhe.text = @"开票员审核";
-    }else if([[zuobian[section] objectForKey:@"state"] intValue]==6){
-        shenhe.text = @"财务审核";
-    }else if([[zuobian[section] objectForKey:@"state"] intValue]==7){
-        shenhe.text = @"撤销";
-    }else if([[zuobian[section] objectForKey:@"state"] intValue]==8){
-        shenhe.text = @"退货";
-    }else if([[zuobian[section] objectForKey:@"state"] intValue]==9){
-        shenhe.text = @"退货确认";
-    }else{
-         shenhe.text =@"未审核";
-    }
-    
-    shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-    shenhe.font = [UIFont systemFontOfSize:13];
-
-    [baseView addSubview:shenhe];
-    [baseView addSubview:groupName];
-    [baseView addSubview:tu];
+   
 
     if (zhi == 1)
     {
         if (section == 0)
         {
             return nil;
-        }else if(zhi == 2)
+        }
+        UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
+        baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+        
+        UILabel *groupName = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 35)];
+        groupName.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
+        groupName.text =@"订单信息";
+        groupName.font = [UIFont systemFontOfSize:13];
+        
+       
+        NSString*huo=[[NSString alloc] init];
+        
+        UILabel *shenhe = [[UILabel alloc]init];
+        if([[zuobian[section] objectForKey:@"state"] intValue]==0){
+            huo = @"完成";
+        }else if([[zuobian[section] objectForKey:@"state"] intValue]==2){
+            huo = @"联系人审核";
+        }else if([[zuobian[section] objectForKey:@"state"] intValue]==4){
+            huo = @"开票员审核";
+        }else if([[zuobian[section] objectForKey:@"state"] intValue]==6){
+            shenhe.text = @"财务审核";
+        }else if([[zuobian[section] objectForKey:@"state"] intValue]==7){
+            huo = @"撤销";
+        }else if([[zuobian[section] objectForKey:@"state"] intValue]==8){
+            huo = @"退货";
+        }else if([[zuobian[section] objectForKey:@"state"] intValue]==9){
+            huo = @"退货确认";
+        }else{
+            huo =@"未审核";
+        }
+        
+        CGRect textRect = [huo boundingRectWithSize:CGSizeMake(100,20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil ];
+        shenhe.text=huo;
+        shenhe.frame=CGRectMake(width-textRect.size.width, 0, textRect.size.width, 35);
+        shenhe.font = [UIFont systemFontOfSize:13];
+        shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
+        
+       UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-20-shenhe.frame.size.width, 10, 15, 15)];
+         [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
+        [baseView addSubview:shenhe];
+        [baseView addSubview:groupName];
+        [baseView addSubview:tu];
+        return baseView;
+    }
+    else if(zhi == 2)
         {
+            UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
+            baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+            
+            UILabel *groupName = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 35)];
+            groupName.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
+            groupName.text =@"订单信息";
+            groupName.font = [UIFont systemFontOfSize:13];
+            
+            NSString*huo=[[NSString alloc] init];
+            
+            UILabel *shenhe = [[UILabel alloc]init];
+            if([[youbian[section] objectForKey:@"state"] intValue]==0){
+                huo = @"完成";
+            }else if([[youbian[section] objectForKey:@"state"] intValue]==2){
+                huo = @"联系人审核";
+            }else if([[zuobian[section] objectForKey:@"state"] intValue]==4){
+                huo = @"开票员审核";
+            }else if([[youbian[section] objectForKey:@"state"] intValue]==6){
+                shenhe.text = @"财务审核";
+            }else if([[youbian[section] objectForKey:@"state"] intValue]==7){
+                huo = @"撤销";
+            }else if([[youbian[section] objectForKey:@"state"] intValue]==8){
+                huo = @"退货";
+            }else if([[youbian[section] objectForKey:@"state"] intValue]==9){
+               huo = @"退货确认";
+            }else{
+                huo =@"未审核";
+            }
+            
+            CGRect textRect = [huo boundingRectWithSize:CGSizeMake(100,20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil ];
+            shenhe.text=huo;
+            shenhe.frame=CGRectMake(width-textRect.size.width, 0, textRect.size.width, 35);
+            shenhe.font = [UIFont systemFontOfSize:13];
+            shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
+            UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-20-shenhe.frame.size.width, 10, 15, 15)];
+            [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
+            
+            [baseView addSubview:shenhe];
+            [baseView addSubview:groupName];
+            [baseView addSubview:tu];
             return baseView;
         }
-    }
-            return baseView;
+    
+    return nil;
 }
 
 //编辑cell内容
@@ -365,13 +415,13 @@
     lab21.text = @"还没显示";
     lab3.text = @"客户姓名:";
     lab31.text = @"还没显示";
-    lab4.text = @"商品数量:";
+    lab4.text = @"订单金额:";
     lab41.text = @"还没显示";
-    lab5.text = @"订单金额:";
+    lab5.text = @"优惠金额:";
     lab51.text = @"还没显示";
-    lab6.text = @"优惠金额:";
+    lab6.text = @"下单时间:";
     lab61.text = @"还没显示";
-    lab7.text = @"下单时间:";
+    lab7.text = @"更新时间:";
     lab71.text = @"还没显示";
     lab8.text = @"业务人员:";
     lab81.text = @"还没显示";
@@ -481,10 +531,10 @@
         lab11.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderCode"]];
         lab21.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderName"]];
         lab31.text=[NSString stringWithFormat:@"%@",[[youbian[indexPath.section] objectForKey:@"customer"] objectForKey:@"customerName"]];
-        lab41.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"total"]];
-        lab51.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"amount"]];
-        lab61.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"discountAmount"]];
-        lab71.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"create_date"]];
+        lab41.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"amount"]];
+        lab51.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"discountAmount"]];
+        lab61.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"createDate"]];
+        lab71.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"updateDate"]];
         lab81.text=[NSString stringWithFormat:@"%@",[[youbian[indexPath.section] objectForKey:@"businessperson"] objectForKey:@"name"]];
 
        
@@ -570,7 +620,7 @@
     }
     else if(index == 1){
         zhi = 2;
-        [self huoqudaishenhe];
+        //[self huoqudaishenhe];
         self.qian.text=nil;
         self.hou.text=nil;
         [self.tableview reloadData];

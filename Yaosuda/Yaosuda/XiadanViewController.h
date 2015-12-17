@@ -10,7 +10,7 @@
 #import "PassTrendValueDelegate.h"
 
 
-@interface XiadanViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,PassTrendValueDelegate>
+@interface XiadanViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,PassTrendValueDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *kehumingzi;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;

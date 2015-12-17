@@ -18,10 +18,11 @@
 
 @interface XiadanViewController ()
 {
+    UITextField *shuliang1;
     CGFloat width;
     CGFloat height;
     NSMutableArray *jieshou;
-    UITableViewCell *cell;
+    
     NSMutableArray *jiage;
     NSMutableDictionary *dicc;
     UIBarButtonItem *right;
@@ -232,7 +233,7 @@
     static NSString *id1 =@"mycell";
    
     
-    cell = [tableView cellForRowAtIndexPath:indexPath ];
+   UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath ];
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
@@ -259,7 +260,8 @@
     UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, 75, width, 1)];
     xian1.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
     
-    UITextField *shuliang1 = [[UITextField alloc]initWithFrame:CGRectMake(100, 45, width-40-80, 30 )];
+    shuliang1 = [[UITextField alloc]initWithFrame:CGRectMake(100, 45, width-40-80, 30 )];
+    shuliang1.delegate=self;
     shuliang1.text = [NSString stringWithFormat:@"%@",[jieshou[indexPath.section] objectForKey:@"shuliang"]];
     shuliang1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     shuliang1.font = [UIFont systemFontOfSize:15];
@@ -287,8 +289,6 @@
     danjia1.font = [UIFont systemFontOfSize:15];
     danjia1.textAlignment = NSTextAlignmentCenter;
     
-    
-    
     if (aa == 1)
     {
         
@@ -307,7 +307,6 @@
     }
     else if (aa == 2)
     {
-    
         //   减创建
         jian = [[UIButton alloc]initWithFrame:CGRectMake(width/3*1.5,50 , 20, 20)];
         [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
@@ -319,8 +318,6 @@
         [jia addTarget:self action:@selector(jia:) forControlEvents:UIControlEventTouchUpInside];
         jia.tag=indexPath.row+10000 ;
 
-        
-        
         [cell.contentView addSubview:name];
         [cell.contentView addSubview:name1];
         [cell.contentView addSubview:xian];
@@ -335,7 +332,6 @@
 
         [cell.contentView addSubview:jia];
         [cell.contentView addSubview:jian];
-        
         
     }
     
@@ -354,9 +350,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    if (aa==2) {
+        return YES;
+    }else
+    return NO;
+}
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    return NO;
+}
 - (IBAction)fanhui:(id)sender {
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -368,8 +370,10 @@
         [WarningBox warningBoxModeText:@"请选择商品及客户！" andView:self.view];
     }else{
     float m;
+        
         for (NSString* a in [dicc allValues]) {
             m+=[a intValue];
+            NSLog(@"\n xixi");
         }
         
         NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
@@ -470,7 +474,22 @@
 
 
 -(void)jia:(UIButton*)tt{
- 
+    NSLog(@"哈哈哈");
+    //找到当前cell
+    UITableViewCell *cell=(UITableViewCell*)[[tt superview] superview ];
+    
+    // 找到当前 没值 ?
+    NSIndexPath *index=[self.tableview indexPathForCell:cell];
+    
+    
+    //计算的
+    NSString *shuliang=[NSString stringWithFormat:@"%@", xiadanshuliang[index.row]];
+    int shuliangInt=  [shuliang intValue];
+    shuliang =[NSString stringWithFormat:@"%d", shuliangInt+1];
+    xiadanshuliang[index.row]=shuliang;
+    //  刷新
+    [self.tableview reloadData];
+
 }
 
 -(void)jian:(UIButton*)tt{

@@ -21,7 +21,7 @@
     NSMutableArray*shuliangji;
     NSString*businesspersonId;
     NSString*customerId;
-    NSString*loginUserId;
+    NSNumber*loginUserId;
 }
 
 
@@ -38,7 +38,7 @@
     NSLog(@"%@****%@*****%@",_dizhi.text,_shouhuoren.text,_yingfu.text);
    
     
-    loginUserId=[NSString stringWithFormat:@"%@",[[yonghuziliao getUserInfo] objectForKey:@"id"]];
+    loginUserId=[[yonghuziliao getUserInfo] objectForKey:@"id"];
     businesspersonId=[NSString stringWithFormat:@"%@",[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"]];
     shangid=[NSMutableArray array];
     shuliangji=[NSMutableArray array];
@@ -96,6 +96,7 @@
     
     //需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+    NSLog(@"////////*************//////////%@",dic);
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
