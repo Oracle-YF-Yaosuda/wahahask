@@ -432,27 +432,33 @@
 #pragma mark - 滑动删除
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath      //当在Cell上滑动时会调用此函数
 {
+   
     NSLog(@"你侧划了...");
     return  UITableViewCellEditingStyleDelete;   //返回此值时,Cell上不会出现Delete按键,即Cell不做任何响应
+  
 }
 - (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath //对选中的Cell根据editingStyle进行操作
 {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //long gg = (long) indexPath.row;
-        [jieshou removeObjectAtIndex:indexPath.row];
-        // Delete the row from the data source.
-        [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    if (aa == 2) {
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            //long gg = (long) indexPath.row;
+            [jieshou removeObjectAtIndex:indexPath.row];
+            // Delete the row from the data source.
+            [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        else if (editingStyle == UITableViewCellEditingStyleInsert)
+        {
+            [self.tableview reloadData];
+        }
+        
     }
-    else if (editingStyle == UITableViewCellEditingStyleInsert)
-    {
-         [self.tableview reloadData];
-    }
-    
-}
+ }
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    if (aa == 2) {
+         return YES;
+    }
+    return NO;
 }
 //按钮起名
 -(NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -462,43 +468,11 @@
 
 
 -(void)jia:(UIButton*)tt{
-    //找到当前cell
-    UITableViewCell *cell=(UITableViewCell*)[[tt superview] superview ];
-    
-    // 找到当前 没值 ?
-    NSIndexPath *index=[self.tableview indexPathForCell:cell];
-    
-    
-    //计算的
-    NSString *shuliang=[NSString stringWithFormat:@"%@", xiadanshuliang[index.row]];
-    int shuliangInt=  [shuliang intValue];
-    shuliang =[NSString stringWithFormat:@"%d", shuliangInt+1];
-    xiadanshuliang[index.row]=shuliang;
-    //  刷新
-    [self.tableview reloadData];
+ 
 }
 
 -(void)jian:(UIButton*)tt{
-    //找到当前cell
-    UITableViewCell *cell=(UITableViewCell*)[[tt superview] superview ];
-    NSIndexPath *index=[self.tableview indexPathForCell:cell];
-    //计算的
-    NSString *shuliang=[NSString stringWithFormat:@"%@", xiadanshuliang[index.row]];
-    int shuliangInt=  [shuliang intValue];
-    if(shuliangInt==0){
-        
-        
-        return;
-    }
-    else{
-        
-        shuliang =[NSString stringWithFormat:@"%d", shuliangInt-1];
-        xiadanshuliang[index.row]=shuliang;
-        
-    }
-    //  刷新
-    [self.tableview reloadData];
-    
+   
 }
 
 
