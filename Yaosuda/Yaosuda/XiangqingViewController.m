@@ -26,6 +26,8 @@
     UIImageView *image;
     UITextField *shuru;
     NSString *shuliangCunFang;
+    NSMutableArray *array;
+    NSMutableArray *array1;
 }
 @property(strong,nonatomic) UIScrollView *scrollView;
 @property(strong,nonatomic) UIPageControl *pageControl;
@@ -85,7 +87,57 @@
             NSDictionary*data=[responseObject valueForKey:@"data"];
            
             shangpin=(NSMutableDictionary*)[data objectForKey:@"productions"];
-            NSLog(@"---%@",shangpin);
+            [array1 addObject:@" "];
+            //商品编码
+            [array1 addObject:@"12"];
+            //名称
+            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proName"]];
+            //剂型
+            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"dosageForm"]];
+            //规格
+            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"erpProId"]];
+            //单位
+            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"unit"]];
+            //通用名称
+            [array1 addObject:@"17"];
+            //通用名称编码
+            [array1 addObject:@"18"];
+            //供应商
+            [array1 addObject:[[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"provider"] objectForKey:@"corporateName"]];
+            //联系人
+            [array1 addObject:@"110"];
+            //联系电话
+            [array1 addObject:@"111"];
+            //仓库地址
+            [array1 addObject:@"112"];
+            //质量认证情况
+            [array1 addObject:@"113"];
+            //质量机构负责人
+            [array1 addObject:@"114"];
+            //生产企业
+            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proEnterprise"]];
+            //药品说明书
+            [array1 addObject:@"116"];
+            //产地
+            [array1 addObject:@"117"];
+            //是否是处方
+            [array1 addObject:@"118"];
+            //批准文号
+            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"auditingFileNo"]];
+            //质量标准
+            [array1 addObject:@"120"];
+            //装箱规格
+            [array1 addObject:@"121"];
+            //储存条件
+            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"storageCondition"]];
+            //批件有效期
+            [array1 addObject:@"123"];
+            //特殊药品类型
+            [array1 addObject:@"124"];
+            //是否含麻黄碱
+            [array1 addObject:@"125"];
+            //是否是冷藏品
+            [array1 addObject:@"126"];
             
             [_tableview reloadData];
             
@@ -101,44 +153,102 @@
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
         
     }];
+    
+    
+    [self arraychuanjian];
+    
 }
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+-(void)arraychuanjian{
+    
+    array = [[NSMutableArray alloc]init];
+    [array addObject:@"商品简介"];
+    [array addObject:@"商品编码"];
+    [array addObject:@"商品名称"];
+    [array addObject:@"剂型"];
+    [array addObject:@"规格"];
+    [array addObject:@"单位"];
+    [array addObject:@"通用名称"];
+    [array addObject:@"通用名称编码"];
+    [array addObject:@"供应商名称"];
+    [array addObject:@"联系人"];
+    [array addObject:@"联系电话"];
+    [array addObject:@"仓库地址"];
+    [array addObject:@"质量认证情况"];
+    [array addObject:@"质量机构负责人"];
+    [array addObject:@"生产企业"];
+    [array addObject:@"药品说明书"];
+    [array addObject:@"产地"];
+    [array addObject:@"是否是处方"];
+    [array addObject:@"批准文号"];
+    [array addObject:@"质量标准"];
+    [array addObject:@"装箱规格"];
+    [array addObject:@"储存条件"];
+    [array addObject:@"批件有效期"];
+    [array addObject:@"特殊药品类型"];
+    [array addObject:@"是否含麻黄碱"];
+    [array addObject:@"是否是冷藏品"];
+   //25
+    array1 = [[NSMutableArray alloc]init];
+    }
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 4;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 3)
+    {
+        return array.count;
+    }else
+        
     return 1;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0)
+    {
         return 250;
     }
-    else if(indexPath.section == 1){
+    else if(indexPath.section == 1)
+    {
         return 105;
     }
-    else if(indexPath.section == 2){
+    else if(indexPath.section == 2)
+    {
     return 40;
     }
-    else if(indexPath.section == 3){
-        return 155;
-    }
+    else if(indexPath.section == 3)
+    {
+        if (indexPath.row == 0)
+        {
+            return 35;
+        }else
+        {
+            return 30;
+        }
+        }
+        
     return 0;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
         return 1;
     }
-    else if(section == 1) {
+    else if(section == 1)
+    {
         return 1;
     }
-    else if(section == 2){
+    else if(section == 2)
+    {
         return 92;
     }
-    else if (section == 3){
+    else if (section == 3)
+    {
         return 20;
     }
     return 0;
@@ -238,9 +348,7 @@
             
             [viewsArray addObject:tempLabel];
             
-            
         }
-        
         
         self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
         
@@ -256,11 +364,6 @@
          [cell.contentView addSubview:self.mainScorllView];
         [cell.contentView addSubview:self.pageControl];
         [cell.contentView bringSubviewToFront:self.pageControl];
-
-    
-        
-        
-
     }
     else if (indexPath.section ==1){
         
@@ -327,124 +430,34 @@
         [cell.contentView addSubview:tu];
     }
     
-    else if (indexPath.section == 3){
+    else if (indexPath.section == 3)
+    {
+        UILabel *leftlabel1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 120, 30)];
+        leftlabel1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+        leftlabel1.font = [UIFont systemFontOfSize:13];
+        leftlabel1.text = array[indexPath.row];
         
-        UILabel *jianjie = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, width, 21)];
-        jianjie.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        jianjie.font = [UIFont systemFontOfSize:14];
-        jianjie.numberOfLines = 0;
-        jianjie.text = @"商品简介";
-        
-        
-        UIView *xian = [[UIView alloc]initWithFrame:CGRectMake(10, 26, width-20, 1)];
-        xian.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+        UILabel *rightLable1 = [[UILabel alloc]initWithFrame:CGRectMake(120, 0, width-120, 30)];
+        rightLable1.textColor= [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+        rightLable1.font = [UIFont systemFontOfSize:13];
+        rightLable1.text = array1[indexPath.row];
 
-        UILabel *mingcheng = [[UILabel alloc]initWithFrame:CGRectMake(10, 29, 100, 20)];
-        mingcheng.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-        mingcheng.font = [UIFont systemFontOfSize:10];
-        mingcheng.numberOfLines = 0;
-        mingcheng.text = @"商品名称";
-        UILabel *mingcheng1 = [[UILabel alloc]initWithFrame:CGRectMake(90, 29, 100, 20)];
-        mingcheng1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        mingcheng1.font = [UIFont systemFontOfSize:10];
-        mingcheng1.numberOfLines = 0;
+        if (indexPath.row == 0)
+        {
+            leftlabel1.frame= CGRectMake(10, 2, width, 30);
+            leftlabel1.font = [UIFont systemFontOfSize:15];
+            
+            UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(10, 34, width-20, 1.5)];
+            xian1.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1 ];
+            [cell.contentView addSubview:leftlabel1];
+            [cell.contentView addSubview:xian1];
+        }else
+        {
         
-        UILabel *jixing = [[UILabel alloc]initWithFrame:CGRectMake(10, 45, 100, 21)];
-        jixing.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-        jixing.font = [UIFont systemFontOfSize:10];
-        jixing.numberOfLines = 0;
-        jixing.text = @"剂型";
-        UILabel *jixing1 = [[UILabel alloc]initWithFrame:CGRectMake(90, 45, 100, 21)];
-        jixing1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        jixing1.font = [UIFont systemFontOfSize:10];
-        jixing1.numberOfLines = 0;
-        
-        UILabel *guige = [[UILabel alloc]initWithFrame:CGRectMake(10, 61, 100, 21)];
-        guige.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-        guige.font = [UIFont systemFontOfSize:10];
-        guige.numberOfLines = 0;
-        guige.text = @"规格";
-        UILabel *guige1 = [[UILabel alloc]initWithFrame:CGRectMake(90, 61, 100, 21)];
-        guige1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        guige1.font = [UIFont systemFontOfSize:10];
-        guige1.numberOfLines = 0;
-
-        UILabel *gongying = [[UILabel alloc]initWithFrame:CGRectMake(10, 77, 100, 21)];
-        gongying.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-        gongying.font = [UIFont systemFontOfSize:10];
-        gongying.numberOfLines = 0;
-        gongying.text = @"供应商";
-        UILabel *gongying1 = [[UILabel alloc]initWithFrame:CGRectMake(90, 77, 100, 21)];
-        gongying1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        gongying1.font = [UIFont systemFontOfSize:10];
-        gongying1.numberOfLines = 0;
-
-        UILabel *qiye = [[UILabel alloc]initWithFrame:CGRectMake(10, 93, 100, 21)];
-        qiye.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-        qiye.font = [UIFont systemFontOfSize:10];
-        qiye.numberOfLines = 0;
-        qiye.text = @"生产企业";
-        UILabel *qiye1 = [[UILabel alloc]initWithFrame:CGRectMake(90, 93, 100, 21)];
-        qiye1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        qiye1.font = [UIFont systemFontOfSize:10];
-        qiye1.numberOfLines = 0;
-
-        UILabel *tongyongming = [[UILabel alloc]initWithFrame:CGRectMake(10, 109, 100, 21)];
-        tongyongming.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-        tongyongming.font = [UIFont systemFontOfSize:10];
-        tongyongming.numberOfLines = 0;
-        tongyongming.text = @"通用名称";
-        UILabel *tongyongming1 = [[UILabel alloc]initWithFrame:CGRectMake(90, 109, 100, 21)];
-        tongyongming1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        tongyongming1.font = [UIFont systemFontOfSize:10];
-        tongyongming1.numberOfLines = 0;
-
-        UILabel *TYbianma = [[UILabel alloc]initWithFrame:CGRectMake(10, 110, 100, 21)];
-        TYbianma.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-        TYbianma.font = [UIFont systemFontOfSize:10];
-        TYbianma.numberOfLines = 0;
-        TYbianma.text = @"通用名称编码";
-        UILabel *TYbianma1 = [[UILabel alloc]initWithFrame:CGRectMake(90, 110, 100, 21)];
-        TYbianma1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        TYbianma1.font = [UIFont systemFontOfSize:10];
-        TYbianma1.numberOfLines = 0;
-        
-        UILabel *chufang = [[UILabel alloc]initWithFrame:CGRectMake(10, 126, 100, 21)];
-        chufang.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-        chufang.font = [UIFont systemFontOfSize:10];
-        chufang.numberOfLines = 0;
-        chufang.text = @"是否是处方";
-        UILabel *chufang1 = [[UILabel alloc]initWithFrame:CGRectMake(90, 126, 100, 21)];
-        chufang1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        chufang1.font = [UIFont systemFontOfSize:10];
-        chufang1.numberOfLines = 0;
-
-        
-        mingcheng1.text = @"通用名称编码";
-        jixing1.text = @"3213211";
-        guige1.text = @"";
-        gongying1.text = @"";
-        qiye1.text = @"";
-        tongyongming1.text = @"";
-        TYbianma1.text = @"";
-        chufang1.text = @"";
-        
-        [cell.contentView addSubview:jianjie];
-        [cell.contentView addSubview:xian];
-        [cell.contentView addSubview:mingcheng];
-        [cell.contentView addSubview:mingcheng1];
-        [cell.contentView addSubview:jixing];
-        [cell.contentView addSubview:jixing1];
-        [cell.contentView addSubview:guige];
-        [cell.contentView addSubview:guige1];
-        [cell.contentView addSubview:gongying];
-        [cell.contentView addSubview:gongying1];
-        [cell.contentView addSubview:qiye];
-        [cell.contentView addSubview:qiye1];
-        [cell.contentView addSubview:TYbianma];
-        [cell.contentView addSubview:TYbianma1];
-        [cell.contentView addSubview:chufang];
-        [cell.contentView addSubview:chufang1];
+        [cell.contentView addSubview:leftlabel1];
+        [cell.contentView addSubview:rightLable1];
+            
+        }
     }
     
     //cell不可点击
@@ -454,7 +467,6 @@
     //隐藏滑动条
     self.tableview.showsVerticalScrollIndicator =NO;
 
-    
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -515,16 +527,8 @@
 //    判断
     if([file fileExistsAtPath:path]){
        
-
-        
-  //        获取文件里的数据
-  
+//   获取文件里的数据
         arr=[NSMutableArray arrayWithContentsOfFile:path];
-    
-
-     
-       
-    
 //   判断输入的是否为0
         if([shuliangCunFang isEqualToString:@"0"]){
           
@@ -557,20 +561,6 @@
         }
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
 @end
