@@ -14,32 +14,40 @@
 #import "SBJsonWriter.h"
 #import "WarningBox.h"
 #import "ZizunViewController.h"
+#import "NSTimer+Addition.h"
+#import "CycleScrollView.h"
 
-
-@interface XiangqingViewController ()
+@interface XiangqingViewController ()<UITextFieldDelegate>
 {
     CGFloat width;
     CGFloat height;
-    NSDictionary*shangpin;
+    NSMutableDictionary*shangpin;
     UITableViewCell *cell;
+    UIImageView *image;
+    UITextField *shuru;
+    NSString *shuliangCunFang;
 }
 @property(strong,nonatomic) UIScrollView *scrollView;
 @property(strong,nonatomic) UIPageControl *pageControl;
 @property(strong,nonatomic) NSTimer *timer;
-
+@property (nonatomic , retain) CycleScrollView *mainScorllView;
 @end
 
 @implementation XiangqingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+  shangpin=[[NSMutableDictionary alloc] init];
+//    创建数量存放
+    shuliangCunFang=[NSString stringWithFormat:@"0"];
     
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
     
     self.tableview.delegate = self;
     self.tableview.dataSource =self;
-    
+
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -58,7 +66,7 @@
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:/*_shangID*/@"11",@"productionsId", nil];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:_shangID,@"productionsId", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     
@@ -76,8 +84,8 @@
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
            
-            shangpin=(NSDictionary*)[data objectForKey:@"productions"];
-       
+            shangpin=(NSMutableDictionary*)[data objectForKey:@"productions"];
+            NSLog(@"---%@",shangpin);
             
             [_tableview reloadData];
             
@@ -192,6 +200,9 @@
     }
     return viewForHeader;
 }
+-(void)tiao:(UIGestureRecognizer*)gg{
+    
+}
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *id1 =@"cell1";
     
@@ -204,7 +215,8 @@
     if (indexPath.section == 0) {
         //轮播
         //创建scrollview
-        self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, width, 250)];
+        self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, width, 250) animationDuration:3];
+        
         //穿件uipageconrol
         self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 230, width, 10)];
         //设置uipageconrol的圆点颜色
@@ -216,35 +228,37 @@
         // 设置uipageconcrol控件总共包含几页
         self.pageControl.numberOfPages = 4;
         self.pageControl.hidesForSinglePage = YES;
-        //imag
-        CGFloat imgW = width;
-        CGFloat imgH = 300;
-        CGFloat imgY = 0;
+ 
+        //  demo里的scroll
+        NSMutableArray *viewsArray = [@[] mutableCopy];
         
-        for (int i =0 ; i< 4; i++) {
-            UIImageView *image = [[UIImageView alloc] init];
+        for (int i = 0; i < 5; ++i) {
+            UIImageView *tempLabel = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, 250)];
+            tempLabel.image=[UIImage imageNamed:@"3.png"];
             
-            NSString *imgName = [NSString stringWithFormat:@"%d.jpg",i+1];
-            image.image = [UIImage imageNamed:imgName];
-            CGFloat imgX = i * imgW;
-            image.frame = CGRectMake(imgX, imgY, imgW, imgH);
+            [viewsArray addObject:tempLabel];
             
-            self.scrollView.pagingEnabled = YES;
             
-            self.scrollView.delegate = self;
-            
-            [self.scrollView addSubview:image];
         }
-        //创建计时器
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(dong) userInfo:nil repeats:YES];
         
-        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
         
-        [runLoop addTimer:self.timer forMode:NSRunLoopCommonModes];
-
-        self.scrollView.showsHorizontalScrollIndicator = NO;
-        [cell.contentView addSubview:self.scrollView];
+        self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
+        
+        self.mainScorllView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
+            return viewsArray[pageIndex];
+        };
+        self.mainScorllView.totalPagesCount = ^NSInteger(void){
+            return 5;
+        };
+        self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex){
+            NSLog(@"点击了第%ld个",pageIndex);
+        };
+         [cell.contentView addSubview:self.mainScorllView];
         [cell.contentView addSubview:self.pageControl];
+        [cell.contentView bringSubviewToFront:self.pageControl];
+
+    
+        
         
 
     }
@@ -264,22 +278,26 @@
         UIView *xian = [[UIView alloc]initWithFrame:CGRectMake(10, 72, width-20, 1)];
         xian.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
         
-        
-        UILabel *shuliang = [[UILabel alloc]initWithFrame:CGRectMake(10, 79, 60, 21)];
+
+        UILabel *shuliang= [[UILabel alloc]initWithFrame:CGRectMake(10, 79, 60, 21)];
         shuliang.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         shuliang.font = [UIFont systemFontOfSize:14];
+//      － 加
         UIButton *jia = [[UIButton alloc]initWithFrame:CGRectMake(width-30, 80, 20, 20)];
         [jia setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
          [jia addTarget:self action:@selector(jia) forControlEvents:UIControlEventTouchUpInside];
+//      － 减
         UIButton *jian = [[UIButton alloc]initWithFrame:CGRectMake(width-80, 80, 20, 20)];
         [jian setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
          [jian addTarget:self action:@selector(jian) forControlEvents:UIControlEventTouchUpInside];
-        UITextField *shuru = [[UITextField alloc]initWithFrame:CGRectMake(width-60, 80, 30,20)];
-        shuru.text = @"0";
+        
+ //     －加减的数量
+        shuru = [[UITextField alloc]initWithFrame:CGRectMake(width-60, 80, 30,20)];
+        shuru.text = shuliangCunFang;
         shuru.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         shuru.textAlignment = NSTextAlignmentCenter;
         shuru.borderStyle=UITextBorderStyleNone;
-     
+        shuru.delegate=self;
 
         
         shu.text = @"￥88.88";
@@ -449,55 +467,110 @@
     
 }
 
+-(void)jian{
+   int shu= [shuru.text intValue];
+    if(shu<1000){
+    shuru.text=[NSString stringWithFormat:@"%d",shu+1];
+        shuliangCunFang=shuru.text;
+    }
+    [shuru resignFirstResponder];
+}
 -(void)jia{
     
-}
--(void)jian{
-    
-}
-//自动滚动图片
--(void)dong{
-    
-    NSInteger page = self.pageControl.currentPage;
-    
-    if (page == self.pageControl.numberOfPages - 1) {
-        page = 0;
+    int shu= [shuru.text intValue];
+    if(shu==0){
+       
+        
     }else{
-        page ++;
+        
+         shuru.text=[NSString stringWithFormat:@"%d",shu-1];
+        shuliangCunFang=shuru.text;
     }
-    CGFloat offsetX = page * self.scrollView.frame.size.width;
     
-    [self .scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
-}
-//scrollview滚动方法
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    CGFloat offsetX = scrollView.contentOffset.x;
-    offsetX = offsetX +(scrollView.frame.size.width * 0.5);
-    
-    int page = offsetX / scrollView.frame.size.width;
-    
-    self.pageControl.currentPage = page;
-    
-}
-//scrollview即将开始拖拽方法
--(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    //停止计时器
-    [self.timer invalidate];
-    //设置timer为nil
-    self.timer = nil;
-}
-//scrollview拖拽完毕方法
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(dong) userInfo:nil repeats:YES];
-    
-    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-    
-    [runLoop addTimer:self.timer forMode:NSRunLoopCommonModes];
+      [shuru resignFirstResponder];
     
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [shuru resignFirstResponder];
+    return YES;
+}
 
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    
+     [shuru becomeFirstResponder];
+    return YES;
+}
+- (IBAction)tianjia:(id)sender {
+    
+    NSMutableArray *arr=[NSMutableArray array] ;
+    NSString *path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+    NSFileManager *file=[NSFileManager defaultManager];
+    
+    //         添加数量
+    NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:shangpin];
+    
+    [dd setObject:shuliangCunFang forKey:@"shuliang"];
+//    判断
+    if([file fileExistsAtPath:path]){
+       
 
+        
+  //        获取文件里的数据
+  
+        arr=[NSMutableArray arrayWithContentsOfFile:path];
+    
+
+     
+       
+    
+//   判断输入的是否为0
+        if([shuliangCunFang isEqualToString:@"0"]){
+          
+     }
+        
+   else
+       
+     {
+      
+       [arr addObject:dd];
+         NSLog(@"%@",arr);
+         NSLog(@"%@",dd);
+         
+        [arr writeToFile:path atomically:YES];
+            
+        }
+        
+    }
+    else{
+      
+//        也判断一下是否为添加的是否为0
+        if([shuliangCunFang isEqualToString:@"0"]){
+           
+        }
+  else
+        {
+            [arr addObject:dd];
+        [arr writeToFile:path atomically:YES];
+        
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
 @end

@@ -149,6 +149,9 @@
 		D23DC3C11C0EB3C1007C66DF /* mmm5.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C01C0EB3C1007C66DF /* mmm5.m */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
 		D23DC3C41C0EB3D6007C66DF /* URLEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C31C0EB3D6007C66DF /* URLEncode.m */; };
 		D23DC3C81C0EB3E6007C66DF /* lianjie.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C71C0EB3E6007C66DF /* lianjie.m */; };
+		D2D962781C227AED00C7F7A7 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D962751C227AED00C7F7A7 /* CycleScrollView.m */; };
+		D2D962791C227AED00C7F7A7 /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D962771C227AED00C7F7A7 /* NSTimer+Addition.m */; };
+		D2D9627B1C227C1500C7F7A7 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = D2D9627A1C227C1500C7F7A7 /* 3.png */; };
 		D2E833F71C0FD53B00F53E7E /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E833D71C0FD53B00F53E7E /* MKAnnotationView+WebCache.m */; };
 		D2E833F81C0FD53B00F53E7E /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E833D91C0FD53B00F53E7E /* NSData+ImageContentType.m */; };
 		D2E833F91C0FD53B00F53E7E /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E833DB1C0FD53B00F53E7E /* SDImageCache.m */; };
@@ -381,6 +384,11 @@
 		D23DC3C51C0EB3E6007C66DF /* hongdingyi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hongdingyi.h; sourceTree = "<group>"; };
 		D23DC3C61C0EB3E6007C66DF /* lianjie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lianjie.h; sourceTree = "<group>"; };
 		D23DC3C71C0EB3E6007C66DF /* lianjie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lianjie.m; sourceTree = "<group>"; };
+		D2D962741C227AED00C7F7A7 /* CycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleScrollView.h; sourceTree = "<group>"; };
+		D2D962751C227AED00C7F7A7 /* CycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleScrollView.m; sourceTree = "<group>"; };
+		D2D962761C227AED00C7F7A7 /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
+		D2D962771C227AED00C7F7A7 /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
+		D2D9627A1C227C1500C7F7A7 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		D2E833D61C0FD53B00F53E7E /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		D2E833D71C0FD53B00F53E7E /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		D2E833D81C0FD53B00F53E7E /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -620,6 +628,7 @@
 		95F7094F1C0BDE2400BEC51C = {
 			isa = PBXGroup;
 			children = (
+				D2D962731C227AD200C7F7A7 /* scoll封装的 */,
 				D21BDF8E1C112E000031F431 /* 协议与本地数据 */,
 				D23DC3C91C0EB3EE007C66DF /* 宏定义和sign转化 */,
 				95F70A381C0BF2A200BEC51C /* SDk */,
@@ -877,6 +886,18 @@
 			name = "宏定义和sign转化";
 			sourceTree = "<group>";
 		};
+		D2D962731C227AD200C7F7A7 /* scoll封装的 */ = {
+			isa = PBXGroup;
+			children = (
+				D2D9627A1C227C1500C7F7A7 /* 3.png */,
+				D2D962741C227AED00C7F7A7 /* CycleScrollView.h */,
+				D2D962751C227AED00C7F7A7 /* CycleScrollView.m */,
+				D2D962761C227AED00C7F7A7 /* NSTimer+Addition.h */,
+				D2D962771C227AED00C7F7A7 /* NSTimer+Addition.m */,
+			);
+			name = "scoll封装的";
+			sourceTree = "<group>";
+		};
 		D2E833D51C0FD53B00F53E7E /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1054,6 +1075,7 @@
 				95F70A291C0BDE6300BEC51C /* @3x_sp_15.png in Resources */,
 				95F70A181C0BDE6300BEC51C /* 6_MarkMan.png in Resources */,
 				95F70A361C0BDE6300BEC51C /* rt_03.png in Resources */,
+				D2D9627B1C227C1500C7F7A7 /* 3.png in Resources */,
 				95F70A121C0BDE6300BEC51C /* 10_MarkMan.png in Resources */,
 				95F709F81C0BDE6300BEC51C /* bg.jpg in Resources */,
 				95F709E81C0BDE6300BEC51C /* 1.jpg in Resources */,
@@ -1178,7 +1200,9 @@
 				957093BB1C0BF3AD007E27C3 /* SBJsonStreamParserState.m in Sources */,
 				D2E833FF1C0FD53B00F53E7E /* SDWebImagePrefetcher.m in Sources */,
 				D2E834021C0FD53B00F53E7E /* UIImage+MultiFormat.m in Sources */,
+				D2D962781C227AED00C7F7A7 /* CycleScrollView.m in Sources */,
 				D2E833FB1C0FD53B00F53E7E /* SDWebImageDecoder.m in Sources */,
+				D2D962791C227AED00C7F7A7 /* NSTimer+Addition.m in Sources */,
 				957093E81C0BF3B6007E27C3 /* Networking.m in Sources */,
 				957093E61C0BF3B6007E27C3 /* AFDownloadRequestOperation.m in Sources */,
 				95E7D6BC1C0D4A3A00E95058 /* GerenViewController.m in Sources */,

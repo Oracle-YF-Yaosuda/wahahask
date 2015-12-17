@@ -12,5 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property( strong , nonatomic)NSString*shangID;
+@property (weak, nonatomic) IBOutlet UIButton *dijiaotianjia;
+- (IBAction)tianjia:(id)sender;
 
 @end

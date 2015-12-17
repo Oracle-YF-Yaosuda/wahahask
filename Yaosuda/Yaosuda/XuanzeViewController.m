@@ -53,72 +53,6 @@
     [self diaoyong:searchBar.text];
     [searchBar resignFirstResponder];
 }
--(void)diaoyong:(NSString*)zhao{
-    //userID    暂时不用改
-    NSString * userID=@"0";
-    
-    //请求地址   地址不同 必须要改
-    NSString * url =@"/prod/productionsList";
-    
-    //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-    
-    //将上传对象转换为json格式字符串
-    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
-    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
-    //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",zhao,@"proName",@"",@"proCatalog",@"1",@"pageNo",@"100",@"pageSize", nil];
-    
-    NSString*jsonstring=[writer stringWithObject:datadic];
-    
-    //获取签名
-    NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
-    
-    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
-    
-  
-    //电泳借口需要上传的数据
-    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-   
-    [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [WarningBox warningBoxHide:YES andView:self.view];
-        
-        
-        //[WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
-        
-        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
-            NSDictionary*data=[responseObject valueForKey:@"data"];
-            productionsList=[data objectForKey:@"productionsList"];
-            for (int i=0; i<productionsList.count; i++) {
-                [shuzi addObject:[NSString stringWithFormat:@"shuzi%d",i]];
-                [jiahao addObject:[NSString stringWithFormat:@"jiahao%d",i]];
-                
-                //       下单数量默认为0
-                [xiadanshuliang addObject:@"0"];
-                
-            }
-            
-            
-            
-            [_tableview reloadData];
-            
-            
-        }else{
-            
-            
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
-        
-    }];
-
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -238,7 +172,7 @@
     
     }
      else{
-                 NSString*lian=[NSString stringWithFormat:@"%@",service_host];
+        NSString*lian=[NSString stringWithFormat:@"%@",service_host];
          NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",lian,arr[1]]];
          
          [_imagr sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"1.jpg"]];
@@ -331,11 +265,7 @@
     changjia1.text = [NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"proEnterprise" ]];
     guige1.text =[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"etalon" ]];
     danwei1.text = [NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"unit" ]];
-    
-    
-    
-    
-    
+  
     [cell.contentView addSubview:_imagr];
 
     [cell.contentView addSubview:name];
@@ -360,14 +290,12 @@
     cell.selectionStyle =UITableViewCellSelectionStyleNone;
     return cell;
 }
+#pragma mark - 点击cell跳转
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     XiangqingViewController *xiangqing = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiangqing"];
-    xiangqing.shangID=[NSString stringWithFormat:@"%ld",indexPath.row];
+    xiangqing.shangID=[NSString stringWithFormat:@"%@",[productionsList[indexPath.row ] objectForKey:@"id"]];
     [self.navigationController pushViewController:xiangqing animated:YES];
-    
-    
-    
-    
+   
 }
 #pragma mark - button点击事件
 -(void)tianjia:(UIButton*)tt{
@@ -433,4 +361,71 @@
     [self.navigationController popViewControllerAnimated:YES];
 
 }
+-(void)diaoyong:(NSString*)zhao{
+    //userID    暂时不用改
+    NSString * userID=@"0";
+    
+    //请求地址   地址不同 必须要改
+    NSString * url =@"/prod/productionsList";
+    
+    //时间戳
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    NSDate *datenow = [NSDate date];
+    NSString *nowtimeStr = [formatter stringFromDate:datenow];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    
+    //将上传对象转换为json格式字符串
+    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+    //出入参数：
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",zhao,@"proName",@"",@"proCatalog",@"1",@"pageNo",@"100",@"pageSize", nil];
+    
+    NSString*jsonstring=[writer stringWithObject:datadic];
+    
+    //获取签名
+    NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
+    
+    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+    
+    
+    //电泳借口需要上传的数据
+    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+    
+    [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        
+        
+        //[WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
+        
+        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+            NSDictionary*data=[responseObject valueForKey:@"data"];
+            productionsList=[data objectForKey:@"productionsList"];
+            for (int i=0; i<productionsList.count; i++) {
+                [shuzi addObject:[NSString stringWithFormat:@"shuzi%d",i]];
+                [jiahao addObject:[NSString stringWithFormat:@"jiahao%d",i]];
+                
+                //       下单数量默认为0
+                [xiadanshuliang addObject:@"0"];
+                
+            }
+            
+            
+            
+            [_tableview reloadData];
+            
+            
+        }else{
+            
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        
+    }];
+    
+}
+
 @end
