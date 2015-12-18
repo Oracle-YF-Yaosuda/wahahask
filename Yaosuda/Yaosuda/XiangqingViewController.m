@@ -39,16 +39,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self arraychuanjian];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
-  shangpin=[[NSMutableDictionary alloc] init];
+    shangpin=[[NSMutableDictionary alloc] init];
 //    创建数量存放
     shuliangCunFang=[NSString stringWithFormat:@"0"];
     
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
-    
-    self.tableview.delegate = self;
-    self.tableview.dataSource =self;
 
     //userID    暂时不用改
     NSString * userID=@"0";
@@ -82,11 +82,18 @@
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"---%@--%@--%@",responseObject,array,array1);
+        
+        
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
            
             shangpin=(NSMutableDictionary*)[data objectForKey:@"productions"];
+            
+            [array1 removeAllObjects];
+            
             [array1 addObject:@" "];
             //商品编码
             [array1 addObject:@"12"];
@@ -139,11 +146,12 @@
             //是否是冷藏品
             [array1 addObject:@"127"];
             
+          
+            
             [_tableview reloadData];
             
-            
-            
-        }else{
+        }else
+        {
             
             
         }
@@ -155,7 +163,7 @@
     }];
     
     
-    [self arraychuanjian];
+    
     
 }
 -(void)arraychuanjian{
@@ -188,7 +196,7 @@
     [array addObject:@"是否含麻黄碱"];
     [array addObject:@"是否是冷藏品"];
    //25
-    array1 = [[NSMutableArray alloc]init];
+    array1 = [[NSMutableArray alloc]initWithArray:array];
     }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -202,7 +210,7 @@
         return array.count;
     }else
         
-    return 1;
+        return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -257,7 +265,8 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *viewForHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 90)];
     viewForHeader.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
-    if(section == 2){
+    if(section == 2)
+    {
         UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 60, 15)];
         name.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
         name.text = @"商品名称:";
@@ -306,23 +315,30 @@
         [viewForHeader addSubview:guige1];
         [viewForHeader addSubview:danwei];
         [viewForHeader addSubview:danwei1];
-    
+     return viewForHeader;
     }
-    return viewForHeader;
+    else
+    {
+        return nil;
+    }
 }
--(void)tiao:(UIGestureRecognizer*)gg{
+-(void)tiao:(UIGestureRecognizer*)gg
+{
     
 }
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *id1 =@"cell1";
     
     cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell == nil) {
+    if (cell == nil)
+    {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
     
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0)
+    {
         //轮播
         //创建scrollview
         self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, width, 250) animationDuration:3];
@@ -340,9 +356,10 @@
         self.pageControl.hidesForSinglePage = YES;
  
         //  demo里的scroll
-        NSMutableArray *viewsArray = [@[] mutableCopy];
+        NSMutableArray *viewsArray = [[NSMutableArray alloc] init];
         
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < 5; ++i)
+        {
             UIImageView *tempLabel = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, 250)];
             tempLabel.image=[UIImage imageNamed:@"3.png"];
             
@@ -352,20 +369,24 @@
         
         self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
         
-        self.mainScorllView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
+        self.mainScorllView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex)
+        {
             return viewsArray[pageIndex];
         };
-        self.mainScorllView.totalPagesCount = ^NSInteger(void){
+        self.mainScorllView.totalPagesCount = ^NSInteger(void)
+        {
             return 5;
         };
-        self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex){
+        self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex)
+        {
             NSLog(@"点击了第%ld个",pageIndex);
         };
-         [cell.contentView addSubview:self.mainScorllView];
+        [cell.contentView addSubview:self.mainScorllView];
         [cell.contentView addSubview:self.pageControl];
         [cell.contentView bringSubviewToFront:self.pageControl];
     }
-    else if (indexPath.section ==1){
+    else if (indexPath.section ==1)
+    {
         
         UILabel *shu = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 100, 30)];
         shu.textColor = [UIColor colorWithHexString:@"f36713" alpha:1];
@@ -416,7 +437,8 @@
         [cell.contentView addSubview:shuru];
     }
     
-    else if (indexPath.section == 2){
+    else if (indexPath.section == 2)
+    {
         
         UILabel *chanpinzizhi = [[UILabel alloc]initWithFrame:CGRectMake(10,10, 100, 21)];
         chanpinzizhi.font = [UIFont systemFontOfSize:14];
@@ -469,31 +491,37 @@
 
     return cell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
-    if (indexPath.section == 2) {
-      
+    if (indexPath.section == 2)
+    {
         ZizunViewController *zixun = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"zixun"];
         [self.navigationController pushViewController:zixun animated:YES];
     }
     
 }
 
--(void)jian{
+-(void)jian
+{
    int shu= [shuru.text intValue];
-    if(shu<1000){
+    if(shu<1000)
+    {
     shuru.text=[NSString stringWithFormat:@"%d",shu+1];
         shuliangCunFang=shuru.text;
     }
     [shuru resignFirstResponder];
 }
--(void)jia{
+-(void)jia
+{
     
     int shu= [shuru.text intValue];
-    if(shu==0){
+    if(shu==0)
+    {
        
         
-    }else{
+    }else
+    {
         
          shuru.text=[NSString stringWithFormat:@"%d",shu-1];
         shuliangCunFang=shuru.text;
@@ -503,18 +531,21 @@
     
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     
     [shuru resignFirstResponder];
     return YES;
 }
 
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
     
      [shuru becomeFirstResponder];
     return YES;
 }
-- (IBAction)tianjia:(id)sender {
+- (IBAction)tianjia:(id)sender
+{
     
     NSMutableArray *arr=[NSMutableArray array] ;
     NSString *path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
@@ -525,12 +556,14 @@
     
     [dd setObject:shuliangCunFang forKey:@"shuliang"];
 //    判断
-    if([file fileExistsAtPath:path]){
+    if([file fileExistsAtPath:path])
+    {
        
 //   获取文件里的数据
         arr=[NSMutableArray arrayWithContentsOfFile:path];
 //   判断输入的是否为0
-        if([shuliangCunFang isEqualToString:@"0"]){
+        if([shuliangCunFang isEqualToString:@"0"])
+        {
           
      }
         

@@ -14,8 +14,6 @@
 #import "WarningBox.h"
 #import "lianjie.h"
 
-
-
 @interface QuerenViewController (){
     NSMutableArray*shangid;
     NSMutableArray*shuliangji;
@@ -23,8 +21,6 @@
     NSString*customerId;
     NSString*loginUserId;
 }
-
-
 - (IBAction)tijiao:(id)sender;
 @end
 

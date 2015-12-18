@@ -51,7 +51,7 @@
 		9570941E1C0C292C007E27C3 /* 确认订单_MarkMan.png in Resources */ = {isa = PBXBuildFile; fileRef = 957094111C0C292C007E27C3 /* 确认订单_MarkMan.png */; };
 		957094271C0C619B007E27C3 /* XiadanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957094261C0C619B007E27C3 /* XiadanViewController.m */; };
 		9580C3541C17DCFA00FB6C4A /* XinxiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9580C3531C17DCFA00FB6C4A /* XinxiViewController.m */; };
-		9588ACB21C225F1400AE9720 /* huadong.png in Resources */ = {isa = PBXBuildFile; fileRef = 9588ACB11C225F1400AE9720 /* huadong.png */; settings = {ASSET_TAGS = (); }; };
+		9588ACB21C225F1400AE9720 /* huadong.png in Resources */ = {isa = PBXBuildFile; fileRef = 9588ACB11C225F1400AE9720 /* huadong.png */; };
 		9596E4631C1E6B73008AEB8A /* QuerenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9596E4621C1E6B73008AEB8A /* QuerenViewController.m */; };
 		95E7D6BC1C0D4A3A00E95058 /* GerenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6BB1C0D4A3A00E95058 /* GerenViewController.m */; };
 		95E7D6BF1C0D64E800E95058 /* XiugaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E7D6BE1C0D64E800E95058 /* XiugaiViewController.m */; };
@@ -1373,9 +1373,10 @@
 				INFOPLIST_FILE = Yaosuda/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = xl.Yaosuda;
+				PRODUCT_BUNDLE_IDENTIFIER = sk.Yaosuda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1388,9 +1389,10 @@
 				INFOPLIST_FILE = Yaosuda/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = xl.Yaosuda;
+				PRODUCT_BUNDLE_IDENTIFIER = sk.Yaosuda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
