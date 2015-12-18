@@ -83,8 +83,8 @@
     SBJsonWriter *writer = [[SBJsonWriter alloc]init];
 
     //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",@"2015-11-11",@"startDate",@"2015-11-21",@"endDate", @"2",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
-
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",@"2013-11-11",@"startDate",@"2015-12-18",@"endDate", @"",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
+    NSLog(@"左边的 入参%@",datadic);
     NSString*jsonstring=[writer stringWithObject:datadic];
 
     //获取签名
@@ -100,7 +100,7 @@
    
 
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-      
+        NSLog(@"zuozuozuozuozuzouozuo------%@",responseObject);
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
         
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
