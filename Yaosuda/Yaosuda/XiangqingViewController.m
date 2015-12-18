@@ -137,7 +137,7 @@
             //是否含麻黄碱
             [array1 addObject:@"125"];
             //是否是冷藏品
-            [array1 addObject:@"126"];
+            [array1 addObject:@"127"];
             
             [_tableview reloadData];
             

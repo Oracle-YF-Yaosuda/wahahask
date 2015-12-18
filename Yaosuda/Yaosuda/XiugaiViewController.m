@@ -19,18 +19,10 @@
 
 @implementation XiugaiViewController
 
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
-    
     [self daili];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
