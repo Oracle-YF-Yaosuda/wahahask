@@ -403,7 +403,15 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="修改密码" id="OtG-gT-uqR"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="修改密码" id="OtG-gT-uqR">
+                        <barButtonItem key="leftBarButtonItem" image="@2x_xj_03_06.png" id="cj7-Pz-2qP">
+                            <connections>
+                                <action selector="fanhui:" destination="0Tq-BS-qrh" id="kcE-Le-xmW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="newpass" destination="RmU-pz-GfX" id="SSw-qE-gHB"/>
                         <outlet property="newpass1" destination="RTq-dm-nFa" id="CKe-Rd-dSp"/>
@@ -773,7 +781,13 @@
                             <constraint firstItem="LA6-y9-C4X" firstAttribute="top" secondItem="ifk-eS-Iso" secondAttribute="bottom" id="zZG-1e-I0O"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="选择客户" id="oD0-Xv-0kr"/>
+                    <navigationItem key="navigationItem" title="选择客户" id="oD0-Xv-0kr">
+                        <barButtonItem key="leftBarButtonItem" image="@2x_xj_03_06.png" id="atW-IK-1cV">
+                            <connections>
+                                <action selector="fanhui:" destination="3oG-Ma-8YG" id="uV8-9H-2H8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableview" destination="LA6-y9-C4X" id="fcm-qq-8AG"/>
                     </connections>
@@ -807,15 +821,6 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货地址:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hkx-Sk-Tnc">
-                                        <rect key="frame" x="23" y="38" width="65" height="18"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="65" id="h8Y-ku-SI8"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbw-1m-VzR">
                                         <rect key="frame" x="96" y="14" width="496" height="21"/>
                                         <constraints>
@@ -825,46 +830,18 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCI-mb-Rl1">
-                                        <rect key="frame" x="96" y="38" width="496" height="25"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.27450980392156865" green="0.45098039215686275" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="SCI-mb-Rl1" firstAttribute="top" secondItem="mbw-1m-VzR" secondAttribute="bottom" constant="3" id="0zT-EF-2Ke"/>
-                                    <constraint firstItem="Hkx-Sk-Tnc" firstAttribute="top" secondItem="5SC-zA-pWf" secondAttribute="bottom" constant="6" id="27n-fw-GvU"/>
-                                    <constraint firstAttribute="trailing" secondItem="SCI-mb-Rl1" secondAttribute="trailing" constant="8" id="7Fs-oW-qzx"/>
                                     <constraint firstItem="5SC-zA-pWf" firstAttribute="leading" secondItem="6qK-VH-QKg" secondAttribute="leading" constant="23" id="A77-Mc-4DH"/>
-                                    <constraint firstItem="Hkx-Sk-Tnc" firstAttribute="top" secondItem="5SC-zA-pWf" secondAttribute="bottom" constant="6" id="Hbq-Pd-FRk"/>
-                                    <constraint firstItem="Hkx-Sk-Tnc" firstAttribute="leading" secondItem="6qK-VH-QKg" secondAttribute="leading" constant="23" id="JdN-1Z-zeo"/>
-                                    <constraint firstAttribute="bottom" secondItem="SCI-mb-Rl1" secondAttribute="bottom" constant="15" id="Jft-yp-uQI"/>
-                                    <constraint firstItem="SCI-mb-Rl1" firstAttribute="leading" secondItem="Hkx-Sk-Tnc" secondAttribute="trailing" constant="8" id="L47-CX-MfT"/>
-                                    <constraint firstItem="SCI-mb-Rl1" firstAttribute="top" secondItem="mbw-1m-VzR" secondAttribute="bottom" constant="8" id="PrG-Me-KUR"/>
                                     <constraint firstItem="5SC-zA-pWf" firstAttribute="leading" secondItem="6qK-VH-QKg" secondAttribute="leading" constant="23" id="Qtj-dw-jnf"/>
                                     <constraint firstItem="mbw-1m-VzR" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="top" constant="14" id="RdW-7T-W9B"/>
-                                    <constraint firstAttribute="trailing" secondItem="SCI-mb-Rl1" secondAttribute="trailing" constant="8" id="Rhb-sE-bAB"/>
                                     <constraint firstAttribute="trailing" secondItem="mbw-1m-VzR" secondAttribute="trailing" constant="8" id="VTv-WM-xtS"/>
-                                    <constraint firstItem="Hkx-Sk-Tnc" firstAttribute="top" secondItem="5SC-zA-pWf" secondAttribute="bottom" constant="6" id="Zil-P3-aDg"/>
                                     <constraint firstItem="mbw-1m-VzR" firstAttribute="leading" secondItem="5SC-zA-pWf" secondAttribute="trailing" constant="7" id="dhW-nh-3A9"/>
-                                    <constraint firstAttribute="bottom" secondItem="SCI-mb-Rl1" secondAttribute="bottom" constant="37" id="f5Z-5y-yMi"/>
-                                    <constraint firstItem="Hkx-Sk-Tnc" firstAttribute="leading" secondItem="5SC-zA-pWf" secondAttribute="leading" id="ghC-0r-uLY"/>
-                                    <constraint firstItem="SCI-mb-Rl1" firstAttribute="leading" secondItem="Hkx-Sk-Tnc" secondAttribute="trailing" constant="8" id="jfo-Q7-TfO"/>
                                     <constraint firstItem="5SC-zA-pWf" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="top" constant="14" id="l3R-RG-p14"/>
                                     <constraint firstItem="5SC-zA-pWf" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="top" constant="14" id="mSQ-A6-3ap"/>
-                                    <constraint firstAttribute="bottom" secondItem="Hkx-Sk-Tnc" secondAttribute="bottom" constant="44" id="myy-rW-VYH"/>
-                                    <constraint firstItem="SCI-mb-Rl1" firstAttribute="top" secondItem="mbw-1m-VzR" secondAttribute="bottom" constant="3" id="pNj-d2-ap7"/>
                                     <constraint firstAttribute="height" constant="100" id="whT-Rj-lpl"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="0zT-EF-2Ke"/>
-                                        <exclude reference="Jft-yp-uQI"/>
-                                        <exclude reference="PrG-Me-KUR"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CvT-us-k0U" userLabel="View2">
                                 <rect key="frame" x="0.0" y="135" width="600" height="54"/>
@@ -924,9 +901,14 @@
                             <constraint firstItem="PEf-jE-rSc" firstAttribute="leading" secondItem="fJn-PY-FwP" secondAttribute="leading" id="uJB-Dv-vFh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="确认下单" id="Qfq-sj-QkV"/>
+                    <navigationItem key="navigationItem" title="确认下单" id="Qfq-sj-QkV">
+                        <barButtonItem key="leftBarButtonItem" image="@2x_xj_03_06.png" id="emx-zu-6yT">
+                            <connections>
+                                <action selector="fanhui:" destination="HBt-ph-xEl" id="krd-Xk-qDS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="dizhi" destination="SCI-mb-Rl1" id="UXA-LE-EZ0"/>
                         <outlet property="shouhuoren" destination="mbw-1m-VzR" id="Frc-Ra-Es2"/>
                         <outlet property="yingfu" destination="UaP-DN-Zlh" id="lci-pI-M6J"/>
                     </connections>

@@ -33,7 +33,6 @@
 - (void)viewDidLoad {
      [super viewDidLoad];
     _yingfu.text=_meme;
-    _dizhi.text=_xixi;
     _shouhuoren.text=_haha;
    
    
@@ -44,7 +43,7 @@
     NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
     NSArray*arr=[NSArray arrayWithContentsOfFile:path];
     for (int i=0; i<arr.count; i++) {
-       [ shangid addObject:[arr[i] objectForKey:@"id"]];
+       [ shangid addObject:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"id"]]];
         [shuliangji addObject:[arr[i] objectForKey:@"shuliang"]];
     }
     NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
@@ -54,13 +53,7 @@
 }
 - (IBAction)tijiao:(id)sender {
     
-    NSFileManager *defaultManager;
-    defaultManager = [NSFileManager defaultManager];
-    NSString*path=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
-    NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-    [defaultManager removeItemAtPath:path error:NULL];
-    [defaultManager removeItemAtPath:path1 error:NULL];
-    
+       
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -75,8 +68,6 @@
   
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     //出入参数：
@@ -92,10 +83,10 @@
     
     //需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
- 
+    NSLog(@"***************%@",dic);
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+    
+       if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             [WarningBox warningBoxModeText:@"下单成功" andView:self.view];
             NSFileManager *defaultManager;
             defaultManager = [NSFileManager defaultManager];
@@ -110,5 +101,9 @@
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
         NSLog(@"%@",[NSString stringWithFormat:@"%@",error]);
     }];
+}
+- (IBAction)fanhui:(id)sender {
+    
+      [self.navigationController popViewControllerAnimated:YES];
 }
 @end

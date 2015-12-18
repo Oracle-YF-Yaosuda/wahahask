@@ -211,14 +211,14 @@
     
 }
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//   
-//    return jieshou.count;
-//    
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+   
+    return jieshou.count;
+    
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return jieshou.count;
+    return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

@@ -132,7 +132,7 @@
         [WarningBox warningBoxHide:YES andView:self.view];
         
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
-        
+        NSLog(@"登录     /*/*/*/*/*/*/*/*/      %@",responseObject);
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSString*path=[NSString stringWithFormat:@"%@/Documents/userInfo.plist",NSHomeDirectory()];
             NSLog(@"%@",NSHomeDirectory());
