@@ -56,6 +56,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
     _search.delegate=self;
     
     shuzi=[NSMutableArray array];
@@ -224,10 +227,6 @@
     UILabel *danwei1 = [[UILabel alloc]initWithFrame:CGRectMake(180, 65, 60, 15)];
     danwei1.font= [UIFont systemFontOfSize:12];
     danwei1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    
-    
-    
-    
     
     UILabel *shuliang = [[UILabel alloc]initWithFrame:CGRectMake(120, 90, 60, 15)];
     shuliang.font= [UIFont systemFontOfSize:12];

@@ -94,6 +94,7 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat offsetX = scrollView.contentOffset.x;
+    
     offsetX = offsetX +(scrollView.frame.size.width * 0.5);
     
     int page = offsetX / scrollView.frame.size.width;

@@ -15,4 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *dijiaotianjia;
 - (IBAction)tianjia:(id)sender;
 
+- (IBAction)fanhui:(id)sender;
+
+
 @end
