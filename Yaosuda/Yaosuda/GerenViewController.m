@@ -109,9 +109,9 @@
     
     
     if (indexPath.section == 0) {
-        la1.text = @"账        号:";
-        la2.text = @"姓        名:";
-        la3.text = @"手  机  号:";
+        la1.text = @"账号";
+        la2.text = @"姓名";
+        la3.text = @"手机号";
         
         la11.text = [NSString stringWithFormat:@"%@",[yonghu objectForKey:@"loginName"] ];
         la22.text =@"四川成都";
@@ -119,11 +119,11 @@
         
     }
     else if (indexPath.section == 1){
-        la1.text = @"账户名称:";
-        la2.text = @"授信额度:";
-        la3.text = @"资金金额:";
+        la1.text = @"账户名称";
+        la2.text = @"授信额度";
+        la3.text = @"资金金额";
         
-        la11.text = @"sk19920518";
+        la11.text = @"chengdu";
         la22.text = [NSString stringWithFormat:@"%@",[zhanghao objectForKey:@"creditFund"]];
         la33.text = @"100000000.00元";
         

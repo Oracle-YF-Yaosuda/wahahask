@@ -100,7 +100,7 @@
    
 
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"zuozuozuozuozuzouozuo------%@",responseObject);
+        NSLog(@"zuozuozuozuozuzouozuo------%@------zuozuozuozuozuzouozuo",responseObject);
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
         
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
@@ -114,7 +114,6 @@
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
 
            }];
-    
 }
 //获取待审核数据
 -(void)huoqudaishenhe
@@ -410,21 +409,21 @@
     lab81.textAlignment = NSTextAlignmentCenter;
 
     lab1.text = @"订单编号:";
-    lab11.text = @"还没显示";
+    lab11.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"orderCode"]];
     lab2.text = @"订单名称:";
-    lab21.text = @"还没显示";
+    lab21.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"orderName"]];
     lab3.text = @"客户姓名:";
-    lab31.text = @"还没显示";
+    lab31.text = [NSString stringWithFormat:@"%@",[[zuobian[indexPath.section] objectForKey:@"customer"] objectForKey:@"customerName"]];
     lab4.text = @"订单金额:";
-    lab41.text = @"还没显示";
+    lab41.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"amount"]];
     lab5.text = @"优惠金额:";
-    lab51.text = @"还没显示";
+    lab51.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"discountAmount"]];
     lab6.text = @"下单时间:";
-    lab61.text = @"还没显示";
+    lab61.text =[NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"create_date"]];
     lab7.text = @"更新时间:";
     lab71.text = @"还没显示";
     lab8.text = @"业务人员:";
-    lab81.text = @"还没显示";
+    lab81.text = [NSString stringWithFormat:@"%@",[[zuobian[indexPath.section]objectForKey:@"businessperson"] objectForKey:@"name"]];
 
     
     if(zhi == 1)
