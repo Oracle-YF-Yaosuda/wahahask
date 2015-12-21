@@ -83,7 +83,7 @@
     SBJsonWriter *writer = [[SBJsonWriter alloc]init];
 
     //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",@"2013-11-11",@"startDate",@"2015-12-18",@"endDate", @"",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",@"2015-01-01",@"startDate",@"2015-12-18",@"endDate", @"",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
     NSLog(@"左边的 入参%@",datadic);
     NSString*jsonstring=[writer stringWithObject:datadic];
 
