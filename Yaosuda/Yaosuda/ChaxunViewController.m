@@ -262,11 +262,11 @@
         
         CGRect textRect = [huo boundingRectWithSize:CGSizeMake(100,20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil ];
         shenhe.text=huo;
-        shenhe.frame=CGRectMake(width-textRect.size.width, 0, textRect.size.width, 35);
+        shenhe.frame=CGRectMake(width-textRect.size.width-5, 0, textRect.size.width, 35);
         shenhe.font = [UIFont systemFontOfSize:13];
         shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
         
-       UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-20-shenhe.frame.size.width, 10, 15, 15)];
+       UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-25-shenhe.frame.size.width, 10, 15, 15)];
          [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
         [baseView addSubview:shenhe];
         [baseView addSubview:groupName];
@@ -306,10 +306,10 @@
             
             CGRect textRect = [huo boundingRectWithSize:CGSizeMake(100,20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil ];
             shenhe.text=huo;
-            shenhe.frame=CGRectMake(width-textRect.size.width, 0, textRect.size.width, 35);
+            shenhe.frame=CGRectMake(width-textRect.size.width-5, 0, textRect.size.width, 35);
             shenhe.font = [UIFont systemFontOfSize:13];
             shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-            UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-20-shenhe.frame.size.width, 10, 15, 15)];
+            UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-25-shenhe.frame.size.width, 10, 15, 15)];
             [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
             
             [baseView addSubview:shenhe];
