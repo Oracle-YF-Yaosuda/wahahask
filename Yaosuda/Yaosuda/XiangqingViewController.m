@@ -403,12 +403,12 @@
         shuliang.font = [UIFont systemFontOfSize:14];
 //      － 加
         UIButton *jia = [[UIButton alloc]initWithFrame:CGRectMake(width-30, 80, 20, 20)];
-        [jia setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
-         [jia addTarget:self action:@selector(jia) forControlEvents:UIControlEventTouchUpInside];
+        [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
+         [jia addTarget:self action:@selector(jian) forControlEvents:UIControlEventTouchUpInside];
 //      － 减
         UIButton *jian = [[UIButton alloc]initWithFrame:CGRectMake(width-80, 80, 20, 20)];
-        [jian setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
-         [jian addTarget:self action:@selector(jian) forControlEvents:UIControlEventTouchUpInside];
+        [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
+         [jian addTarget:self action:@selector(jia) forControlEvents:UIControlEventTouchUpInside];
         
  //     －加减的数量
         shuru = [[UITextField alloc]initWithFrame:CGRectMake(width-60, 80, 30,20)];
