@@ -82,10 +82,7 @@
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"---%@--%@--%@",responseObject,array,array1);
-        
-        
+
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
@@ -145,8 +142,6 @@
             [array1 addObject:@"125"];
             //是否是冷藏品
             [array1 addObject:@"127"];
-            
-          
             
             [_tableview reloadData];
             
