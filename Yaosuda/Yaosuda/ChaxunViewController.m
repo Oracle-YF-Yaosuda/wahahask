@@ -42,7 +42,9 @@
 @end
 
 @implementation ChaxunViewController
-
+-(void)viewWillAppear:(BOOL)animated{
+     _tableview.frame=CGRectMake(0, 40, width, height);
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     //遵守 tableview 代理
@@ -61,9 +63,9 @@
     
     zhi = 1;
     // Let the show begins
-    self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"storehouse" color:[UIColor blueColor] lineWidth:1.5 dropHeight:50 scale:1 horizontalRandomness:50 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
+    //self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"storehouse" color:[UIColor blueColor] lineWidth:1.5 dropHeight:50 scale:1 horizontalRandomness:50 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
     
-    //self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"AKTA" color:[UIColor orangeColor] lineWidth:2 dropHeight:80 scale:0.7 horizontalRandomness:300 reverseLoadingAnimation:NO internalAnimationFactor:0.7];
+    self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"AKTA" color:[UIColor orangeColor] lineWidth:2 dropHeight:50 scale:0.7 horizontalRandomness:300 reverseLoadingAnimation:NO internalAnimationFactor:0.7];
     
     [self huoququanbu];
     [self huoqudaishenhe];
@@ -144,12 +146,13 @@
    
 
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
         
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
             zuobian=[datadic objectForKey:@"orderList"];
             [_tableview reloadData];
-           
+            NSLog(@"zuobian***************%@",zuobian);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -196,12 +199,12 @@
     
 
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       
+        
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
         
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             youbian=[data1 objectForKey:@"orderList"];
-           
+            NSLog(@"youbian----------%@",youbian);
             [_tableview reloadData];
             
         }
@@ -218,12 +221,17 @@
 }
 //section
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-
     if (zhi == 1) {
-        return zuobian.count;
+        if (zuobian.count!=0) {
+            return zuobian.count;
+        }else
+        return 0;
     }
     else if (zhi == 2){
-        return youbian.count;
+        if (youbian.count!=0) {
+            return youbian.count;
+        }else
+        return 0;
     }
     return 0;
 }
@@ -248,7 +256,7 @@
     }
     return 0;
 }
-//section 高度
+//header 高度
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (zhi == 1) {
         if (section == 0) {
@@ -262,7 +270,7 @@
     }
         return 0;
 }
-//编辑section内容
+//编辑header内容
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
    
@@ -283,6 +291,8 @@
         
        
         NSString*huo=[[NSString alloc] init];
+        
+            
         
         UILabel *shenhe = [[UILabel alloc]init];
         if([[zuobian[section] objectForKey:@"state"] intValue]==0){
@@ -314,10 +324,13 @@
         [baseView addSubview:shenhe];
         [baseView addSubview:groupName];
         [baseView addSubview:tu];
+        
         return baseView;
     }
     else if(zhi == 2)
         {
+           
+
             UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
             baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
             
@@ -359,8 +372,8 @@
             [baseView addSubview:groupName];
             [baseView addSubview:tu];
             return baseView;
+        
         }
-    
     return nil;
 }
 
@@ -451,6 +464,9 @@
     lab81.font = [UIFont systemFontOfSize:13];
     lab81.textAlignment = NSTextAlignmentCenter;
 
+    
+        
+    
     lab1.text = @"订单编号:";
     lab11.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"orderCode"]];
     lab2.text = @"订单名称:";
@@ -467,7 +483,7 @@
     lab71.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"updateDate"]];
     lab8.text = @"业务人员:";
     lab81.text = [NSString stringWithFormat:@"%@",[[zuobian[indexPath.section]objectForKey:@"businessperson"] objectForKey:@"name"]];
-
+    
     
     if(zhi == 1)
     {
@@ -502,6 +518,7 @@
             self.chaxun = [[UIButton alloc]initWithFrame:CGRectMake(45+(width- 60)/3*2+20, 42, (width- 60)/3-20, 30)];
             self.chaxun.backgroundColor = [UIColor colorWithHexString:@"0CB7FF" alpha:1];
             [self.chaxun setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self.chaxun addTarget:self action:@selector(cha) forControlEvents:UIControlEventTouchUpInside];
             [self.chaxun setTitle:@"查询" forState:UIControlStateNormal];
             self.chaxun.layer.cornerRadius = 5.0;
             self.chaxun.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -570,7 +587,7 @@
         [cell.contentView addSubview:imag];
         [cell.contentView addSubview:imag1];
 //cell  赋值
-        if (youbian.count!=0) {
+        
             
         
         lab11.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderCode"]];
@@ -614,7 +631,7 @@
         [cell.contentView addSubview:lab8];
         [cell.contentView addSubview:lab81];
 
-    }
+    
     }
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -632,14 +649,16 @@
     XinxiViewController*xinxi =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xinxi"];
     if (zhi == 2) {
         
-        
         xinxi.orderId=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"id"]];
         
         
     }
     else{
-        xinxi.orderId=[NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"id"]];
+        if (indexPath.section!=0) {
+            
         
+        xinxi.orderId=[NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"id"]];
+        }
         
     }
     [self.navigationController pushViewController:xinxi animated:YES];
@@ -703,5 +722,58 @@
 - (IBAction)quxiao:(id)sender {
      self.beijing.hidden = YES;
     
+}
+-(void)cha{
+    [WarningBox warningBoxModeIndeterminate:@"正在加载..." andView:self.view];
+    NSString*loginUserID=[[yonghuziliao getUserInfo] objectForKey:@"id"];
+    //userID    暂时不用改
+    NSString * userID=@"0";
+    
+    //请求地址   地址不同 必须要改
+    NSString *url = @"/order/list";
+    
+    //时间戳
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    NSDate *datenow = [NSDate date];
+    NSString *nowtimeStr = [formatter stringFromDate:datenow];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    
+    //将上传对象转换为json格式字符串
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    SBJsonWriter *writer = [[SBJsonWriter alloc]init];
+ 
+    //出入参数：
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",_qian.text,@"startDate",_hou.text,@"endDate", @"",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
+    NSString*jsonstring=[writer stringWithObject:datadic];
+    NSLog(@"---------%@",datadic);
+    //获取签名
+    NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
+    
+    
+    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+    
+    
+    //电泳借口需要上传的数据
+    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+    
+    
+    
+    [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
+            
+            NSDictionary *datadic = [responseObject valueForKey:@"data"];
+            zuobian=[datadic objectForKey:@"orderList"];
+            zhi=1;
+            [_tableview reloadData];
+            NSLog(@"zuobian***************%@",zuobian);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        
+    }];
 }
 @end
