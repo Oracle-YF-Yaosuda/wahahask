@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBStoreHouseRefreshControl.h"
 
 @interface ChaxunViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
-
+@property (strong ,nonatomic) CBStoreHouseRefreshControl*storeHouseRefreshControl;
 
 
 @end

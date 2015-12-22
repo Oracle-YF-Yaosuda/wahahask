@@ -45,22 +45,59 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//遵守 tableview 代理
+    //遵守 tableview 代理
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
-//获取设备 宽和高
+    
+    //获取设备 宽和高
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
-
-//初始view隐藏
+    
+    self.automaticallyAdjustsScrollViewInsets=NO;
+    
+    //初始view隐藏
     self.beijing.hidden = YES;
+    _tableview.frame=CGRectMake(0, 40, width, height);
     
     zhi = 1;
+    // Let the show begins
+    self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"storehouse" color:[UIColor blueColor] lineWidth:1.5 dropHeight:50 scale:1 horizontalRandomness:50 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
+    
+    //self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"AKTA" color:[UIColor orangeColor] lineWidth:2 dropHeight:80 scale:0.7 horizontalRandomness:300 reverseLoadingAnimation:NO internalAnimationFactor:0.7];
     
     [self huoququanbu];
     [self huoqudaishenhe];
-   
+    
 }
+#pragma mark - 刷新  怪怪的
+#pragma mark - Notifying refresh control of scrolling
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.storeHouseRefreshControl scrollViewDidScroll];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [self.storeHouseRefreshControl scrollViewDidEndDragging];
+}
+
+
+- (void)refreshTriggered:(id)sender
+{
+    [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:3 inModes:@[NSRunLoopCommonModes]];
+}
+- (void)finishRefreshControl
+{
+    
+    [self.storeHouseRefreshControl finishingLoading];
+    self.tableview.frame=CGRectMake(0, 40, width, height);
+    [self.view bringSubviewToFront:_fenduan ];
+}
+
+
+
+
 //获取全部订单网络数据
 -(void)huoququanbu
 {
@@ -81,10 +118,17 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter *writer = [[SBJsonWriter alloc]init];
-
+    NSString  *Now;
+    NSDateFormatter*ff=[[NSDateFormatter alloc] init];
+    [ff setDateFormat:@"YYYY-MM-dd"];
+    Now=[ff stringFromDate:[NSDate date]];
+    NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
+    NSDate* theDate;
+    theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*3 ];
+    NSString*san=[ff stringFromDate:theDate];
+    NSLog(@"%@*******%@",Now,san);
     //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",@"2015-01-01",@"startDate",@"2015-12-18",@"endDate", @"",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
-    NSLog(@"左边的 入参%@",datadic);
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
     NSString*jsonstring=[writer stringWithObject:datadic];
 
     //获取签名
@@ -100,7 +144,6 @@
    
 
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"zuozuozuozuozuzouozuo------%@------zuozuozuozuozuzouozuo",responseObject);
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
         
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
@@ -153,12 +196,12 @@
     
 
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"youbiande    --------   %@",responseObject);
+       
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
         
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             youbian=[data1 objectForKey:@"orderList"];
-            //NSLog(@"youbiande    --------   %@",youbian);
+           
             [_tableview reloadData];
             
         }
@@ -419,9 +462,9 @@
     lab5.text = @"优惠金额:";
     lab51.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"discountAmount"]];
     lab6.text = @"下单时间:";
-    lab61.text =[NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"create_date"]];
+    lab61.text =[NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"createDate"]];
     lab7.text = @"更新时间:";
-    lab71.text = @"还没显示";
+    lab71.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"updateDate"]];
     lab8.text = @"业务人员:";
     lab81.text = [NSString stringWithFormat:@"%@",[[zuobian[indexPath.section]objectForKey:@"businessperson"] objectForKey:@"name"]];
 
@@ -527,6 +570,9 @@
         [cell.contentView addSubview:imag];
         [cell.contentView addSubview:imag1];
 //cell  赋值
+        if (youbian.count!=0) {
+            
+        
         lab11.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderCode"]];
         lab21.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderName"]];
         lab31.text=[NSString stringWithFormat:@"%@",[[youbian[indexPath.section] objectForKey:@"customer"] objectForKey:@"customerName"]];
@@ -569,7 +615,7 @@
         [cell.contentView addSubview:lab81];
 
     }
-   
+    }
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //线消失
@@ -583,13 +629,21 @@
 //cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    XinxiViewController*xinxi =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xinxi"];
     if (zhi == 2) {
         
-        XinxiViewController*xinxi =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xinxi"];
+        
         xinxi.orderId=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"id"]];
-        [self.navigationController pushViewController:xinxi animated:YES];
+        
         
     }
+    else{
+        xinxi.orderId=[NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"id"]];
+        
+        
+    }
+    [self.navigationController pushViewController:xinxi animated:YES];
+
 }
 //textfield点击事件
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField{
@@ -632,7 +686,7 @@
     //创建一个日期格式器
     NSDateFormatter *dataFoematter = [[NSDateFormatter alloc]init];
     //为日期格式器设置格式字符串
-    [dataFoematter setDateFormat:@"  yyyy-MM-dd"];
+    [dataFoematter setDateFormat:@"yyyy-MM-dd"];
     //使用日期格式器格式化时间
     NSString *destDateString = [dataFoematter stringFromDate:selected];
     

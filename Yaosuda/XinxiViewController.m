@@ -100,7 +100,7 @@
             
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             orderDetailList = [data1 objectForKey:@"orderDetailList"];
-            
+            NSLog(@"-------------%@",orderDetailList);
             
             [self huoqushangpinxinxi];
             [self.tableview reloadData];
