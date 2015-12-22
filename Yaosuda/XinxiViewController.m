@@ -35,6 +35,7 @@
     NSArray *orderDetailList;
     
     
+    
 }
 @end
 @implementation XinxiViewController
@@ -60,7 +61,8 @@
     
 }
 //获取订单数据
--(void)huoqudingdanxinxi{
+-(void)huoqudingdanxinxi
+{
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -100,7 +102,7 @@
             
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             orderDetailList = [data1 objectForKey:@"orderDetailList"];
-            NSLog(@"-------------%@",orderDetailList);
+            //NSLog(@"-------------%@",orderDetailList);
             
             [self huoqushangpinxinxi];
             [self.tableview reloadData];
@@ -119,7 +121,8 @@
 
 }
 //获取商品信息数据
--(void)huoqushangpinxinxi{
+-(void)huoqushangpinxinxi
+{
     //userID    暂时不用改
     NSString *userID = @"0";
     //请求地址   地址不同 必须要改
@@ -134,7 +137,7 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter *write = [[SBJsonWriter alloc]init];
     //出入参数：
-    NSString*shangpinid=[NSString stringWithFormat:@"%@",[orderDetailList[0] objectForKey:@"productionsId"]];
+    NSString *shangpinid=[NSString stringWithFormat:@"%@",[orderDetailList[0] objectForKey:@"productionsId"]];
     NSDictionary *datadic = [NSDictionary dictionaryWithObjectsAndKeys:shangpinid,@"productionsId", nil];
     
     NSString *jsonstring = [write stringWithObject:datadic];
@@ -151,23 +154,24 @@
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
             NSDictionary *data = [responseObject valueForKey:@"data"];
         
+            NSLog(@"youbian--------------%@------------------youbian",data);
             productions = [data objectForKey:@"productions"];
             
             //名称
             [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proName"]];
             //剂型
             [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"dosageForm"]];
-//            //规格
+            //规格
             [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"erpProId"]];
-//            //单位
+            //单位
             [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"unit"]];
-//            //供应商
+            //供应商
             [SPshuju addObject:[[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"provider"] objectForKey:@"corporateName"]];
-//            //生产企业
+            //生产企业
             [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proEnterprise"]];
-//            //批准文号
+            //批准文号
             [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"auditingFileNo"]];
-//            //储存条件
+            //储存条件
             [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"storageCondition"]];
             
             [self.tableview reloadData];
@@ -263,7 +267,7 @@
     if (zhi==1) {
         return orderDetailList.count;
     }else
-    return 1;
+        return orderDetailList.count;
 }
 //tableview 行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -279,6 +283,12 @@
 }
 //setion高度
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (zhi == 2){
+        if(section == 0 ){
+            return 0;
+        }else
+        return 15;
+    }
     return 0;
 }
 //cell高度
@@ -356,7 +366,8 @@
     
     return cell;
 }
--(void)tuihui{
+-(void)tuihui
+{
     NSString*loginUserId=[[yonghuziliao getUserInfo] objectForKey:@"id"];
     //userID    暂时不用改
     NSString * userID=@"0";
@@ -402,7 +413,8 @@
 
     
 }
--(void)tongguo{
+-(void)tongguo
+{
     NSString*loginUserId=[[yonghuziliao getUserInfo] objectForKey:@"id"];
     
     //userID    暂时不用改

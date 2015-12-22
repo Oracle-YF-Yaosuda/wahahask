@@ -702,5 +702,6 @@
 }
 - (IBAction)quxiao:(id)sender {
      self.beijing.hidden = YES;
+    
 }
 @end
