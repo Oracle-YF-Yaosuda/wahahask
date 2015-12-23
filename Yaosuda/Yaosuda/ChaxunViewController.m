@@ -43,7 +43,8 @@
 
 @implementation ChaxunViewController
 -(void)viewWillAppear:(BOOL)animated{
-     _tableview.frame=CGRectMake(0, 40, width, height);
+     _tableview.frame=CGRectMake(0, 0, width, height);
+    [_tableview reloadData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -1071,7 +1071,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="请输入商品名称" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mag-fn-kOi">
+                            <searchBar contentMode="redraw" placeholder="请输入商品名称" translatesAutoresizingMaskIntoConstraints="NO" id="mag-fn-kOi">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <animations/>
                                 <constraints>

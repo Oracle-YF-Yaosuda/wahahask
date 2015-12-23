@@ -44,13 +44,27 @@
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
     searchBar.text=@"";
+    _search.showsCancelButton=NO;
     [self diaoyong:searchBar.text];
 }
-
-
+-(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
+    searchBar.showsCancelButton = YES;
+    for(id cc in [searchBar.subviews[0] subviews])
+    {
+        if([cc isKindOfClass:[UIButton class]])
+        {
+            UIButton *btn = (UIButton *)cc;
+            [btn setTitle:@"取消" forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            
+        }
+    }
+    return YES;
+}
 //按键搜索
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [self diaoyong:searchBar.text];
+    _search.showsCancelButton=NO;
     [searchBar resignFirstResponder];
 }
 
