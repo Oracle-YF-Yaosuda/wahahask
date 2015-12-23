@@ -14,27 +14,18 @@
 #import "WarningBox.h"
 #import "lianjie.h"
 #import "yonghuziliao.h"
-
+#define ziticolor [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+#define zitifont [UIFont systemFontOfSize:13];
 @interface XinxiViewController ()
 {
     CGFloat width;
     CGFloat height;
-    
-    NSMutableArray *DDxinxi;
-    NSMutableArray *DDshuju;
-    
-    NSMutableArray *SPxinxi;
-    NSMutableArray *SPshuju;
-    
+    //分段换控制器
     UISegmentedControl *segmentedControl;
-    
     int index;
     int zhi;
     
-    NSArray *productions;
     NSArray *orderDetailList;
-    
-    
     
 }
 @end
@@ -52,17 +43,47 @@
     self.tableview.dataSource = self;
     
     zhi = 1;
+
+    [self SPxinxi];
     
-    [self huoqudingdanxinxi];
-  
-    [self array];
     [self fenduan];
     [self anniu];
+}
+
+//创建分段控制器
+-(void)fenduan
+{
+    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"订单信息",@"商品信息",nil];
+    //初始化UISegmentedControl
+    segmentedControl = [[UISegmentedControl alloc]initWithItems:segmentedArray];
+    segmentedControl.frame = CGRectMake(0,0,width/2,30);
+    segmentedControl.selectedSegmentIndex = 0;//设置默认选择项索引
+    segmentedControl.tintColor = [UIColor whiteColor];
+    self.navigationItem.titleView = segmentedControl;
+    [segmentedControl addTarget:self action:@selector(change:) forControlEvents:UIControlEventValueChanged];
+}
+//分段控制器点击方法
+-(void)change:(UISegmentedControl *)segmentControl
+{
+    index = (int)segmentedControl.selectedSegmentIndex;
+    if (index == 0 ) {
+        zhi = 1;
+        [self.tableview reloadData];
+    }
+    else if(index == 1){
+        zhi = 2;
+        [self.tableview reloadData];
+    }
+
+}
+
+//获取订单信息2.3
+-(void)DDxinxi{
+    
     
 }
-//获取订单数据
--(void)huoqudingdanxinxi
-{
+//获取商品信息2.4
+-(void)SPxinxi{
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -91,25 +112,25 @@
     
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-   
+    
     //电泳借口需要上传的数据
     NSDictionary*dic1=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-   
+    
     
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
-            NSLog(@"左边返回数据--------%@",responseObject);
+            //NSLog(@"右边返回数据--------%@",responseObject);
             
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             orderDetailList = [data1 objectForKey:@"orderDetailList"];
-            //NSLog(@"-------------%@",orderDetailList);
+            NSLog(@"-------------%@",orderDetailList);
             
-            [self huoqushangpinxinxi];
+            
             [self.tableview reloadData];
-
+            
             
         }
-
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
@@ -117,102 +138,247 @@
         NSLog(@"%@",error);
         
     }];
-    
+}
+
+
+//tableview 分组
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+   }
+//tableview 行数
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (zhi == 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 1;
+    }
+    return 0;
 
 }
-//获取商品信息数据
--(void)huoqushangpinxinxi
-{
-    //userID    暂时不用改
-    NSString *userID = @"0";
-    //请求地址   地址不同 必须要改
-    NSString *url = @"/prod/productions";
-    //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld",(long)nowtimeStr];
-    //将上传对象转换为json格式字符串
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
-    SBJsonWriter *write = [[SBJsonWriter alloc]init];
-    //出入参数：
-    NSString *shangpinid=[NSString stringWithFormat:@"%@",[orderDetailList[0] objectForKey:@"productionsId"]];
-    NSDictionary *datadic = [NSDictionary dictionaryWithObjectsAndKeys:shangpinid,@"productionsId", nil];
+//setion高度
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0;
+}
+//cell高度
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    if(zhi == 1)
+    {
+        return 10;
+    }
+    if (zhi == 2)
+    {
+        return 486;
+    }
+    return 0;
+}
+//section内容
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+//编辑cell内容
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *id1 = @"cell3";
+    UITableViewCell *cell= [tableView cellForRowAtIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
+    }
+    UIView *xian = [[UIView alloc]initWithFrame:CGRectMake(15, 40, width-30, 1)];
+    xian.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(15, 80, width-30, 1)];
+    xian1.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(15, 120, width-30, 1)];
+    xian2.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(15, 160, width-30, 1)];
+    xian3.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian4 = [[UIView alloc]initWithFrame:CGRectMake(15, 200, width-30, 1)];
+    xian4.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian5 = [[UIView alloc]initWithFrame:CGRectMake(15, 240, width-30, 1)];
+    xian5.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian6 = [[UIView alloc]initWithFrame:CGRectMake(15, 280, width-30, 1)];
+    xian6.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian7 = [[UIView alloc]initWithFrame:CGRectMake(15, 320, width-30, 1)];
+    xian7.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian8 = [[UIView alloc]initWithFrame:CGRectMake(15, 360, width-30, 1)];
+    xian8.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian9 = [[UIView alloc]initWithFrame:CGRectMake(15, 400, width-30, 1)];
+    xian9.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian10 = [[UIView alloc]initWithFrame:CGRectMake(15, 440, width-30, 1)];
+    xian10.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
     
-    NSString *jsonstring = [write stringWithObject:datadic];
-    //获取签名
-    NSString *sign = [lianjie getSign:url :userID :jsonstring :timeSp];
-    NSString *url1 = [NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-    //调用接口需要上传的数据
-    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+    
+    
+    UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 100, 40)];
+    lab1.font = zitifont;
+    lab1.textColor = ziticolor;
+    UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(15, 45, 100, 40)];
+    lab2.font = zitifont;
+    lab2.textColor = ziticolor;
+    UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(15, 85, 100, 40)];
+    lab3.font = zitifont;
+    lab3.textColor = ziticolor;
+    UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(15, 125, 100, 40)];
+    lab4.font = zitifont;
+    lab4.textColor = ziticolor;
+    UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(15, 165, 100, 40)];
+    lab5.font = zitifont;
+    lab5.textColor = ziticolor;
+    UILabel *lab6 = [[UILabel alloc]initWithFrame:CGRectMake(15, 205, 100, 40)];
+    lab6.font = zitifont;
+    lab6.textColor = ziticolor;
+    UILabel *lab7 = [[UILabel alloc]initWithFrame:CGRectMake(15, 245, 100, 40)];
+    lab7.font = zitifont;
+    lab7.textColor = ziticolor;
+    UILabel *lab8 = [[UILabel alloc]initWithFrame:CGRectMake(15, 285, 100, 40)];
+    lab8.font = zitifont;
+    lab8.textColor = ziticolor;
+    UILabel *lab9 = [[UILabel alloc]initWithFrame:CGRectMake(15, 325, 100, 40)];
+    lab9.font = zitifont;
+    lab9.textColor = ziticolor;
+    UILabel *lab10 = [[UILabel alloc]initWithFrame:CGRectMake(15, 365, 100, 40)];
+    lab10.font = zitifont;
+    lab10.textColor = ziticolor;
+    UILabel *lab11 = [[UILabel alloc]initWithFrame:CGRectMake(15, 405, 100, 40)];
+    lab11.font = zitifont;
+    lab11.textColor = ziticolor;
+    UILabel *lab12 = [[UILabel alloc]initWithFrame:CGRectMake(15, 445, 100, 40)];
+    lab12.font = zitifont;
+    lab12.textColor = ziticolor;
+
   
+    UILabel *you1 = [[UILabel alloc]initWithFrame:CGRectMake(120, 5, width-30, 40)];
+    you1.font = zitifont;
+    you1.textColor = ziticolor;
+    UILabel *you2 = [[UILabel alloc]initWithFrame:CGRectMake(120, 45, width-30, 40)];
+    you2.font = zitifont;
+    you2.textColor = ziticolor;
+    UILabel *you3 = [[UILabel alloc]initWithFrame:CGRectMake(120, 85, width-30, 40)];
+    you3.font = zitifont;
+    you3.textColor = ziticolor;
+    UILabel *you4 = [[UILabel alloc]initWithFrame:CGRectMake(120, 125, width-30, 40)];
+    you4.font = zitifont;
+    you4.textColor = ziticolor;
+    UILabel *you5 = [[UILabel alloc]initWithFrame:CGRectMake(120, 165, width-30, 40)];
+    you5.font = zitifont;
+    you5.textColor = ziticolor;
+    UILabel *you6 = [[UILabel alloc]initWithFrame:CGRectMake(120, 205, width-30, 40)];
+    you6.font = zitifont;
+    you6.textColor = ziticolor;
+    UILabel *you7 = [[UILabel alloc]initWithFrame:CGRectMake(120, 245, width-30, 40)];
+    you7.font = zitifont;
+    you7.textColor = ziticolor;
+    UILabel *you8 = [[UILabel alloc]initWithFrame:CGRectMake(120, 285, width-30, 40)];
+    you8.font = zitifont;
+    you8.textColor = ziticolor;
+    UILabel *you9 = [[UILabel alloc]initWithFrame:CGRectMake(120, 325, width-30, 40)];
+    you9.font = zitifont;
+    you9.textColor = ziticolor;
+    UILabel *you10 = [[UILabel alloc]initWithFrame:CGRectMake(120, 365, width-30, 40)];
+    you10.font = zitifont;
+    you10.textColor = ziticolor;
+    UILabel *you11 = [[UILabel alloc]initWithFrame:CGRectMake(120, 405, width-30, 40)];
+    you11.font = zitifont;
+    you11.textColor = ziticolor;
+    UILabel *you12 = [[UILabel alloc]initWithFrame:CGRectMake(120, 445, width-30, 40)];
+    you12.font = zitifont;
+    you12.textColor = ziticolor;
 
-    [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [WarningBox warningBoxHide:YES andView:self.view];
-        if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
-            NSDictionary *data = [responseObject valueForKey:@"data"];
+   
+
+    if (zhi == 1)
+    {
         
-            NSLog(@"youbian--------------%@------------------youbian",data);
-            productions = [data objectForKey:@"productions"];
-            
-            //名称
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proName"]];
-            //剂型
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"dosageForm"]];
-            //规格
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"erpProId"]];
-            //单位
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"unit"]];
-            //供应商
-            [SPshuju addObject:[[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"provider"] objectForKey:@"corporateName"]];
-            //生产企业
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proEnterprise"]];
-            //批准文号
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"auditingFileNo"]];
-            //储存条件
-            [SPshuju addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"storageCondition"]];
-            
-            [self.tableview reloadData];
-            
-            
-        }else{
-            
-         
-
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
-    }];
-}
-//创建分段控制器
--(void)fenduan{
-    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"订单信息",@"商品信息",nil];
-    //初始化UISegmentedControl
-    segmentedControl = [[UISegmentedControl alloc]initWithItems:segmentedArray];
-    segmentedControl.frame = CGRectMake(0,0,width/2,30);
-    segmentedControl.selectedSegmentIndex = 0;//设置默认选择项索引
-    segmentedControl.tintColor = [UIColor whiteColor];
-    self.navigationItem.titleView = segmentedControl;
-    [segmentedControl addTarget:self action:@selector(change:) forControlEvents:UIControlEventValueChanged];
-}
-//分段控制器点击方法
--(void)change:(UISegmentedControl *)segmentControl{
-    index = (int)segmentedControl.selectedSegmentIndex;
-    if (index == 0 ) {
-        zhi = 1;
-        [self.tableview reloadData];
+        
     }
-    else if(index == 1){
-        zhi = 2;
-        [self.tableview reloadData];
+    else if(zhi == 2)
+    {
+        lab1.text = @"产品id";
+        lab2.text = @"产品erpid";
+        lab3.text = @"产品名称";
+        lab4.text = @"数量";
+        lab5.text = @"退货数量";
+        lab6.text = @"完成数量";
+        lab7.text = @"取消数量";
+        lab8.text = @"执行数量";
+        lab9.text = @"申请预留数量";
+        lab10.text = @"联系人价格";
+        lab11.text = @"客户价格";
+        lab12.text = @"总价";
+        
+        you1.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.row] objectForKey:@"productionsId"] ];
+        you2.text = @"无返回数据";
+        you3.text = [orderDetailList [indexPath.row] objectForKey:@"orderCode"];
+        you4.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.row] objectForKey:@"amount"] ];
+        you5.text = @"无返回数据";
+        you6.text = @"无返回数据";
+        you7.text = @"无返回数据";
+        you8.text = @"无返回数据";
+        you9.text = @"无返回数据";
+        you10.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.row] objectForKey:@"favorablePrice"] ];
+        you11.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.row] objectForKey:@"costPrice"] ];
+        you12.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.row] objectForKey:@"totalPrice"] ];
+
     }
 
+    [cell.contentView addSubview:lab1];
+    [cell.contentView addSubview:lab2];
+    [cell.contentView addSubview:lab3];
+    [cell.contentView addSubview:lab4];
+    [cell.contentView addSubview:lab5];
+    [cell.contentView addSubview:lab6];
+    [cell.contentView addSubview:lab7];
+    [cell.contentView addSubview:lab8];
+    [cell.contentView addSubview:lab9];
+    [cell.contentView addSubview:lab10];
+    [cell.contentView addSubview:lab11];
+    [cell.contentView addSubview:lab12];
+    
+    [cell.contentView addSubview:you1];
+    [cell.contentView addSubview:you2];
+    [cell.contentView addSubview:you3];
+    [cell.contentView addSubview:you4];
+    [cell.contentView addSubview:you5];
+    [cell.contentView addSubview:you6];
+    [cell.contentView addSubview:you7];
+    [cell.contentView addSubview:you8];
+    [cell.contentView addSubview:you9];
+    [cell.contentView addSubview:you10];
+    [cell.contentView addSubview:you11];
+    [cell.contentView addSubview:you12];
+    
+    
+    
+    
+    
+    
+    [cell.contentView addSubview:xian];
+    [cell.contentView addSubview:xian1];
+    [cell.contentView addSubview:xian2];
+    [cell.contentView addSubview:xian3];
+    [cell.contentView addSubview:xian4];
+    [cell.contentView addSubview:xian5];
+    [cell.contentView addSubview:xian6];
+    [cell.contentView addSubview:xian7];
+    [cell.contentView addSubview:xian8];
+    [cell.contentView addSubview:xian9];
+    [cell.contentView addSubview:xian10];
+    
+    
+    //cell不可点击
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //线消失
+    self.tableview.separatorStyle = UITableViewCellSelectionStyleNone;
+    //隐藏滑动条
+    self.tableview.showsVerticalScrollIndicator =NO;
+    
+    return cell;
 }
 //创建按钮
--(void)anniu{
+-(void)anniu
+{
     UIView *underView = [[UIView alloc]init];
     underView.frame = CGRectMake(0, height-40, width, 40);
     underView.backgroundColor = [UIColor colorWithHexString:@"aaaaaa" alpha:0.5];
@@ -237,134 +403,6 @@
     [self.view addSubview:underView];
     [underView addSubview:passButton];
     [underView addSubview:backButton];
-}
-//需要改得地方
--(void)array{
-    
-    DDxinxi = [[NSMutableArray alloc]init];
-    [DDxinxi addObject:@"数量"];
-    [DDxinxi addObject:@"客户价格"];
-    [DDxinxi addObject:@"业务联系人价格"];
-    [DDxinxi addObject:@"订单编码"];
-    [DDxinxi addObject:@"总价"];
-    DDshuju = [[NSMutableArray alloc]init];
-   
-   
-    SPxinxi = [[NSMutableArray alloc]init];
-    [SPxinxi addObject:@"名称"];
-    [SPxinxi addObject:@"剂型"];
-    [SPxinxi addObject:@"规格"];
-    [SPxinxi addObject:@"单位"];
-    [SPxinxi addObject:@"供应商"];
-    [SPxinxi addObject:@"生产企业"];
-    [SPxinxi addObject:@"批准文号"];
-    [SPxinxi addObject:@"储存条件"];
-    SPshuju = [[NSMutableArray alloc]init];
-    
-}
-//tableview 分组
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (zhi==1) {
-        return orderDetailList.count;
-    }else
-        return orderDetailList.count;
-}
-//tableview 行数
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (zhi == 1)
-    {
-        return DDxinxi.count;
-    }
-    else if (zhi == 2)
-    {
-        return SPxinxi.count;
-    }
-    return 0;
-}
-//setion高度
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (zhi == 2){
-        if(section == 0 ){
-            return 0;
-        }else
-        return 15;
-    }
-    return 0;
-}
-//cell高度
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    return 40;
-}
-//section内容
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return nil;
-}
-//编辑cell内容
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *id1 = @"cell3";
-    UITableViewCell *cell= [tableView cellForRowAtIndexPath:indexPath];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
-    }
-
- 
-    UIView *xian = [[UIView alloc]initWithFrame:CGRectMake(15, 39, width-30, 1)];
-    xian.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-
-    if (zhi == 1)//订单信息
-    {
-        [DDshuju addObject:[orderDetailList [indexPath.section]objectForKey:@"amount"]];
-        [DDshuju addObject:[orderDetailList [indexPath.section]objectForKey:@"costPrice"]];
-        [DDshuju addObject:[orderDetailList [indexPath.section]objectForKey:@"favorablePrice"]];
-        [DDshuju addObject:[orderDetailList [indexPath.section]objectForKey:@"orderCode"]];
-        [DDshuju addObject:[orderDetailList [indexPath.section]objectForKey:@"totalPrice"]];
-
-        UILabel *leftlabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 7, 120, 30)];
-        leftlabel.textColor= [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        leftlabel.font = [UIFont systemFontOfSize:13];
-        leftlabel.text = DDxinxi[indexPath.row];
-        
-        UILabel *rightLable = [[UILabel alloc]initWithFrame:CGRectMake(120, 7, width-120, 30)];
-        rightLable.textColor= [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        rightLable.font = [UIFont systemFontOfSize:13];
-        
-        if(DDshuju.count==0){
-           rightLable.text =@"无网络";
-        }else{
-        rightLable.text =[NSString stringWithFormat:@"%@" ,DDshuju[indexPath.row] ];
-        }
-        //rightLable.textAlignment = NSTextAlignmentCenter;
-
-        [cell.contentView addSubview:xian];
-        [cell.contentView addSubview:leftlabel];
-        [cell.contentView addSubview:rightLable];
-    }
-    else if (zhi == 2)  //商品信息
-    {
-        UILabel *leftlabel1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 7, 120, 30)];
-        leftlabel1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        leftlabel1.font = [UIFont systemFontOfSize:13];
-        leftlabel1.text = SPxinxi[indexPath.row];
-        
-        UILabel *rightLable1 = [[UILabel alloc]initWithFrame:CGRectMake(120, 7, width-120, 30)];
-        rightLable1.textColor= [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        rightLable1.font = [UIFont systemFontOfSize:13];
-        rightLable1.text = SPshuju[indexPath.row];
-        //rightLable1.textAlignment = NSTextAlignmentCenter;
-
-        [cell.contentView addSubview:xian];
-        [cell.contentView addSubview:leftlabel1];
-        [cell.contentView addSubview:rightLable1];
-    }
-      
-    //cell不可点击
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //线消失
-    self.tableview.separatorStyle = UITableViewCellSelectionStyleNone;
-    //隐藏滑动条
-    self.tableview.showsVerticalScrollIndicator =NO;
-    
-    return cell;
 }
 -(void)tuihui
 {

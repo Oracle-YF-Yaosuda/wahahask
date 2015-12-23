@@ -74,7 +74,7 @@
     
     
     _search.delegate=self;
-    
+    self.search.showsCancelButton = @"ss";
     shuzi=[NSMutableArray array];
     jiahao=[NSMutableArray array];
     chuande=[NSMutableArray array];
