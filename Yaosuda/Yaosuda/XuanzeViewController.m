@@ -71,10 +71,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
     _search.delegate=self;
-    self.search.showsCancelButton = @"ss";
+    _search.showsCancelButton=NO;
+
     shuzi=[NSMutableArray array];
     jiahao=[NSMutableArray array];
     chuande=[NSMutableArray array];

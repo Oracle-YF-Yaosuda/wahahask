@@ -9,8 +9,12 @@
 #import "ViewController.h"
 
 @interface XinxiViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong , nonatomic) NSString*orderId;
-
+@property (strong,nonatomic) NSString *orderType;
+@property (strong,nonatomic) NSString *isGather;
+@property (strong,nonatomic) NSString *isInvoice;
+@property (strong,nonatomic) NSString *isNewRecord;
 
 @end

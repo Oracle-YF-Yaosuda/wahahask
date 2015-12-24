@@ -12,6 +12,7 @@
 #import "lianjie.h"
 #import "hongdingyi.h"
 #import "WarningBox.h"
+#import "yonghuziliao.h"
 
 @interface XiugaiViewController ()
 
@@ -35,7 +36,7 @@
     self.oldpass.delegate = self;
     self.newpass.delegate = self;
     self.newpass1.delegate = self;
-//button圆角
+    //button圆角
     self.queren.layer.cornerRadius = 5.0;
 }
 
@@ -61,71 +62,67 @@
 
 - (IBAction)queren:(id)sender {
     
-//    if (self.oldpass.text.length > 0 && self.newpass.text.length > 0 && self.newpass1.text.length > 0) {
-//        if (![self Oldpassword:self.oldpass.text]) {
-//            [self waringBox:@"请输入旧密码"];
-//        }
-//        else if(![self NewpassWord:self.newpass.text]){
-//            [self waringBox:@"请输入新密码"];
-//        }
-//        else if(![self NewpassWord1:self.newpass1.text]){
-//            [self waringBox:@"请再次输入新密码"];
-//        }
-//    }else if([self Oldpassword:self.oldpass.text] && [self NewpassWord:self.newpass.text] && [self NewpassWord1:self.newpass1.text]){
-//    
-//        if (self.oldpass.text!=nil && self.newpass.text!=nil && self.newpass1.text!=nil) {
+    if (![self Oldpassword:self.oldpass.text]) {
+        [WarningBox warningBoxModeText:@"请输入就密码" andView:self.view];
+    }
+    else if(![self NewpassWord:self.newpass.text]){
+        [WarningBox warningBoxModeText:@"请输入新密码！" andView:self.view ];
+    }
+    else if (![self NewpassWord1:self.newpass1.text]){
+        [WarningBox warningBoxModeText:@"请输入确认新密码！" andView:self.view ];
+    }
+    else if(![_newpass.text isEqualToString:_newpass1.text]){
+        [WarningBox warningBoxModeText:@"新设密码不一致！" andView:self.view ];
+    }
     
-    //键盘消失
-    [self.view endEditing:YES];
-    //userID    暂时不用改
-    NSString * userID=@"0";
     
-    //请求地址   地址不同 必须要改
-    NSString * url =@"/modifypwd";
-    
-    //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-    
-    //将上传对象转换为json格式字符串
-    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
-    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
-    //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"chengdu",@"loginName",@"admin",@"oldpassword",@"111111",@"newspassword", nil];
-    
-    NSString*jsonstring=[writer stringWithObject:datadic];
-    
-    //获取签名
-    NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-   
-    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
-    
-  
-    //电泳借口需要上传的数据
-    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-   
+    else{
+        NSString*loginName=[[yonghuziliao getUserInfo] objectForKey:@"loginName"];
+        //键盘消失
+        [self.view endEditing:YES];
+        //userID    暂时不用改
+        NSString * userID=@"0";
         
+        //请求地址   地址不同 必须要改
+        NSString * url =@"/modifypwd";
+        [WarningBox warningBoxModeIndeterminate:@"正在修改密码..." andView:self.view];
+        //时间戳
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+        NSDate *datenow = [NSDate date];
+        NSString *nowtimeStr = [formatter stringFromDate:datenow];
+        NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
         
-        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
-            
-        }
+        //将上传对象转换为json格式字符串
+        AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+        manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+        SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+        //出入参数：
+        NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginName,@"loginName",_oldpass.text,@"oldpassword",_newpass.text,@"newspassword", nil];
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
-        }];
-  
-    
-       // }
-//    }
-//    else{
-//        [self waringBox:@"请输入密码"];
+        NSString*jsonstring=[writer stringWithObject:datadic];
+        
+        //获取签名
+        NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
+        
+        NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
 
- //   }
+        NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+        [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [WarningBox warningBoxHide:YES andView:self.view];
+            NSLog(@"%@",responseObject);
+            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.navigationController. view];
+            
+            if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [WarningBox warningBoxHide:YES andView:self.view];
+            
+        }];
+        
+    }
+    
 }
 
 - (IBAction)fanhui:(id)sender {

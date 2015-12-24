@@ -143,7 +143,15 @@
 
 //tableview 分组
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    if (zhi == 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return orderDetailList.count;
+    }
+    return 0;
    }
 //tableview 行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -160,17 +168,17 @@
 }
 //setion高度
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0;
+    return 15;
 }
 //cell高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     if(zhi == 1)
     {
-        return 10;
+        return 161;
     }
     if (zhi == 2)
     {
-        return 486;
+        return 481;
     }
     return 0;
 }
@@ -207,8 +215,9 @@
     xian9.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
     UIView *xian10 = [[UIView alloc]initWithFrame:CGRectMake(15, 440, width-30, 1)];
     xian10.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    
-    
+    UIView *xian11 = [[UIView alloc]initWithFrame:CGRectMake(15, 480, width-30, 1)];
+    xian11.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+
     
     
     UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 100, 40)];
@@ -290,7 +299,54 @@
 
     if (zhi == 1)
     {
+        lab1.text = @"订单类型";
+        lab2.text = @"是否开票";
+        lab3.text = @"是否收款";
+        lab4.text = @"是否退货";
         
+        NSString *orderType1;//订单类型
+        NSString *isGather1;//是否收款
+        NSString *isInvoice1;//是否开票
+        NSString *isNewRecord1;//是否退货
+        
+        if(_orderType ==0)
+        {
+            orderType1 = @"业务联系人";
+        }else
+        {
+            orderType1 = @"业务联系人";
+        }
+        if(_isGather ==0)
+        {
+            isInvoice1 = @"未开票";
+        }else
+        {
+            isInvoice1 = @"已开票";
+        }
+        if(_isInvoice ==0)
+        {
+            isGather1 = @"未收款";
+        }else
+        {
+            isGather1 = @"已收款";
+        }
+        if(_isNewRecord==0)
+        {
+            isNewRecord1 = @"无退货";
+        }else
+        {
+            isNewRecord1 = @"有退货";
+        }
+
+        you1.text = orderType1;
+        you2.text = isGather1;
+        you3.text = isInvoice1;
+        you4.text = isNewRecord1;
+        
+        [cell.contentView addSubview:xian];
+        [cell.contentView addSubview:xian1];
+        [cell.contentView addSubview:xian2];
+        [cell.contentView addSubview:xian3];
         
     }
     else if(zhi == 2)
@@ -308,18 +364,32 @@
         lab11.text = @"客户价格";
         lab12.text = @"总价";
         
-        you1.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.row] objectForKey:@"productionsId"] ];
+        you1.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"productionsId"] ];
         you2.text = @"无返回数据";
-        you3.text = [orderDetailList [indexPath.row] objectForKey:@"orderCode"];
-        you4.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.row] objectForKey:@"amount"] ];
+        you3.text = [orderDetailList [indexPath.section] objectForKey:@"orderCode"];
+        you4.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"amount"] ];
         you5.text = @"无返回数据";
         you6.text = @"无返回数据";
         you7.text = @"无返回数据";
         you8.text = @"无返回数据";
         you9.text = @"无返回数据";
-        you10.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.row] objectForKey:@"favorablePrice"] ];
-        you11.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.row] objectForKey:@"costPrice"] ];
-        you12.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.row] objectForKey:@"totalPrice"] ];
+        you10.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"favorablePrice"] ];
+        you11.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"costPrice"] ];
+        you12.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"totalPrice"] ];
+        
+        [cell.contentView addSubview:xian];
+        [cell.contentView addSubview:xian1];
+        [cell.contentView addSubview:xian2];
+        [cell.contentView addSubview:xian3];
+        [cell.contentView addSubview:xian4];
+        [cell.contentView addSubview:xian5];
+        [cell.contentView addSubview:xian6];
+        [cell.contentView addSubview:xian7];
+        [cell.contentView addSubview:xian8];
+        [cell.contentView addSubview:xian9];
+        [cell.contentView addSubview:xian10];
+        [cell.contentView addSubview:xian11];
+
 
     }
 
@@ -354,17 +424,6 @@
     
     
     
-    [cell.contentView addSubview:xian];
-    [cell.contentView addSubview:xian1];
-    [cell.contentView addSubview:xian2];
-    [cell.contentView addSubview:xian3];
-    [cell.contentView addSubview:xian4];
-    [cell.contentView addSubview:xian5];
-    [cell.contentView addSubview:xian6];
-    [cell.contentView addSubview:xian7];
-    [cell.contentView addSubview:xian8];
-    [cell.contentView addSubview:xian9];
-    [cell.contentView addSubview:xian10];
     
     
     //cell不可点击

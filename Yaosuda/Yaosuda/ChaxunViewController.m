@@ -46,7 +46,8 @@
      _tableview.frame=CGRectMake(0, 0, width, height);
     [_tableview reloadData];
 }
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     //遵守 tableview 代理
     self.tableview.delegate = self;
@@ -66,8 +67,6 @@
     // Let the show begins
     self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"storehouse" color:[UIColor blueColor] lineWidth:1.5 dropHeight:50 scale:1 horizontalRandomness:50 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
     
-//    self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"AKTA" color:[UIColor orangeColor] lineWidth:2 dropHeight:50 scale:0.7 horizontalRandomness:300 reverseLoadingAnimation:NO internalAnimationFactor:0.7];
-    
     [self huoququanbu];
     [self huoqudaishenhe];
     
@@ -79,28 +78,20 @@
 {
     [self.storeHouseRefreshControl scrollViewDidScroll];
 }
-
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [self.storeHouseRefreshControl scrollViewDidEndDragging];
 }
-
-
 - (void)refreshTriggered:(id)sender
 {
     [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:3 inModes:@[NSRunLoopCommonModes]];
 }
 - (void)finishRefreshControl
 {
-    
     [self.storeHouseRefreshControl finishingLoading];
     self.tableview.frame=CGRectMake(0, 40, width, height);
     [self.view bringSubviewToFront:_fenduan ];
 }
-
-
-
-
 //获取全部订单网络数据
 -(void)huoququanbu
 {
@@ -205,7 +196,7 @@
         
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             youbian=[data1 objectForKey:@"orderList"];
-            NSLog(@"youbian----------%@",youbian);
+            //NSLog(@"youbian----------%@",youbian);
             [_tableview reloadData];
             
         }
@@ -214,22 +205,24 @@
         
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
         
-       
-
     }];
-    
     
 }
 //section
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (zhi == 1) {
-        if (zuobian.count!=0) {
-            return zuobian.count;
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if (zhi == 1)
+    {
+        if (zuobian.count!=0)
+        {
+            return zuobian.count +1;
         }else
         return 0;
     }
-    else if (zhi == 2){
-        if (youbian.count!=0) {
+    else if (zhi == 2)
+    {
+        if (youbian.count!=0)
+        {
             return youbian.count;
         }else
         return 0;
@@ -237,11 +230,13 @@
     return 0;
 }
 //cell
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return 1;
 }
 //cell高度
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
     if (zhi == 1)
     {
         if (indexPath.section == 0)
@@ -258,7 +253,8 @@
     return 0;
 }
 //header 高度
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
     if (zhi == 1) {
         if (section == 0) {
             return 15;
@@ -272,7 +268,8 @@
         return 0;
 }
 //编辑header内容
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
     
    
 
@@ -296,19 +293,19 @@
             
         
         UILabel *shenhe = [[UILabel alloc]init];
-        if([[zuobian[section] objectForKey:@"state"] intValue]==0){
+        if([[zuobian[section-1] objectForKey:@"state"] intValue]==0){
             huo = @"完成";
-        }else if([[zuobian[section] objectForKey:@"state"] intValue]==2){
+        }else if([[zuobian[section-1] objectForKey:@"state"] intValue]==2){
             huo = @"联系人审核";
-        }else if([[zuobian[section] objectForKey:@"state"] intValue]==4){
+        }else if([[zuobian[section-1] objectForKey:@"state"] intValue]==4){
             huo = @"开票员审核";
-        }else if([[zuobian[section] objectForKey:@"state"] intValue]==6){
+        }else if([[zuobian[section-1] objectForKey:@"state"] intValue]==6){
             shenhe.text = @"财务审核";
-        }else if([[zuobian[section] objectForKey:@"state"] intValue]==7){
+        }else if([[zuobian[section-1] objectForKey:@"state"] intValue]==7){
             huo = @"撤销";
-        }else if([[zuobian[section] objectForKey:@"state"] intValue]==8){
+        }else if([[zuobian[section-1] objectForKey:@"state"] intValue]==8){
             huo = @"退货";
-        }else if([[zuobian[section] objectForKey:@"state"] intValue]==9){
+        }else if([[zuobian[section-1] objectForKey:@"state"] intValue]==9){
             huo = @"退货确认";
         }else{
             huo =@"未审核";
@@ -377,9 +374,9 @@
         }
     return nil;
 }
-
 //编辑cell内容
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *id1 =@"cell1";
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -466,24 +463,16 @@
     lab81.textAlignment = NSTextAlignmentCenter;
 
     
-        
-    
     lab1.text = @"订单编号:";
-    lab11.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"orderCode"]];
     lab2.text = @"订单名称:";
-    lab21.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"orderName"]];
     lab3.text = @"客户姓名:";
-    lab31.text = [NSString stringWithFormat:@"%@",[[zuobian[indexPath.section] objectForKey:@"customer"] objectForKey:@"customerName"]];
     lab4.text = @"订单金额:";
-    lab41.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"amount"]];
     lab5.text = @"优惠金额:";
-    lab51.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"discountAmount"]];
     lab6.text = @"下单时间:";
-    lab61.text =[NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"createDate"]];
     lab7.text = @"更新时间:";
-    lab71.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"updateDate"]];
     lab8.text = @"业务人员:";
-    lab81.text = [NSString stringWithFormat:@"%@",[[zuobian[indexPath.section]objectForKey:@"businessperson"] objectForKey:@"name"]];
+    
+   
     
     
     if(zhi == 1)
@@ -537,6 +526,25 @@
             
         }else
         {
+          
+            lab11.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"orderCode"]];
+          
+            lab21.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"orderName"]];
+           
+            lab31.text = [NSString stringWithFormat:@"%@",[[zuobian[indexPath.section-1] objectForKey:@"customer"] objectForKey:@"customerName"]];
+           
+            lab41.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"amount"]];
+            
+            lab51.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"discountAmount"]];
+            
+            lab61.text =[NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"createDate"]];
+            
+            lab71.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"updateDate"]];
+            
+            lab81.text = [NSString stringWithFormat:@"%@",[[zuobian[indexPath.section-1]objectForKey:@"businessperson"] objectForKey:@"name"]];
+            
+            
+            
             UIImageView *imag = [[UIImageView alloc]initWithFrame:CGRectMake(5, 4, width-10, 317)];
             imag.image = [UIImage imageNamed:@"b.png"];
             
@@ -588,8 +596,6 @@
         [cell.contentView addSubview:imag];
         [cell.contentView addSubview:imag1];
 //cell  赋值
-        
-            
         
         lab11.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderCode"]];
         lab21.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderName"]];
@@ -645,20 +651,34 @@
     return cell;
 }
 //cell点击事件
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //NSString *orderType1;//订单类型
+    //NSString *isGather1;//是否收款
+    //NSString *isInvoice1;//是否开票
+    //NSString *isNewRecord1;//是否退货
     XinxiViewController*xinxi =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xinxi"];
     if (zhi == 2) {
         
         xinxi.orderId=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"id"]];
+        
+        xinxi.orderType = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderType"]];
+        xinxi.isGather = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isGather"]];
+        xinxi.isInvoice = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isInvoice"]];
+        xinxi.isNewRecord = [NSString stringWithFormat:@"%@",[youbian[indexPath.section]objectForKey:@"isNewRecord"]];
         
         
     }
     else{
         if (indexPath.section!=0) {
             
-        
-        xinxi.orderId=[NSString stringWithFormat:@"%@",[zuobian[indexPath.section] objectForKey:@"id"]];
+        xinxi.orderId=[NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"id"]];
+            
+        xinxi.orderType = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"orderType"]];
+        xinxi.isGather = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"isGather"]];
+        xinxi.isInvoice = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"isInvoice"]];
+        xinxi.isNewRecord = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1]objectForKey:@"isNewRecord"]];
+
         }
         
     }
@@ -666,7 +686,8 @@
 
 }
 //textfield点击事件
-- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField{
+- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
+{
     if (textField == self.qian){
         self.beijing.hidden = NO;
         zhi=3;
@@ -680,9 +701,8 @@
     
     return YES;
 }
-
-
-- (IBAction)fenduan:(id)sender {
+- (IBAction)fenduan:(id)sender
+{
     
     index = (int)_fenduan.selectedSegmentIndex;
     if (index == 0 ) {
@@ -693,14 +713,14 @@
     }
     else if(index == 1){
         zhi = 2;
-        //[self huoqudaishenhe];
         self.qian.text=nil;
         self.hou.text=nil;
         [self.tableview reloadData];
     }
 
 }
-- (IBAction)queding:(id)sender {
+- (IBAction)queding:(id)sender
+{
     //获取用户设置的时间
     NSDate *selected = [self.picker date];
     //创建一个日期格式器
@@ -720,11 +740,13 @@
         self.hou.text = destDateString;
     }
 }
-- (IBAction)quxiao:(id)sender {
+- (IBAction)quxiao:(id)sender
+{
      self.beijing.hidden = YES;
     
 }
--(void)cha{
+-(void)cha
+{
     [WarningBox warningBoxModeIndeterminate:@"正在加载..." andView:self.view];
     NSString*loginUserID=[[yonghuziliao getUserInfo] objectForKey:@"id"];
     //userID    暂时不用改

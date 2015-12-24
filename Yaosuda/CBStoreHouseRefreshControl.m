@@ -207,7 +207,7 @@ NSString *const yKey = @"y";
 
 - (CGFloat)realContentOffsetY
 {
-    NSLog(@"--%d",self.count);
+    
     
     if (self.count==0) {
         return self.scrollView.contentOffset.y;

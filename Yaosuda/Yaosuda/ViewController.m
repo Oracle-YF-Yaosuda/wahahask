@@ -23,34 +23,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    //    NSFileManager *defaultManager;
-    //    defaultManager = [NSFileManager defaultManager];
-    //    NSString*path=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
-    //    NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-    //    [defaultManager removeItemAtPath:path error:NULL];
-    //    [defaultManager removeItemAtPath:path1 error:NULL];
-    //
-    
+   
     self.user.delegate = self;
     self.pass.delegate = self;
     //设置圆角
     self.diview.layer.cornerRadius = 5.0;
     self.denglu.layer.cornerRadius = 5.0;
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+   
 }
 #pragma make - textfield Delegate
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
-    
-    
     if (textField == self.pass){
-        
         int len = (int)self.pass.text.length;
         if (len >10 && string.length > 0) {
             if (![self validatePass:self.pass.text]) {
