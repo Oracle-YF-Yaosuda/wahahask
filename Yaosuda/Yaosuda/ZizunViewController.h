@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZizunViewController : UIViewController<UIScrollViewDelegate>
-
+@interface ZizunViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@property (strong,nonatomic) UITableView *tableview;
+- (IBAction)fanhui:(id)sender;
 
 
 @end

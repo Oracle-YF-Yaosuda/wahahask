@@ -178,7 +178,7 @@
     }
     if (zhi == 2)
     {
-        return 481;
+        return 201;
     }
     return 0;
 }
@@ -205,20 +205,7 @@
     xian4.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
     UIView *xian5 = [[UIView alloc]initWithFrame:CGRectMake(15, 240, width-30, 1)];
     xian5.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian6 = [[UIView alloc]initWithFrame:CGRectMake(15, 280, width-30, 1)];
-    xian6.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian7 = [[UIView alloc]initWithFrame:CGRectMake(15, 320, width-30, 1)];
-    xian7.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian8 = [[UIView alloc]initWithFrame:CGRectMake(15, 360, width-30, 1)];
-    xian8.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian9 = [[UIView alloc]initWithFrame:CGRectMake(15, 400, width-30, 1)];
-    xian9.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian10 = [[UIView alloc]initWithFrame:CGRectMake(15, 440, width-30, 1)];
-    xian10.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian11 = [[UIView alloc]initWithFrame:CGRectMake(15, 480, width-30, 1)];
-    xian11.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
 
-    
     
     UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 100, 40)];
     lab1.font = zitifont;
@@ -235,29 +222,8 @@
     UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(15, 165, 100, 40)];
     lab5.font = zitifont;
     lab5.textColor = ziticolor;
-    UILabel *lab6 = [[UILabel alloc]initWithFrame:CGRectMake(15, 205, 100, 40)];
-    lab6.font = zitifont;
-    lab6.textColor = ziticolor;
-    UILabel *lab7 = [[UILabel alloc]initWithFrame:CGRectMake(15, 245, 100, 40)];
-    lab7.font = zitifont;
-    lab7.textColor = ziticolor;
-    UILabel *lab8 = [[UILabel alloc]initWithFrame:CGRectMake(15, 285, 100, 40)];
-    lab8.font = zitifont;
-    lab8.textColor = ziticolor;
-    UILabel *lab9 = [[UILabel alloc]initWithFrame:CGRectMake(15, 325, 100, 40)];
-    lab9.font = zitifont;
-    lab9.textColor = ziticolor;
-    UILabel *lab10 = [[UILabel alloc]initWithFrame:CGRectMake(15, 365, 100, 40)];
-    lab10.font = zitifont;
-    lab10.textColor = ziticolor;
-    UILabel *lab11 = [[UILabel alloc]initWithFrame:CGRectMake(15, 405, 100, 40)];
-    lab11.font = zitifont;
-    lab11.textColor = ziticolor;
-    UILabel *lab12 = [[UILabel alloc]initWithFrame:CGRectMake(15, 445, 100, 40)];
-    lab12.font = zitifont;
-    lab12.textColor = ziticolor;
+   
 
-  
     UILabel *you1 = [[UILabel alloc]initWithFrame:CGRectMake(120, 5, width-30, 40)];
     you1.font = zitifont;
     you1.textColor = ziticolor;
@@ -273,30 +239,7 @@
     UILabel *you5 = [[UILabel alloc]initWithFrame:CGRectMake(120, 165, width-30, 40)];
     you5.font = zitifont;
     you5.textColor = ziticolor;
-    UILabel *you6 = [[UILabel alloc]initWithFrame:CGRectMake(120, 205, width-30, 40)];
-    you6.font = zitifont;
-    you6.textColor = ziticolor;
-    UILabel *you7 = [[UILabel alloc]initWithFrame:CGRectMake(120, 245, width-30, 40)];
-    you7.font = zitifont;
-    you7.textColor = ziticolor;
-    UILabel *you8 = [[UILabel alloc]initWithFrame:CGRectMake(120, 285, width-30, 40)];
-    you8.font = zitifont;
-    you8.textColor = ziticolor;
-    UILabel *you9 = [[UILabel alloc]initWithFrame:CGRectMake(120, 325, width-30, 40)];
-    you9.font = zitifont;
-    you9.textColor = ziticolor;
-    UILabel *you10 = [[UILabel alloc]initWithFrame:CGRectMake(120, 365, width-30, 40)];
-    you10.font = zitifont;
-    you10.textColor = ziticolor;
-    UILabel *you11 = [[UILabel alloc]initWithFrame:CGRectMake(120, 405, width-30, 40)];
-    you11.font = zitifont;
-    you11.textColor = ziticolor;
-    UILabel *you12 = [[UILabel alloc]initWithFrame:CGRectMake(120, 445, width-30, 40)];
-    you12.font = zitifont;
-    you12.textColor = ziticolor;
-
-   
-
+  
     if (zhi == 1)
     {
         lab1.text = @"订单类型";
@@ -351,45 +294,23 @@
     }
     else if(zhi == 2)
     {
-        lab1.text = @"产品id";
-        lab2.text = @"产品erpid";
-        lab3.text = @"产品名称";
-        lab4.text = @"数量";
-        lab5.text = @"退货数量";
-        lab6.text = @"完成数量";
-        lab7.text = @"取消数量";
-        lab8.text = @"执行数量";
-        lab9.text = @"申请预留数量";
-        lab10.text = @"联系人价格";
-        lab11.text = @"客户价格";
-        lab12.text = @"总价";
+        lab1.text = @"订单编码";
+        lab2.text = @"数量";
+        lab3.text = @"联系人价格";
+        lab4.text = @"客户价格";
+        lab5.text = @"总价";
         
-        you1.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"productionsId"] ];
-        you2.text = @"无返回数据";
-        you3.text = [orderDetailList [indexPath.section] objectForKey:@"orderCode"];
-        you4.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"amount"] ];
-        you5.text = @"无返回数据";
-        you6.text = @"无返回数据";
-        you7.text = @"无返回数据";
-        you8.text = @"无返回数据";
-        you9.text = @"无返回数据";
-        you10.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"favorablePrice"] ];
-        you11.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"costPrice"] ];
-        you12.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"totalPrice"] ];
+        you1.text = [orderDetailList [indexPath.section] objectForKey:@"orderCode"];
+        you2.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"amount"] ];
+        you3.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"favorablePrice"] ];
+        you4.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"costPrice"] ];
+        you5.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"totalPrice"] ];
         
         [cell.contentView addSubview:xian];
         [cell.contentView addSubview:xian1];
         [cell.contentView addSubview:xian2];
         [cell.contentView addSubview:xian3];
         [cell.contentView addSubview:xian4];
-        [cell.contentView addSubview:xian5];
-        [cell.contentView addSubview:xian6];
-        [cell.contentView addSubview:xian7];
-        [cell.contentView addSubview:xian8];
-        [cell.contentView addSubview:xian9];
-        [cell.contentView addSubview:xian10];
-        [cell.contentView addSubview:xian11];
-
 
     }
 
@@ -398,33 +319,15 @@
     [cell.contentView addSubview:lab3];
     [cell.contentView addSubview:lab4];
     [cell.contentView addSubview:lab5];
-    [cell.contentView addSubview:lab6];
-    [cell.contentView addSubview:lab7];
-    [cell.contentView addSubview:lab8];
-    [cell.contentView addSubview:lab9];
-    [cell.contentView addSubview:lab10];
-    [cell.contentView addSubview:lab11];
-    [cell.contentView addSubview:lab12];
+ 
     
     [cell.contentView addSubview:you1];
     [cell.contentView addSubview:you2];
     [cell.contentView addSubview:you3];
     [cell.contentView addSubview:you4];
     [cell.contentView addSubview:you5];
-    [cell.contentView addSubview:you6];
-    [cell.contentView addSubview:you7];
-    [cell.contentView addSubview:you8];
-    [cell.contentView addSubview:you9];
-    [cell.contentView addSubview:you10];
-    [cell.contentView addSubview:you11];
-    [cell.contentView addSubview:you12];
-    
-    
-    
-    
-    
-    
-    
+   
+
     
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

@@ -7,14 +7,16 @@
 //
 
 #import "ZizunViewController.h"
-
+#import "Color+Hex.h"
+#define XianColor [UIColor colorWithHexString:@"dcdcdc" alpha:1]
 @interface ZizunViewController ()
 {
+    
     CGFloat width;
+    CGFloat height;
+    
+    
 }
-@property(strong,nonatomic) UIScrollView *scrollView;
-@property(strong,nonatomic) UIPageControl *pageControl;
-@property(strong,nonatomic) NSTimer *timer;
 
 @end
 
@@ -23,100 +25,103 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"产品资质";
     
     width = [UIScreen mainScreen].bounds.size.width;
+    height = [UIScreen mainScreen].bounds.size.height;
     
-    self.scrollView.delegate = self;
+    self.navigationItem.title = @"产品资质";
     
-    [self lunbo];
-}
--(void)lunbo{
-//轮播
-//创建scrollview
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, width, 250)];
-//穿件uipageconrol
-    self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 230, width, 10)];
-//设置uipageconrol的圆点颜色
-    self.pageControl.pageIndicatorTintColor = [UIColor redColor];
-//设置uipageconrol的高亮圆点颜色
-    self.pageControl.currentPageIndicatorTintColor = [UIColor greenColor];
-//设置uipagecontrol控件当前显示第几页
-    self.pageControl.currentPage = 0;
-// 设置uipageconcrol控件总共包含几页
-    self.pageControl.numberOfPages = 4;
-    self.pageControl.hidesForSinglePage = YES;
-//imag
-    CGFloat imgW = width;
-    CGFloat imgH = 300;
-    CGFloat imgY = 0;
+    //解决tableview多出的白条
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
-    for (int i =0 ; i< 4; i++) {
-        UIImageView *image = [[UIImageView alloc] init];
-        
-        NSString *imgName = [NSString stringWithFormat:@"%d.jpg",i+1];
-        image.image = [UIImage imageNamed:imgName];
-        CGFloat imgX = i * imgW;
-        image.frame = CGRectMake(imgX, imgY, imgW, imgH);
-        
-        self.scrollView.pagingEnabled = YES;
-        
-        self.scrollView.delegate = self;
-        
-        [self.scrollView addSubview:image];
-    }
-    //创建计时器
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(dong) userInfo:nil repeats:YES];
+    [self myTableView];
     
-    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-    
-    [runLoop addTimer:self.timer forMode:NSRunLoopCommonModes];
-    
-    self.scrollView.showsHorizontalScrollIndicator = NO;
-    [self.view addSubview:self.scrollView];
-    [self.view addSubview:self.pageControl];
-}
-//自动滚动图片
--(void)dong{
-    
-    NSInteger page = self.pageControl.currentPage;
-    
-    if (page == self.pageControl.numberOfPages - 1) {
-        page = 0;
-    }else{
-        page ++;
-    }
-    CGFloat offsetX = page *self.scrollView.frame.size.width;
-    
-    [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
-}
-//scrollview滚动方法
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+   }
+
+
+//创建TableView
+-(void)myTableView
 {
-    CGFloat offsetX = scrollView.contentOffset.x;
-    
-    offsetX = offsetX +(scrollView.frame.size.width * 0.5);
-    
-    int page = offsetX / scrollView.frame.size.width;
-    
-    self.pageControl.currentPage = page;
-    
+    //创建tableview
+    self.tableview = [[UITableView alloc]init];
+    self.tableview.frame = CGRectMake(0, 79, width, height-79);
+    self.tableview.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+    //遵守代理
+    self.tableview.delegate = self;
+    self.tableview.dataSource = self;
+    //显示在self.view上
+    [self.view addSubview:self.tableview];
 }
-//scrollview即将开始拖拽方法
--(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    //停止计时器
-    [self.timer invalidate];
-    //设置timer为nil
-    self.timer = nil;
+
+//返回组数
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
-//scrollview拖拽完毕方法
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+//返回行数
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+//cell高度
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 347;
+}
+//setion高度
+//cell
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *id1 =@"cell125";
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(dong) userInfo:nil repeats:YES];
+    UITableViewCell*cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
+    }
     
-    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    //创建三条线
+    UIView *shang = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 1)];
+    shang.backgroundColor = XianColor;
+    UIView *zhong = [[UIView alloc]initWithFrame:CGRectMake(0, 299, width, 1)];
+    zhong.backgroundColor = XianColor;
+    UIView *xia = [[UIView alloc]initWithFrame:CGRectMake(0, 346, width, 1)];
+    xia.backgroundColor = XianColor;
+    //创建image
+    UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(0, 1, width, 298)];
+    image.image = [UIImage imageNamed:@"shancun.jpg"];
+    //创建label
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(10, 301, width-20, 40)];
+    lab.textColor =[UIColor colorWithHexString:@"1e1e1e" alpha:1];
+    lab.font = [UIFont systemFontOfSize:13];
+    lab.numberOfLines = 0;
+    lab.text = @"维生素和矿物质均为维持机体正常代谢和身体健康必不可少的重要物质";
     
-    [runLoop addTimer:self.timer forMode:NSRunLoopCommonModes];
     
+    //label
+    [cell.contentView addSubview:lab];
+    //image
+    [cell.contentView addSubview:image];
+    //线
+    [cell.contentView addSubview:shang];
+    [cell.contentView addSubview:zhong];
+    [cell.contentView addSubview:xia];
+    
+    //cell不边灰
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //线消失
+    self.tableview.separatorStyle = UITableViewCellSelectionStyleNone;
+    //隐藏滑动条
+    self.tableview.showsVerticalScrollIndicator =NO;
+    
+    return cell;
+}
+
+
+//navigation返回按钮
+- (IBAction)fanhui:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 @end
