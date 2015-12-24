@@ -221,7 +221,7 @@
     guige.font= [UIFont systemFontOfSize:12];
     guige.text = @"规       格:";
     guige.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    UILabel *guige1 = [[UILabel alloc]initWithFrame:CGRectMake(180, 45, 60, 15)];
+    UILabel *guige1 = [[UILabel alloc]initWithFrame:CGRectMake(180, 45, 80, 15)];
     guige1.font= [UIFont systemFontOfSize:12];
     guige1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
 

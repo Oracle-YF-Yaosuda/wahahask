@@ -130,29 +130,26 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
     
-    UILabel *KHmingzi = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, width/4-10, 30)];
+    UILabel *KHmingzi = [[UILabel alloc]initWithFrame:CGRectMake(10, 8, width/4-10, 30)];
     KHmingzi.text = @"客户姓名:";
     KHmingzi.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     KHmingzi.font = [UIFont systemFontOfSize:13];
-    UILabel *KHmingzi1  = [[UILabel alloc]initWithFrame:CGRectMake(width/4-10, 10, width/4, 30)];
+    UILabel *KHmingzi1  = [[UILabel alloc]initWithFrame:CGRectMake(width/4-10, 3.5, width/4, 40)];
     KHmingzi1.text = [customerList[indexPath.section] objectForKey:@"customerName" ];
     KHmingzi1.font = [UIFont systemFontOfSize:13];
     KHmingzi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     KHmingzi1.textAlignment = NSTextAlignmentCenter;
+    KHmingzi1.numberOfLines = 0;
     UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, 40, width, 1)];
     xian1.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
     
     
     
-    UILabel *LXdianhua = [[UILabel alloc]initWithFrame:CGRectMake(width/2-10, 10, width/4-20, 30)];
+    UILabel *LXdianhua = [[UILabel alloc]initWithFrame:CGRectMake(width/2-10, 8, width/4-20, 30)];
     LXdianhua.text = @"联系电话:";
     LXdianhua.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     LXdianhua.font = [UIFont systemFontOfSize:13];
-    UILabel *LXdianhua1 = [[UILabel alloc]initWithFrame:CGRectMake(width/2+width/4-30, 10, width/4+30, 30)];
-    
-    
-    
-    
+    UILabel *LXdianhua1 = [[UILabel alloc]initWithFrame:CGRectMake(width/2+width/4-30, 8, width/4+30, 30)];
     LXdianhua1.text = [customerList[indexPath.section] objectForKey:@"linkmanPhone" ];
     LXdianhua1.font = [UIFont systemFontOfSize:14];
     LXdianhua1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];

@@ -394,15 +394,16 @@
     lab11.font = [UIFont systemFontOfSize:13];
     lab11.textAlignment = NSTextAlignmentCenter;
     
-    UILabel *lab2 = [[UILabel  alloc]initWithFrame:CGRectMake(20, 45, 80, 30)];
+    UILabel *lab2 = [[UILabel  alloc]initWithFrame:CGRectMake(20, 40, 80, 30)];
     lab2.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     lab2.font = [UIFont systemFontOfSize:13];
     UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(20, 75, width-40, 1)];
     xian2.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
-    UILabel *lab21 = [[UILabel alloc]initWithFrame:CGRectMake(100, 45, width-40-80, 30)];
+    UILabel *lab21 = [[UILabel alloc]initWithFrame:CGRectMake(100, 37, width-40-80, 40)];
     lab21.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     lab21.font = [UIFont systemFontOfSize:13];
     lab21.textAlignment = NSTextAlignmentCenter;
+    lab21.numberOfLines = 0;
     
     UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(20, 85, 80, 30)];
     lab3.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
@@ -658,31 +659,35 @@
     //NSString *isInvoice1;//是否开票
     //NSString *isNewRecord1;//是否退货
     XinxiViewController*xinxi =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xinxi"];
-    if (zhi == 2) {
-        
-        xinxi.orderId=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"id"]];
-        
-        xinxi.orderType = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderType"]];
-        xinxi.isGather = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isGather"]];
-        xinxi.isInvoice = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isInvoice"]];
-        xinxi.isNewRecord = [NSString stringWithFormat:@"%@",[youbian[indexPath.section]objectForKey:@"isNewRecord"]];
-        
-        
-    }
-    else{
-        if (indexPath.section!=0) {
+    
+    
+    if (zhi == 1){
+        if (indexPath.section == 0)
+        {
             
-        xinxi.orderId=[NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"id"]];
+        }else
+        {
+            xinxi.orderId=[NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"id"]];
             
-        xinxi.orderType = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"orderType"]];
-        xinxi.isGather = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"isGather"]];
-        xinxi.isInvoice = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"isInvoice"]];
-        xinxi.isNewRecord = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1]objectForKey:@"isNewRecord"]];
-
+            xinxi.orderType = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"orderType"]];
+            xinxi.isGather = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"isGather"]];
+            xinxi.isInvoice = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"isInvoice"]];
+            xinxi.isNewRecord = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1]objectForKey:@"isNewRecord"]];
+            
+             [self.navigationController pushViewController:xinxi animated:YES];
         }
-        
     }
-    [self.navigationController pushViewController:xinxi animated:YES];
+    else if (zhi == 2){
+        
+            xinxi.orderId=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"id"]];
+        
+            xinxi.orderType = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderType"]];
+            xinxi.isGather = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isGather"]];
+            xinxi.isInvoice = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isInvoice"]];
+            xinxi.isNewRecord = [NSString stringWithFormat:@"%@",[youbian[indexPath.section]objectForKey:@"isNewRecord"]];
+            [self.navigationController pushViewController:xinxi animated:YES];
+        
+            }
 
 }
 //textfield点击事件
