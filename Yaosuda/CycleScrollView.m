@@ -18,7 +18,7 @@
 
 @property (nonatomic , strong) NSTimer *animationTimer;
 @property (nonatomic , assign) NSTimeInterval animationDuration;
-
+@property(strong,nonatomic) UIPageControl *pageControl;
 @end
 
 @implementation CycleScrollView
@@ -61,6 +61,20 @@
         self.scrollView.pagingEnabled = YES;
         [self addSubview:self.scrollView];
         self.currentPageIndex = 0;
+        
+        //穿件uipageconrol
+        self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 230, self.frame.size.width, 10)];
+        //设置uipageconrol的圆点颜色
+        self.pageControl.pageIndicatorTintColor = [UIColor redColor];
+        //设置uipageconrol的高亮圆点颜色
+        self.pageControl.currentPageIndicatorTintColor = [UIColor greenColor];
+        //设置uipagecontrol控件当前显示第几页
+        self.pageControl.currentPage = 0;
+        // 设置uipageconcrol控件总共包含几页
+        self.pageControl.numberOfPages = 5;
+        self.pageControl.hidesForSinglePage = YES;
+        [self addSubview:self.pageControl];
+        
     }
     return self;
 }
@@ -135,12 +149,14 @@
     int contentOffsetX = scrollView.contentOffset.x;
     if(contentOffsetX >= (2 * CGRectGetWidth(scrollView.frame))) {
         self.currentPageIndex = [self getValidNextPageIndexWithPageIndex:self.currentPageIndex + 1];
+        self.pageControl.currentPage=self.currentPageIndex;
       //  NSLog(@"next，当前页:%ld",self.currentPageIndex);
         [self configContentViews];
     }
     if(contentOffsetX <= 0) {
         self.currentPageIndex = [self getValidNextPageIndexWithPageIndex:self.currentPageIndex - 1];
       // NSLog(@"previous，当前页:%ld",self.currentPageIndex);
+        self.pageControl.currentPage=self.currentPageIndex;
         [self configContentViews];
     }
 }

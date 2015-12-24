@@ -64,9 +64,9 @@
     
     zhi = 1;
     // Let the show begins
-    //self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"storehouse" color:[UIColor blueColor] lineWidth:1.5 dropHeight:50 scale:1 horizontalRandomness:50 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
+    self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"storehouse" color:[UIColor blueColor] lineWidth:1.5 dropHeight:50 scale:1 horizontalRandomness:50 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
     
-    self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"AKTA" color:[UIColor orangeColor] lineWidth:2 dropHeight:50 scale:0.7 horizontalRandomness:300 reverseLoadingAnimation:NO internalAnimationFactor:0.7];
+//    self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"AKTA" color:[UIColor orangeColor] lineWidth:2 dropHeight:50 scale:0.7 horizontalRandomness:300 reverseLoadingAnimation:NO internalAnimationFactor:0.7];
     
     [self huoququanbu];
     [self huoqudaishenhe];
