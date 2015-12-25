@@ -89,13 +89,12 @@
     
     //请求地址   地址不同 必须要改
     NSString *url = @"/order/detailList";
-    
+    [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
     //时间戳
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     NSDate *datenow = [NSDate date];
     NSString *nowtimeStr = [formatter stringFromDate:datenow];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-    //NSLog(@"时间戳:%@",timeSp); //时间戳的值
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -118,12 +117,13 @@
     
     
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
-            //NSLog(@"右边返回数据--------%@",responseObject);
+            
             
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             orderDetailList = [data1 objectForKey:@"orderDetailList"];
-            NSLog(@"-------------%@",orderDetailList);
+            
             
             
             [self.tableview reloadData];
@@ -133,9 +133,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
-        
-        NSLog(@"%@",error);
+        [WarningBox warningBoxModeText:@"数据加载失败～" andView:self.view];
         
     }];
 }
@@ -155,15 +153,8 @@
    }
 //tableview 行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (zhi == 1)
-    {
-        return 1;
-    }
-    else
-    {
-        return 1;
-    }
-    return 0;
+   
+    return 1;
 
 }
 //setion高度
@@ -252,28 +243,28 @@
         NSString *isInvoice1;//是否开票
         NSString *isNewRecord1;//是否退货
         
-        if(_orderType ==0)
+        if([_orderType isEqualToString:@"0"])
         {
             orderType1 = @"业务联系人";
         }else
         {
             orderType1 = @"业务联系人";
         }
-        if(_isGather ==0)
+        if([_isGather isEqualToString:@"0"])
         {
             isInvoice1 = @"未开票";
         }else
         {
             isInvoice1 = @"已开票";
         }
-        if(_isInvoice ==0)
+        if([_isInvoice isEqualToString:@"0"])
         {
             isGather1 = @"未收款";
         }else
         {
             isGather1 = @"已收款";
         }
-        if(_isNewRecord==0)
+        if([_isNewRecord isEqualToString:@"0"])
         {
             isNewRecord1 = @"无退货";
         }else
@@ -374,7 +365,7 @@
     
     //请求地址   地址不同 必须要改
     NSString * url =@"/order/return";
-    
+    [WarningBox warningBoxModeIndeterminate:@"订单退回中..." andView:self.view];
     //时间戳
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     NSDate *datenow = [NSDate date];
@@ -399,15 +390,16 @@
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
       [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.navigationController.view];
-        NSLog(@"%@",responseObject);
+       
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        [WarningBox warningBoxModeText:@"网络连接错误～" andView:self.view];
         
     }];
 
@@ -422,7 +414,7 @@
     
     //请求地址   地址不同 必须要改
     NSString * url =@"/order/audit";
-    
+    [WarningBox warningBoxModeIndeterminate:@"订单审核中..." andView:self.view];
     //时间戳
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     NSDate *datenow = [NSDate date];
@@ -448,7 +440,7 @@
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+        [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.navigationController.view];
   
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
@@ -457,7 +449,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        [WarningBox warningBoxModeText:@"网络连接错误～" andView:self.view];
        
     }];
 

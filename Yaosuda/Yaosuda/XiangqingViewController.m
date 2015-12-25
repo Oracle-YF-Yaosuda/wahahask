@@ -44,12 +44,12 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     shangpin=[[NSMutableDictionary alloc] init];
-//    创建数量存放
+    //    创建数量存放
     shuliangCunFang=[NSString stringWithFormat:@"0"];
     
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
-
+    
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -61,8 +61,8 @@
     NSDate *datenow = [NSDate date];
     NSString *nowtimeStr = [formatter stringFromDate:datenow];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-   
     
+    [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
@@ -74,19 +74,19 @@
     
     //获取签名
     NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
-   
+    
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-  
+    
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
+        
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
-           
+            
             shangpin=(NSMutableDictionary*)[data objectForKey:@"productions"];
             
             [array1 removeAllObjects];
@@ -190,9 +190,9 @@
     [array addObject:@"特殊药品类型"];
     [array addObject:@"是否含麻黄碱"];
     [array addObject:@"是否是冷藏品"];
-   //25
+    //25
     array1 = [[NSMutableArray alloc]initWithArray:array];
-    }
+}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 4;
@@ -220,7 +220,7 @@
     }
     else if(indexPath.section == 2)
     {
-    return 40;
+        return 40;
     }
     else if(indexPath.section == 3)
     {
@@ -231,8 +231,8 @@
         {
             return 30;
         }
-        }
-        
+    }
+    
     return 0;
 }
 
@@ -277,7 +277,7 @@
         UILabel *changjia1 = [[UILabel alloc]initWithFrame:CGRectMake(80, 30, width-20, 15)];
         changjia1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
         changjia1.font = [UIFont systemFontOfSize:12];
-
+        
         UILabel *guige = [[UILabel alloc]initWithFrame:CGRectMake(10, 50, 60, 15)];
         guige.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
         guige.text = @"规       格:";
@@ -285,7 +285,7 @@
         UILabel *guige1 = [[UILabel alloc]initWithFrame:CGRectMake(80, 50, width-20, 15)];
         guige1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
         guige1.font = [UIFont systemFontOfSize:12];
-
+        
         UILabel *danwei = [[UILabel alloc]initWithFrame:CGRectMake(10, 70, 60, 15)];
         danwei.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
         danwei.text = @"单       位:";
@@ -294,14 +294,14 @@
         danwei1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
         danwei1.font = [UIFont systemFontOfSize:12];
         
-//***************************
+        //***************************
         
         name1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"proName"]];
         changjia1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"proEnterprise"]];
         guige1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"etalon"]];
         danwei1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"unit"]];
         
-//****************************
+        //****************************
         [viewForHeader addSubview:name];
         [viewForHeader addSubview:name1];
         [viewForHeader addSubview:changjia];
@@ -310,7 +310,7 @@
         [viewForHeader addSubview:guige1];
         [viewForHeader addSubview:danwei];
         [viewForHeader addSubview:danwei1];
-     return viewForHeader;
+        return viewForHeader;
     }
     else
     {
@@ -338,8 +338,8 @@
         //创建scrollview
         self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, width, 250) animationDuration:3];
         
-       
- 
+        
+        
         //  demo里的scroll
         NSMutableArray *viewsArray = [[NSMutableArray alloc] init];
         
@@ -380,37 +380,37 @@
         
         UILabel *biaoti = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, width-20, 42)];
         biaoti.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-        biaoti.font = [UIFont systemFontOfSize:14];
+        biaoti.font = [UIFont systemFontOfSize:16];
         biaoti.numberOfLines = 0;
-       
+        
         
         UIView *xian = [[UIView alloc]initWithFrame:CGRectMake(10, 72, width-20, 1)];
         xian.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
         
-
+        
         UILabel *shuliang= [[UILabel alloc]initWithFrame:CGRectMake(10, 79, 60, 21)];
         shuliang.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         shuliang.font = [UIFont systemFontOfSize:14];
-//      － 加
+        //      － 加
         UIButton *jia = [[UIButton alloc]initWithFrame:CGRectMake(width-30, 80, 20, 20)];
         [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
-         [jia addTarget:self action:@selector(jian) forControlEvents:UIControlEventTouchUpInside];
-//      － 减
+        [jia addTarget:self action:@selector(jian) forControlEvents:UIControlEventTouchUpInside];
+        //      － 减
         UIButton *jian = [[UIButton alloc]initWithFrame:CGRectMake(width-80, 80, 20, 20)];
         [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
-         [jian addTarget:self action:@selector(jia) forControlEvents:UIControlEventTouchUpInside];
+        [jian addTarget:self action:@selector(jia) forControlEvents:UIControlEventTouchUpInside];
         
- //     －加减的数量
+        //     －加减的数量
         shuru = [[UITextField alloc]initWithFrame:CGRectMake(width-60, 80, 30,20)];
         shuru.text = shuliangCunFang;
         shuru.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         shuru.textAlignment = NSTextAlignmentCenter;
         shuru.borderStyle=UITextBorderStyleNone;
         shuru.delegate=self;
-
         
-        shu.text = @"￥88.88";
-        biaoti.text = @"惠氏 善存 多维元素片 惠氏 善存 多维元素片 惠氏 善存 多维元素片 惠氏 善存 多维元素片";
+        
+        shu.text = @"￥待估价～";
+        biaoti.text = [NSString stringWithFormat:@"%@",array1[2]];
         shuliang.text = @"数量";
         
         [cell.contentView addSubview:shu];
@@ -448,7 +448,7 @@
         rightLable1.textColor= [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         rightLable1.font = [UIFont systemFontOfSize:13];
         rightLable1.text = array1[indexPath.row];
-
+        
         if (indexPath.row == 0)
         {
             leftlabel1.frame= CGRectMake(10, 2, width, 30);
@@ -460,9 +460,9 @@
             [cell.contentView addSubview:xian1];
         }else
         {
-        
-        [cell.contentView addSubview:leftlabel1];
-        [cell.contentView addSubview:rightLable1];
+            
+            [cell.contentView addSubview:leftlabel1];
+            [cell.contentView addSubview:rightLable1];
             
         }
     }
@@ -473,7 +473,7 @@
     self.tableview.separatorStyle = UITableViewCellSelectionStyleNone;
     //隐藏滑动条
     self.tableview.showsVerticalScrollIndicator =NO;
-
+    
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -489,10 +489,10 @@
 
 -(void)jian
 {
-   int shu= [shuru.text intValue];
+    int shu= [shuru.text intValue];
     if(shu<1000)
     {
-    shuru.text=[NSString stringWithFormat:@"%d",shu+1];
+        shuru.text=[NSString stringWithFormat:@"%d",shu+1];
         shuliangCunFang=shuru.text;
     }
     [shuru resignFirstResponder];
@@ -503,16 +503,16 @@
     int shu= [shuru.text intValue];
     if(shu==0)
     {
-       
+        
         
     }else
     {
         
-         shuru.text=[NSString stringWithFormat:@"%d",shu-1];
+        shuru.text=[NSString stringWithFormat:@"%d",shu-1];
         shuliangCunFang=shuru.text;
     }
     
-      [shuru resignFirstResponder];
+    [shuru resignFirstResponder];
     
 }
 
@@ -526,12 +526,14 @@
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     
-     [shuru becomeFirstResponder];
+    [shuru becomeFirstResponder];
     return YES;
 }
 - (IBAction)tianjia:(id)sender
 {
-    
+    if ([shuru.text isEqualToString:@""]||[shuru.text isEqualToString: @"0"]) {
+        [WarningBox warningBoxModeText:@"购买数量太少了哟!" andView:self.view];
+    }
     NSMutableArray *arr=[NSMutableArray array] ;
     NSString *path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
     NSFileManager *file=[NSFileManager defaultManager];
@@ -540,42 +542,42 @@
     NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:shangpin];
     
     [dd setObject:shuliangCunFang forKey:@"shuliang"];
-//    判断
+    //    判断
     if([file fileExistsAtPath:path])
     {
-       
-//   获取文件里的数据
+        
+        //   获取文件里的数据
         arr=[NSMutableArray arrayWithContentsOfFile:path];
-//   判断输入的是否为0
+        //   判断输入的是否为0
         if([shuliangCunFang isEqualToString:@"0"])
         {
-          
-     }
-        
-   else
-       
-     {
-      
-       [arr addObject:dd];
-         NSLog(@"%@",arr);
-         NSLog(@"%@",dd);
-         
-        [arr writeToFile:path atomically:YES];
             
+        }
+        
+        else
+            
+        {
+            
+            [arr addObject:dd];
+            
+            [arr writeToFile:path atomically:YES];
+            [WarningBox warningBoxModeText:@"添加成功～" andView:self. navigationController.view];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
     else{
-      
-//        也判断一下是否为添加的是否为0
+        
+        //        也判断一下是否为添加的是否为0
         if([shuliangCunFang isEqualToString:@"0"])
         {
-           
+            
         }
-  else
+        else
         {
             [arr addObject:dd];
-        [arr writeToFile:path atomically:YES];
-        
+            [arr writeToFile:path atomically:YES];
+            [WarningBox warningBoxModeText:@"添加成功～" andView:self. navigationController.view];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         
     }
@@ -584,7 +586,7 @@
 
 - (IBAction)fanhui:(id)sender {
     
-     [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 @end

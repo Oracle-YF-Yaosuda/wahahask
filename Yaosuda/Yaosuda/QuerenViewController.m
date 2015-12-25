@@ -61,7 +61,7 @@
     NSDate *datenow = [NSDate date];
     NSString *nowtimeStr = [formatter stringFromDate:datenow];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-  
+    [WarningBox warningBoxModeIndeterminate:@"正在下单中..." andView:self.view];
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
@@ -79,9 +79,9 @@
     
     //需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    NSLog(@"***************%@",dic);
-    [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
     
+    [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             [WarningBox warningBoxModeText:@"下单成功" andView:self.view];
             NSFileManager *defaultManager;
@@ -94,8 +94,8 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
-        NSLog(@"%@",[NSString stringWithFormat:@"%@",error]);
+        [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
+
     }];
 }
 - (IBAction)fanhui:(id)sender {

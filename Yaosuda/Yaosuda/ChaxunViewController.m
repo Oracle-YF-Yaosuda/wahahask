@@ -101,7 +101,7 @@
     
     //请求地址   地址不同 必须要改
     NSString *url = @"/order/list";
-
+    [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
     //时间戳
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     NSDate *datenow = [NSDate date];
@@ -120,7 +120,6 @@
     NSDate* theDate;
     theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*3 ];
     NSString*san=[ff stringFromDate:theDate];
-    NSLog(@"%@*******%@",Now,san);
     //出入参数：
     NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
     NSString*jsonstring=[writer stringWithObject:datadic];
@@ -138,7 +137,7 @@
    
 
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       
+        [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
         
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
@@ -149,7 +148,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        [WarningBox warningBoxModeText:@"获取数据失败!" andView:self.view];
 
            }];
 }
@@ -202,8 +201,6 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
         
     }];
     
@@ -795,12 +792,12 @@
             zuobian=[datadic objectForKey:@"orderList"];
             zhi=1;
             [_tableview reloadData];
-            NSLog(@"zuobian***************%@",zuobian);
+            //NSLog(@"zuobian***************%@",zuobian);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        [WarningBox warningBoxModeText:@"加载失败～" andView:self.view];
         
     }];
 }

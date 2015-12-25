@@ -41,7 +41,7 @@
         int len = (int)self.pass.text.length;
         if (len >10 && string.length > 0) {
             if (![self validatePass:self.pass.text]) {
-                [WarningBox warningBoxModeText:@"请输入长度为6-10之间的密码" andView:self.view];
+                [WarningBox warningBoxModeText:@"请输入长度为6-10位的非特殊符号" andView:self.view];
             }
             return NO;
         }
@@ -98,7 +98,7 @@
     NSString *nowtimeStr = [formatter stringFromDate:datenow];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
     
-    
+   
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];

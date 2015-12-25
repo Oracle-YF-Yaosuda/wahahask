@@ -102,6 +102,7 @@
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+    [WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
     //出入参数：
     NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",@"",@"proName",@"",@"proCatalog",@"1",@"pageNo",@"100",@"pageSize", nil];
     
@@ -146,7 +147,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
         
     }];
   
@@ -379,7 +380,7 @@
     
     //请求地址   地址不同 必须要改
     NSString * url =@"/prod/productionsList";
-    
+    [WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
     //时间戳
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     NSDate *datenow = [NSDate date];
@@ -400,13 +401,10 @@
     
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-    
-    //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        
         
         //[WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
         
@@ -416,25 +414,17 @@
             for (int i=0; i<productionsList.count; i++) {
                 [shuzi addObject:[NSString stringWithFormat:@"shuzi%d",i]];
                 [jiahao addObject:[NSString stringWithFormat:@"jiahao%d",i]];
-                
                 //       下单数量默认为0
                 [xiadanshuliang addObject:@"0"];
                 
             }
             
-            
-            
             [_tableview reloadData];
             
-            
-        }else{
-            
-            
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
         
     }];
     

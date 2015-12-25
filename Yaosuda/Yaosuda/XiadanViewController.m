@@ -101,7 +101,7 @@
     NSString*kehuID=[NSString stringWithFormat:@"%@",[kehuxinxi objectForKey:@"id"]];
     if (kehuID!=nil&&![kehuID isEqual:[NSNull null]]) {
         
-    
+    //[WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
     for (int i=0; i<jieshou.count; i++) {
       
         //userID    暂时不用改
@@ -138,7 +138,7 @@
         //需要上传的数据
         NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
         [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
+            [WarningBox warningBoxHide:YES andView:self.view];
             if ([[responseObject objectForKey:@"code"] intValue]==0000) {
                 NSDictionary*data=[responseObject objectForKey:@"data"];
                 NSString*customerPrice=[NSString stringWithFormat:@"%@",[data objectForKey:@"customerPrice"]];
@@ -149,7 +149,7 @@
             [_tableview reloadData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
-            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+            [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
                    }];
        }
       }
@@ -198,7 +198,7 @@
     [quan addSubview:lab];
     
     
-    NSLog(@"%d",aa);
+  
 }
 -(void)baocun{
     di.hidden=YES;
@@ -208,10 +208,7 @@
 //  保存plist文件 重新写入
     NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
     [jieshou writeToFile:path atomically:YES];
-    
-    
-    
-    
+ 
     [self.tableview reloadData];
     [self viewWillAppear:YES];
 }
@@ -417,7 +414,7 @@
         NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
         
         [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-           
+            [WarningBox warningBoxHide:YES andView:self.view];
             if ([[responseObject objectForKey:@"code"] intValue]==0000) {
                 NSDictionary*data=[responseObject valueForKey:@"data"];
                 NSArray*consignList=[data objectForKey:@"consignList"];
@@ -454,14 +451,11 @@
     if (aa == 2) {
         if (editingStyle == UITableViewCellEditingStyleDelete) {
             
-           
-            
             //删除字典内容
             
             [jieshou removeObjectAtIndex:indexPath.row];
           
             [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            
             
              [self.tableview reloadData];
         }

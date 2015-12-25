@@ -27,12 +27,13 @@
     NSArray*pl=[NSArray arrayWithObjects:[NSString stringWithFormat:@"appkey=%@",appkey],[NSString stringWithFormat:@"params=%@",jsonstring],[NSString stringWithFormat:@"timestamp=%@",timeSP],[NSString stringWithFormat:@"userid=%@",userID], nil];
     NSString*plstr=[pl componentsJoinedByString:@","];
 
-    NSMutableString*basestr=[NSMutableString stringWithFormat:@"POST%@%@%@%@%@%@",sign_host,app_name,api_url,url,plstr,appsecret];
+    NSMutableString*basestr=[NSMutableString stringWithFormat:@"POST%@%@%@%@%@",app_name,api_url,url,plstr,appsecret];
+    NSLog(@"basestr-------%@",basestr);
     //把字符串basestr中的＋用％20代替
      NSString * beibei = [basestr stringByReplacingOccurrencesOfString:@"+" withString:@"%20"];
     //加盐
    // NSString*jiayan=[beibei stringByAppendingString:@"48"];
-    
+
     URLEncode*haha=[[URLEncode alloc] init];
    
     NSString * memeda=[haha encodeToPercentEscapeString:beibei];
