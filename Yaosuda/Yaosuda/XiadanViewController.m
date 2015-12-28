@@ -118,7 +118,7 @@
         NSString *nowtimeStr = [formatter stringFromDate:datenow];
         NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
         
-        
+      //  [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
         //将上传对象转换为json格式字符串
         AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
         manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
@@ -155,7 +155,10 @@
                    }];
        }
       }
-    }[_tableview reloadData];
+    }
+    [WarningBox warningBoxHide:YES andView:self.view];
+    [_tableview reloadData];
+    
     
 }
 - (void)viewDidLoad

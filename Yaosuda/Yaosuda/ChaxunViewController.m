@@ -183,7 +183,7 @@
     
     //请求地址   地址不同 必须要改
     NSString *url = @"/order/auditList";
-    [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
+   // [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
     //时间戳
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     NSDate *datenow = [NSDate date];
