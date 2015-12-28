@@ -86,7 +86,7 @@
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
-            
+
             shangpin=(NSMutableDictionary*)[data objectForKey:@"productions"];
             
             [array1 removeAllObjects];

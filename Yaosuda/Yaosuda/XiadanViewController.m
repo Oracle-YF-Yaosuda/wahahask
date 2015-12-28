@@ -40,7 +40,8 @@
 
 @implementation XiadanViewController
 
--(void)passTrendValue:(NSArray *)values{
+-(void)passTrendValue:(NSArray *)values
+{
     
     NSString *path =[NSHomeDirectory() stringByAppendingString:@"/Documents/xiadanmingxi.plist"];
     NSFileManager*fm=[NSFileManager defaultManager];
@@ -60,7 +61,8 @@
     
     
 }
--(void)viewWillAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated
+{
     [super viewDidLoad];
 //   数量修改
     xiuGaiShangPin=[NSMutableArray array];
@@ -156,7 +158,8 @@
     }[_tableview reloadData];
     
 }
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     
     dicc=[NSMutableDictionary dictionary];
     [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -173,7 +176,8 @@
      self.navigationItem.rightBarButtonItem = right;
 }
 
--(void)bianij{
+-(void)bianij
+{
     aa=2;
     self.navigationItem.rightBarButtonItem = right1;
     [self.tableview reloadData];
@@ -200,7 +204,8 @@
     
   
 }
--(void)baocun{
+-(void)baocun
+{
     di.hidden=YES;
     aa=1;
     self.navigationItem.rightBarButtonItem = right;
@@ -212,7 +217,8 @@
     [self.tableview reloadData];
     [self viewWillAppear:YES];
 }
--(void)xiaoshi{
+-(void)xiaoshi
+{
     
     di.hidden = YES;
     
@@ -227,7 +233,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 125;//cell高度
+    return 151;//cell高度
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -245,7 +251,7 @@
     name.font = [UIFont systemFontOfSize:15];
     
     UIView *xian = [[UIView alloc]initWithFrame:CGRectMake(0, 35, width, 1)];
-    xian.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
+    xian.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
     
     UILabel *name1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 5, width-40-80, 30 )];
     name1.text = [NSString stringWithFormat:@"%@", [jieshou[indexPath.row] objectForKey:@"proName"]];
@@ -253,15 +259,15 @@
     name1.font = [UIFont systemFontOfSize:15];
     name1.textAlignment = NSTextAlignmentCenter;
     
-    UILabel *shuliang = [[UILabel alloc]initWithFrame:CGRectMake(20, 45, 80, 30)];
+    UILabel *shuliang = [[UILabel alloc]initWithFrame:CGRectMake(20, 40, 80, 30)];
     shuliang.text = @"商品数量:";
     shuliang.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     shuliang.font = [UIFont systemFontOfSize:15];
     
-    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, 75, width, 1)];
-    xian1.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
+    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, 70, width, 1)];
+    xian1.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
     
-   UITextField* shuliang1 = [[UITextField alloc]initWithFrame:CGRectMake(100, 45, width-40-80, 30 )];
+   UITextField* shuliang1 = [[UITextField alloc]initWithFrame:CGRectMake(100, 40, width-40-80, 30 )];
     shuliang1.delegate=self;
     shuliang1.tag=(int)indexPath.row+999;
     shuliang1.text = [NSString stringWithFormat:@"%@",[jieshou[indexPath.row] objectForKey:@"shuliang"]];
@@ -270,26 +276,56 @@
     shuliang1.textAlignment = NSTextAlignmentCenter;
     shuliang1.delegate=self;
     
-    UILabel *danjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 85, 80, 30)];
-    danjia.text = @"商品总价:";
+    UILabel *danjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 75, 80, 30)];
+    danjia.text = @"客户单价:";
     danjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     danjia.font = [UIFont systemFontOfSize:15];
     
-    UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(0, 115, width, 10)];
-    xian2.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+    UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(0, 105, width, 1)];
+    xian2.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
     
-    UILabel *danjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 85, width-40-80, 30 )];
+    UILabel *danjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 75, width-40-80, 30 )];
     
     if (jiage.count!=jieshou.count) {
-          danjia1.text=@"待估价";
+        danjia1.text=@"待估价";
+        
+        danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+        danjia1.font = [UIFont systemFontOfSize:15];
+        danjia1.textAlignment = NSTextAlignmentCenter;
     }
-    else
+    else{
     danjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
 
-    
     danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     danjia1.font = [UIFont systemFontOfSize:15];
     danjia1.textAlignment = NSTextAlignmentCenter;
+    }
+    UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(0, 140, width, 10)];
+    xian3.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    
+    UILabel *LXdanjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 110, 80, 30)];
+    LXdanjia.text = @"联系人单价:";
+    LXdanjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
+    LXdanjia.font = [UIFont systemFontOfSize:15];
+
+    UILabel *LXdanjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 110, width-40-80, 30 )];
+    
+    if (jiage.count!=jieshou.count) {
+        LXdanjia1.text=@"待估价";
+        LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+        LXdanjia1.font = [UIFont systemFontOfSize:15];
+        LXdanjia1.textAlignment = NSTextAlignmentCenter;
+    }
+    else{
+        LXdanjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+        
+        LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+        LXdanjia1.font = [UIFont systemFontOfSize:15];
+        LXdanjia1.textAlignment = NSTextAlignmentCenter;
+    }
+
+    
+    
     
     if (aa == 1)
     {
@@ -305,6 +341,10 @@
         [cell.contentView addSubview:danjia];
         [cell.contentView addSubview:danjia1];
         [cell.contentView addSubview:xian2];
+        
+        [cell.contentView addSubview:LXdanjia];
+        [cell.contentView addSubview:LXdanjia1];
+        [cell.contentView addSubview:xian3];
 
     }
     else if (aa == 2)
@@ -331,6 +371,10 @@
         [cell.contentView addSubview:danjia];
         [cell.contentView addSubview:danjia1];
         [cell.contentView addSubview:xian2];
+        
+        [cell.contentView addSubview:LXdanjia];
+        [cell.contentView addSubview:LXdanjia1];
+        [cell.contentView addSubview:xian3];
 
         [cell.contentView addSubview:jia];
         [cell.contentView addSubview:jian];
