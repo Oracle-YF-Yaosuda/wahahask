@@ -16,15 +16,17 @@
 #import "SBJson.h"
 #import "WarningBox.h"
 #import "yonghuziliao.h"
+#import "MJRefresh.h"
 
-@interface ChaxunViewController ()
-{
+@interface ChaxunViewController ()<MJRefreshBaseViewDelegate>
+{   MJRefreshHeaderView*header;
+    MJRefreshFooterView*footer;
     CGFloat width;
     CGFloat height;
     NSArray*zuobian;
     NSArray*youbian;
     int zhi;
-    
+    int ye;
     int index;
     
 }
@@ -64,34 +66,50 @@
     _tableview.frame=CGRectMake(0, 40, width, height);
     
     zhi = 1;
-    // Let the show begins
-    self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:_tableview target:self refreshAction:@selector(refreshTriggered:) plist:@"storehouse" color:[UIColor blueColor] lineWidth:1.5 dropHeight:50 scale:1 horizontalRandomness:50 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
-    
+    ye=1;
     [self huoququanbu];
     [self huoqudaishenhe];
+    [self setupre];
+}
+-(void)setupre{
+    header=[MJRefreshHeaderView header];
+    header.scrollView=_tableview;
+    header.delegate=self;
+    header.tag=1001;
+    footer=[MJRefreshFooterView footer];
+    footer.scrollView=_tableview;
+    footer.delegate=self;
+}
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
+    [self performSelector:@selector(done:) withObject:refreshView afterDelay:0];
+    
     
 }
-#pragma mark - 刷新  怪怪的
-#pragma mark - Notifying refresh control of scrolling
+-(void)done:(MJRefreshBaseView*)refr{
+    if (refr.tag==1001) {
+        ye=1;
+        if (zhi==1) {
+            
+        [self huoququanbu];
+        }
+        else
+        [self huoqudaishenhe];
+     
+        [_tableview reloadData];
+        [refr endRefreshing];
+        
+        
+    }
+    else{
+        ye++;
+        if (zhi==1) {
+            [self huoququanbu];
+        }else
+            [self huoqudaishenhe];
+        [_tableview reloadData];
+        [refr endRefreshing];
+    }}
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    [self.storeHouseRefreshControl scrollViewDidScroll];
-}
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    [self.storeHouseRefreshControl scrollViewDidEndDragging];
-}
-- (void)refreshTriggered:(id)sender
-{
-    [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:3 inModes:@[NSRunLoopCommonModes]];
-}
-- (void)finishRefreshControl
-{
-    [self.storeHouseRefreshControl finishingLoading];
-    self.tableview.frame=CGRectMake(0, 40, width, height);
-    [self.view bringSubviewToFront:_fenduan ];
-}
 //获取全部订单网络数据
 -(void)huoququanbu
 {
@@ -116,12 +134,16 @@
     NSDateFormatter*ff=[[NSDateFormatter alloc] init];
     [ff setDateFormat:@"YYYY-MM-dd"];
     Now=[ff stringFromDate:[NSDate date]];
+    NSLog(@"%@",Now);
     NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
     NSDate* theDate;
     theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*3 ];
     NSString*san=[ff stringFromDate:theDate];
+
     //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
+    NSString*pageNo=[NSString stringWithFormat:@"%d",ye];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", pageNo,@"pageNo",@"10",@"pageSize",nil];
+
     NSString*jsonstring=[writer stringWithObject:datadic];
 
     //获取签名
@@ -135,7 +157,7 @@
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
  
    
-
+    
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
@@ -143,7 +165,7 @@
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
             zuobian=[datadic objectForKey:@"orderList"];
             [_tableview reloadData];
-            NSLog(@"zuobian***************%@",zuobian);
+        
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
@@ -161,7 +183,7 @@
     
     //请求地址   地址不同 必须要改
     NSString *url = @"/order/auditList";
-    
+    [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
     //时间戳
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     NSDate *datenow = [NSDate date];
@@ -769,6 +791,7 @@
     SBJsonWriter *writer = [[SBJsonWriter alloc]init];
  
     //出入参数：
+    
     NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",_qian.text,@"startDate",_hou.text,@"endDate", @"",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
     NSString*jsonstring=[writer stringWithObject:datadic];
     NSLog(@"---------%@",datadic);

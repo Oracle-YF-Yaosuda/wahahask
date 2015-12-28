@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
      [super viewDidLoad];
     _yingfu.text=_meme;
-    _shouhuoren.text=_haha;
+    _shouhuoren.text=_xixi;
    
    
     loginUserId= [NSString stringWithFormat:@"%@",[[yonghuziliao getUserInfo] objectForKey:@"id"]];

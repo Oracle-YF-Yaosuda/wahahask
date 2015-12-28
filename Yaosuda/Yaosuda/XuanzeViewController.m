@@ -16,10 +16,12 @@
 #import "lianjie.h"
 #import "UIImageView+WebCache.h"
 #import "XiadanViewController.h"
+#import "MJRefresh.h"
 
 
-@interface XuanzeViewController ()
-{
+@interface XuanzeViewController ()<MJRefreshBaseViewDelegate>
+{   MJRefreshHeaderView*header;
+    MJRefreshHeaderView*footer;
     NSMutableArray*jiahao;
     NSMutableArray*shuzi;
     CGFloat width;
@@ -30,6 +32,7 @@
     NSMutableArray*chuande;
     NSArray*productionsList;
     UIButton *jia ;
+    int ye;
     
 //  数组中存放各个产品的下单  数量
     NSMutableArray *xiadanshuliang;
@@ -85,7 +88,11 @@
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
-
+    ye=1;
+    [self xxx];
+    [self setupre];
+}
+-(void)xxx{
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -104,19 +111,20 @@
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     [WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
     //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",@"",@"proName",@"",@"proCatalog",@"1",@"pageNo",@"100",@"pageSize", nil];
+    NSString*pageNo=[NSString stringWithFormat:@"%d",ye];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",@"",@"proName",@"",@"proCatalog",pageNo,@"pageNo",@"10",@"pageSize", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     
     //获取签名
     NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
-   
+    
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
- 
+    
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-   
+    
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         
@@ -130,11 +138,11 @@
                 [shuzi addObject:[NSString stringWithFormat:@"shuzi%d",i]];
                 [jiahao addObject:[NSString stringWithFormat:@"jiahao%d",i]];
                 
-    //       下单数量默认为0
+                //       下单数量默认为0
                 [xiadanshuliang addObject:@"0"];
                 
             }
-        
+            
             
             
             [_tableview reloadData];
@@ -150,8 +158,36 @@
         [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
         
     }];
-  
 }
+-(void)setupre{
+    header=[MJRefreshHeaderView header];
+    header.scrollView=_tableview;
+    header.delegate=self;
+    header.tag=1001;
+    footer=[MJRefreshFooterView footer];
+    footer.scrollView=_tableview;
+    footer.delegate=self;
+}
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
+    [self performSelector:@selector(done:) withObject:refreshView afterDelay:0];
+    
+    
+}
+-(void)done:(MJRefreshBaseView*)refr{
+    if (refr.tag==1001) {
+        ye=1;
+        [self xxx];
+        [_tableview reloadData];
+        [refr endRefreshing];
+        
+        
+    }
+    else{
+        ye++;
+        [self xxx];
+        [_tableview reloadData];
+        [refr endRefreshing];
+    }}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;

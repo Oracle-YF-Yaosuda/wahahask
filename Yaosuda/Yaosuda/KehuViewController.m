@@ -15,12 +15,14 @@
 #import "WarningBox.h"
 #import "yonghuziliao.h"
 #import "XiadanViewController.h"
+#import "MJRefresh.h"
 
-@interface KehuViewController ()
-{
+@interface KehuViewController ()<MJRefreshBaseViewDelegate>
+{   MJRefreshFooterView*footer;
+    MJRefreshHeaderView*header;
     CGFloat width;
     CGFloat height;
-    
+    int ye;
     
     NSArray*customerList;
     UIImageView *image;
@@ -43,9 +45,16 @@
     
     //解决tableview多出的白条
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    NSString*businesspersonId=[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"];
+    ye=1;
+ 
 
+    [self kkk];
+    [self setupre];
+    
+}
+-(void)kkk{
+    NSString*businesspersonId=[[yonghuziliao getUserInfo] objectForKey:@"businesspersonId"];
+    
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -64,13 +73,14 @@
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",@"1",@"pageNo",@"100",@"pageSize", nil];
+    NSString*pageNo=[NSString stringWithFormat:@"%d",ye];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",pageNo,@"pageNo",@"5",@"pageSize", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-   
+    
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
     
@@ -93,13 +103,38 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
-     
+        
     }];
-
-    
+}
+-(void)setupre{
+    header=[MJRefreshHeaderView header];
+    header.scrollView=_tableview;
+    header.delegate=self;
+    header.tag=1001;
+    footer=[MJRefreshFooterView footer];
+    footer.scrollView=_tableview;
+    footer.delegate=self;
+}
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
+    [self performSelector:@selector(done:) withObject:refreshView afterDelay:0];
     
     
 }
+-(void)done:(MJRefreshBaseView*)refr{
+    if (refr.tag==1001) {
+        ye=1;
+        [self kkk];
+        [_tableview reloadData];
+        [refr endRefreshing];
+        
+        
+    }
+    else{
+        ye++;
+        [self kkk];
+        [_tableview reloadData];
+        [refr endRefreshing];
+    }}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
