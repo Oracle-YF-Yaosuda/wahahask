@@ -197,7 +197,7 @@
     return productionsList.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 115;//cell高度
+    return width/3;//cell高度
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *id1 =@"mycell2";
@@ -207,7 +207,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
     
-    _imagr = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,115 , 115)];
+    _imagr = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,width/3 ,width/3)];
    
         
     NSString*tupian=[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"pics"]];
@@ -233,69 +233,77 @@
  
     
    
-    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(120, 5,60, 15)];
+    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, 0,width/3*2/3-15, width/3/6)];
     name.font= [UIFont systemFontOfSize:12];
     name.text = @"商品名称:";
     name.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    UILabel *name1 = [[UILabel alloc]initWithFrame:CGRectMake(180, 5, width-180, 15)];
+   
+    UILabel *name1 = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15, 0, width-width/3-width/3*2/3+5, width/3/6)];
     name1.font= [UIFont systemFontOfSize:12];
     name1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+   
 
     
-    UILabel *changjia = [[UILabel alloc]initWithFrame:CGRectMake(120, 25, 60, 15)];
+    UILabel *changjia = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, width/3/6+3, width/3*2/3-15, width/3/6)];
     changjia.font= [UIFont systemFontOfSize:12];
     changjia.text = @"生产厂家:";
     changjia.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    UILabel *changjia1 = [[UILabel alloc]initWithFrame:CGRectMake(180, 26, width-180, 15)];
+   
+    UILabel *changjia1 = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15,width/3/6+3,  width-width/3-width/3*2/3+5, width/3/6)];
     changjia1.font= [UIFont systemFontOfSize:12];
     changjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    
 
     
-    
-    
-    
-    UILabel *guige = [[UILabel alloc]initWithFrame:CGRectMake(120, 45, 60, 15)];
+    UILabel *guige = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, width/3/6*2+6, width/3*2/3-15, width/3/6)];
     guige.font= [UIFont systemFontOfSize:12];
     guige.text = @"规       格:";
     guige.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    UILabel *guige1 = [[UILabel alloc]initWithFrame:CGRectMake(180, 45, 80, 15)];
+   
+    UILabel *guige1 = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15, width/3/6*2+6,  width-width/3-width/3*2/3+5-70, width/3/6)];
     guige1.font= [UIFont systemFontOfSize:12];
     guige1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+   
 
     
     
-    tianjia = [[UIButton alloc]initWithFrame:CGRectMake(width-60, 45, 50, 30)];
+    tianjia = [[UIButton alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+(width-width/3-width/3*2/3+5-70)+15, width/3/6*2+10, width-(width/3+5+width/3*2/3-15)-(width-width/3-width/3*2/3+5-70)-20, width/3/5)];
     [tianjia setTag:indexPath.row+2000];
     [tianjia setImage:[UIImage imageNamed:@"@2x_sp_07.png"] forState:UIControlStateNormal];
     [tianjia addTarget:self action:@selector(tianjia:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    UILabel *danwei = [[UILabel alloc]initWithFrame:CGRectMake(120, 65, 60, 15)];
+    UILabel *danwei = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, width/3/6*3+9, width/3*2/3-15, width/3/6)];
     danwei.font= [UIFont systemFontOfSize:12];
     danwei.text = @"单       位:";
     danwei.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    UILabel *danwei1 = [[UILabel alloc]initWithFrame:CGRectMake(180, 65, 60, 15)];
+    
+    UILabel *danwei1 = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15, width/3/6*3+9,  width-width/3-width/3*2/3+5-70, width/3/6)];
     danwei1.font= [UIFont systemFontOfSize:12];
     danwei1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     
-    UILabel *shuliang = [[UILabel alloc]initWithFrame:CGRectMake(120, 90, 60, 15)];
+    
+    UILabel *shuliang = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, width/3/6*4+12, width/3*2/3-15, width/3/6)];
     shuliang.font= [UIFont systemFontOfSize:12];
     shuliang.text = @"下单数量:";
     shuliang.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+   
     
 //   减创建
-    jian = [[UIButton alloc]initWithFrame:CGRectMake(180, 87, 20, 20)];
+    jian = [[UIButton alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15, width/3/6*4+12, (width-width/3-width/3*2/3+5-70)/3-10,  width/3/6)];
     [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
     [jian addTarget:self action:@selector(jian:) forControlEvents:UIControlEventTouchUpInside];
     jian.tag=indexPath.row+20000;
+  
 //   加创建
-    jia = [[UIButton alloc]initWithFrame:CGRectMake(225, 87, 20, 20)];
+    jia = [[UIButton alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+((width-width/3-width/3*2/3+5-70)/3-10)+(width-width/3-width/3*2/3+5-70)/3-5, width/3/6*4+12, (width-width/3-width/3*2/3+5-70)/3-10,  width/3/6)];
     [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
     [jia addTarget:self action:@selector(jia:) forControlEvents:UIControlEventTouchUpInside];
     jia.tag=indexPath.row+10000 ;
+  
     
     
-    shuru = [[UITextField alloc]initWithFrame:CGRectMake(201, 87, 23,20)];
+    shuru = [[UITextField alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+((width-width/3-width/3*2/3+5-70)/3-10), width/3/6*4+12, (width-width/3-width/3*2/3+5-70)/3-5,width/3/6)];
     
 
 //   下单的产品数量
@@ -306,9 +314,10 @@
     shuru.borderStyle=UITextBorderStyleNone;
     
     
-    UIButton *gengduo= [[UIButton alloc]initWithFrame:CGRectMake(271, 87, 30, 20)];
+    UIButton *gengduo= [[UIButton alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+(width-width/3-width/3*2/3+5-70)+15,width/3/6*4,width-(width/3+5+width/3*2/3-15)-(width-width/3-width/3*2/3+5-70)-20,width/3/5)];
    
     [gengduo setImage:[UIImage imageNamed:@"@2x_sp_16.png"] forState:UIControlStateNormal];
+    
    
     name1.text = [NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"proName" ]];
     changjia1.text = [NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"proEnterprise" ]];
