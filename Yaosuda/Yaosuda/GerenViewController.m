@@ -53,6 +53,18 @@
     return 20;
 }
 
+//编辑header内容
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    UIView *diview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 20)];
+    diview.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+    
+    return diview;
+    
+}
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         return 110;

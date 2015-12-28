@@ -231,9 +231,18 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 20;//section高度
 }
-
+//编辑header内容
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    UIView *diview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 20)];
+    diview.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+    
+    return diview;
+    
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 151;//cell高度
+    return 150;//cell高度
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -301,7 +310,7 @@
     danjia1.textAlignment = NSTextAlignmentCenter;
     }
     UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(0, 140, width, 10)];
-    xian3.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    xian3.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
     UILabel *LXdanjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 110, 80, 30)];
     LXdanjia.text = @"联系人单价:";
