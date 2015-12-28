@@ -24,6 +24,7 @@
     NSMutableDictionary*shangpin;
     UITableViewCell *cell;
     UIImageView *image;
+    NSString*stockNum;
     UITextField *shuru;
     NSString *shuliangCunFang;
     NSMutableArray *array;
@@ -534,53 +535,103 @@
     if ([shuru.text isEqualToString:@""]||[shuru.text isEqualToString: @"0"]) {
         [WarningBox warningBoxModeText:@"购买数量太少了哟!" andView:self.view];
     }
-    NSMutableArray *arr=[NSMutableArray array] ;
-    NSString *path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-    NSFileManager *file=[NSFileManager defaultManager];
+    //userID    暂时不用改
+    NSString * userID=@"0";
     
-    //         添加数量
-    NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:shangpin];
+    //请求地址   地址不同 必须要改
+    NSString * url =@"/prod/stockNum";
     
-    [dd setObject:shuliangCunFang forKey:@"shuliang"];
-    //    判断
-    if([file fileExistsAtPath:path])
-    {
-        
-        //   获取文件里的数据
-        arr=[NSMutableArray arrayWithContentsOfFile:path];
-        //   判断输入的是否为0
-        if([shuliangCunFang isEqualToString:@"0"])
-        {
+    //时间戳
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    NSDate *datenow = [NSDate date];
+    NSString *nowtimeStr = [formatter stringFromDate:datenow];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    
+    
+    //将上传对象转换为json格式字符串
+    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+    //出入参数：
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:_shangID,@"productionsId", nil];
+    
+    NSString*jsonstring=[writer stringWithObject:datadic];
+    
+    //获取签名
+    NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
+    
+    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+    
+    //电泳借口需要上传的数据
+    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+    
+    [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary*data=[responseObject objectForKey:@"data"];
+        stockNum=[data objectForKey:@"stockNum"];
+        if ([stockNum intValue]-[shuru.text intValue]<0) {
+            NSString*message=[NSString stringWithFormat:@"您选择了%@件商品，当前剩余库存为%@件",shuru.text,stockNum];
+            NSLog(@"%d",[stockNum intValue]-[shuru.text intValue]);
+            NSLog(@"%@",stockNum);
+            UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"库存不足" message:message preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                
+            }];
+            UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action1];
+            [alert addAction:action2];
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            
             
         }
-        
-        else
+        else{
+            NSMutableArray *arr=[NSMutableArray array] ;
+            NSString *path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+            NSFileManager *file=[NSFileManager defaultManager];
             
-        {
+            //         添加数量
+            NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:shangpin];
             
-            [arr addObject:dd];
-            
-            [arr writeToFile:path atomically:YES];
-            [WarningBox warningBoxModeText:@"添加成功～" andView:self. navigationController.view];
-            [self.navigationController popViewControllerAnimated:YES];
+            [dd setObject:shuliangCunFang forKey:@"shuliang"];
+            //    判断
+            if([file fileExistsAtPath:path])
+            {
+                
+                //   获取文件里的数据
+                arr=[NSMutableArray arrayWithContentsOfFile:path];
+                
+                [arr addObject:dd];
+                
+                [arr writeToFile:path atomically:YES];
+                [WarningBox warningBoxModeText:@"添加成功～" andView:self. navigationController.view];
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            }
+            else{
+                
+                
+                [arr addObject:dd];
+                [arr writeToFile:path atomically:YES];
+                [WarningBox warningBoxModeText:@"添加成功～" andView:self. navigationController.view];
+                [self.navigationController popViewControllerAnimated:YES];
+                
+                
+            }
         }
-    }
-    else{
         
-        //        也判断一下是否为添加的是否为0
-        if([shuliangCunFang isEqualToString:@"0"])
-        {
-            
-        }
-        else
-        {
-            [arr addObject:dd];
-            [arr writeToFile:path atomically:YES];
-            [WarningBox warningBoxModeText:@"添加成功～" andView:self. navigationController.view];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
         
-    }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        NSLog(@"%@",error);
+    }];
+    
     
 }
 

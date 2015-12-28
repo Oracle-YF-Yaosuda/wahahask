@@ -14,6 +14,7 @@
 #import "SBJsonWriter.h"
 #import "lianjie.h"
 #import "hongdingyi.h"
+#import "XuanzeViewController.h"
 
 
 @interface XiadanViewController ()
@@ -25,9 +26,10 @@
     NSMutableArray*arr;
     NSMutableArray *jiage;
     NSMutableDictionary *dicc;
+    NSMutableDictionary*dixx;
     UIBarButtonItem *right;
     UIBarButtonItem *right1;
-   
+    NSMutableArray*wo;
     int aa;
     
     UIButton *jia;
@@ -35,6 +37,7 @@
     NSMutableArray *xiuGaiShangPin;
     UIView * di;
 }
+- (IBAction)xltianjia:(UIButton *)sender;
 
 @end
 
@@ -77,7 +80,7 @@
     jieshou=[NSMutableArray arrayWithContentsOfFile:path];
     NSLog(@"  jiesou--------- %@",jieshou);
     
-    NSMutableArray*wo=[NSMutableArray array];
+    wo=[NSMutableArray array];
     for (int i=0; i<jieshou.count; i++) {
         [wo addObject:[jieshou[i] objectForKey:@"shuliang"]];
     }
@@ -103,7 +106,7 @@
     NSString*kehuID=[NSString stringWithFormat:@"%@",[kehuxinxi objectForKey:@"id"]];
     if (kehuID!=nil&&![kehuID isEqual:[NSNull null]]) {
         
-    //[WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
+    [WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
     for (int i=0; i<jieshou.count; i++) {
       
         //userID    暂时不用改
@@ -142,9 +145,14 @@
         [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
             if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+                
                 NSDictionary*data=[responseObject objectForKey:@"data"];
                 NSString*customerPrice=[NSString stringWithFormat:@"%@",[data objectForKey:@"customerPrice"]];
                 [dicc setObject:customerPrice forKey:[NSString stringWithFormat:@"%d",i]];
+                
+                NSString*discountAmount=[NSString stringWithFormat:@"%@",[data objectForKey:@"discountAmount"]];
+                [dixx setObject:discountAmount forKey:[NSString stringWithFormat:@"%d",i]];
+                
                 [jiage addObject:@"1"];
 
             }
@@ -163,7 +171,7 @@
 }
 - (void)viewDidLoad
 {
-    
+    dixx=[NSMutableDictionary dictionary];
     dicc=[NSMutableDictionary dictionary];
     [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     width = [UIScreen mainScreen].bounds.size.width;
@@ -329,7 +337,7 @@
         LXdanjia1.textAlignment = NSTextAlignmentCenter;
     }
     else{
-        LXdanjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+        LXdanjia1.text =[dixx objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
         
         LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         LXdanjia1.font = [UIFont systemFontOfSize:15];
@@ -429,11 +437,11 @@
         [WarningBox warningBoxModeText:@"请选择客户及商品！" andView:self.view];
     }else{
     float m;
-        
-        for (NSString* a in [dicc allValues]) {
-            m+=[a intValue];
-       
+        NSLog(@"%@*-*-*-*-*-*-*-%@",wo,dicc);
+        for (int i=0; i<dicc.count; i++) {
+            m+= [wo[i] intValue]*[[dicc objectForKey:[NSString stringWithFormat:@"%d",i]] intValue];
         }
+        
         
         NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
         NSDictionary*kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
@@ -535,4 +543,14 @@
 }
 
 
+- (IBAction)xltianjia:(UIButton *)sender {
+    if ([_kehumingzi.text isEqualToString: @"请选择客户"]) {
+        [WarningBox warningBoxModeText:@"请先选择客户!" andView:self.view];
+    }
+    else{
+    XuanzeViewController *xuanze = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xuanze"];
+    
+    [self.navigationController pushViewController:xuanze animated:YES];
+    }
+}
 @end
