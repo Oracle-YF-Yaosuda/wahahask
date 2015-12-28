@@ -146,7 +146,7 @@
             NSLog(@"zuobian***************%@",zuobian);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        NSLog(@"%@",error);
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"获取数据失败!" andView:self.view];
 

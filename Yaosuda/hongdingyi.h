@@ -17,8 +17,8 @@
  *
  *  @return http://192.168.137.15:8080
  */
-#define sign_host @"http://192.168.137.15:8080"
-
+//#define sign_host @"http://192.168.137.15:8080"
+#define sign_host @""
 
 
 //#define sign_host @"http://192.168.1.199:8080"

@@ -26,8 +26,8 @@
    
     NSArray*pl=[NSArray arrayWithObjects:[NSString stringWithFormat:@"appkey=%@",appkey],[NSString stringWithFormat:@"params=%@",jsonstring],[NSString stringWithFormat:@"timestamp=%@",timeSP],[NSString stringWithFormat:@"userid=%@",userID], nil];
     NSString*plstr=[pl componentsJoinedByString:@","];
-
-    NSMutableString*basestr=[NSMutableString stringWithFormat:@"POST%@%@%@%@%@",app_name,api_url,url,plstr,appsecret];
+NSString*host=[NSString stringWithFormat:@"%@%@%@",sign_host,app_name,api_url];
+    NSMutableString*basestr=[NSMutableString stringWithFormat:@"%@%@%@%@",host,url,plstr,appsecret];
     NSLog(@"basestr-------%@",basestr);
     //把字符串basestr中的＋用％20代替
      NSString * beibei = [basestr stringByReplacingOccurrencesOfString:@"+" withString:@"%20"];
@@ -48,8 +48,8 @@
     
     NSArray*pl=[NSArray arrayWithObjects:[NSString stringWithFormat:@"appkey=%@",appkey],[NSString stringWithFormat:@"params=%@",jsonstring],[NSString stringWithFormat:@"timestamp=%@",timeSP],[NSString stringWithFormat:@"userid=%@",userID], nil];
     NSString*plstr=[pl componentsJoinedByString:@","];
-    
-    NSMutableString*basestr=[NSMutableString stringWithFormat:@"GET%@%@%@%@%@%@",sign_host,app_name,api_url,url,plstr,appsecret];
+NSString*host=[NSString stringWithFormat:@"%@%@%@",sign_host,app_name,api_url];
+    NSMutableString*basestr=[NSMutableString stringWithFormat:@"%@%@%@%@",host,url,plstr,appsecret];
     //把字符串basestr中的＋用％20代替
     NSString * beibei = [basestr stringByReplacingOccurrencesOfString:@"+" withString:@"%20"];
     //加盐
