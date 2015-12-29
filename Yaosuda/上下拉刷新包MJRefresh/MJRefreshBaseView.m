@@ -7,6 +7,7 @@
 //
 
 #import "MJRefreshBaseView.h"
+#import "Color+Hex.h"
 
 #define kBundleName @"MJRefresh.bundle"
 #define kSrcName(file) [kBundleName stringByAppendingPathComponent:file]
@@ -46,7 +47,7 @@
 {
     // 1.自己的属性
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
     // 2.时间标签
 //    [self addSubview:_lastUpdateTimeLabel = [self labelWithFontSize:12]];
@@ -91,7 +92,7 @@
     UILabel *label = [[UILabel alloc] init];
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     label.font = [UIFont boldSystemFontOfSize:size];
-    label.textColor = [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:1.0];
+    label.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = NSTextAlignmentCenter;
     return label;

@@ -149,7 +149,17 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 150;//cell高度 
+    return width/2;//cell高度
+}
+//编辑header内容
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    UIView *diview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
+    diview.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+    
+    return diview;
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -165,76 +175,82 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
+    CGFloat kuan = width;
+    CGFloat gao = width/2;
     
-    UILabel *KHmingzi = [[UILabel alloc]initWithFrame:CGRectMake(10, 8, width/4-10, 30)];
-    KHmingzi.text = @"客户姓名:";
+    
+    UILabel *KHmingzi = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, (kuan-10)/4-(kuan-10)/4/4, gao/4)];
+    KHmingzi.text = @"客户姓名";
     KHmingzi.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     KHmingzi.font = [UIFont systemFontOfSize:13];
-    UILabel *KHmingzi1  = [[UILabel alloc]initWithFrame:CGRectMake(width/4-10, 3.5, width/4, 40)];
+    //KHmingzi.backgroundColor = [UIColor redColor];
+    UILabel *KHmingzi1  = [[UILabel alloc]initWithFrame:CGRectMake((kuan-10)/4-(kuan-10)/4/4, 0, (kuan-5)/4+15, gao/4)];
     KHmingzi1.text = [customerList[indexPath.section] objectForKey:@"customerName" ];
     KHmingzi1.font = [UIFont systemFontOfSize:13];
     KHmingzi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     KHmingzi1.textAlignment = NSTextAlignmentCenter;
     KHmingzi1.numberOfLines = 0;
-    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, 40, width, 1)];
+    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, gao/4, kuan, 1)];
     xian1.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
     
     
     
-    UILabel *LXdianhua = [[UILabel alloc]initWithFrame:CGRectMake(width/2-10, 8, width/4-20, 30)];
-    LXdianhua.text = @"联系电话:";
+    UILabel *LXdianhua = [[UILabel alloc]initWithFrame:CGRectMake((kuan-5)/4*2, 0, (kuan-10)/4-(kuan-10)/4/4, gao/4)];
+    LXdianhua.text = @"联系电话";
     LXdianhua.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     LXdianhua.font = [UIFont systemFontOfSize:13];
-    UILabel *LXdianhua1 = [[UILabel alloc]initWithFrame:CGRectMake(width/2+width/4-30, 8, width/4+30, 30)];
-    LXdianhua1.text = [customerList[indexPath.section] objectForKey:@"linkmanPhone" ];
+    
+   
+    UILabel *LXdianhua1 = [[UILabel alloc]initWithFrame:CGRectMake((kuan-5)/4*2+( (kuan-10)/4-(kuan-10)/4/4), 0, (kuan-5)/4+15, gao/4)];
+    //LXdianhua1.text = [customerList[indexPath.section] objectForKey:@"linkmanPhone" ];
+    LXdianhua1.text = @"18345559961";
     LXdianhua1.font = [UIFont systemFontOfSize:14];
     LXdianhua1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-    LXdianhua1.textAlignment = NSTextAlignmentCenter;
-   
-
+    //LXdianhua1.textAlignment = NSTextAlignmentCenter;
     
     
     
-    UILabel *CKdizhi = [[UILabel alloc]initWithFrame:CGRectMake(10, 45, 70, 30)];
-    CKdizhi.text = @"仓库地址:";
+    
+    
+    UILabel *CKdizhi = [[UILabel alloc]initWithFrame:CGRectMake(5, gao/4, (kuan-5)/4-15, gao/4)];
+    CKdizhi.text = @"仓库地址";
     CKdizhi.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     CKdizhi.font = [UIFont systemFontOfSize:13];
-    UILabel *CKdizhi1 = [[UILabel alloc]initWithFrame:CGRectMake(80, 45, width-90, 30)];
+    UILabel *CKdizhi1 = [[UILabel alloc]initWithFrame:CGRectMake((kuan-5)/4-15, gao/4, kuan-((kuan-5)/4-15)-5, gao/4)];
     CKdizhi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-    
+   
     
     
     
     CKdizhi1.text = [customerList[indexPath.section] objectForKey:@"warehouseAddress" ];
     CKdizhi1.font = [UIFont systemFontOfSize:13];
     CKdizhi1.textAlignment = NSTextAlignmentCenter;
-    UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(0, 75, width, 1)];
+    UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(0, gao/2, width, 1)];
     xian2.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
     
     
 
-    UILabel *ZCdizhi = [[UILabel alloc]initWithFrame:CGRectMake(10, 80, 70, 30)];
-    ZCdizhi.text = @"注册地址:";
+    UILabel *ZCdizhi = [[UILabel alloc]initWithFrame:CGRectMake(5, gao/2, (kuan-5)/4-15, gao/4)];
+    ZCdizhi.text = @"注册地址";
     ZCdizhi.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     ZCdizhi.font = [UIFont systemFontOfSize:13];
-    UILabel *ZCdizhi1 = [[UILabel alloc]initWithFrame:CGRectMake(80, 80, width-90, 30)];
-    
-    
-    
+    UILabel *ZCdizhi1 = [[UILabel alloc]initWithFrame:CGRectMake((kuan-5)/4-15, gao/2, kuan-((kuan-5)/4-15)-5, gao/4)];
     
     ZCdizhi1.text = [customerList[indexPath.section] objectForKey:@"registerAddress" ];
     ZCdizhi1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     ZCdizhi1.font = [UIFont systemFontOfSize:13];
     ZCdizhi1.textAlignment = NSTextAlignmentCenter;
     
+    UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(0, gao/4*3, width, 1)];
+    xian3.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
+    
+    
 
-    UILabel *FZren = [[UILabel alloc]initWithFrame:CGRectMake(10, 115, width/4-10, 30)];
-    FZren.text = @"负  责  人:";
+    UILabel *FZren = [[UILabel alloc]initWithFrame:CGRectMake(5, gao/4*3, (kuan-10)/4-(kuan-10)/4/4, gao/4)];
+    FZren.text = @"负  责  人";
     FZren.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     FZren.font = [UIFont systemFontOfSize:13];
-    UILabel *FZren1 = [[UILabel alloc]initWithFrame:CGRectMake(width/4-10, 115, width/4, 30)];
-    
-    
+    UILabel *FZren1 = [[UILabel alloc]initWithFrame:CGRectMake((kuan-10)/4-(kuan-10)/4/4, gao/4*3, (kuan-5)/4+15, gao/4)];
     
     
     FZren1.text = [customerList[indexPath.section] objectForKey:@"officer" ];
@@ -245,23 +261,21 @@
     
     
 
-    UILabel *LXren = [[UILabel alloc]initWithFrame:CGRectMake(width/2-10, 115, width/4-20, 30)];
-    LXren.text = @"联  系  人:";
+    UILabel *LXren = [[UILabel alloc]initWithFrame:CGRectMake((kuan-5)/4*2, gao/4*3, (kuan-10)/4-(kuan-10)/4/4, gao/4)];
+    LXren.text = @"联  系  人";
     LXren.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     LXren.font = [UIFont systemFontOfSize:13];
-    UILabel *LXren1 = [[UILabel alloc]initWithFrame:CGRectMake(width/2+width/4-30, 115, width/4+30, 30)];
+    UILabel *LXren1 = [[UILabel alloc]initWithFrame:CGRectMake((kuan-5)/4*2+( (kuan-10)/4-(kuan-10)/4/4), gao/4*3, (kuan-5)/4+15, gao/4)];
    
-    
     
     LXren1.text = [customerList[indexPath.section] objectForKey:@"linkman" ];
     LXren1.font = [UIFont systemFontOfSize:13];
     LXren1.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-    LXren1.textAlignment = NSTextAlignmentCenter;
-    UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(0, 115, width, 1)];
-    xian3.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
+    //LXren1.textAlignment = NSTextAlignmentCenter;
+    
 
     
-    image = [[UIImageView alloc]initWithFrame:CGRectMake(1, 0, width-2, 150)];
+    image = [[UIImageView alloc]initWithFrame:CGRectMake(1, 0, kuan-2, gao)];
     image.image = [UIImage imageNamed:@"b.png"];
     
     image1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-20, 3, 15, 15)];
