@@ -217,7 +217,7 @@
     }
     else if(indexPath.section == 1)
     {
-        return 105;
+        return 85;
     }
     else if(indexPath.section == 2)
     {
@@ -374,35 +374,35 @@
     else if (indexPath.section ==1)
     {
         
-        UILabel *shu = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 100, 30)];
-        shu.textColor = [UIColor colorWithHexString:@"f36713" alpha:1];
-        shu.font = [UIFont systemFontOfSize:20];
+//        UILabel *shu = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 100, 30)];
+//        shu.textColor = [UIColor colorWithHexString:@"f36713" alpha:1];
+//        shu.font = [UIFont systemFontOfSize:20];
         
         
-        UILabel *biaoti = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, width-20, 42)];
+        UILabel *biaoti = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, width-20, 42)];
         biaoti.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
         biaoti.font = [UIFont systemFontOfSize:16];
         biaoti.numberOfLines = 0;
         
         
-        UIView *xian = [[UIView alloc]initWithFrame:CGRectMake(10, 72, width-20, 1)];
+        UIView *xian = [[UIView alloc]initWithFrame:CGRectMake(10,52, width-20, 1)];
         xian.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
         
         
-        UILabel *shuliang= [[UILabel alloc]initWithFrame:CGRectMake(10, 79, 60, 21)];
+        UILabel *shuliang= [[UILabel alloc]initWithFrame:CGRectMake(10, 59, 60, 21)];
         shuliang.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         shuliang.font = [UIFont systemFontOfSize:14];
         //      － 加
-        UIButton *jia = [[UIButton alloc]initWithFrame:CGRectMake(width-30, 80, 20, 20)];
+        UIButton *jia = [[UIButton alloc]initWithFrame:CGRectMake(width-30, 60, 20, 20)];
         [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
         [jia addTarget:self action:@selector(jian) forControlEvents:UIControlEventTouchUpInside];
         //      － 减
-        UIButton *jian = [[UIButton alloc]initWithFrame:CGRectMake(width-80, 80, 20, 20)];
+        UIButton *jian = [[UIButton alloc]initWithFrame:CGRectMake(width-80, 60, 20, 20)];
         [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
         [jian addTarget:self action:@selector(jia) forControlEvents:UIControlEventTouchUpInside];
         
         //     －加减的数量
-        shuru = [[UITextField alloc]initWithFrame:CGRectMake(width-60, 80, 30,20)];
+        shuru = [[UITextField alloc]initWithFrame:CGRectMake(width-60, 60, 30,20)];
         shuru.text = shuliangCunFang;
         shuru.delegate=self;
         shuru.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
@@ -411,11 +411,11 @@
         shuru.delegate=self;
         
         
-        shu.text = @"￥待估价～";
+        //shu.text = @"￥待估价～";
         biaoti.text = [NSString stringWithFormat:@"%@",array1[2]];
         shuliang.text = @"数量";
         
-        [cell.contentView addSubview:shu];
+       // [cell.contentView addSubview:shu];
         [cell.contentView addSubview:biaoti];
         [cell.contentView addSubview:xian];
         [cell.contentView addSubview:shuliang];
