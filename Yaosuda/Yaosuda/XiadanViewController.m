@@ -107,7 +107,7 @@
         NSString*kehuID=[NSString stringWithFormat:@"%@",[kehuxinxi objectForKey:@"id"]];
         if (kehuID!=nil&&![kehuID isEqual:[NSNull null]]) {
             
-            [WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
+           // [WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
             
             __block int qq;
             for (int i=0; i<jieshou.count; i++) {
@@ -147,9 +147,7 @@
                 NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
                 [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     qq++;
-                    if (qq==jieshou.count) {
-                        [WarningBox warningBoxHide:YES andView:self.view];
-                    }
+                   
                     
                     if ([[responseObject objectForKey:@"code"] intValue]==0000) {
                         
@@ -159,10 +157,17 @@
                         
                         NSString*discountAmount=[NSString stringWithFormat:@"%@",[data objectForKey:@"discountAmount"]];
                         [dixx setObject:discountAmount forKey:[NSString stringWithFormat:@"%d",i]];
-                        
-                        [jiage addObject:@"1"];
+                        if (jiage.count!=jieshou.count) {
+                            [jiage addObject:@"1"];
+
+                        }
                         
                     }
+                    
+                    if (qq==jieshou.count) {
+                        [WarningBox warningBoxHide:YES andView:self.view];
+                    }
+                    
                     [_tableview reloadData];
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     qq++;
@@ -231,7 +236,16 @@
     di.hidden=YES;
     aa=1;
     self.navigationItem.rightBarButtonItem = right;
-    [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
+   
+    if (jieshou.count==0) {
+        NSFileManager *defaultManager;
+        defaultManager = [NSFileManager defaultManager];
+       
+        NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+       
+        [defaultManager removeItemAtPath:path1 error:NULL];
+    }else{
+     [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -304,14 +318,14 @@
                     [jieshou writeToFile:path atomically:YES];
                     
                     [self.tableview reloadData];
-                    //[self viewWillAppear:YES];
+                    [self viewWillAppear:YES];
 
                     }
                     else{
-                         NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-                        jieshou=[NSMutableArray arrayWithContentsOfFile:path];
+                        // NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+                       // jieshou=[NSMutableArray arrayWithContentsOfFile:path];
                         [self.tableview reloadData];
-                       // [self viewWillAppear:YES];
+                        [self viewWillAppear:YES];
                     }
                                         
                 }
@@ -322,7 +336,7 @@
         [WarningBox warningBoxHide:YES andView:self.view];
     }];
     
-    
+    }
     
     
     
@@ -408,12 +422,12 @@
     xian2.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
     
     UILabel *danjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 75, width-40-80, 30 )];
-    
     if (jiage.count!=jieshou.count) {
+        
         danjia1.text=@"待估价";
         
         danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        danjia1.font = [UIFont systemFontOfSize:15];
+        danjia1.font = [UIFont systemFontOfSize:12];
         danjia1.textAlignment = NSTextAlignmentCenter;
     }
     else{
@@ -436,7 +450,7 @@
     if (jiage.count!=jieshou.count) {
         LXdanjia1.text=@"待估价";
         LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        LXdanjia1.font = [UIFont systemFontOfSize:15];
+        LXdanjia1.font = [UIFont systemFontOfSize:12];
         LXdanjia1.textAlignment = NSTextAlignmentCenter;
     }
     else{
@@ -587,7 +601,9 @@
             //删除字典内容
             
             [jieshou removeObjectAtIndex:indexPath.row];
-            
+            if (jieshou.count==0) {
+                jieshou=nil;
+            }
             [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             
             [self.tableview reloadData];

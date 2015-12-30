@@ -19,7 +19,7 @@
 #import "MJRefresh.h"
 
 
-@interface XuanzeViewController ()<MJRefreshBaseViewDelegate>
+@interface XuanzeViewController ()<MJRefreshBaseViewDelegate,UITextFieldDelegate>
 {   MJRefreshHeaderView*header;
     MJRefreshHeaderView*footer;
     NSMutableArray*jiahao;
@@ -308,6 +308,7 @@
 
 //   下单的产品数量
     shuru.text = xiadanshuliang[indexPath.row];
+    shuru.delegate=self;
     [shuru setTag:indexPath.row+1000];
     shuru.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     shuru.textAlignment = NSTextAlignmentCenter;
@@ -357,15 +358,84 @@
 }
 #pragma mark - button点击事件
 -(void)tianjia:(UIButton*)tt{
-    NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:productionsList[tt.tag-2000]];
    
-    [dd setObject:xiadanshuliang[tt.tag-2000] forKey:@"shuliang"];
-    if([xiadanshuliang[tt.tag-2000] intValue]==0){
-        [WarningBox warningBoxModeText:@"数量不能为空哟～" andView:self.view];
-    }else{
-    [chuande addObject:dd];
+    //userID    暂时不用改
+    NSString * userID=@"0";
+    
+    //请求地址   地址不同 必须要改
+    NSString * url =@"/prod/stockNum";
+    
+    //时间戳
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    NSDate *datenow = [NSDate date];
+    NSString *nowtimeStr = [formatter stringFromDate:datenow];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    
+    
+    //将上传对象转换为json格式字符串
+    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+    //出入参数：
+    NSString*_shangID=[NSString stringWithFormat:@"%@",[productionsList[tt.tag-2000] objectForKey:@"id"]];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:_shangID,@"productionsId", nil];
+    
+    NSString*jsonstring=[writer stringWithObject:datadic];
+    
+    //获取签名
+    NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
+    
+    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+    
+    //电泳借口需要上传的数据
+    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+    
+    [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary*data=[responseObject objectForKey:@"data"];
+       NSString* stockNum=[data objectForKey:@"stockNum"];
+        if ([stockNum intValue]-[xiadanshuliang[tt.tag-2000] intValue]<0) {
+            
+            
+            NSString*message=[NSString stringWithFormat:@"您选择了%@件商品，当前剩余库存为%@件",xiadanshuliang[tt.tag-2000],stockNum];
+           
+            UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"库存不足" message:message preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                
+            }];
+            UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action1];
+            [alert addAction:action2];
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            
+            
+        }
+        else{
+            [WarningBox warningBoxModeText:@"添加成功~" andView:self.view];
+            NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:productionsList[tt.tag-2000]];
+            [dd setObject:xiadanshuliang[tt.tag-2000] forKey:@"shuliang"];
+            if([xiadanshuliang[tt.tag-2000] intValue]==0){
+                [WarningBox warningBoxModeText:@"数量不能为空哟～" andView:self.view];
+            }else{
+                [chuande addObject:dd];
+            }
+
+        
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
+        NSLog(@"%@",error);
+    }];
+    
     }
-}
 -(void)jia:(UIButton*)tt{
 //找到当前cell
      UITableViewCell *cell=(UITableViewCell*)[[tt superview] superview ];
@@ -474,5 +544,43 @@
     }];
     
 }
+//手动添加下单数量
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+ 
+    NSLog(@"%@",string);
+    
+    //找到当前cell
+    UITableViewCell *cell=(UITableViewCell*)[[textField superview] superview ];
+    
+    // 找到当前 没值 ?
+    NSIndexPath *index=[self.tableview indexPathForCell:cell];
+//    NSLog(@"0000000--%@",textField.text);
+    
 
+    
+    
+    if([string isEqualToString:@""]){
+        
+        NSString*yuanlai=[NSString stringWithFormat:@"%@",xiadanshuliang[index.row]];
+        int x=[yuanlai intValue]/10;
+        
+        xiadanshuliang[index.row]=[NSString stringWithFormat:@"%d",x];
+        
+        NSLog(@"%@",xiadanshuliang);
+        
+    }else {
+        
+        NSString*yuanlai=[NSString stringWithFormat:@"%@",xiadanshuliang[index.row]];
+         int x=[yuanlai intValue]*10+[string intValue];
+        
+      
+        xiadanshuliang[index.row]=[NSString stringWithFormat:@"%d",x];
+        NSLog(@"%@",xiadanshuliang);
+        
+    }
+    
+    
+    return YES;
+}
 @end

@@ -404,6 +404,7 @@
         //     －加减的数量
         shuru = [[UITextField alloc]initWithFrame:CGRectMake(width-60, 80, 30,20)];
         shuru.text = shuliangCunFang;
+        shuru.delegate=self;
         shuru.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         shuru.textAlignment = NSTextAlignmentCenter;
         shuru.borderStyle=UITextBorderStyleNone;
@@ -634,7 +635,33 @@
     
     
 }
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if([string isEqualToString:@""]){
+        
+        NSString*yuanlai=[NSString stringWithFormat:@"%@",shuliangCunFang];
+        int x=[yuanlai intValue]/10;
+        
+        shuliangCunFang=[NSString stringWithFormat:@"%d",x];
+        
+      
+        
+    }else {
+        
+        NSString*yuanlai=[NSString stringWithFormat:@"%@",shuliangCunFang];
+        int x=[yuanlai intValue]*10+[string intValue];
+        yuanlai=[NSString stringWithFormat:@"%d",x];
+        
+        shuliangCunFang=yuanlai;
+  
+        
+    }
 
+ 
+    
+    return YES;
+    
+}
 - (IBAction)fanhui:(id)sender {
     
     [self.navigationController popViewControllerAnimated:YES];
