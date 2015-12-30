@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -682,7 +683,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9c8-We-eyK">
-                                <rect key="frame" x="300" y="562" width="300" height="38"/>
+                                <rect key="frame" x="375" y="562" width="225" height="38"/>
                                 <color key="backgroundColor" red="0.95294117647058818" green="0.40392156862745099" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="确认">
@@ -702,7 +703,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FUb-9N-yEv">
-                                <rect key="frame" x="0.0" y="562" width="300" height="38"/>
+                                <rect key="frame" x="0.0" y="562" width="375" height="38"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="4KI-aX-fdh"/>
@@ -725,7 +726,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="9c8-We-eyK" firstAttribute="width" secondItem="FUb-9N-yEv" secondAttribute="width" id="6wO-np-d4D"/>
+                            <constraint firstItem="9c8-We-eyK" firstAttribute="width" secondItem="FUb-9N-yEv" secondAttribute="width" multiplier="0.6" id="6wO-np-d4D"/>
                             <constraint firstItem="9c8-We-eyK" firstAttribute="top" secondItem="Qqo-X6-aJC" secondAttribute="bottom" id="7Ys-k4-lu0"/>
                             <constraint firstAttribute="trailing" secondItem="vHS-Cb-hSb" secondAttribute="trailing" id="9qr-VC-Pzj"/>
                             <constraint firstItem="vHS-Cb-hSb" firstAttribute="top" secondItem="Fbw-pD-ncL" secondAttribute="bottom" id="CbW-T0-htk"/>
@@ -883,7 +884,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEf-jE-rSc">
                                 <rect key="frame" x="0.0" y="564" width="600" height="36"/>
-                                <color key="backgroundColor" red="0.047058823530000002" green="0.71764705880000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.95294117647058818" green="0.40392156862745099" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="cjz-Hy-mCQ"/>
                                 </constraints>
@@ -946,7 +947,7 @@
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UkN-SE-UWE">
                                 <rect key="frame" x="0.0" y="564" width="600" height="36"/>
-                                <color key="backgroundColor" red="0.047058823530000002" green="0.71764705880000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.95294117647058818" green="0.40392156862745099" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="2Wm-9i-XfC"/>
                                 </constraints>
