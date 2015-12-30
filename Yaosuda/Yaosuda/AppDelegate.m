@@ -24,21 +24,22 @@
 //    [self.window makeKeyAndVisible];
     
     // Required
-#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+    [APService setupWithOption:launchOptions];
+    // Required
+
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
-        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |UIUserNotificationTypeSound |UIUserNotificationTypeAlert) categories:nil];
+    [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                       UIUserNotificationTypeSound |
+                                                       UIUserNotificationTypeAlert)
+                                           categories:nil];
     } else {
         //categories 必须为nil
-        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert) categories:nil];
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                       UIRemoteNotificationTypeSound |
+                                                       UIRemoteNotificationTypeAlert)
+                                           categories:nil];
     }
-#else
-    //categories 必须为nil
-    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert) categories:nil];
-#endif
-    // Required
-    [APService setupWithOption:launchOptions];
-    
     return YES;
 }
 
@@ -61,13 +62,19 @@
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
-    
-    // IOS 7 Support Required
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
+    
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    
+    NSLog(@"Receive remote notification : %@",userInfo);
+    UIAlertView *alert =
+    [[UIAlertView alloc] initWithTitle:@"温馨提示"
+                               message:@"推送成功！"
+                              delegate:nil
+                     cancelButtonTitle:@"确定"
+                     otherButtonTitles:nil];
+    [alert show];
     // Required
     [APService handleRemoteNotification:userInfo];
 }

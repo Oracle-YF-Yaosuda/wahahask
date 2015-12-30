@@ -132,7 +132,7 @@
     SBJsonWriter *writer = [[SBJsonWriter alloc]init];
     NSString  *Now;
     NSDateFormatter*ff=[[NSDateFormatter alloc] init];
-    [ff setDateFormat:@"YYYY-MM-dd"];
+    [ff setDateFormat:@"yyyy-MM-dd"];
     Now=[ff stringFromDate:[NSDate date]];
     NSLog(@"%@",Now);
     NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
@@ -143,7 +143,7 @@
     //出入参数：
     NSString*pageNo=[NSString stringWithFormat:@"%d",ye];
     NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", pageNo,@"pageNo",@"10",@"pageSize",nil];
-
+    NSLog(@"%@-----------%@",Now,san);
     NSString*jsonstring=[writer stringWithObject:datadic];
 
     //获取签名
@@ -161,9 +161,10 @@
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
-        
+            NSLog(@"%@",responseObject);
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
             zuobian=[datadic objectForKey:@"orderList"];
+            NSLog(@"zuobian ------%@",zuobian);
             [_tableview reloadData];
         
         }
@@ -815,7 +816,7 @@
             zuobian=[datadic objectForKey:@"orderList"];
             zhi=1;
             [_tableview reloadData];
-            //NSLog(@"zuobian***************%@",zuobian);
+           // NSLog(@"zuobian***************%@",zuobian);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
