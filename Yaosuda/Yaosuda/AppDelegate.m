@@ -50,26 +50,26 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+   //[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
-- (void)application:(UIApplication *)application
-didRegisterUserNotificationSettings:
-(UIUserNotificationSettings *)notificationSettings {
-}
-- (void)application:(UIApplication *)application
-handleActionWithIdentifier:(NSString *)identifier
-forLocalNotification:(UILocalNotification *)notification
-  completionHandler:(void (^)())completionHandler {
-}
-- (void)application:(UIApplication *)application
-handleActionWithIdentifier:(NSString *)identifier
-forRemoteNotification:(NSDictionary *)userInfo
-  completionHandler:(void (^)())completionHandler {
-}
+//- (void)application:(UIApplication *)application
+//didRegisterUserNotificationSettings:
+//(UIUserNotificationSettings *)notificationSettings {
+//}
+//- (void)application:(UIApplication *)application
+//handleActionWithIdentifier:(NSString *)identifier
+//forLocalNotification:(UILocalNotification *)notification
+//  completionHandler:(void (^)())completionHandler {
+//}
+//- (void)application:(UIApplication *)application
+//handleActionWithIdentifier:(NSString *)identifier
+//forRemoteNotification:(NSDictionary *)userInfo
+//  completionHandler:(void (^)())completionHandler {
+//}
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    [application setApplicationIconBadgeNumber:0];
+  //  [application setApplicationIconBadgeNumber:0];
     [application cancelAllLocalNotifications];
 }
 
@@ -77,14 +77,14 @@ forRemoteNotification:(NSDictionary *)userInfo
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    
+    NSLog(@"收到通知:%@", [self logDic:userInfo]);
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 
     
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
- 
+ NSLog(@"收到通知:%@", [self logDic:userInfo]);
     [APService handleRemoteNotification:userInfo];
 }
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
