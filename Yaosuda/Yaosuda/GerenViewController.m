@@ -126,7 +126,7 @@
         la3.text = @"手机号";
         
         la11.text = [NSString stringWithFormat:@"%@",[yonghu objectForKey:@"loginName"] ];
-        la22.text =@"四川成都";
+        la22.text =@"写死了";
         la33.text = [NSString stringWithFormat:@"%@",[yonghu objectForKey:@"mobile"] ];
         
     }
@@ -135,9 +135,9 @@
         la2.text = @"授信额度";
         la3.text = @"资金金额";
         
-        la11.text = @"chengdu";
+        la11.text = @"写死了";
         la22.text = [NSString stringWithFormat:@"%@",[zhanghao objectForKey:@"creditFund"]];
-        la33.text = @"100000000.00元";
+        la33.text = @"写死了 元";
         
     }
     else if(indexPath.section == 2){
