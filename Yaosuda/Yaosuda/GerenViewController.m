@@ -143,7 +143,7 @@
     else if(indexPath.section == 2){
         la1.text = @"修改密码";
         sanjiao = [[UIButton alloc]initWithFrame:CGRectMake(width-30,15, 11 , 15)];
-        [sanjiao setBackgroundImage:[UIImage imageNamed:@"icon.png"] forState:UIControlStateNormal];
+        [sanjiao setBackgroundImage:[UIImage imageNamed:@"iconcc.png"] forState:UIControlStateNormal];
         xian2.hidden=YES;
         
     }

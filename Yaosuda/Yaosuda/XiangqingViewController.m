@@ -432,7 +432,7 @@
         chanpinzizhi.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         chanpinzizhi.text = @"产品资质";
         UIButton *tu = [[UIButton alloc]initWithFrame:CGRectMake(width-21, 15, 11, 15)];
-        [tu setImage:[UIImage imageNamed:@"icon.png"] forState:UIControlStateNormal];
+        [tu setImage:[UIImage imageNamed:@"iconcc.png"] forState:UIControlStateNormal];
         
         
         [cell.contentView addSubview:chanpinzizhi];

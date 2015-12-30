@@ -38,7 +38,7 @@
 		957094031C0C19FA007E27C3 /* Color+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 957094021C0C19FA007E27C3 /* Color+Hex.m */; };
 		957094121C0C292C007E27C3 /* a.png in Resources */ = {isa = PBXBuildFile; fileRef = 957094051C0C292B007E27C3 /* a.png */; };
 		957094131C0C292C007E27C3 /* b.png in Resources */ = {isa = PBXBuildFile; fileRef = 957094061C0C292B007E27C3 /* b.png */; };
-		957094141C0C292C007E27C3 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 957094071C0C292B007E27C3 /* icon.png */; };
+		957094141C0C292C007E27C3 /* iconcc.png in Resources */ = {isa = PBXBuildFile; fileRef = 957094071C0C292B007E27C3 /* iconcc.png */; };
 		957094151C0C292C007E27C3 /* icon_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 957094081C0C292B007E27C3 /* icon_03.png */; };
 		957094161C0C292C007E27C3 /* tx_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 957094091C0C292B007E27C3 /* tx_03.png */; };
 		957094171C0C292C007E27C3 /* 产品资质.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9570940A1C0C292B007E27C3 /* 产品资质.jpg */; };
@@ -269,7 +269,7 @@
 		957094021C0C19FA007E27C3 /* Color+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Color+Hex.m"; sourceTree = "<group>"; };
 		957094051C0C292B007E27C3 /* a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = a.png; sourceTree = "<group>"; };
 		957094061C0C292B007E27C3 /* b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b.png; sourceTree = "<group>"; };
-		957094071C0C292B007E27C3 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		957094071C0C292B007E27C3 /* iconcc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconcc.png; sourceTree = "<group>"; };
 		957094081C0C292B007E27C3 /* icon_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_03.png; sourceTree = "<group>"; };
 		957094091C0C292B007E27C3 /* tx_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tx_03.png; sourceTree = "<group>"; };
 		9570940A1C0C292B007E27C3 /* 产品资质.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "产品资质.jpg"; sourceTree = "<group>"; };
@@ -596,7 +596,7 @@
 				95E7D6C51C0D7B1900E95058 /* 9205.jpg */,
 				957094051C0C292B007E27C3 /* a.png */,
 				957094061C0C292B007E27C3 /* b.png */,
-				957094071C0C292B007E27C3 /* icon.png */,
+				957094071C0C292B007E27C3 /* iconcc.png */,
 				957094081C0C292B007E27C3 /* icon_03.png */,
 				957094091C0C292B007E27C3 /* tx_03.png */,
 				9570940A1C0C292B007E27C3 /* 产品资质.jpg */,
@@ -1151,7 +1151,7 @@
 				9570941C1C0C292C007E27C3 /* 商品详情_MarkMan.png in Resources */,
 				957094131C0C292C007E27C3 /* b.png in Resources */,
 				95F70A211C0BDE6300BEC51C /* @3x_bj_11.png in Resources */,
-				957094141C0C292C007E27C3 /* icon.png in Resources */,
+				957094141C0C292C007E27C3 /* iconcc.png in Resources */,
 				95F709F11C0BDE6300BEC51C /* 8.jpg in Resources */,
 				95F70A1A1C0BDE6300BEC51C /* icon.png in Resources */,
 				95F70A0A1C0BDE6300BEC51C /* @2x_xj_03_06.png in Resources */,
