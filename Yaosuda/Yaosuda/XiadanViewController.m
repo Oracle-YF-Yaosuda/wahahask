@@ -368,7 +368,7 @@
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 150;//cell高度
+    return 190;//cell高度
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -437,7 +437,7 @@
         danjia1.font = [UIFont systemFontOfSize:15];
         danjia1.textAlignment = NSTextAlignmentCenter;
     }
-    UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(0, 140, width, 10)];
+    UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(0, 140, width, 1)];
     xian3.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
     UILabel *LXdanjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 110, 80, 30)];
@@ -462,6 +462,23 @@
     }
     
     
+    UILabel *quanbu = [[UILabel alloc] init];
+    quanbu.frame = CGRectMake(20, 145, 80, 30);
+    quanbu.text = @"客户单价:";
+    quanbu.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
+    quanbu.font = [UIFont systemFontOfSize:15];
+    
+    UILabel *quanbu1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 145, width-40-80, 30 )];
+
+    quanbu1.text =@"待修改";
+    
+    quanbu1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    quanbu1.font = [UIFont systemFontOfSize:15];
+    quanbu1.textAlignment = NSTextAlignmentCenter;
+    
+    UIView *xian4 = [[UIView alloc]initWithFrame:CGRectMake(0, 180, width, 10)];
+    xian4.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+    
     
     
     if (aa == 1)
@@ -482,6 +499,10 @@
         [cell.contentView addSubview:LXdanjia];
         [cell.contentView addSubview:LXdanjia1];
         [cell.contentView addSubview:xian3];
+        
+        [cell.contentView addSubview:quanbu];
+        [cell.contentView addSubview:quanbu1];
+        [cell.contentView addSubview:xian4];
         
     }
     else if (aa == 2)
@@ -513,6 +534,10 @@
         [cell.contentView addSubview:LXdanjia1];
         [cell.contentView addSubview:xian3];
         
+        [cell.contentView addSubview:quanbu];
+        [cell.contentView addSubview:quanbu1];
+        [cell.contentView addSubview:xian4];
+
         [cell.contentView addSubview:jia];
         [cell.contentView addSubview:jian];
         
