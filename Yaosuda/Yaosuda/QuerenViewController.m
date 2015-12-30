@@ -13,6 +13,7 @@
 #import "yonghuziliao.h"
 #import "WarningBox.h"
 #import "lianjie.h"
+#import "ChaxunViewController.h"
 
 @interface QuerenViewController (){
     NSMutableArray*shangid;
@@ -90,6 +91,13 @@
             NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
             [defaultManager removeItemAtPath:path error:NULL];
             [defaultManager removeItemAtPath:path1 error:NULL];
+           
+           //跳转到订单查询
+           
+           ChaxunViewController *chaxun = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
+           [self.navigationController pushViewController:chaxun animated:YES];
+           
+           
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
