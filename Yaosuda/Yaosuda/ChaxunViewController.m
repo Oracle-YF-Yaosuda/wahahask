@@ -134,7 +134,7 @@
     NSDateFormatter*ff=[[NSDateFormatter alloc] init];
     [ff setDateFormat:@"yyyy-MM-dd"];
     Now=[ff stringFromDate:[NSDate date]];
-    NSLog(@"%@",Now);
+    
     NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
     NSDate* theDate;
     theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*3 ];
@@ -143,8 +143,7 @@
     //出入参数：
     NSString*pageNo=[NSString stringWithFormat:@"%d",ye];
     NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", pageNo,@"pageNo",@"10",@"pageSize",nil];
-    NSLog(@"%@-----------%@",Now,san);
-    NSString*jsonstring=[writer stringWithObject:datadic];
+       NSString*jsonstring=[writer stringWithObject:datadic];
 
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
@@ -161,15 +160,15 @@
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
-            NSLog(@"%@",responseObject);
+           
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
             zuobian=[datadic objectForKey:@"orderList"];
-            NSLog(@"zuobian ------%@",zuobian);
+            
             [_tableview reloadData];
         
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
+       
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"获取数据失败!" andView:self.view];
 
@@ -218,7 +217,7 @@
         
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             youbian=[data1 objectForKey:@"orderList"];
-            //NSLog(@"youbian----------%@",youbian);
+            
             [_tableview reloadData];
             
         }
@@ -795,7 +794,7 @@
     
     NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",_qian.text,@"startDate",_hou.text,@"endDate", @"",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
     NSString*jsonstring=[writer stringWithObject:datadic];
-    NSLog(@"---------%@",datadic);
+   
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
     
@@ -816,7 +815,7 @@
             zuobian=[datadic objectForKey:@"orderList"];
             zhi=1;
             [_tableview reloadData];
-           // NSLog(@"zuobian***************%@",zuobian);
+         
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
