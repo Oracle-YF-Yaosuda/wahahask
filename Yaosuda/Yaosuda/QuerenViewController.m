@@ -77,7 +77,6 @@
 {
     
     Left = [[NSMutableArray alloc]init];
-    [Left addObject:@"客户姓名:"];
     [Left addObject:@"联系电话:"];
     [Left addObject:@"仓库地址:"];
     [Left addObject:@"注册地址:"];
@@ -89,7 +88,7 @@
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 6;
+    return 5;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -120,8 +119,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
     
-    //[Right addObject:[kehu objectForKey:@"customerName"]];
-    [Right addObject:@"无字段"];
+  
     //[Right addObject:[kehu objectForKey:@"linkmanPhone"]];
     [Right addObject:@"无字段"];
     //[Right addObject:[kehu objectForKey:@"warehouseAddress"]];
