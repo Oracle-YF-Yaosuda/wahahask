@@ -28,7 +28,7 @@
     NSString*plstr=[pl componentsJoinedByString:@","];
 NSString*host=[NSString stringWithFormat:@"%@%@%@",sign_host,app_name,api_url];
     NSMutableString*basestr=[NSMutableString stringWithFormat:@"%@%@%@%@",host,url,plstr,appsecret];
-    NSLog(@"basestr-------%@",basestr);
+    
     //把字符串basestr中的＋用％20代替
      NSString * beibei = [basestr stringByReplacingOccurrencesOfString:@"+" withString:@"%20"];
     //加盐

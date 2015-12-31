@@ -61,7 +61,9 @@
         self.scrollView.pagingEnabled = YES;
         [self addSubview:self.scrollView];
         self.currentPageIndex = 0;
-        
+        NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+       NSArray*arr=[userDefaultes objectForKey: @"duoshao"] ;
+        int s=(int)arr.count;
         //穿件uipageconrol
         self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 230, self.frame.size.width, 10)];
         //设置uipageconrol的圆点颜色
@@ -71,7 +73,8 @@
         //设置uipagecontrol控件当前显示第几页
         self.pageControl.currentPage = 0;
         // 设置uipageconcrol控件总共包含几页
-        self.pageControl.numberOfPages = 5;
+        
+        self.pageControl.numberOfPages = s;
         self.pageControl.hidesForSinglePage = YES;
         [self addSubview:self.pageControl];
         

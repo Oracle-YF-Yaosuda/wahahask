@@ -26,6 +26,7 @@
     NSMutableArray*jiahao;
     NSMutableArray*shuzi;
     CGFloat width;
+    NSString*tupian;
     CGFloat height;
     UIButton *jian;
     UIButton *tianjia;
@@ -211,7 +212,7 @@
     _imagr = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,width/3 ,width/3)];
    
         
-    NSString*tupian=[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"pics"]];
+    tupian=[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"pics"]];
         
    
         
@@ -354,6 +355,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     XiangqingViewController *xiangqing = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiangqing"];
     xiangqing.shangID=[NSString stringWithFormat:@"%@",[productionsList[indexPath.row ] objectForKey:@"id"]];
+    NSString * ij=[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"pics"]];
+  
+    NSArray*arr=[ij componentsSeparatedByString:@"|"];
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    [userDefaultes setObject:arr forKey:@"duoshao"];
     [self.navigationController pushViewController:xiangqing animated:YES];
    
 }
@@ -433,7 +439,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
-        NSLog(@"%@",error);
+        
     }];
     
     }
@@ -549,14 +555,14 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
  
-    NSLog(@"%@",string);
+    
     
     //找到当前cell
     UITableViewCell *cell=(UITableViewCell*)[[textField superview] superview ];
     
     // 找到当前 没值 ?
     NSIndexPath *index=[self.tableview indexPathForCell:cell];
-//    NSLog(@"0000000--%@",textField.text);
+
     
 
     
@@ -568,7 +574,7 @@
         
         xiadanshuliang[index.row]=[NSString stringWithFormat:@"%d",x];
         
-        NSLog(@"%@",xiadanshuliang);
+    
         
     }else {
         
@@ -577,7 +583,7 @@
         
       
         xiadanshuliang[index.row]=[NSString stringWithFormat:@"%d",x];
-        NSLog(@"%@",xiadanshuliang);
+       
         
     }
     

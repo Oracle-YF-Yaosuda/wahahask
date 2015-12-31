@@ -17,6 +17,7 @@
 #import "NSTimer+Addition.h"
 #import "CycleScrollView.h"
 #import "KeyboardToolBar.h"
+#import "UIImageView+WebCache.h"
 
 @interface XiangqingViewController ()<UITextFieldDelegate>
 {
@@ -27,12 +28,13 @@
     UIImageView *image;
     NSString*stockNum;
     UITextField *shuru;
+    NSArray*arr1;
     NSString *shuliangCunFang;
     NSMutableArray *array;
     NSMutableArray *array1;
 }
 @property(strong,nonatomic) UIScrollView *scrollView;
-@property(strong,nonatomic) UIPageControl *pageControl;
+
 @property(strong,nonatomic) NSTimer *timer;
 @property (nonatomic , retain) CycleScrollView *mainScorllView;
 @end
@@ -43,6 +45,7 @@
     [super viewDidLoad];
     
     [self arraychuanjian];
+    arr1=[NSArray array];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     shangpin=[[NSMutableDictionary alloc] init];
@@ -90,12 +93,11 @@
             NSDictionary*data=[responseObject valueForKey:@"data"];
 
             shangpin=(NSMutableDictionary*)[data objectForKey:@"productions"];
-            NSString *pic = [data objectForKey:@"pics"];
+            NSString *pic = [shangpin objectForKey:@"pics"];
             
-            NSArray *arr = [pic componentsSeparatedByString:@"|"];
+            arr1 = [pic componentsSeparatedByString:@"|"];
             
-            NSLog(@"%@",arr);
-            
+           
             [array1 removeAllObjects];
             
             [array1 addObject:@" "];
@@ -341,20 +343,22 @@
     
     if (indexPath.section == 0)
     {
+        if (arr1.count==0) {
+            
+        }else{
         //轮播
         //创建scrollview
         self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, width, 250) animationDuration:3];
-        
-        
-        
         //  demo里的scroll
         NSMutableArray *viewsArray = [[NSMutableArray alloc] init];
-        
-        for (int i = 0; i < 5; ++i)
+        for (int i = 0; i < arr1.count; ++i)
         {
             UIImageView *tempLabel = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, 250)];
-            tempLabel.image=[UIImage imageNamed:@"3.png"];
+            NSString*lian=[NSString stringWithFormat:@"%@",service_host];
+            NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",lian,arr1[1]]];
+            //tempLabel.image=[UIImage imageNamed:@"3.png"];
             
+            [tempLabel sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"1.jpg"]];
             [viewsArray addObject:tempLabel];
             
         }
@@ -365,17 +369,18 @@
         {
             return viewsArray[pageIndex];
         };
+        int s=(int)arr1.count;
         self.mainScorllView.totalPagesCount = ^NSInteger(void)
         {
-            return 5;
+            return s;
         };
         self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex)
         {
             NSLog(@"点击了第%ld个",pageIndex);
         };
         [cell.contentView addSubview:self.mainScorllView];
-        [cell.contentView addSubview:self.pageControl];
-        [cell.contentView bringSubviewToFront:self.pageControl];
+     
+    }
     }
     else if (indexPath.section ==1)
     {
@@ -420,7 +425,7 @@
         [KeyboardToolBar registerKeyboardToolBar:shuru];
 
         
-        //shu.text = @"￥待估价～";
+        
         biaoti.text = [NSString stringWithFormat:@"%@",array1[2]];
         shuliang.text = @"数量";
         
@@ -580,8 +585,6 @@
         stockNum=[data objectForKey:@"stockNum"];
         if ([stockNum intValue]-[shuru.text intValue]<0) {
             NSString*message=[NSString stringWithFormat:@"您选择了%@件商品，当前剩余库存为%@件",shuru.text,stockNum];
-            NSLog(@"%d",[stockNum intValue]-[shuru.text intValue]);
-            NSLog(@"%@",stockNum);
             UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"库存不足" message:message preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
@@ -639,7 +642,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
-        NSLog(@"%@",error);
+        
     }];
     
     
