@@ -870,13 +870,14 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="52"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收  货  人:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SC-zA-pWf">
-                                        <rect key="frame" x="23" y="14" width="66" height="18"/>
-                                        <animations/>
+
+                                        <rect key="frame" x="12" y="14" width="84" height="18"/>
+
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="66" id="Cdr-l4-ZIR"/>
+                                            <constraint firstAttribute="width" constant="84" id="Cdr-l4-ZIR"/>
                                             <constraint firstAttribute="height" constant="18" id="FWy-hU-yMj"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -894,11 +895,11 @@
                                 <animations/>
                                 <color key="backgroundColor" red="0.27450980392156865" green="0.45098039215686275" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="5SC-zA-pWf" firstAttribute="leading" secondItem="6qK-VH-QKg" secondAttribute="leading" constant="23" id="A77-Mc-4DH"/>
-                                    <constraint firstItem="5SC-zA-pWf" firstAttribute="leading" secondItem="6qK-VH-QKg" secondAttribute="leading" constant="23" id="Qtj-dw-jnf"/>
+                                    <constraint firstItem="5SC-zA-pWf" firstAttribute="leading" secondItem="6qK-VH-QKg" secondAttribute="leading" constant="12" id="A77-Mc-4DH"/>
+                                    <constraint firstItem="5SC-zA-pWf" firstAttribute="leading" secondItem="6qK-VH-QKg" secondAttribute="leading" constant="12" id="Qtj-dw-jnf"/>
                                     <constraint firstItem="mbw-1m-VzR" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="top" constant="14" id="RdW-7T-W9B"/>
                                     <constraint firstAttribute="trailing" secondItem="mbw-1m-VzR" secondAttribute="trailing" constant="8" id="VTv-WM-xtS"/>
-                                    <constraint firstItem="mbw-1m-VzR" firstAttribute="leading" secondItem="5SC-zA-pWf" secondAttribute="trailing" constant="7" id="dhW-nh-3A9"/>
+                                    <constraint firstItem="mbw-1m-VzR" firstAttribute="leading" secondItem="5SC-zA-pWf" secondAttribute="trailing" id="dhW-nh-3A9"/>
                                     <constraint firstItem="5SC-zA-pWf" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="top" constant="14" id="l3R-RG-p14"/>
                                     <constraint firstItem="5SC-zA-pWf" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="top" constant="14" id="mSQ-A6-3ap"/>
                                     <constraint firstAttribute="height" constant="52" id="whT-Rj-lpl"/>

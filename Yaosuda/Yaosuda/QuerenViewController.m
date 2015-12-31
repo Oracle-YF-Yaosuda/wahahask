@@ -31,6 +31,9 @@
     
     NSMutableArray *Left;
     NSMutableArray *Right;
+    
+    NSArray*arr;
+    NSDictionary*kehu;
 }
 - (IBAction)tijiao:(id)sender;
 @end
@@ -54,15 +57,16 @@
     shangid=[NSMutableArray array];
     shuliangji=[NSMutableArray array];
     NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-    NSArray*arr=[NSArray arrayWithContentsOfFile:path];
+    arr=[NSArray arrayWithContentsOfFile:path];
+    //NSLog(@"%@",arr);
     for (int i=0; i<arr.count; i++) {
        [ shangid addObject:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"id"]]];
         [shuliangji addObject:[arr[i] objectForKey:@"shuliang"]];
     }
     NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
-    NSDictionary*kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
+    kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
     customerId=[NSString stringWithFormat:@"%@",[kehu objectForKey:@"id"]];
-    
+    NSLog(@"%@",kehu);
     self.tableview.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
     [self makearray];
@@ -71,6 +75,7 @@
 
 -(void)makearray
 {
+    
     Left = [[NSMutableArray alloc]init];
     [Left addObject:@"客户姓名:"];
     [Left addObject:@"联系电话:"];
@@ -79,12 +84,7 @@
     [Left addObject:@"负 责 人 :"];
     [Left addObject:@"联 系 人 :"];
     Right = [[NSMutableArray alloc]init];
-    [Right addObject:@"暂无数据"];
-    [Right addObject:@"暂无数据"];
-    [Right addObject:@"暂无数据"];
-    [Right addObject:@"暂无数据"];
-    [Right addObject:@"暂无数据"];
-    [Right addObject:@"暂无数据"];
+    
 }
 
 
@@ -119,6 +119,21 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
+    
+    //[Right addObject:[kehu objectForKey:@"customerName"]];
+    [Right addObject:@"无字段"];
+    //[Right addObject:[kehu objectForKey:@"linkmanPhone"]];
+    [Right addObject:@"无字段"];
+    //[Right addObject:[kehu objectForKey:@"warehouseAddress"]];
+    [Right addObject:@"无字段"];
+    //[Right addObject:[kehu objectForKey:@"registerAddress"]];
+    [Right addObject:@"无字段"];
+    [Right addObject:[kehu objectForKey:@"officer"]];
+    //[Right addObject:@"无字段"];
+    //[Right addObject:[kehu objectForKey:@"linkman"]];
+    [Right addObject:@"无字段"];
+
+    
     //创建label
     UILabel *left = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 70, 40)];
     left.textColor = ziticolor;
