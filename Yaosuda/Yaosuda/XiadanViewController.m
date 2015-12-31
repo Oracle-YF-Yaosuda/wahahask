@@ -32,7 +32,7 @@
     UIBarButtonItem *right1;
     NSMutableArray*wo;
     int aa;
-    
+    int he;
     UIButton *jia;
     UIButton *jian;
     NSMutableArray *xiuGaiShangPin;
@@ -68,6 +68,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidLoad];
+    he=0;
     //   数量修改
     xiuGaiShangPin=[NSMutableArray array];
     di.hidden = YES;
@@ -107,10 +108,14 @@
         //提取客户id
         NSString*kehuID=[NSString stringWithFormat:@"%@",[kehuxinxi objectForKey:@"id"]];
         if (kehuID!=nil&&![kehuID isEqual:[NSNull null]]) {
+            if (![fm fileExistsAtPath:path]) {
+                
+            }else{
+                
+            [WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
             
-           // [WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
-            
-            __block int qq;
+            __block int qq=0;
+                
             for (int i=0; i<jieshou.count; i++) {
                 
                 //userID    暂时不用改
@@ -179,6 +184,7 @@
                                         [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
                 }];
             }
+            }
         }
     }
    // [WarningBox warningBoxHide:YES andView:self.view];
@@ -235,8 +241,8 @@
 -(void)baocun
 {
     di.hidden=YES;
-    aa=1;
-    self.navigationItem.rightBarButtonItem = right;
+    
+    
    
     if (jieshou.count==0) {
         NSFileManager *defaultManager;
@@ -313,6 +319,8 @@
                    
                 }else
                 {
+                    aa=1;
+                    self.navigationItem.rightBarButtonItem = right;
                     if (qq==1) {
                         //  保存plist文件 重新写入
                     NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
@@ -436,6 +444,7 @@
     }
     else{
         danjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+        he=1;
         
         danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         danjia1.font = [UIFont systemFontOfSize:15];
@@ -459,6 +468,7 @@
     }
     else{
         LXdanjia1.text =[dixx objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+        he=1;
         
         LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         LXdanjia1.font = [UIFont systemFontOfSize:15];
@@ -473,13 +483,21 @@
     quanbu.font = [UIFont systemFontOfSize:15];
     
     UILabel *quanbu1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 145, width-40-80, 30 )];
-
-    quanbu1.text =@"待修改";
-    
-    quanbu1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    quanbu1.font = [UIFont systemFontOfSize:15];
-    quanbu1.textAlignment = NSTextAlignmentCenter;
-    
+    if (jiage.count!=jieshou.count) {
+        quanbu1.text=@"待估价";
+        quanbu1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+        quanbu1.font = [UIFont systemFontOfSize:12];
+        quanbu1.textAlignment = NSTextAlignmentCenter;
+    }
+    else{
+        quanbu1.text =[NSString stringWithFormat:@"%d",[wo[indexPath.row] intValue]*[[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] intValue]];
+        he=1;
+        
+        quanbu1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+        quanbu1.font = [UIFont systemFontOfSize:15];
+        quanbu1.textAlignment = NSTextAlignmentCenter;
+    }
+   
     UIView *xian4 = [[UIView alloc]initWithFrame:CGRectMake(0, 180, width, 10)];
     xian4.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
@@ -597,8 +615,10 @@
         for (int i=0; i<dicc.count; i++) {
             m+= [wo[i] intValue]*[[dicc objectForKey:[NSString stringWithFormat:@"%d",i]] intValue];
         }
-        
-        
+        if (he==0) {
+            [WarningBox warningBoxModeText:@"请稍等～～" andView:self.view];
+        }
+        else{
         NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
         NSDictionary*kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
         
@@ -608,7 +628,7 @@
         qu.meme =[NSString stringWithFormat:@"%.2f元",m];
         [self.navigationController pushViewController:qu animated:YES];
         
-        
+        }
     }
 }
 
@@ -704,13 +724,21 @@
 
 
 - (IBAction)xltianjia:(UIButton *)sender {
+   
     if ([_kehumingzi.text isEqualToString: @"请选择客户"]) {
         [WarningBox warningBoxModeText:@"请先选择客户!" andView:self.view];
     }
     else{
+        if (aa==2) {
+            [WarningBox warningBoxModeText:@"请保存您的设置!" andView:self.view];
+        }
+        else{
+            
+        
         XuanzeViewController *xuanze = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xuanze"];
         
         [self.navigationController pushViewController:xuanze animated:YES];
+    }
     }
 }
 @end
