@@ -817,7 +817,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qK-VH-QKg">
-                                <rect key="frame" x="0.0" y="20" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="52"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收  货  人:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SC-zA-pWf">
                                         <rect key="frame" x="23" y="14" width="66" height="18"/>
@@ -848,11 +848,11 @@
                                     <constraint firstItem="mbw-1m-VzR" firstAttribute="leading" secondItem="5SC-zA-pWf" secondAttribute="trailing" constant="7" id="dhW-nh-3A9"/>
                                     <constraint firstItem="5SC-zA-pWf" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="top" constant="14" id="l3R-RG-p14"/>
                                     <constraint firstItem="5SC-zA-pWf" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="top" constant="14" id="mSQ-A6-3ap"/>
-                                    <constraint firstAttribute="height" constant="100" id="whT-Rj-lpl"/>
+                                    <constraint firstAttribute="height" constant="52" id="whT-Rj-lpl"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CvT-us-k0U" userLabel="View2">
-                                <rect key="frame" x="0.0" y="135" width="600" height="54"/>
+                                <rect key="frame" x="0.0" y="80" width="600" height="54"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="应付金额：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8Y-bW-M2C">
                                         <rect key="frame" x="0.0" y="18" width="300" height="21"/>
@@ -895,18 +895,30 @@
                                     <action selector="tijiao:" destination="HBt-ph-xEl" eventType="touchUpInside" id="gdk-tQ-Qba"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QoT-4s-sRc">
+                                <rect key="frame" x="0.0" y="154" width="600" height="410"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="HBt-ph-xEl" id="BPP-F8-wuQ"/>
+                                    <outlet property="delegate" destination="HBt-ph-xEl" id="mU8-iz-nRU"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="QoT-4s-sRc" firstAttribute="top" secondItem="CvT-us-k0U" secondAttribute="bottom" constant="20" id="6NI-XY-O1E"/>
                             <constraint firstItem="6qK-VH-QKg" firstAttribute="leading" secondItem="fJn-PY-FwP" secondAttribute="leading" id="Erm-HG-A5d"/>
                             <constraint firstItem="Iak-2M-ibc" firstAttribute="top" secondItem="PEf-jE-rSc" secondAttribute="bottom" id="J7w-sf-FSl"/>
                             <constraint firstAttribute="trailing" secondItem="6qK-VH-QKg" secondAttribute="trailing" id="Jga-XW-PQ2"/>
                             <constraint firstAttribute="trailing" secondItem="PEf-jE-rSc" secondAttribute="trailing" id="MNz-CN-3DA"/>
+                            <constraint firstAttribute="trailing" secondItem="QoT-4s-sRc" secondAttribute="trailing" id="PMD-6l-xgd"/>
                             <constraint firstItem="CvT-us-k0U" firstAttribute="leading" secondItem="fJn-PY-FwP" secondAttribute="leading" id="VCt-Rd-TQ1"/>
                             <constraint firstItem="6qK-VH-QKg" firstAttribute="top" secondItem="jQU-eQ-wtl" secondAttribute="bottom" id="Xeq-VT-bSW"/>
                             <constraint firstAttribute="trailing" secondItem="CvT-us-k0U" secondAttribute="trailing" id="e0i-sX-7su"/>
-                            <constraint firstItem="CvT-us-k0U" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="bottom" constant="15" id="ekz-Rq-8Cl"/>
+                            <constraint firstItem="CvT-us-k0U" firstAttribute="top" secondItem="6qK-VH-QKg" secondAttribute="bottom" constant="8" id="ekz-Rq-8Cl"/>
+                            <constraint firstItem="PEf-jE-rSc" firstAttribute="top" secondItem="QoT-4s-sRc" secondAttribute="bottom" id="p6l-io-Ras"/>
                             <constraint firstItem="PEf-jE-rSc" firstAttribute="leading" secondItem="fJn-PY-FwP" secondAttribute="leading" id="uJB-Dv-vFh"/>
+                            <constraint firstItem="QoT-4s-sRc" firstAttribute="leading" secondItem="fJn-PY-FwP" secondAttribute="leading" id="vrN-Ck-OA9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="确认下单" id="Qfq-sj-QkV">
@@ -918,6 +930,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="shouhuoren" destination="mbw-1m-VzR" id="Frc-Ra-Es2"/>
+                        <outlet property="tableview" destination="QoT-4s-sRc" id="W4A-Cx-jSe"/>
                         <outlet property="yingfu" destination="UaP-DN-Zlh" id="lci-pI-M6J"/>
                     </connections>
                 </viewController>

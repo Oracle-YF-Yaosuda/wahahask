@@ -89,7 +89,6 @@
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
 
-            
             shangpin=(NSMutableDictionary*)[data objectForKey:@"productions"];
             NSString *pic = [data objectForKey:@"pics"];
             
