@@ -58,7 +58,7 @@
     shuliangji=[NSMutableArray array];
     NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
     arr=[NSArray arrayWithContentsOfFile:path];
-    //NSLog(@"%@",arr);
+    
     for (int i=0; i<arr.count; i++) {
        [ shangid addObject:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"id"]]];
         [shuliangji addObject:[arr[i] objectForKey:@"shuliang"]];
@@ -66,7 +66,7 @@
     NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
     kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
     customerId=[NSString stringWithFormat:@"%@",[kehu objectForKey:@"id"]];
-    NSLog(@"%@",kehu);
+   
     self.tableview.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
     [self makearray];

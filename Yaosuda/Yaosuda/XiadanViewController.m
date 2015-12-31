@@ -581,7 +581,7 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)textFieldDidChange :(UITextField *)theTextField{
-    NSLog( @"text changed: %@", theTextField.text);
+    
     UITableViewCell *cell=(UITableViewCell*)[[theTextField superview] superview ];
     
     NSIndexPath *index=[self.tableview indexPathForCell:cell];
