@@ -454,7 +454,7 @@
     xian3.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
     UILabel *LXdanjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 110, 80, 30)];
-    LXdanjia.text = @"联系人单价:";
+    LXdanjia.text = @"职员单价:";
     LXdanjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     LXdanjia.font = [UIFont systemFontOfSize:15];
     
@@ -478,7 +478,7 @@
     
     UILabel *quanbu = [[UILabel alloc] init];
     quanbu.frame = CGRectMake(20, 145, 80, 30);
-    quanbu.text = @"客户单价:";
+    quanbu.text = @"商品总价:";
     quanbu.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     quanbu.font = [UIFont systemFontOfSize:15];
     
