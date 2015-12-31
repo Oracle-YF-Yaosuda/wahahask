@@ -112,7 +112,7 @@
                 
             }else{
                 
-            [WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
+            [WarningBox warningBoxModeIndeterminate:@"价钱估算中..." andView:self.view];
             
             __block int qq=0;
                 
@@ -252,7 +252,7 @@
        
         [defaultManager removeItemAtPath:path1 error:NULL];
     }else{
-     [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
+     [WarningBox warningBoxModeIndeterminate:@"库存剩余判定中..." andView:self.view];
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -740,5 +740,16 @@
         [self.navigationController pushViewController:xuanze animated:YES];
     }
     }
+}
+- (IBAction)xuanzekehuii:(id)sender {
+    if (aa==2) {
+        [WarningBox warningBoxModeText:@"请保存您的设置!" andView:self.view];
+    }else{
+        KehuViewController*kehu=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"kehu"];
+        [self.navigationController pushViewController:kehu animated:YES];
+    }
+    
+    
+    
 }
 @end

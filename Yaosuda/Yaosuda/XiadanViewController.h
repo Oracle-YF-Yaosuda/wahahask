@@ -13,6 +13,8 @@
 @interface XiadanViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,PassTrendValueDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *kehumingzi;
 
+- (IBAction)xuanzekehuii:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 - (IBAction)fanhui:(id)sender;
