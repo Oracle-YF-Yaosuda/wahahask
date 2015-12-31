@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "APService.h"
-#import "ChaxunViewController.h"
 
 @interface AppDelegate ()
 
@@ -33,9 +32,7 @@
                                        categories:nil];
     [APService setupWithOption:launchOptions];
     
-    [[NSBundle mainBundle] loadNibNamed:@"JpushTabBarViewController"
-                                  owner:self
-                                options:nil];
+    [[NSBundle mainBundle] loadNibNamed:@"JpushTabBarViewController" owner:self options:nil];
     
     }
     
@@ -56,63 +53,46 @@
 //- (void)application:(UIApplication *)application
 //didRegisterUserNotificationSettings:
 //(UIUserNotificationSettings *)notificationSettings {
+//    
 //}
 //- (void)application:(UIApplication *)application
 //handleActionWithIdentifier:(NSString *)identifier
 //forLocalNotification:(UILocalNotification *)notification
 //  completionHandler:(void (^)())completionHandler {
+//    
 //}
-//- (void)application:(UIApplication *)application
-//handleActionWithIdentifier:(NSString *)identifier
-//forRemoteNotification:(NSDictionary *)userInfo
-//  completionHandler:(void (^)())completionHandler {
+//- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler {
+//    
 //}
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
   //  [application setApplicationIconBadgeNumber:0];
-    [application cancelAllLocalNotifications];
+    //[application cancelAllLocalNotifications];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    NSLog(@"收到通知:%@", [self logDic:userInfo]);
+    NSLog(@"收到通知:shangshangshang%@", userInfo);
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
-
-    
+   
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
- NSLog(@"收到通知:%@", [self logDic:userInfo]);
+    NSLog(@"收到通知:xiaxiaxia%@", userInfo);
     [APService handleRemoteNotification:userInfo];
 }
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    
-    // Required
+//-(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
+//    NSLog(@"notificationSettings-----%@",notificationSettings);
+//}
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    NSLog(@"deviceToken-----%@",deviceToken);
     [APService registerDeviceToken:deviceToken];
 }
+
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-- (NSString *)logDic:(NSDictionary *)dic {
-    if (![dic count]) {
-        return nil;
-    }
-    NSString *tempStr1 =
-    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
-                                                 withString:@"\\U"];
-    NSString *tempStr2 =
-    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-    NSString *tempStr3 =
-    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
-    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *str =
-    [NSPropertyListSerialization propertyListFromData:tempData
-                                     mutabilityOption:NSPropertyListImmutable
-                                               format:NULL
-                                     errorDescription:NULL];
-    return str;
 }
 
 @end
