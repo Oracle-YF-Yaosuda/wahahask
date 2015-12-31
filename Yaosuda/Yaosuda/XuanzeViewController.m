@@ -17,6 +17,7 @@
 #import "UIImageView+WebCache.h"
 #import "XiadanViewController.h"
 #import "MJRefresh.h"
+#import "KeyboardToolBar.h"
 
 
 @interface XuanzeViewController ()<MJRefreshBaseViewDelegate,UITextFieldDelegate>
@@ -304,8 +305,6 @@
     
     
     shuru = [[UITextField alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+((width-width/3-width/3*2/3+5-70)/3-10), width/3/6*4+12, (width-width/3-width/3*2/3+5-70)/3-5,width/3/6)];
-    
-
 //   下单的产品数量
     shuru.text = xiadanshuliang[indexPath.row];
     shuru.delegate=self;
@@ -313,7 +312,9 @@
     shuru.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     shuru.textAlignment = NSTextAlignmentCenter;
     shuru.borderStyle=UITextBorderStyleNone;
-    
+    shuru.keyboardType = UIKeyboardTypeNumberPad;
+    //键盘添加完成
+    [KeyboardToolBar registerKeyboardToolBar:shuru];
     
     UIButton *gengduo= [[UIButton alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+(width-width/3-width/3*2/3+5-70)+15,width/3/6*4,width-(width/3+5+width/3*2/3-15)-(width-width/3-width/3*2/3+5-70)-20,width/3/5)];
    

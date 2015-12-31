@@ -16,6 +16,7 @@
 #import "ZizunViewController.h"
 #import "NSTimer+Addition.h"
 #import "CycleScrollView.h"
+#import "KeyboardToolBar.h"
 
 @interface XiangqingViewController ()<UITextFieldDelegate>
 {
@@ -409,7 +410,10 @@
         shuru.textAlignment = NSTextAlignmentCenter;
         shuru.borderStyle=UITextBorderStyleNone;
         shuru.delegate=self;
-        
+        shuru.keyboardType = UIKeyboardTypeNumberPad;
+        //键盘添加完成
+        [KeyboardToolBar registerKeyboardToolBar:shuru];
+
         
         //shu.text = @"￥待估价～";
         biaoti.text = [NSString stringWithFormat:@"%@",array1[2]];

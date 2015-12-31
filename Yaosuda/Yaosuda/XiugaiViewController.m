@@ -13,6 +13,7 @@
 #import "hongdingyi.h"
 #import "WarningBox.h"
 #import "yonghuziliao.h"
+#import "KeyboardToolBar.h"
 
 @interface XiugaiViewController ()
 
@@ -22,6 +23,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //键盘添加完成
+    [KeyboardToolBar registerKeyboardToolBar:self.oldpass];
+    [KeyboardToolBar registerKeyboardToolBar:self.newpass];
+    [KeyboardToolBar registerKeyboardToolBar:self.newpass1];
     
     [self daili];
 }
@@ -61,7 +66,8 @@
 }
 
 - (IBAction)queren:(id)sender {
-    
+    //键盘消失
+    [self.view endEditing:YES];
     if (![self Oldpassword:self.oldpass.text]) {
         [WarningBox warningBoxModeText:@"请输入就密码" andView:self.view];
     }
@@ -78,8 +84,7 @@
     
     else{
         NSString*loginName=[[yonghuziliao getUserInfo] objectForKey:@"loginName"];
-        //键盘消失
-        [self.view endEditing:YES];
+        
         //userID    暂时不用改
         NSString * userID=@"0";
         

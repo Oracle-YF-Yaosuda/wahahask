@@ -15,7 +15,7 @@
 #import "SBJsonWriter.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "yonghuziliao.h"
-
+#import "KeyboardToolBar.h"
 @interface ViewController ()
 @end
 
@@ -29,6 +29,10 @@
     //设置圆角
     self.diview.layer.cornerRadius = 5.0;
     self.denglu.layer.cornerRadius = 5.0;
+    //键盘添加完成
+    [KeyboardToolBar registerKeyboardToolBar:self.user];
+    [KeyboardToolBar registerKeyboardToolBar:self.pass];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

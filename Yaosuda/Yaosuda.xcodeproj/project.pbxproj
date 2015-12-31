@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		951646011C34C27100A781B7 /* KeyboardToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 951646001C34C27100A781B7 /* KeyboardToolBar.m */; };
 		9521ABD21C11817F0036B052 /* ZizunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9521ABD11C11817F0036B052 /* ZizunViewController.m */; };
 		956160471C155FDC005F92C9 /* KehuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 956160461C155FDC005F92C9 /* KehuViewController.m */; };
 		957093B61C0BF3AD007E27C3 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 9570939E1C0BF3AD007E27C3 /* NSObject+SBJson.m */; };
@@ -208,6 +209,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		951645FF1C34C27100A781B7 /* KeyboardToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardToolBar.h; sourceTree = "<group>"; };
+		951646001C34C27100A781B7 /* KeyboardToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardToolBar.m; sourceTree = "<group>"; };
 		9521ABD01C11817F0036B052 /* ZizunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZizunViewController.h; sourceTree = "<group>"; };
 		9521ABD11C11817F0036B052 /* ZizunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZizunViewController.m; sourceTree = "<group>"; };
 		956160461C155FDC005F92C9 /* KehuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KehuViewController.m; sourceTree = "<group>"; };
@@ -506,6 +509,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		951645FE1C34C27100A781B7 /* 键盘 */ = {
+			isa = PBXGroup;
+			children = (
+				951645FF1C34C27100A781B7 /* KeyboardToolBar.h */,
+				951646001C34C27100A781B7 /* KeyboardToolBar.m */,
+			);
+			path = "键盘";
+			sourceTree = "<group>";
+		};
 		9570939C1C0BF3AD007E27C3 /* SBJSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -679,6 +691,7 @@
 		95F7094F1C0BDE2400BEC51C = {
 			isa = PBXGroup;
 			children = (
+				951645FE1C34C27100A781B7 /* 键盘 */,
 				D29D7EFD1C33692500E17B8F /* lib */,
 				D2D16EA51C323A0200060941 /* Frameworks */,
 				D21BDF8E1C112E000031F431 /* 协议与本地数据 */,
@@ -1287,6 +1300,7 @@
 				957093E31C0BF3B6007E27C3 /* AFURLRequestSerialization.m in Sources */,
 				957093E21C0BF3B6007E27C3 /* AFURLConnectionOperation.m in Sources */,
 				957093E51C0BF3B6007E27C3 /* AFURLSessionManager.m in Sources */,
+				951646011C34C27100A781B7 /* KeyboardToolBar.m in Sources */,
 				9580C3541C17DCFA00FB6C4A /* XinxiViewController.m in Sources */,
 				95E7D6BF1C0D64E800E95058 /* XiugaiViewController.m in Sources */,
 				9596E4631C1E6B73008AEB8A /* QuerenViewController.m in Sources */,

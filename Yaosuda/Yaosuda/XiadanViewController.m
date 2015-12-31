@@ -15,6 +15,7 @@
 #import "lianjie.h"
 #import "hongdingyi.h"
 #import "XuanzeViewController.h"
+#import "KeyboardToolBar.h"
 
 
 @interface XiadanViewController ()
@@ -412,6 +413,9 @@
     shuliang1.font = [UIFont systemFontOfSize:15];
     shuliang1.textAlignment = NSTextAlignmentCenter;
     shuliang1.delegate=self;
+    shuliang1.keyboardType = UIKeyboardTypeNumberPad;
+    //键盘添加完成
+    [KeyboardToolBar registerKeyboardToolBar:shuliang1];
     
     UILabel *danjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 75, 80, 30)];
     danjia.text = @"客户单价:";
@@ -508,12 +512,12 @@
     else if (aa == 2)
     {
         //   减创建
-        jian = [[UIButton alloc]initWithFrame:CGRectMake(width/3*1.5,50 , 20, 20)];
+        jian = [[UIButton alloc]initWithFrame:CGRectMake(width/3*1.5,45 , 20, 20)];
         [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
         [jian addTarget:self action:@selector(jian:) forControlEvents:UIControlEventTouchUpInside];
         jian.tag=indexPath.row+20000;
         //   加创建
-        jia = [[UIButton alloc]initWithFrame:CGRectMake(width/3*1.5+60, 50, 20, 20)];
+        jia = [[UIButton alloc]initWithFrame:CGRectMake(width/3*1.5+60, 45, 20, 20)];
         [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
         [jia addTarget:self action:@selector(jia:) forControlEvents:UIControlEventTouchUpInside];
         jia.tag=indexPath.row+10000 ;
