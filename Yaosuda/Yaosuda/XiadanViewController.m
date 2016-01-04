@@ -221,13 +221,13 @@
     UIButton *quan = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width, height)];
     [quan addTarget:self action:@selector(xiaoshi) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImageView *iam = [[UIImageView alloc]initWithFrame:CGRectMake(50, 200, width-100, 100)];
+    UIImageView *iam = [[UIImageView alloc]initWithFrame:CGRectMake(20, 200, width-200, 100)];
     iam.image = [UIImage imageNamed:@"huadong.png"];
     
-    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 320, width, 25)];
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(20+width-200, 280, width, 25)];
     lab.font = [UIFont systemFontOfSize:17];
-    lab.textColor = [UIColor redColor];
-    lab.textAlignment = NSTextAlignmentCenter;
+    lab.textColor = [UIColor whiteColor];
+    //lab.textAlignment = NSTextAlignmentCenter;
     lab.text = @"*  向左侧拉删除";
     
     [self.view addSubview:di];
@@ -240,11 +240,13 @@
 }
 -(void)baocun
 {
+    
     di.hidden=YES;
     
-    
-   
     if (jieshou.count==0) {
+        
+        aa=1;
+        self.navigationItem.rightBarButtonItem = right;
         NSFileManager *defaultManager;
         defaultManager = [NSFileManager defaultManager];
        
@@ -252,7 +254,7 @@
        
         [defaultManager removeItemAtPath:path1 error:NULL];
     }else{
-     [WarningBox warningBoxModeIndeterminate:@"库存剩余判定中..." andView:self.view];
+    // [WarningBox warningBoxModeIndeterminate:@"库存剩余判定中..." andView:self.view];
     //userID    暂时不用改
     NSString * userID=@"0";
     
