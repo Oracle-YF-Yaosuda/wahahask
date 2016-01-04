@@ -513,6 +513,7 @@
     }
     [shuru resignFirstResponder];
 }
+
 -(void)jia
 {
     

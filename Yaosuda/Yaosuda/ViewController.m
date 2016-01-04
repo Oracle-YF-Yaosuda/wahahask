@@ -107,11 +107,35 @@
 }
 
 #pragma make - 两个按钮实现的功能
+-(BOOL)User:(NSString *)chusheng{
+    
+    if (self.user.text.length==0) {
+        return NO;
+    }
+    return YES;
+}
+-(BOOL)PassWord:(NSString *)newpass{
+    if (self.pass.text.length==0) {
+        return NO;
+    }
+    return YES;
+}
 
 
 - (IBAction)denglu:(UIButton *)sender {
     //键盘消失
     [self.view endEditing:YES];
+    
+    [self.view endEditing:YES];
+    if (![self User:self.user.text]) {
+        [WarningBox warningBoxModeText:@"请输入用户名" andView:self.view];
+    }
+    else if(![self PassWord:self.pass.text]){
+        [WarningBox warningBoxModeText:@"请输入密码" andView:self.view ];
+    }
+
+    else{
+    
     
     [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
     
@@ -171,7 +195,7 @@
         [WarningBox warningBoxModeText:@"网络连接失败！" andView:self.view];
         
     }];
-    
+    }
 }
 
 - (IBAction)genghuan:(UIButton *)sender {
