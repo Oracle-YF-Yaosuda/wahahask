@@ -66,7 +66,7 @@
     _tableview.frame=CGRectMake(0, 40, width, height);
     
     zhi = 1;
-    ye=1;
+    ye=5;
     [self huoququanbu];
     [self huoqudaishenhe];
     [self setupre];
