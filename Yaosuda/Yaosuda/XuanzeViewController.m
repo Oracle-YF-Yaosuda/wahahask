@@ -90,11 +90,11 @@
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
-    ye=1;
-    [self xxx];
+    ye=5;
+    [self xxx:@""];
     [self setupre];
 }
--(void)xxx{
+-(void)xxx:(NSString*)zhao{
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -113,8 +113,9 @@
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     [WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
     //出入参数：
-    NSString*pageNo=[NSString stringWithFormat:@"%d",ye];
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",@"",@"proName",@"",@"proCatalog",pageNo,@"pageNo",@"10",@"pageSize", nil];
+    NSString*pageSize=[NSString stringWithFormat:@"%d",ye];
+    NSString *proName=[NSString stringWithFormat:@"%@",zhao];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",proName,@"proName",@"",@"proCatalog",@"1",@"pageNo",pageSize,@"pageSize", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     
@@ -177,16 +178,16 @@
 }
 -(void)done:(MJRefreshBaseView*)refr{
     if (refr.tag==1001) {
-        ye=1;
-        [self xxx];
+        ye=5;
+        [self xxx:_search.text];
         [_tableview reloadData];
         [refr endRefreshing];
         
         
     }
     else{
-        ye++;
-        [self xxx];
+        ye+=5;
+        [self xxx:_search.text];
         [_tableview reloadData];
         [refr endRefreshing];
     }}
@@ -514,7 +515,8 @@
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",zhao,@"proName",@"",@"proCatalog",@"1",@"pageNo",@"100",@"pageSize", nil];
+    NSString *proName=[NSString stringWithFormat:@"%@",zhao];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",proName,@"proName",@"",@"proCatalog",@"1",@"pageNo",@"100",@"pageSize", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     

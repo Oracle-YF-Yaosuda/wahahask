@@ -8,9 +8,9 @@
 
 
 
-#define kPullToRefresh @"加载中..."
+#define kPullToRefresh @"准备加载..."
 #define kReleaseToRefresh @"上拉加载数据..."
-#define kRefreshing @"加载中..."
+#define kRefreshing @"加载已准备..."
 
 #import "MJRefreshFooterView.h"
 

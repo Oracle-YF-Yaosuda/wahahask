@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 itcast. All rights reserved.
 //  下拉刷新
 
-#define kPullToRefresh @"加载中..."
+#define kPullToRefresh @"准备加载..."
 #define kReleaseToRefresh @"下拉刷新数据..."
-#define kRefreshing @"加载中..."
+#define kRefreshing @"加载已准备..."
 
 #define kTimeKey @"MJRefreshHeaderView"
 

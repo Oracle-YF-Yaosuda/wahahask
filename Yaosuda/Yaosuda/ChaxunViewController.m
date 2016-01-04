@@ -87,7 +87,7 @@
 }
 -(void)done:(MJRefreshBaseView*)refr{
     if (refr.tag==1001) {
-        ye=1;
+        ye=5;
         if (zhi==1) {
             
         [self huoququanbu];
@@ -101,7 +101,7 @@
         
     }
     else{
-        ye++;
+        ye+=5;
         if (zhi==1) {
             [self huoququanbu];
         }else
@@ -141,8 +141,8 @@
     NSString*san=[ff stringFromDate:theDate];
 
     //出入参数：
-    NSString*pageNo=[NSString stringWithFormat:@"%d",ye];
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", pageNo,@"pageNo",@"10",@"pageSize",nil];
+    NSString*pageSize=[NSString stringWithFormat:@"%d",ye];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", @"1",@"pageNo",pageSize,@"pageSize",nil];
        NSString*jsonstring=[writer stringWithObject:datadic];
 
     //获取签名

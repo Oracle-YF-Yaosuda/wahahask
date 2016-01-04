@@ -50,7 +50,7 @@
     
     //解决tableview多出的白条
     self.automaticallyAdjustsScrollViewInsets = NO;
-    ye=1;
+    ye=5;
  
 
     [self kkk];
@@ -78,8 +78,8 @@
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     //出入参数：
-    NSString*pageNo=[NSString stringWithFormat:@"%d",ye];
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",pageNo,@"pageNo",@"5",@"pageSize", nil];
+    NSString*pageSize=[NSString stringWithFormat:@"%d",ye];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",@"1",@"pageNo",pageSize,@"pageSize", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     
@@ -127,7 +127,7 @@
 }
 -(void)done:(MJRefreshBaseView*)refr{
     if (refr.tag==1001) {
-        ye=1;
+        ye=5;
         [self kkk];
         [_tableview reloadData];
         [refr endRefreshing];
@@ -135,7 +135,7 @@
         
     }
     else{
-        ye++;
+        ye+=5;
         [self kkk];
         [_tableview reloadData];
         [refr endRefreshing];
