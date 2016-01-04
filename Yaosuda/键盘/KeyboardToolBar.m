@@ -31,7 +31,7 @@ static KeyboardToolBar *keyboardToolBar = nil;
     [textField setInputAccessoryView:keyboardToolBar];
     [textField addTarget:keyboardToolBar action:@selector(textFieldDidBegin:) forControlEvents:UIControlEventEditingDidBegin];
     [textField addTarget:keyboardToolBar action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    [keyboardToolBar.allRegisterTextFields setValue:textField forKey:[NSString stringWithFormat:@"%p",textField]];
+    //[keyboardToolBar.allRegisterTextFields setValue:textField forKey:[NSString stringWithFormat:@"%p",textField]];
 }
 
 + (void)unregisterKeyboardToolBar:(UITextField *)textField {

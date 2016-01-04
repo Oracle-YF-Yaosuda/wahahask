@@ -296,10 +296,13 @@
     {
         if (section == 0)
         {
-            return nil;
+            UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
+            baseView.backgroundColor = [UIColor clearColor];
+            return baseView;
         }
         UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
-        baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+        //baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+        baseView.backgroundColor = [UIColor clearColor];
         
         UILabel *groupName = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 35)];
         groupName.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
