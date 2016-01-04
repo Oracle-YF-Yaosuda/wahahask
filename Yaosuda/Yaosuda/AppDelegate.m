@@ -73,14 +73,16 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
+//如果是使用 iOS 7 的 Remote Notification 特性那么处理函数需要使用
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    NSLog(@"收到通知:shangshangshang%@", userInfo);
+    NSLog(@"收到通知:shangshangshang－－－－%@", userInfo);
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
    
 }
+//如果 App状态为正在前台或者后台运行，那么此函数将被调用，并且可通过AppDelegate的applicationState是否为UIApplicationStateActive判断程序是否在前台运行。此种情况在此函数中处理：
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSLog(@"收到通知:xiaxiaxia%@", userInfo);
+    NSLog(@"收到通知:xiaxiaxia－－－－%@", userInfo);
     [APService handleRemoteNotification:userInfo];
 }
 //-(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{

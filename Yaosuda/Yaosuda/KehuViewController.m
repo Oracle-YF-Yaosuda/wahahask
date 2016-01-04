@@ -220,8 +220,7 @@
     ZCdizhi1.textColor = ziticolor;
     ZCdizhi1.font = zitifont;
     ZCdizhi1.textAlignment = NSTextAlignmentCenter;
-    
-
+  
     UILabel *FZren = [[UILabel alloc]initWithFrame:CGRectMake(5, gao, (kuan-10)/4-(kuan-10)/4/4, gao/4)];
     FZren.textColor =ziticolor;
     FZren.font = zitifont;

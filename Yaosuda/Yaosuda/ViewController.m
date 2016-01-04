@@ -16,6 +16,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "yonghuziliao.h"
 #import "KeyboardToolBar.h"
+#import "yonghuziliao.h"
 @interface ViewController ()
 @end
 
@@ -29,11 +30,38 @@
     //设置圆角
     self.diview.layer.cornerRadius = 5.0;
     self.denglu.layer.cornerRadius = 5.0;
+    
+    NSString*path=[NSString stringWithFormat:@"%@/Documents/userInfo.plist",NSHomeDirectory()];
+    NSFileManager*fm=[NSFileManager defaultManager];
+    if (![fm fileExistsAtPath:path]) {
+        
+    }
+    else{
+        NSString*user=[NSString stringWithFormat:@"%@",[[yonghuziliao getUserInfo] objectForKey:@"loginName"]];
+        _user.text=user;
+//        NSString*pass=[NSString stringWithFormat:@"%@",[[yonghuziliao getUserInfo] objectForKey:@"password"]];
+//        _pass.text=pass;
+//        [self denglu:nil];
+    }
+
+    
     //键盘添加完成
     [KeyboardToolBar registerKeyboardToolBar:self.user];
-    [KeyboardToolBar registerKeyboardToolBar:self.pass];
+//    [KeyboardToolBar registerKeyboardToolBar:self.pass];
     
 }
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField==_user) {
+        [_user resignFirstResponder];
+        [_pass becomeFirstResponder];
+    }
+    else
+    {
+        [self.view endEditing:YES];
+    }
+    return YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
    
@@ -108,7 +136,7 @@
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     //出入参数：
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"heilongjiang",@"loginName",@"admin",@"password",@"867246020234069"/*imei*/,@"imei", nil];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:_user.text,@"loginName",_pass.text,@"password",@"867246020234069"/*imei*/,@"imei", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     

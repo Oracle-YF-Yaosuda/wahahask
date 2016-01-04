@@ -218,7 +218,7 @@
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
-            [WarningBox warningBoxModeText:@"下单成功" andView:self.view];
+            [WarningBox warningBoxModeText:@"下单成功" andView:self.navigationController.view];
             NSFileManager *defaultManager;
             defaultManager = [NSFileManager defaultManager];
             NSString*path=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
