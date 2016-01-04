@@ -39,7 +39,7 @@
  *
  *  @return d800528f235e4142b78a8c26c4d537d9
  */
-#define appkey @"17d07d59ca7143daa6e6b0d4"
+#define appkey @"a739089463def36753784915"
 //#define appkey @"d800528f235e4142b78a8c26c4d537d9"
 /**
  *  借口访问密码
