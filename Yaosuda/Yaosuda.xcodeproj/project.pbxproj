@@ -151,6 +151,7 @@
 		D23DC3C11C0EB3C1007C66DF /* mmm5.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C01C0EB3C1007C66DF /* mmm5.m */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
 		D23DC3C41C0EB3D6007C66DF /* URLEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C31C0EB3D6007C66DF /* URLEncode.m */; };
 		D23DC3C81C0EB3E6007C66DF /* lianjie.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C71C0EB3E6007C66DF /* lianjie.m */; };
+		D24632431C3A32E500A4A417 /* com_appleyifeng_YaoSudadev-2.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = D24632421C3A32E500A4A417 /* com_appleyifeng_YaoSudadev-2.mobileprovision */; };
 		D29D7F001C33705700E17B8F /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29D7EFF1C33705700E17B8F /* libPushSDK-1.8.8.a */; };
 		D2D16EAA1C323A8700060941 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D16EA91C323A8700060941 /* CFNetwork.framework */; };
 		D2D16EAC1C323A9600060941 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D16EAB1C323A9600060941 /* CoreFoundation.framework */; };
@@ -405,6 +406,7 @@
 		D23DC3C51C0EB3E6007C66DF /* hongdingyi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hongdingyi.h; sourceTree = "<group>"; };
 		D23DC3C61C0EB3E6007C66DF /* lianjie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lianjie.h; sourceTree = "<group>"; };
 		D23DC3C71C0EB3E6007C66DF /* lianjie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lianjie.m; sourceTree = "<group>"; };
+		D24632421C3A32E500A4A417 /* com_appleyifeng_YaoSudadev-2.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = "com_appleyifeng_YaoSudadev-2.mobileprovision"; sourceTree = "<group>"; };
 		D29D7EFE1C3369CA00E17B8F /* PushTest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushTest-Prefix.pch"; sourceTree = "<group>"; };
 		D29D7EFF1C33705700E17B8F /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		D2D16EA61C323A1500060941 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 				95F709641C0BDE2400BEC51C /* Main.storyboard */,
 				95F709691C0BDE2400BEC51C /* LaunchScreen.storyboard */,
 				95F7096C1C0BDE2400BEC51C /* Info.plist */,
+				D24632421C3A32E500A4A417 /* com_appleyifeng_YaoSudadev-2.mobileprovision */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1118,6 +1121,7 @@
 				TargetAttributes = {
 					95F709571C0BDE2400BEC51C = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = KBRTKNG36Q;
 					};
 					95F709701C0BDE2400BEC51C = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -1168,6 +1172,7 @@
 				95F709EE1C0BDE6300BEC51C /* 5.jpg in Resources */,
 				95F70A231C0BDE6300BEC51C /* @3x_kh_03.png in Resources */,
 				95F709F01C0BDE6300BEC51C /* 7.jpg in Resources */,
+				D24632431C3A32E500A4A417 /* com_appleyifeng_YaoSudadev-2.mobileprovision in Resources */,
 				95F7096B1C0BDE2400BEC51C /* LaunchScreen.storyboard in Resources */,
 				95F709FE1C0BDE6300BEC51C /* @2x_sp_21.png in Resources */,
 				95F709F71C0BDE6300BEC51C /* @2x_dl_13.png in Resources */,
@@ -1501,7 +1506,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = xx.Yaosuda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "70c1370c-ac45-49e0-8653-2dca8c1d693c";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/lib";
 			};
@@ -1524,7 +1529,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = xx.Yaosuda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "70c1370c-ac45-49e0-8653-2dca8c1d693c";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/lib";
 			};
