@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-
 #import "navigation.h"
 #import "WarningBox.h"
 #import "lianjie.h"
@@ -16,7 +15,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "yonghuziliao.h"
 #import "KeyboardToolBar.h"
-#import "yonghuziliao.h"
+
 @interface ViewController ()
 @end
 
@@ -126,7 +125,6 @@
     //键盘消失
     [self.view endEditing:YES];
     
-    [self.view endEditing:YES];
     if (![self User:self.user.text]) {
         [WarningBox warningBoxModeText:@"请输入用户名" andView:self.view];
     }
@@ -156,22 +154,24 @@
     
    
     //将上传对象转换为json格式字符串
-    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
-    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+    SBJsonWriter *writer = [[SBJsonWriter alloc]init];
     //出入参数：
     NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:_user.text,@"loginName",_pass.text,@"password",@"867246020234069"/*imei*/,@"imei", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     
     //获取签名
-    NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-    
+    NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
+        
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+
    // NSLog(@"%@",url1);
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
@@ -207,7 +207,7 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://15545457012"]];
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [WarningBox warningBoxModeText:@"不打电话你乱按啥！！！" andView:self.view];
+        [WarningBox warningBoxModeText:@"如需更换设备请联系我们" andView:self.view];
     }];
     
     [alert addAction:action1];
