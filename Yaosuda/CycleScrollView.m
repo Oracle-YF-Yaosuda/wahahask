@@ -8,6 +8,7 @@
 
 #import "CycleScrollView.h"
 #import "NSTimer+Addition.h"
+#import "Color+Hex.h"
 
 @interface CycleScrollView () <UIScrollViewDelegate>
 
@@ -67,9 +68,9 @@
         //穿件uipageconrol
         self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 230, self.frame.size.width, 10)];
         //设置uipageconrol的圆点颜色
-        self.pageControl.pageIndicatorTintColor = [UIColor redColor];
+        self.pageControl.pageIndicatorTintColor = [UIColor grayColor];
         //设置uipageconrol的高亮圆点颜色
-        self.pageControl.currentPageIndicatorTintColor = [UIColor greenColor];
+        self.pageControl.currentPageIndicatorTintColor = [UIColor orangeColor];
         //设置uipagecontrol控件当前显示第几页
         self.pageControl.currentPage = 0;
         // 设置uipageconcrol控件总共包含几页

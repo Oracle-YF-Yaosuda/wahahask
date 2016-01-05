@@ -88,13 +88,13 @@
     xia.backgroundColor = XianColor;
     //创建image
     UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(0, 1, width, 298)];
-    image.image = [UIImage imageNamed:@"shancun.jpg"];
+    image.image = [UIImage imageNamed:@""];
     //创建label
     UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(10, 301, width-20, 40)];
     lab.textColor =[UIColor colorWithHexString:@"1e1e1e" alpha:1];
     lab.font = [UIFont systemFontOfSize:13];
     lab.numberOfLines = 0;
-    lab.text = @"维生素和矿物质均为维持机体正常代谢和身体健康必不可少的重要物质";
+    lab.text = @"";
     
     
     //label
