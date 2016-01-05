@@ -45,6 +45,7 @@
     [super viewDidLoad];
     
     self.tableview.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1   ];
     
     [self arraychuanjian];
     arr1=[NSArray array];

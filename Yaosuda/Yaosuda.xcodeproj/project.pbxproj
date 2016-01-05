@@ -1118,7 +1118,7 @@
 				TargetAttributes = {
 					95F709571C0BDE2400BEC51C = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = QP77F498Q9;
+						DevelopmentTeam = Q893CLHQS4;
 					};
 					95F709701C0BDE2400BEC51C = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -1493,16 +1493,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Yaosuda/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/lib",
 					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appleyifeng.YaoSud;
+				PRODUCT_BUNDLE_IDENTIFIER = co.appleyifeng.Yasd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3c0cef19-5d18-455e-8fee-b0e025c230f6";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/lib";
 			};
@@ -1516,16 +1516,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Yaosuda/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/lib",
 					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appleyifeng.YaoSud;
+				PRODUCT_BUNDLE_IDENTIFIER = co.appleyifeng.Yasd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3c0cef19-5d18-455e-8fee-b0e025c230f6";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/lib";
 			};
