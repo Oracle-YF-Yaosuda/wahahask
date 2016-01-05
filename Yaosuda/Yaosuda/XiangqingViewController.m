@@ -44,6 +44,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableview.backgroundColor = [UIColor clearColor];
+    
     [self arraychuanjian];
     arr1=[NSArray array];
     
@@ -323,7 +325,10 @@
     }
     else
     {
-        return nil;
+        UIView *viewFor = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
+        viewFor.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+        
+        return viewFor;
     }
 }
 -(void)tiao:(UIGestureRecognizer*)gg

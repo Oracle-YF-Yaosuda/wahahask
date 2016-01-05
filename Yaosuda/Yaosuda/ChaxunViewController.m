@@ -51,6 +51,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableview.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     //遵守 tableview 代理
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -290,13 +292,15 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     
-   
 
     if (zhi == 1)
     {
         if (section == 0)
         {
-            return nil;
+            UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
+            baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+
+            return baseView;
         }
         UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
         baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
