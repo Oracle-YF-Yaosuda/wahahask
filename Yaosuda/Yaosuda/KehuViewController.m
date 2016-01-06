@@ -18,7 +18,7 @@
 #import "MJRefresh.h"
 
 #define ziticolor [UIColor colorWithHexString:@"646464" alpha:1];
-#define zitifont [UIFont systemFontOfSize:15];
+#define zitifont [UIFont systemFontOfSize:14];
 #define xiancolor [UIColor colorWithHexString:@"e4e4e4" alpha:1];
 
 @interface KehuViewController ()<MJRefreshBaseViewDelegate>

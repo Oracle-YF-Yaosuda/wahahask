@@ -19,7 +19,8 @@
 #import "MJRefresh.h"
 #import "KeyboardToolBar.h"
 
-
+#define ziticolor [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+#define zitifont [UIFont systemFontOfSize:13];
 @interface XuanzeViewController ()<MJRefreshBaseViewDelegate,UITextFieldDelegate>
 {   MJRefreshHeaderView*header;
     MJRefreshHeaderView*footer;
@@ -237,35 +238,35 @@
     
    
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, 0,width/3*2/3-15, width/3/6)];
-    name.font= [UIFont systemFontOfSize:15];
+    name.font= zitifont;
     name.text = @"商品名称:";
-    name.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    name.textColor = ziticolor;
    
     UILabel *name1 = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15, 0, width-width/3-width/3*2/3+5, width/3/6)];
-    name1.font= [UIFont systemFontOfSize:15];
-    name1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    name1.font= zitifont;
+    name1.textColor = ziticolor;
    
 
     
     UILabel *changjia = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, width/3/6+3, width/3*2/3-15, width/3/6)];
-    changjia.font= [UIFont systemFontOfSize:15];
+    changjia.font= zitifont;
     changjia.text = @"生产厂家:";
-    changjia.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    changjia.textColor = ziticolor;
    
     UILabel *changjia1 = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15,width/3/6+3,  width-width/3-width/3*2/3+5, width/3/6)];
-    changjia1.font= [UIFont systemFontOfSize:15];
-    changjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    changjia1.font= zitifont;
+    changjia1.textColor = ziticolor;
     
 
     
     UILabel *guige = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, width/3/6*2+6, width/3*2/3-15, width/3/6)];
-    guige.font= [UIFont systemFontOfSize:15];
+    guige.font= zitifont;
     guige.text = @"规       格:";
-    guige.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    guige.textColor = ziticolor;
    
     UILabel *guige1 = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15, width/3/6*2+6,  width-width/3-width/3*2/3+5-70, width/3/6)];
-    guige1.font= [UIFont systemFontOfSize:15];
-    guige1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    guige1.font= zitifont;
+    guige1.textColor = ziticolor;
    
 
     
@@ -277,19 +278,19 @@
     
     
     UILabel *danwei = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, width/3/6*3+9, width/3*2/3-15, width/3/6)];
-    danwei.font= [UIFont systemFontOfSize:15];
+    danwei.font= zitifont;
     danwei.text = @"单       位:";
-    danwei.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    danwei.textColor = ziticolor;
     
     UILabel *danwei1 = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15, width/3/6*3+9,  width-width/3-width/3*2/3+5-70, width/3/6)];
-    danwei1.font= [UIFont systemFontOfSize:15];
-    danwei1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    danwei1.font= zitifont;
+    danwei1.textColor = ziticolor;
     
     
     UILabel *shuliang = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, width/3/6*4+12, width/3*2/3-15, width/3/6)];
-    shuliang.font= [UIFont systemFontOfSize:15];
+    shuliang.font= zitifont;
     shuliang.text = @"下单数量:";
-    shuliang.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    shuliang.textColor =ziticolor;
    
     
 //   减创建
