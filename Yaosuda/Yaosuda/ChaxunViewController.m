@@ -18,6 +18,11 @@
 #import "yonghuziliao.h"
 #import "MJRefresh.h"
 
+#define ziticolor [UIColor colorWithHexString:@"646464" alpha:1];
+#define zitifont [UIFont systemFontOfSize:15];
+#define xiancolor [UIColor colorWithHexString:@"e4e4e4" alpha:1];
+#define beijingcolor [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+
 @interface ChaxunViewController ()<MJRefreshBaseViewDelegate>
 {   MJRefreshHeaderView*header;
     MJRefreshFooterView*footer;
@@ -73,7 +78,8 @@
     [self huoqudaishenhe];
     [self setupre];
 }
--(void)setupre{
+-(void)setupre
+{
     header=[MJRefreshHeaderView header];
     header.scrollView=_tableview;
     header.delegate=self;
@@ -82,12 +88,13 @@
     footer.scrollView=_tableview;
     footer.delegate=self;
 }
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
+{
     [self performSelector:@selector(done:) withObject:refreshView afterDelay:0];
-    
-    
+
 }
--(void)done:(MJRefreshBaseView*)refr{
+-(void)done:(MJRefreshBaseView*)refr
+{
     if (refr.tag==1001) {
         ye=5;
         if (zhi==1) {
@@ -111,7 +118,6 @@
         [_tableview reloadData];
         [refr endRefreshing];
     }}
-
 //获取全部订单网络数据
 -(void)huoququanbu
 {
@@ -265,11 +271,11 @@
             return 80;
         }
         else
-            return 325;
+            return width;
     }
     else if(zhi == 2)
     {
-        return 325;
+        return width;
     }
     return 0;
 }
@@ -281,10 +287,10 @@
             return 15;
         }
         else
-            return 30;
+            return 32;
     }
     else if(zhi == 2){
-        return 30;
+        return 32;
     }
         return 0;
 }
@@ -298,17 +304,17 @@
         if (section == 0)
         {
             UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
-            baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+            baseView.backgroundColor = beijingcolor;
 
             return baseView;
         }
         UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
-        baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+        baseView.backgroundColor = beijingcolor;
         
         UILabel *groupName = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 35)];
         groupName.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
         groupName.text =@"订单信息";
-        groupName.font = [UIFont systemFontOfSize:13];
+        groupName.font = [UIFont systemFontOfSize:15];
         
        
         NSString*huo=[[NSString alloc] init];
@@ -334,13 +340,13 @@
             huo =@"未审核";
         }
         
-        CGRect textRect = [huo boundingRectWithSize:CGSizeMake(100,20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil ];
+        CGRect textRect = [huo boundingRectWithSize:CGSizeMake(100,20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil ];
         shenhe.text=huo;
         shenhe.frame=CGRectMake(width-textRect.size.width-5, 0, textRect.size.width, 35);
-        shenhe.font = [UIFont systemFontOfSize:13];
+        shenhe.font = [UIFont systemFontOfSize:15];
         shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
         
-       UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-25-shenhe.frame.size.width, 10, 15, 15)];
+       UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-30-shenhe.frame.size.width, 8, 20, 20)];
          [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
         [baseView addSubview:shenhe];
         [baseView addSubview:groupName];
@@ -358,7 +364,7 @@
             UILabel *groupName = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 35)];
             groupName.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
             groupName.text =@"订单信息";
-            groupName.font = [UIFont systemFontOfSize:13];
+            groupName.font = [UIFont systemFontOfSize:15];
             
             NSString*huo=[[NSString alloc] init];
             
@@ -381,12 +387,12 @@
                 huo =@"未审核";
             }
             
-            CGRect textRect = [huo boundingRectWithSize:CGSizeMake(100,20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil ];
+            CGRect textRect = [huo boundingRectWithSize:CGSizeMake(100,20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil ];
             shenhe.text=huo;
             shenhe.frame=CGRectMake(width-textRect.size.width-5, 0, textRect.size.width, 35);
-            shenhe.font = [UIFont systemFontOfSize:13];
+            shenhe.font = [UIFont systemFontOfSize:15];
             shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-            UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-25-shenhe.frame.size.width, 10, 15, 15)];
+            UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-30-shenhe.frame.size.width, 8, 20,20)];
             [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
             
             [baseView addSubview:shenhe];
@@ -407,83 +413,87 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
     
-    UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 80, 30)];
-    lab1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab1.font = [UIFont systemFontOfSize:13];
-    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(20, 35, width-40, 1)];
-    xian1.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
-    UILabel *lab11 = [[UILabel alloc]initWithFrame:CGRectMake(100, 5, width-40-80, 30)];
-    lab11.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab11.font = [UIFont systemFontOfSize:13];
+    
+    CGFloat gao = width;
+    CGFloat labheight = gao/8;
+    
+    UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, 80, labheight)];
+    lab1.textColor = ziticolor;
+    lab1.font =zitifont;
+    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/8, width-40, 1)];
+    xian1.backgroundColor =xiancolor;
+    UILabel *lab11 = [[UILabel alloc]initWithFrame:CGRectMake(100, 0, width-120, labheight)];
+    lab11.textColor = ziticolor;
+    lab11.font = zitifont;
     lab11.textAlignment = NSTextAlignmentCenter;
     
-    UILabel *lab2 = [[UILabel  alloc]initWithFrame:CGRectMake(20, 40, 80, 30)];
-    lab2.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab2.font = [UIFont systemFontOfSize:13];
-    UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(20, 75, width-40, 1)];
-    xian2.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
-    UILabel *lab21 = [[UILabel alloc]initWithFrame:CGRectMake(100, 37, width-40-80, 40)];
-    lab21.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab21.font = [UIFont systemFontOfSize:13];
+    UILabel *lab2 = [[UILabel  alloc]initWithFrame:CGRectMake(20, gao/8, 80, labheight)];
+    lab2.textColor = ziticolor;
+    lab2.font = zitifont;
+    UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/4, width-40, 1)];
+    xian2.backgroundColor = xiancolor;
+    UILabel *lab21 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/8, width-40-80, labheight)];
+    lab21.textColor = ziticolor;
+    lab21.font =zitifont;
     lab21.textAlignment = NSTextAlignmentCenter;
     lab21.numberOfLines = 0;
     
-    UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(20, 85, 80, 30)];
-    lab3.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab3.font = [UIFont systemFontOfSize:13];
-    UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(20, 115, width-40, 1)];
-    xian3.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
-    UILabel *lab31 = [[UILabel alloc]initWithFrame:CGRectMake(100, 85, width-40-80, 30)];
-    lab31.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab31.font = [UIFont systemFontOfSize:13];
+    UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(20, gao/4, 80, labheight)];
+    lab3.textColor = ziticolor;
+    lab3.font = zitifont;
+    UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/8*3, width-40, 1)];
+    xian3.backgroundColor = xiancolor;
+    UILabel *lab31 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/4, width-40-80, labheight)];
+    lab31.textColor = ziticolor;
+    lab31.font = zitifont;
     lab31.textAlignment = NSTextAlignmentCenter;
     
-    UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(20, 125, 80, 30)];
-    lab4.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab4.font = [UIFont systemFontOfSize:13];
-    UIView *xian4 = [[UIView alloc]initWithFrame:CGRectMake(20, 155, width-40, 1)];
-    xian4.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
-    UILabel *lab41 = [[UILabel alloc]initWithFrame:CGRectMake(100, 125, width-40-80, 30)];
-    lab41.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab41.font = [UIFont systemFontOfSize:13];
+    UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(20, gao/8*3, 80, labheight)];
+    lab4.textColor = ziticolor;
+    lab4.font = zitifont;
+    UIView *xian4 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/2, width-40, 1)];
+    xian4.backgroundColor = xiancolor;
+    UILabel *lab41 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/8*3, width-40-80, labheight)];
+    lab41.textColor = ziticolor;
+    lab41.font = zitifont;
     lab41.textAlignment = NSTextAlignmentCenter;
     
-    UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(20, 165, 80, 30)];
-    lab5.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab5.font = [UIFont systemFontOfSize:13];
-    UIView *xian5 = [[UIView alloc]initWithFrame:CGRectMake(20, 195, width-40, 1)];
-    xian5.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
-    UILabel *lab51 = [[UILabel alloc]initWithFrame:CGRectMake(100, 165, width-40-80, 30)];
-    lab51.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab51.font = [UIFont systemFontOfSize:13];
+    UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(20,  gao/2, 80, labheight)];
+    lab5.textColor = ziticolor;
+    lab5.font = zitifont;
+    UIView *xian5 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/8*5, width-40, 1)];
+    xian5.backgroundColor = xiancolor;
+    UILabel *lab51 = [[UILabel alloc]initWithFrame:CGRectMake(100,  gao/2, width-40-80, labheight)];
+    lab51.textColor = ziticolor;
+    lab51.font = zitifont;
     lab51.textAlignment = NSTextAlignmentCenter;
     
-    UILabel *lab6 = [[UILabel alloc]initWithFrame:CGRectMake(20, 205, 80, 30)];
-    lab6.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab6.font = [UIFont systemFontOfSize:13];
-    UIView *xian6 = [[UIView alloc]initWithFrame:CGRectMake(20, 235, width-40, 1)];
-    xian6.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
-    UILabel *lab61 = [[UILabel alloc]initWithFrame:CGRectMake(100, 205, width-40-80, 30)];
-    lab61.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab61.font = [UIFont systemFontOfSize:13];
+    UILabel *lab6 = [[UILabel alloc]initWithFrame:CGRectMake(20, gao/8*5, 80, labheight)];
+    lab6.textColor = ziticolor;
+    lab6.font = zitifont;
+    UIView *xian6 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/8*6, width-40, 1)];
+    xian6.backgroundColor = xiancolor;
+    UILabel *lab61 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/8*5, width-40-80, labheight)];
+    lab61.textColor = ziticolor;
+    lab61.font = zitifont;
     lab61.textAlignment = NSTextAlignmentCenter;
     
-    UILabel *lab7 = [[UILabel alloc]initWithFrame:CGRectMake(20, 245, 80, 30)];
-    lab7.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab7.font = [UIFont systemFontOfSize:13];
-    UIView *xian7 = [[UIView alloc]initWithFrame:CGRectMake(20, 275, width-40, 1)];
-    xian7.backgroundColor = [UIColor colorWithHexString:@"e4e4e4" alpha:1];
-    UILabel *lab71 = [[UILabel alloc]initWithFrame:CGRectMake(100, 245, width-40-80, 30)];
-    lab71.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab71.font = [UIFont systemFontOfSize:13];
+    UILabel *lab7 = [[UILabel alloc]initWithFrame:CGRectMake(20, gao/8*6, 80, labheight)];
+    lab7.textColor = ziticolor;
+    lab7.font = zitifont;
+    UIView *xian7 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/8*7, width-40, 1)];
+    xian7.backgroundColor = xiancolor;
+    UILabel *lab71 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/8*6, width-40-80, labheight)];
+    lab71.textColor = ziticolor;
+    lab71.font = zitifont;
     lab71.textAlignment = NSTextAlignmentCenter;
     
-    UILabel *lab8 = [[UILabel alloc]initWithFrame:CGRectMake(20, 285, 80, 30)];
-    lab8.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab8.font = [UIFont systemFontOfSize:13];
-    UILabel *lab81 = [[UILabel alloc]initWithFrame:CGRectMake(100, 285, width-40-80, 30)];
-    lab81.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-    lab81.font = [UIFont systemFontOfSize:13];
+    UILabel *lab8 = [[UILabel alloc]initWithFrame:CGRectMake(20, gao/8*7, 80, labheight)];
+    lab8.textColor = ziticolor;
+    lab8.font = zitifont;
+    UILabel *lab81 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/8*7, width-40-80, labheight)];
+    lab81.textColor = ziticolor;
+    lab81.font = zitifont;
     lab81.textAlignment = NSTextAlignmentCenter;
 
     
@@ -569,10 +579,10 @@
             
             
             
-            UIImageView *imag = [[UIImageView alloc]initWithFrame:CGRectMake(5, 4, width-10, 317)];
+            UIImageView *imag = [[UIImageView alloc]initWithFrame:CGRectMake(5, 0, width-10, gao)];
             imag.image = [UIImage imageNamed:@"b.png"];
             
-            UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, 320-50, 60, 55)];
+            UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, gao-55, 60, 55)];
             imag1.image = [UIImage imageNamed:@"@2x_dd_22_22.png"];
             [cell.contentView addSubview:imag];
             [cell.contentView addSubview:imag1];
@@ -612,10 +622,10 @@
     }
     else if (zhi == 2)
     {
-        UIImageView *imag = [[UIImageView alloc]initWithFrame:CGRectMake(5, 4, width-10, 317)];
+        UIImageView *imag = [[UIImageView alloc]initWithFrame:CGRectMake(5, 0, width-10, gao)];
         imag.image = [UIImage imageNamed:@"a.png"];
         
-        UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, 320-50, 60, 55)];
+        UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, gao-55, 60, 55)];
         imag1.image = [UIImage imageNamed:@"@2x_dd_22_22_22.png"];
         [cell.contentView addSubview:imag];
         [cell.contentView addSubview:imag1];

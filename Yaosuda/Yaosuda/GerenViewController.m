@@ -30,6 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+    self.tableview.backgroundColor = [UIColor clearColor];
+    
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
     
@@ -89,25 +92,25 @@
     
     UILabel *la1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 8, 60, 30)];
     la1.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-    la1.font = [UIFont systemFontOfSize:13];
+    la1.font = [UIFont systemFontOfSize:15];
     UILabel *la2 = [[UILabel alloc]initWithFrame:CGRectMake(10, 45, 60, 30)];
     la2.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-    la2.font = [UIFont systemFontOfSize:13];
+    la2.font = [UIFont systemFontOfSize:15];
     UILabel *la3 = [[UILabel alloc]initWithFrame:CGRectMake(10, 80, 60, 30)];
     la3.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-    la3.font = [UIFont systemFontOfSize:13];
+    la3.font = [UIFont systemFontOfSize:15];
     
     UILabel *la11 = [[UILabel alloc]initWithFrame:CGRectMake(90, 10, width-80, 30)];
     la11.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-    la11.font = [UIFont systemFontOfSize:13];
+    la11.font = [UIFont systemFontOfSize:15];
     //la11.textAlignment = NSTextAlignmentCenter;
     UILabel *la22 = [[UILabel alloc]initWithFrame:CGRectMake(90, 45, width-80, 30)];
     la22.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-    la22.font = [UIFont systemFontOfSize:13];
+    la22.font = [UIFont systemFontOfSize:15];
     //la22.textAlignment = NSTextAlignmentCenter;
     UILabel *la33 = [[UILabel alloc]initWithFrame:CGRectMake(90, 80, width-80, 30)];
     la33.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
-    la33.font = [UIFont systemFontOfSize:13];
+    la33.font = [UIFont systemFontOfSize:15];
     //la33.textAlignment = NSTextAlignmentCenter;
     
     

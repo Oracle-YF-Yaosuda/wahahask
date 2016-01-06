@@ -15,7 +15,7 @@
 #import "lianjie.h"
 #import "yonghuziliao.h"
 #define ziticolor [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-#define zitifont [UIFont systemFontOfSize:13];
+#define zitifont [UIFont systemFontOfSize:15];
 @interface XinxiViewController ()
 {
     CGFloat width;
@@ -30,8 +30,12 @@
 }
 @end
 @implementation XinxiViewController
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+    self.tableview.backgroundColor = [UIColor clearColor];
     
 //解决tableview多出的白条
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -76,14 +80,15 @@
     }
 
 }
-
 //获取订单信息2.3
--(void)DDxinxi{
+-(void)DDxinxi
+{
     
     
 }
 //获取商品信息2.4
--(void)SPxinxi{
+-(void)SPxinxi
+{
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -137,10 +142,9 @@
         
     }];
 }
-
-
 //tableview 分组
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     if (zhi == 1)
     {
         return 1;
@@ -152,20 +156,23 @@
     return 0;
    }
 //tableview 行数
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
    
     return 1;
 
 }
 //setion高度
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
     return 15;
 }
 //cell高度
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
     if(zhi == 1)
     {
-        return 161;
+        return width/2;
     }
     if (zhi == 2)
     {
@@ -174,60 +181,69 @@
     return 0;
 }
 //section内容
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 15)];
+    baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+    return baseView;
+    
     return nil;
 }
 //编辑cell内容
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *id1 = @"cell3";
     UITableViewCell *cell= [tableView cellForRowAtIndexPath:indexPath];
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
-    UIView *xian = [[UIView alloc]initWithFrame:CGRectMake(15, 40, width-30, 1)];
+    
+    CGFloat gao2 = width;
+    UIView *xian = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8, width-30, 1)];
     xian.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(15, 80, width-30, 1)];
+    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/4, width-30, 1)];
     xian1.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(15, 120, width-30, 1)];
+    UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*3, width-30, 1)];
     xian2.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(15, 160, width-30, 1)];
+    UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/2, width-30, 1)];
     xian3.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian4 = [[UIView alloc]initWithFrame:CGRectMake(15, 200, width-30, 1)];
+    UIView *xian4 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*5, width-30, 1)];
     xian4.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian5 = [[UIView alloc]initWithFrame:CGRectMake(15, 240, width-30, 1)];
+    UIView *xian5 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*6, width-30, 1)];
     xian5.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
 
     
-    UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 100, 40)];
+    UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 100, gao2/8)];
     lab1.font = zitifont;
     lab1.textColor = ziticolor;
-    UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(15, 45, 100, 40)];
+    UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8, 100, gao2/8)];
     lab2.font = zitifont;
     lab2.textColor = ziticolor;
-    UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(15, 85, 100, 40)];
+    UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/4, 100, gao2/8)];
     lab3.font = zitifont;
     lab3.textColor = ziticolor;
-    UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(15, 125, 100, 40)];
+    UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*3, 100, gao2/8)];
     lab4.font = zitifont;
     lab4.textColor = ziticolor;
-    UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(15, 165, 100, 40)];
+    UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/2, 100, gao2/8)];
     lab5.font = zitifont;
     lab5.textColor = ziticolor;
    
 
-    UILabel *you1 = [[UILabel alloc]initWithFrame:CGRectMake(120, 5, width-30, 40)];
+    UILabel *you1 = [[UILabel alloc]initWithFrame:CGRectMake(120, 0, width-30, gao2/8)];
     you1.font = zitifont;
     you1.textColor = ziticolor;
-    UILabel *you2 = [[UILabel alloc]initWithFrame:CGRectMake(120, 45, width-30, 40)];
+    UILabel *you2 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8, width-30, gao2/8)];
     you2.font = zitifont;
     you2.textColor = ziticolor;
-    UILabel *you3 = [[UILabel alloc]initWithFrame:CGRectMake(120, 85, width-30, 40)];
+    UILabel *you3 = [[UILabel alloc]initWithFrame:CGRectMake(120,  gao2/4, width-30, gao2/8)];
     you3.font = zitifont;
     you3.textColor = ziticolor;
-    UILabel *you4 = [[UILabel alloc]initWithFrame:CGRectMake(120, 125, width-30, 40)];
+    UILabel *you4 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*3, width-30, gao2/8)];
     you4.font = zitifont;
     you4.textColor = ziticolor;
-    UILabel *you5 = [[UILabel alloc]initWithFrame:CGRectMake(120, 165, width-30, 40)];
+    UILabel *you5 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/2, width-30, gao2/8)];
     you5.font = zitifont;
     you5.textColor = ziticolor;
   
@@ -333,12 +349,12 @@
 -(void)anniu
 {
     UIView *underView = [[UIView alloc]init];
-    underView.frame = CGRectMake(0, height-40, width, 40);
+    underView.frame = CGRectMake(0, height-50, width, 50);
     underView.backgroundColor = [UIColor colorWithHexString:@"aaaaaa" alpha:0.5];
     [self.view bringSubviewToFront:underView];
     
     UIButton *passButton = [[UIButton alloc]init];
-    passButton.frame = CGRectMake(10, 7, width/2-20, 30);
+    passButton.frame = CGRectMake(10, 7, width/2-20, 40);
     [passButton setTitle:@"通过" forState:UIControlStateNormal];
     [passButton setTitleColor:[UIColor colorWithHexString:@"ffffff" alpha:1] forState:UIControlStateNormal];
     passButton.backgroundColor = [UIColor colorWithHexString:@"FF7F00" alpha:0.6];
@@ -346,7 +362,7 @@
     [passButton addTarget:self action:@selector(tongguo) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *backButton = [[UIButton alloc]init];
-    backButton.frame = CGRectMake(width-width/2+10, 7, width/2-20, 30);
+    backButton.frame = CGRectMake(width-width/2+10, 7, width/2-20, 40);
     [backButton setTitle:@"退回" forState:UIControlStateNormal];
     [backButton setTitleColor:[UIColor colorWithHexString:@"ffffff" alpha:1] forState:UIControlStateNormal];
     backButton.backgroundColor = [UIColor colorWithHexString:@"FF7F00" alpha:0.6];

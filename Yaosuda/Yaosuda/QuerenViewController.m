@@ -17,7 +17,7 @@
 #import "Color+Hex.h"
 
 #define ziticolor [UIColor colorWithHexString:@"646464" alpha:1];
-#define zitifont [UIFont systemFontOfSize:13];
+#define zitifont [UIFont systemFontOfSize:15];
 #define xiancolor [UIColor colorWithHexString:@"e4e4e4" alpha:1];
 @interface QuerenViewController (){
     NSMutableArray*shangid;
@@ -97,7 +97,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 41;//cell高度
+    return width/8;//cell高度
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -133,10 +133,10 @@
 
     
     //创建label
-    UILabel *left = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 70, 40)];
+    UILabel *left = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 70, width/8)];
     left.textColor = ziticolor;
     left.font = zitifont;
-    UILabel *right = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, width-90, 40)];
+    UILabel *right = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, width-90, width/8)];
     right.font = zitifont;
     right.textColor = ziticolor;
     right.textAlignment = NSTextAlignmentCenter;
@@ -144,7 +144,7 @@
     left.text = Left[indexPath.section];
     right.text = Right[indexPath.section];
     //自定义线
-    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, 40, width, 1)];
+    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, width/8-1, width, 1)];
     xian1.backgroundColor = xiancolor;
     //在cell上显示
     [cell.contentView addSubview:xian1];
@@ -160,26 +160,6 @@
 
     return cell;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 - (IBAction)tijiao:(id)sender
 {

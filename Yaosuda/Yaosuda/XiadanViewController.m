@@ -17,6 +17,9 @@
 #import "XuanzeViewController.h"
 #import "KeyboardToolBar.h"
 
+#define ziticolor [UIColor colorWithHexString:@"646464" alpha:1];
+#define zitifont [UIFont systemFontOfSize:15];
+#define xiancolor [UIColor colorWithHexString:@"e4e4e4" alpha:1];
 
 @interface XiadanViewController ()
 {
@@ -221,10 +224,10 @@
     UIButton *quan = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width, height)];
     [quan addTarget:self action:@selector(xiaoshi) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImageView *iam = [[UIImageView alloc]initWithFrame:CGRectMake(20, 200, width-200, 100)];
+    UIImageView *iam = [[UIImageView alloc]initWithFrame:CGRectMake(140, 200, 140, 100)];
     iam.image = [UIImage imageNamed:@"huadong.png"];
     
-    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(20+width-200, 280, width, 25)];
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(150, 300, width, 25)];
     lab.font = [UIFont systemFontOfSize:17];
     lab.textColor = [UIColor whiteColor];
     //lab.textAlignment = NSTextAlignmentCenter;
@@ -361,11 +364,13 @@
     
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return jieshou.count;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
     return 20;//section高度
 }
 //编辑header内容
@@ -378,11 +383,13 @@
     return diview;
     
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return 190;//cell高度
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *id1 =@"mycell";
     
     
@@ -441,7 +448,7 @@
         danjia1.text=@"待估价";
         
         danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        danjia1.font = [UIFont systemFontOfSize:12];
+        danjia1.font = [UIFont systemFontOfSize:15];
         danjia1.textAlignment = NSTextAlignmentCenter;
     }
     else{
@@ -465,7 +472,7 @@
     if (jiage.count!=jieshou.count) {
         LXdanjia1.text=@"待估价";
         LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        LXdanjia1.font = [UIFont systemFontOfSize:12];
+        LXdanjia1.font = [UIFont systemFontOfSize:15];
         LXdanjia1.textAlignment = NSTextAlignmentCenter;
     }
     else{
@@ -488,7 +495,7 @@
     if (jiage.count!=jieshou.count) {
         quanbu1.text=@"待估价";
         quanbu1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        quanbu1.font = [UIFont systemFontOfSize:12];
+        quanbu1.font = [UIFont systemFontOfSize:15];
         quanbu1.textAlignment = NSTextAlignmentCenter;
     }
     else{
@@ -578,11 +585,9 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
--(void)textFieldDidChange :(UITextField *)theTextField{
+
+-(void)textFieldDidChange :(UITextField *)theTextField
+{
     
     UITableViewCell *cell=(UITableViewCell*)[[theTextField superview] superview ];
     
@@ -592,14 +597,16 @@
     NSString*qw=oo.text;
     [jieshou[index.row] setObject:qw forKey:@"shuliang"];
 }
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
     if (aa == 2) {
         
         return YES;
     }
     return NO;
 }
-- (IBAction)fanhui:(id)sender {
+- (IBAction)fanhui:(id)sender
+{
     if (aa!=2) {
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -607,7 +614,8 @@
         [WarningBox warningBoxModeText:@"请保存您的操作！" andView:self.view];
     
 }
-- (IBAction)queren:(id)sender {
+- (IBAction)queren:(id)sender
+{
     
     if (jiage.count==0) {
         [WarningBox warningBoxModeText:@"请选择客户及商品！" andView:self.view];
@@ -666,7 +674,8 @@
         
     }
 }
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     [self.view endEditing:YES];
     
     
@@ -679,7 +688,8 @@
 }
 
 
--(void)jia:(UIButton*)tt{
+-(void)jia:(UIButton*)tt
+{
     [self.view endEditing:YES];
     UITableViewCell *cell=(UITableViewCell*)[[tt superview] superview ];
     
@@ -702,7 +712,8 @@
     
 }
 
--(void)jian:(UIButton*)tt{
+-(void)jian:(UIButton*)tt
+{
     [self.view endEditing:YES];
     UITableViewCell *cell=(UITableViewCell*)[[tt superview] superview ];
     
@@ -725,7 +736,8 @@
 }
 
 
-- (IBAction)xltianjia:(UIButton *)sender {
+- (IBAction)xltianjia:(UIButton *)sender
+{
    
     if ([_kehumingzi.text isEqualToString: @"请选择客户"]) {
         [WarningBox warningBoxModeText:@"请先选择客户!" andView:self.view];
@@ -743,7 +755,8 @@
     }
     }
 }
-- (IBAction)xuanzekehuii:(id)sender {
+- (IBAction)xuanzekehuii:(id)sender
+{
     if (aa==2) {
         [WarningBox warningBoxModeText:@"请保存您的设置!" andView:self.view];
     }else{

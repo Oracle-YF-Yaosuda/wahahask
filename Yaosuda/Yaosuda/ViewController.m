@@ -30,6 +30,9 @@
     self.diview.layer.cornerRadius = 5.0;
     self.denglu.layer.cornerRadius = 5.0;
     
+    self.user.text = @"chengdu";
+    self.pass.text = @"admin";
+    
     NSString*path=[NSString stringWithFormat:@"%@/Documents/userInfo.plist",NSHomeDirectory()];
     NSFileManager*fm=[NSFileManager defaultManager];
     if (![fm fileExistsAtPath:path]) {

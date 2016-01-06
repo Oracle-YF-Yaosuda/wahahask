@@ -398,7 +398,7 @@
         
         UILabel *biaoti = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, width-20, 42)];
         biaoti.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-        biaoti.font = [UIFont systemFontOfSize:16];
+        biaoti.font = [UIFont systemFontOfSize:18];
         biaoti.numberOfLines = 0;
         
         
@@ -408,7 +408,7 @@
         
         UILabel *shuliang= [[UILabel alloc]initWithFrame:CGRectMake(10, 59, 60, 21)];
         shuliang.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        shuliang.font = [UIFont systemFontOfSize:14];
+        shuliang.font = [UIFont systemFontOfSize:15];
         //      － 加
         UIButton *jia = [[UIButton alloc]initWithFrame:CGRectMake(width-30, 60, 20, 20)];
         [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
@@ -448,7 +448,7 @@
     {
         
         UILabel *chanpinzizhi = [[UILabel alloc]initWithFrame:CGRectMake(10,10, 100, 21)];
-        chanpinzizhi.font = [UIFont systemFontOfSize:14];
+        chanpinzizhi.font = [UIFont systemFontOfSize:15];
         chanpinzizhi.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         chanpinzizhi.text = @"产品资质";
         UIButton *tu = [[UIButton alloc]initWithFrame:CGRectMake(width-21, 15, 11, 15)];
