@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "APService.h"
+#import "AppDelegate+JPush.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    // self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
         [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
@@ -26,17 +28,26 @@
                                                        UIUserNotificationTypeAlert)
                                            categories:nil];
     } else {
+        //categories 必须为nil
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                       UIRemoteNotificationTypeSound |
+                                                       UIRemoteNotificationTypeAlert)
+                                           categories:nil];
+    }
+#else
+    //categories 必须为nil
     [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                                    UIRemoteNotificationTypeSound |
                                                    UIRemoteNotificationTypeAlert)
                                        categories:nil];
+#endif
+    // Required
     [APService setupWithOption:launchOptions];
     
-    [[NSBundle mainBundle] loadNibNamed:@"JpushTabBarViewController" owner:self options:nil];
-    
-    }
+  //  [self initJPushWithApplication:application withOptions:launchOptions];
     
     return YES;
+  
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -55,15 +66,17 @@
 //(UIUserNotificationSettings *)notificationSettings {
 //    
 //}
-//- (void)application:(UIApplication *)application
-//handleActionWithIdentifier:(NSString *)identifier
-//forLocalNotification:(UILocalNotification *)notification
-//  completionHandler:(void (^)())completionHandler {
-//    
-//}
-//- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler {
-//    
-//}
+- (void)application:(UIApplication *)application
+handleActionWithIdentifier:(NSString *)identifier
+forLocalNotification:(UILocalNotification *)notification
+  completionHandler:(void (^)())completionHandler {
+    
+}
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler {
+    
+    
+}
+
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
   //  [application setApplicationIconBadgeNumber:0];
@@ -85,9 +98,9 @@
     NSLog(@"收到通知:xiaxiaxia－－－－%@", userInfo);
     [APService handleRemoteNotification:userInfo];
 }
-//-(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
-//    NSLog(@"notificationSettings-----%@",notificationSettings);
-//}
+-(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
+    NSLog(@"notificationSettings-----%@",notificationSettings);
+}
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     NSLog(@"deviceToken-----%@",deviceToken);
     [APService registerDeviceToken:deviceToken];
