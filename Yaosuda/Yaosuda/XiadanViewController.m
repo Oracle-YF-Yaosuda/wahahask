@@ -171,7 +171,7 @@
                         }
                         
                     }
-                    
+                    NSLog(@"%d    ,   %d",qq,jieshou.count);
                     if (qq==jieshou.count) {
                         [WarningBox warningBoxHide:YES andView:self.view];
                     }
@@ -186,6 +186,7 @@
                                         [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
                 }];
             }
+                [WarningBox warningBoxHide:YES andView:self.view];
             }
         }
     }
@@ -451,7 +452,7 @@
         danjia1.textAlignment = NSTextAlignmentCenter;
     }
     else{
-        danjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+        danjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
         he=1;
         
         danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
@@ -475,7 +476,7 @@
         LXdanjia1.textAlignment = NSTextAlignmentCenter;
     }
     else{
-        LXdanjia1.text =[dixx objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+        LXdanjia1.text =[dixx objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
         he=1;
         
         LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
@@ -498,7 +499,7 @@
         quanbu1.textAlignment = NSTextAlignmentCenter;
     }
     else{
-        quanbu1.text =[NSString stringWithFormat:@"%d",[wo[indexPath.row] intValue]*[[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] intValue]];
+        quanbu1.text =[NSString stringWithFormat:@"%d",[wo[indexPath.row] intValue]*[[dicc objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] intValue]];
         he=1;
         
         quanbu1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
