@@ -150,11 +150,10 @@
     NSString * url =@"/login";
     
     //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
-    
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970];
+    NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
+
    
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -173,7 +172,7 @@
    // NSLog(@"%@",url1);
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-        
+        //NSLog(@"ssssssssssssss%@",dic);
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         

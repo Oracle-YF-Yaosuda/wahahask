@@ -65,10 +65,10 @@
     NSString * url =@"/prod/productions";
     
     //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970];
+    NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
+
     
     [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
     //将上传对象转换为json格式字符串
@@ -564,10 +564,10 @@
     NSString * url =@"/prod/stockNum";
     
     //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970];
+    NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
+
     
     
     //将上传对象转换为json格式字符串

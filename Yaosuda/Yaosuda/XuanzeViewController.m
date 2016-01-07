@@ -103,10 +103,10 @@
     NSString * url =@"/prod/productionsList";
     
     //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970];
+    NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
+
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -375,10 +375,10 @@
     NSString * url =@"/prod/stockNum";
     
     //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970];
+    NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
+
     
     
     //将上传对象转换为json格式字符串
@@ -506,10 +506,10 @@
     NSString * url =@"/prod/productionsList";
     [WarningBox warningBoxModeIndeterminate:@"数据加载中..." andView:self.view];
     //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970];
+    NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
+
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];

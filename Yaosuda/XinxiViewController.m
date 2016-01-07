@@ -96,10 +96,9 @@
     NSString *url = @"/order/detailList";
     [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
     //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970];
+    NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -383,10 +382,10 @@
     NSString * url =@"/order/return";
     [WarningBox warningBoxModeIndeterminate:@"订单退回中..." andView:self.view];
     //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970];
+    NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
+
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -432,10 +431,10 @@
     NSString * url =@"/order/audit";
     [WarningBox warningBoxModeIndeterminate:@"订单审核中..." andView:self.view];
     //时间戳
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-    NSDate *datenow = [NSDate date];
-    NSString *nowtimeStr = [formatter stringFromDate:datenow];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)nowtimeStr];
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970];
+    NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
+
    
     
     //将上传对象转换为json格式字符串
