@@ -44,6 +44,22 @@
     //button圆角
     self.queren.layer.cornerRadius = 5.0;
 }
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField==_oldpass) {
+        [_oldpass resignFirstResponder];
+        [_newpass becomeFirstResponder];
+    }
+    else if (textField==_newpass){
+        [_newpass resignFirstResponder];
+        [_newpass1 becomeFirstResponder];
+    }else{
+        [self.view endEditing:YES];
+    }
+    return YES;
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 
 -(BOOL)Oldpassword:(NSString *)chusheng{
     
@@ -69,7 +85,7 @@
     //键盘消失
     [self.view endEditing:YES];
     if (![self Oldpassword:self.oldpass.text]) {
-        [WarningBox warningBoxModeText:@"请输入就密码" andView:self.view];
+        [WarningBox warningBoxModeText:@"请输入旧密码" andView:self.view];
     }
     else if(![self NewpassWord:self.newpass.text]){
         [WarningBox warningBoxModeText:@"请输入新密码！" andView:self.view ];

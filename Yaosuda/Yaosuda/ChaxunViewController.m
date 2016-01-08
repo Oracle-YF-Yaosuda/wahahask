@@ -579,8 +579,11 @@
             
             lab61.text =[NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"createDate"]];
             
+            if ([zuobian[indexPath.section-1] objectForKey:@"updateDate"]==nil) {
+                lab71.text=@"";
+            }else{
             lab71.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"updateDate"]];
-            
+            }
             lab81.text = [NSString stringWithFormat:@"%@",[[zuobian[indexPath.section-1]objectForKey:@"businessperson"] objectForKey:@"name"]];
             
             

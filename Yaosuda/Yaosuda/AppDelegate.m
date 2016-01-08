@@ -15,7 +15,10 @@
 @end
 
 @implementation AppDelegate
-
+/**
+ *  注意～   本版本为iOS 9.1   所以极光推送的时候 要在可选设置里  勾选 
+ *            content-available 否则 接受不到
+ */
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

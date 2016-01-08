@@ -248,18 +248,18 @@
     KHmingzi.text = @"客户姓名";
     KHmingzi1.text = [customerList[indexPath.section] objectForKey:@"customerName" ];
     LXdianhua.text = @"联系电话";
-    //LXdianhua1.text =[customerList[indexPath.section] objectForKey:@"linkmanPhone" ];
-    LXdianhua1.text = @"无字段";
+    LXdianhua1.text =[customerList[indexPath.section] objectForKey:@"linkmanPhone" ];
     CKdizhi.text = @"仓库地址";
     //CKdizhi1.text = [customerList[indexPath.section] objectForKey:@"warehouseAddress" ];
-    CKdizhi1.text = @"无字段";
+    CKdizhi1.text = [customerList[indexPath.section] objectForKey:@"warehouseAddress"];
     ZCdizhi.text = @"注册地址";
     ZCdizhi1.text = [customerList[indexPath.section] objectForKey:@"registerAddress" ];
     FZren.text = @"负  责  人";
     FZren1.text = [customerList[indexPath.section] objectForKey:@"officer" ];
     LXren.text = @"联  系  人";
-    // LXren1.text = [customerList[indexPath.section] objectForKey:@"linkman" ];
-    LXren1.text = @"无字段";
+   
+    LXren1.text = [customerList[indexPath.section] objectForKey:@"linkman" ];
+    
     
     
     

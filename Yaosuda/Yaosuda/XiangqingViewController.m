@@ -105,55 +105,149 @@
             
             [array1 addObject:@" "];
             //商品编码
-            [array1 addObject:@"12"];
+            [array1 addObject:[shangpin objectForKey:@"erpProId"]];
             //名称
             [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proName"]];
             //剂型
             [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"dosageForm"]];
             //规格
-            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"erpProId"]];
+            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"etalon"]];
             //单位
             [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"unit"]];
             //通用名称
-            [array1 addObject:@"17"];
-            //通用名称编码
-            [array1 addObject:@"18"];
+            if ([shangpin objectForKey:@"commonName"]==nil) {
+                [array1 addObject:@""];
+            }else{
+            [array1 addObject:[shangpin objectForKey:@"commonName"]];
+            }
+                //通用名称编码
+            if ([shangpin objectForKey:@"commonCode"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[shangpin objectForKey:@"commonCode"]];
+            }
+            
             //供应商
             [array1 addObject:[[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"provider"] objectForKey:@"corporateName"]];
             //联系人
-            [array1 addObject:@"110"];
+            if ([shangpin objectForKey:[[shangpin objectForKey:@"provider"] objectForKey:@"linkman"]]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[[shangpin objectForKey:@"provider"] objectForKey:@"linkman"]];
+            }
+            
             //联系电话
-            [array1 addObject:@"111"];
+            if ([shangpin objectForKey:[[shangpin objectForKey:@"provider"] objectForKey:@"linkmanPhone"]]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[[shangpin objectForKey:@"provider"] objectForKey:@"linkmanPhone"]];
+            }
+            
             //仓库地址
-            [array1 addObject:@"112"];
+            if ([shangpin objectForKey:[[shangpin objectForKey:@"provider"] objectForKey:@"warehouseAddress"]]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[[shangpin objectForKey:@"provider"] objectForKey:@"warehouseAddress"]];
+            }
+            
             //质量认证情况
-            [array1 addObject:@"113"];
+            if ([shangpin objectForKey:[[shangpin objectForKey:@"provider"] objectForKey:@"certificate"]]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[[shangpin objectForKey:@"provider"] objectForKey:@"certificate"]];
+            }
+            
+           
             //质量机构负责人
-            [array1 addObject:@"114"];
+            
+            if ([shangpin objectForKey:[[shangpin objectForKey:@"provider"] objectForKey:@"certificateOfficer"]]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[[shangpin objectForKey:@"provider"] objectForKey:@"certificateOfficer"]];
+            }
+            
             //生产企业
             [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proEnterprise"]];
             //药品说明书
-            [array1 addObject:@"116"];
-            //产地
-            [array1 addObject:@"117"];
+            if ([shangpin objectForKey:@"specification"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[shangpin objectForKey:@"specification"]];
+            }
+            
+                       //产地
+            if ([shangpin objectForKey:@"place"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[shangpin objectForKey:@"place"]];
+            }
+            
+         
             //是否是处方
-            [array1 addObject:@"118"];
+            if ([shangpin objectForKey:@"isPrescription"]==nil) {
+                [array1 addObject:@""];
+            }else if([[shangpin objectForKey:@"isPrescription"] intValue]==1){
+                [array1 addObject:@"处方"];
+            }else{
+                [array1 addObject:@"非处方"];
+            }
+            
+            
             //批准文号
             [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"auditingFileNo"]];
             //质量标准
-            [array1 addObject:@"120"];
+            if ([shangpin objectForKey:@"qualityStandard"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[shangpin objectForKey:@"qualityStandard"]];
+            }
+            
+           
             //装箱规格
-            [array1 addObject:@"121"];
+            if ([shangpin objectForKey:@"binningEtalon"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[shangpin objectForKey:@"binningEtalon"]];
+            }
+            
+            
             //储存条件
             [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"storageCondition"]];
             //批件有效期
-            [array1 addObject:@"123"];
+            if ([shangpin objectForKey:@"approveDate"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[shangpin objectForKey:@"approveDate"]];
+            }
+            
+         
             //特殊药品类型
-            [array1 addObject:@"124"];
+            if ([shangpin objectForKey:@"specialDrugsType"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[shangpin objectForKey:@"specialDrugsType"]];
+            }
+            
+          
             //是否含麻黄碱
-            [array1 addObject:@"125"];
+            if ([shangpin objectForKey:@"isEphedrine"]==nil) {
+                [array1 addObject:@""];
+            }else if([[shangpin objectForKey:@"isEphedrine"] intValue]==1){
+                [array1 addObject:@"包含"];
+                 }else{
+                     [array1 addObject:@"不包含"];
+                 }
+            
+          
             //是否是冷藏品
-            [array1 addObject:@"127"];
+            if ([shangpin objectForKey:@"isColdStorage"]==nil) {
+                [array1 addObject:@""];
+        }else if([[shangpin objectForKey:@"isColdStorage"] intValue]==1)
+            {
+                [array1 addObject:@"冷藏"];
+            }else{
+                [array1 addObject:@"不冷藏"];
+            }
             
             [_tableview reloadData];
             
