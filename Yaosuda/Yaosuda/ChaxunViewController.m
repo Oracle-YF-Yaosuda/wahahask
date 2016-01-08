@@ -35,6 +35,7 @@
     int index;
     
 }
+@property (weak, nonatomic) IBOutlet UIImageView *xiaodian;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *fenduan;
 - (IBAction)fenduan:(id)sender;
@@ -52,6 +53,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"dian"] intValue]==1) {
         
+    }else{
+        _xiaodian.hidden=YES;
     }
      _tableview.frame=CGRectMake(0, 0, width, height);
     [_tableview reloadData];
@@ -755,6 +758,7 @@
     else if(index == 1){
         zhi = 2;
         [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"dian"];
+        _xiaodian.hidden=YES;
         self.qian.text=nil;
         self.hou.text=nil;
         [self.tableview reloadData];

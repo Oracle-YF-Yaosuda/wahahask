@@ -490,6 +490,28 @@
                                     <action selector="fenduan:" destination="jz2-yB-QuE" eventType="valueChanged" id="rLL-gZ-y4o"/>
                                 </connections>
                             </segmentedControl>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dangqianjiekuan_07.png" translatesAutoresizingMaskIntoConstraints="NO" id="bq2-X3-69D">
+                                <rect key="frame" x="555" y="72" width="10" height="10"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="15" id="DhD-7Q-OZA"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="EgS-FJ-xSC"/>
+                                    <constraint firstAttribute="width" constant="20" id="Jny-9n-I7t"/>
+                                    <constraint firstAttribute="width" constant="10" id="NrT-Vz-fCd"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="15" id="aM1-j5-1dX"/>
+                                    <constraint firstAttribute="height" constant="20" id="adK-vH-GaS"/>
+                                    <constraint firstAttribute="height" constant="10" id="e8d-wT-hUy"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="15" id="yB4-lr-ZJv"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="EgS-FJ-xSC"/>
+                                        <exclude reference="Jny-9n-I7t"/>
+                                        <exclude reference="adK-vH-GaS"/>
+                                        <exclude reference="yB4-lr-ZJv"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vSw-EY-sqj">
                                 <rect key="frame" x="0.0" y="104" width="600" height="496"/>
                                 <animations/>
@@ -524,17 +546,6 @@
                                             <constraint firstItem="fns-12-55Y" firstAttribute="top" secondItem="vxo-7R-ijU" secondAttribute="top" id="wc1-dp-EXe"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df3-y5-Pd0">
-                                        <rect key="frame" x="0.0" y="46" width="600" height="41"/>
-                                        <animations/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="41" id="i3q-rg-7ZJ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.047058823530000002" green="0.71764705880000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cz-8H-2YC">
                                         <rect key="frame" x="0.0" y="305" width="300" height="40"/>
                                         <animations/>
@@ -562,6 +573,17 @@
                                             <action selector="queding:" destination="jz2-yB-QuE" eventType="touchUpInside" id="IkS-aW-7UO"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df3-y5-Pd0">
+                                        <rect key="frame" x="0.0" y="46" width="600" height="41"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="41" id="i3q-rg-7ZJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.047058823530000002" green="0.71764705880000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.15436422413793102" colorSpace="calibratedRGB"/>
@@ -587,6 +609,7 @@
                         <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="7DT-9d-a2q" firstAttribute="top" secondItem="mbh-wo-n5U" secondAttribute="bottom" id="09g-eB-kmg"/>
+                            <constraint firstItem="bq2-X3-69D" firstAttribute="top" secondItem="mbh-wo-n5U" secondAttribute="bottom" constant="8" id="ANW-md-j1Q"/>
                             <constraint firstAttribute="trailing" secondItem="7DT-9d-a2q" secondAttribute="trailing" constant="-5" id="Aqd-1K-TRP"/>
                             <constraint firstItem="49r-iR-oPX" firstAttribute="top" secondItem="vSw-EY-sqj" secondAttribute="bottom" id="B9y-LN-kXQ"/>
                             <constraint firstItem="vSw-EY-sqj" firstAttribute="top" secondItem="7DT-9d-a2q" secondAttribute="bottom" constant="23" id="G0t-mC-62P"/>
@@ -594,14 +617,17 @@
                             <constraint firstItem="vSw-EY-sqj" firstAttribute="top" secondItem="7DT-9d-a2q" secondAttribute="bottom" id="ZKU-rx-EaQ"/>
                             <constraint firstAttribute="trailing" secondItem="LXF-kc-PBC" secondAttribute="trailing" id="biJ-1T-90B"/>
                             <constraint firstAttribute="trailing" secondItem="vSw-EY-sqj" secondAttribute="trailing" id="gIm-g2-Eh0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bq2-X3-69D" secondAttribute="trailing" constant="15" id="nKL-Yp-j7g"/>
                             <constraint firstItem="49r-iR-oPX" firstAttribute="top" secondItem="LXF-kc-PBC" secondAttribute="bottom" id="osH-ti-oRi"/>
                             <constraint firstItem="LXF-kc-PBC" firstAttribute="top" secondItem="mbh-wo-n5U" secondAttribute="bottom" id="pqR-bh-9vd"/>
                             <constraint firstItem="LXF-kc-PBC" firstAttribute="leading" secondItem="4cc-Vy-zRh" secondAttribute="leading" id="qOG-9c-sOG"/>
+                            <constraint firstItem="bq2-X3-69D" firstAttribute="leading" secondItem="4cc-Vy-zRh" secondAttribute="leadingMargin" constant="322" id="tKL-5e-5AK"/>
                             <constraint firstItem="vSw-EY-sqj" firstAttribute="leading" secondItem="4cc-Vy-zRh" secondAttribute="leading" id="yKB-bT-VXQ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="G0t-mC-62P"/>
+                                <exclude reference="tKL-5e-5AK"/>
                             </mask>
                         </variation>
                     </view>
@@ -626,11 +652,12 @@
                         <outlet property="fenduan" destination="7DT-9d-a2q" id="GGM-5a-eeN"/>
                         <outlet property="picker" destination="fns-12-55Y" id="LqF-9X-Xvz"/>
                         <outlet property="tableview" destination="vSw-EY-sqj" id="YqF-Bm-IgZ"/>
+                        <outlet property="xiaodian" destination="bq2-X3-69D" id="VBq-dE-90G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36G-Qr-fJI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="476" y="555"/>
+            <point key="canvasLocation" x="489" y="555"/>
         </scene>
         <!--Xinxi View Controller-->
         <scene sceneID="BEb-W4-lOF">
@@ -1175,6 +1202,7 @@
         <image name="@2x_xj_03_06.png" width="20" height="32"/>
         <image name="bg.jpg" width="750" height="1334"/>
         <image name="bg_02.png" width="750" height="350"/>
+        <image name="dangqianjiekuan_07.png" width="26" height="26"/>
         <image name="iconcc.png" width="18" height="32"/>
         <image name="tx_03.png" width="152" height="152"/>
     </resources>
