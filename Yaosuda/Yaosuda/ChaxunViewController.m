@@ -50,6 +50,9 @@
 
 @implementation ChaxunViewController
 -(void)viewWillAppear:(BOOL)animated{
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"dian"] intValue]==1) {
+        
+    }
      _tableview.frame=CGRectMake(0, 0, width, height);
     [_tableview reloadData];
 }
@@ -751,6 +754,7 @@
     }
     else if(index == 1){
         zhi = 2;
+        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"dian"];
         self.qian.text=nil;
         self.hou.text=nil;
         [self.tableview reloadData];
