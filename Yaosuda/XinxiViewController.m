@@ -18,6 +18,9 @@
 #define zitifont [UIFont systemFontOfSize:15];
 @interface XinxiViewController ()
 {
+    UIView *underView;
+    UIButton *passButton;
+    UIButton *backButton;
     CGFloat width;
     CGFloat height;
     //分段换控制器
@@ -30,6 +33,13 @@
 }
 @end
 @implementation XinxiViewController
+-(void)viewWillAppear:(BOOL)animated{
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"shen"] intValue]==0) {
+        passButton.hidden=YES;
+        backButton.hidden=YES;
+        underView.hidden=YES;
+    }
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -175,7 +185,7 @@
     }
     if (zhi == 2)
     {
-        return 201;
+        return width/8*5;
     }
     return 0;
 }
@@ -248,10 +258,10 @@
   
     if (zhi == 1)
     {
-        lab1.text = @"订单类型";
-        lab2.text = @"是否开票";
-        lab3.text = @"是否收款";
-        lab4.text = @"是否退货";
+        lab1.text = @"订单类型:";
+        lab2.text = @"是否开票:";
+        lab3.text = @"是否收款:";
+        lab4.text = @"是否退货:";
         
         NSString *orderType1;//订单类型
         NSString *isGather1;//是否收款
@@ -267,17 +277,17 @@
         }
         if([_isGather isEqualToString:@"0"])
         {
-            isInvoice1 = @"未开票";
-        }else
-        {
-            isInvoice1 = @"已开票";
-        }
-        if([_isInvoice isEqualToString:@"0"])
-        {
             isGather1 = @"未收款";
         }else
         {
             isGather1 = @"已收款";
+        }
+        if([_isInvoice isEqualToString:@"0"])
+        {
+            isInvoice1 = @"未开票";
+        }else
+        {
+            isInvoice1 = @"已开票";
         }
         if([_isNewRecord isEqualToString:@"0"])
         {
@@ -288,8 +298,8 @@
         }
 
         you1.text = orderType1;
-        you2.text = isGather1;
-        you3.text = isInvoice1;
+        you2.text = isInvoice1;
+        you3.text = isGather1;
         you4.text = isNewRecord1;
         
         [cell.contentView addSubview:xian];
@@ -300,11 +310,11 @@
     }
     else if(zhi == 2)
     {
-        lab1.text = @"订单编码";
-        lab2.text = @"数量";
-        lab3.text = @"联系人价格";
-        lab4.text = @"客户价格";
-        lab5.text = @"总价";
+        lab1.text = @"订单编码:";
+        lab2.text = @"数量:";
+        lab3.text = @"联系人价格:";
+        lab4.text = @"客户价格:";
+        lab5.text = @"总价:";
         
         you1.text = [orderDetailList [indexPath.section] objectForKey:@"orderCode"];
         you2.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"amount"] ];
@@ -334,7 +344,7 @@
     [cell.contentView addSubview:you5];
    
 
-    
+    cell.backgroundColor=[UIColor whiteColor];
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //线消失
@@ -347,12 +357,12 @@
 //创建按钮
 -(void)anniu
 {
-    UIView *underView = [[UIView alloc]init];
+    underView = [[UIView alloc]init];
     underView.frame = CGRectMake(0, height-50, width, 50);
     underView.backgroundColor = [UIColor colorWithHexString:@"aaaaaa" alpha:0.5];
     [self.view bringSubviewToFront:underView];
     
-    UIButton *passButton = [[UIButton alloc]init];
+    passButton = [[UIButton alloc]init];
     passButton.frame = CGRectMake(10, 7, width/2-20, 40);
     [passButton setTitle:@"通过" forState:UIControlStateNormal];
     [passButton setTitleColor:[UIColor colorWithHexString:@"ffffff" alpha:1] forState:UIControlStateNormal];
@@ -360,7 +370,7 @@
     passButton.layer.cornerRadius = 5.0;
     [passButton addTarget:self action:@selector(tongguo) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *backButton = [[UIButton alloc]init];
+    backButton = [[UIButton alloc]init];
     backButton.frame = CGRectMake(width-width/2+10, 7, width/2-20, 40);
     [backButton setTitle:@"退回" forState:UIControlStateNormal];
     [backButton setTitleColor:[UIColor colorWithHexString:@"ffffff" alpha:1] forState:UIControlStateNormal];

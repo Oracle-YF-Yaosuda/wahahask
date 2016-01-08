@@ -40,6 +40,7 @@
     UIButton *jian;
     NSMutableArray *xiuGaiShangPin;
     UIView * di;
+    NSMutableArray*chuancan;
 }
 - (IBAction)xltianjia:(UIButton *)sender;
 
@@ -71,6 +72,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidLoad];
+    chuancan=[[NSMutableArray alloc] init];
     he=0;
     //   数量修改
     xiuGaiShangPin=[NSMutableArray array];
@@ -115,82 +117,82 @@
                 
             }else{
                 
-            [WarningBox warningBoxModeIndeterminate:@"价钱估算中..." andView:self.view];
-            
-            __block int qq=0;
+                [WarningBox warningBoxModeIndeterminate:@"价钱估算中..." andView:self.view];
                 
-            for (int i=0; i<jieshou.count; i++) {
+                __block int qq=0;
                 
-                //userID    暂时不用改
-                NSString * userID=@"0";
-                
-                //请求地址   地址不同 必须要改
-                NSString * url =@"/prod/priceByNum";
-                
-                //时间戳
-                NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
-                NSTimeInterval a=[dat timeIntervalSince1970];
-                NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
-                
-                
-                //将上传对象转换为json格式字符串
-                AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
-                manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
-                SBJsonWriter* writer=[[SBJsonWriter alloc] init];
-                //数量
-                NSString*acount=[NSString stringWithFormat:@"%@",[jieshou[i] objectForKey:@"shuliang"]];
-                //商品id
-                NSString*shangpinID= [ NSString stringWithFormat:@"%@",[jieshou[i] objectForKey:@"id"]];
-                //出入参数：
-                NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",businesspersonId],@"businesspersonId",acount,@"acount",kehuID,@"customerId",shangpinID,@"productionsId", nil];
-                
-                NSString*jsonstring=[writer stringWithObject:datadic];
-                
-                //获取签名
-                NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
-                NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
-                
-                
-                //需要上传的数据
-                NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-                [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    qq++;
-                   
+                for (int i=0; i<jieshou.count; i++) {
                     
-                    if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+                    //userID    暂时不用改
+                    NSString * userID=@"0";
+                    
+                    //请求地址   地址不同 必须要改
+                    NSString * url =@"/prod/priceByNum";
+                    
+                    //时间戳
+                    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+                    NSTimeInterval a=[dat timeIntervalSince1970];
+                    NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
+                    
+                    
+                    //将上传对象转换为json格式字符串
+                    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+                    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+                    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+                    //数量
+                    NSString*acount=[NSString stringWithFormat:@"%@",[jieshou[i] objectForKey:@"shuliang"]];
+                    //商品id
+                    NSString*shangpinID= [ NSString stringWithFormat:@"%@",[jieshou[i] objectForKey:@"id"]];
+                    //出入参数：
+                    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",businesspersonId],@"businesspersonId",acount,@"acount",kehuID,@"customerId",shangpinID,@"productionsId", nil];
+                    
+                    NSString*jsonstring=[writer stringWithObject:datadic];
+                    
+                    //获取签名
+                    NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
+                    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+                    
+                    
+                    //需要上传的数据
+                    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+                    [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        qq++;
                         
-                        NSDictionary*data=[responseObject objectForKey:@"data"];
-                        NSString*customerPrice=[NSString stringWithFormat:@"%@",[data objectForKey:@"customerPrice"]];
-                        [dicc setObject:customerPrice forKey:[NSString stringWithFormat:@"%d",i]];
                         
-                        NSString*discountAmount=[NSString stringWithFormat:@"%@",[data objectForKey:@"discountAmount"]];
-                        [dixx setObject:discountAmount forKey:[NSString stringWithFormat:@"%d",i]];
-                        if (jiage.count!=jieshou.count) {
-                            [jiage addObject:@"1"];
-
+                        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+                            
+                            NSDictionary*data=[responseObject objectForKey:@"data"];
+                            NSString*customerPrice=[NSString stringWithFormat:@"%@",[data objectForKey:@"customerPrice"]];
+                            [dicc setObject:customerPrice forKey:[NSString stringWithFormat:@"%d",i]];
+                            
+                            NSString*discountAmount=[NSString stringWithFormat:@"%@",[data objectForKey:@"discountAmount"]];
+                            [dixx setObject:discountAmount forKey:[NSString stringWithFormat:@"%d",i]];
+                            if (jiage.count!=jieshou.count) {
+                                [jiage addObject:@"1"];
+                                
+                            }
+                            
                         }
                         
-                    }
-                    NSLog(@"%d    ,   %d",qq,jieshou.count);
-                    if (qq==jieshou.count) {
-                        [WarningBox warningBoxHide:YES andView:self.view];
-                    }
-                    
-                    [_tableview reloadData];
-                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    qq++;
-                    if (qq==jieshou.count) {
-                        [WarningBox warningBoxHide:YES andView:self.view];
-
-                    }
-                                        [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
-                }];
-            }
+                        if (qq==jieshou.count) {
+                            [WarningBox warningBoxHide:YES andView:self.view];
+                        }
+                        
+                        [_tableview reloadData];
+                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        qq++;
+                        if (qq==jieshou.count) {
+                            [WarningBox warningBoxHide:YES andView:self.view];
+                            
+                        }
+                        [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
+                    }];
+                }
                 [WarningBox warningBoxHide:YES andView:self.view];
             }
         }
     }
-   // [WarningBox warningBoxHide:YES andView:self.view];
+    // [WarningBox warningBoxHide:YES andView:self.view];
     [_tableview reloadData];
     
     
@@ -252,104 +254,104 @@
         self.navigationItem.rightBarButtonItem = right;
         NSFileManager *defaultManager;
         defaultManager = [NSFileManager defaultManager];
-       
+        
         NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-       
+        
         [defaultManager removeItemAtPath:path1 error:NULL];
     }else{
-    // [WarningBox warningBoxModeIndeterminate:@"库存剩余判定中..." andView:self.view];
-    //userID    暂时不用改
-    NSString * userID=@"0";
-    
-    //请求地址   地址不同 必须要改
-    NSString * url =@"/prod/stockNums";
-    
-    //时间戳
+        // [WarningBox warningBoxModeIndeterminate:@"库存剩余判定中..." andView:self.view];
+        //userID    暂时不用改
+        NSString * userID=@"0";
+        
+        //请求地址   地址不同 必须要改
+        NSString * url =@"/prod/stockNums";
+        
+        //时间戳
         NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
         NSTimeInterval a=[dat timeIntervalSince1970];
         NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
-
-    
-    //将上传对象转换为json格式字符串
-    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
-    SBJsonWriter* writer=[[SBJsonWriter alloc] init];
-    //出入参数：
-    NSMutableArray*ids=[NSMutableArray array];
-    for (int i=0; i<jieshou.count; i++) {
-        [ids addObject:[NSString stringWithFormat:@"%@",[jieshou[i] objectForKey:@"id"]]];
-    }
-    NSString*iid=[ids componentsJoinedByString:@","];
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:iid,@"ids", nil];
-    NSString*jsonstring=[writer stringWithObject:datadic];
-    
-    //获取签名
-    NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-    
-    NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
-    
-    //电泳借口需要上传的数据
-    NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [WarningBox warningBoxHide:YES andView:self.view];
-        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
-            NSDictionary*data=[responseObject objectForKey:@"data"];
-            NSArray*list=[data objectForKey:@"list"];
-            int qq=1;
-            for (int i=0; i<list.count; i++) {
-                if ([[list[i] objectForKey:@"stockNum"] intValue]-[[jieshou[i] objectForKey:@"shuliang"] intValue]<0) {
-                    qq++;
-                    //kucunbuzu
-                   
-                    
-                    
-                    
-                    NSString*message=[NSString stringWithFormat:@"您选择了%d件商品，当前剩余库存为%d件",[[jieshou[i] objectForKey:@"shuliang"] intValue],[[list[i] objectForKey:@"stockNum"] intValue]];
-                    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"库存不足" message:message preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        //将上传对象转换为json格式字符串
+        AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+        manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+        SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+        //出入参数：
+        NSMutableArray*ids=[NSMutableArray array];
+        for (int i=0; i<jieshou.count; i++) {
+            [ids addObject:[NSString stringWithFormat:@"%@",[jieshou[i] objectForKey:@"id"]]];
+        }
+        NSString*iid=[ids componentsJoinedByString:@","];
+        NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:iid,@"ids", nil];
+        NSString*jsonstring=[writer stringWithObject:datadic];
+        
+        //获取签名
+        NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
+        
+        NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+        
+        //电泳借口需要上传的数据
+        NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+        [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [WarningBox warningBoxHide:YES andView:self.view];
+            if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+                NSDictionary*data=[responseObject objectForKey:@"data"];
+                NSArray*list=[data objectForKey:@"list"];
+                int qq=1;
+                for (int i=0; i<list.count; i++) {
+                    if ([[list[i] objectForKey:@"stockNum"] intValue]-[[jieshou[i] objectForKey:@"shuliang"] intValue]<0) {
+                        qq++;
+                        //kucunbuzu
                         
                         
-                    }];
-                    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                         
-                    }];
-                    
-                    [alert addAction:action1];
-                    [alert addAction:action2];
-                    [self presentViewController:alert animated:YES completion:^{
                         
-                    }];
-                    
-                    
-                   
-                }else
-                {
-                    aa=1;
-                    self.navigationItem.rightBarButtonItem = right;
-                    if (qq==1) {
-                        //  保存plist文件 重新写入
-                    NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-                    [jieshou writeToFile:path atomically:YES];
-                    
-                    [self.tableview reloadData];
-                    [self viewWillAppear:YES];
-
+                        NSString*message=[NSString stringWithFormat:@"您选择了%d件商品，当前剩余库存为%d件",[[jieshou[i] objectForKey:@"shuliang"] intValue],[[list[i] objectForKey:@"stockNum"] intValue]];
+                        UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"库存不足" message:message preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            
+                            
+                        }];
+                        UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                            
+                        }];
+                        
+                        [alert addAction:action1];
+                        [alert addAction:action2];
+                        [self presentViewController:alert animated:YES completion:^{
+                            
+                        }];
+                        
+                        
+                        
+                    }else
+                    {
+                        aa=1;
+                        self.navigationItem.rightBarButtonItem = right;
+                        if (qq==1) {
+                            //  保存plist文件 重新写入
+                            NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+                            [jieshou writeToFile:path atomically:YES];
+                            
+                            [self.tableview reloadData];
+                            [self viewWillAppear:YES];
+                            
+                        }
+                        else{
+                            // NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+                            // jieshou=[NSMutableArray arrayWithContentsOfFile:path];
+                            [self.tableview reloadData];
+                            [self viewWillAppear:YES];
+                        }
+                        
                     }
-                    else{
-                        // NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-                       // jieshou=[NSMutableArray arrayWithContentsOfFile:path];
-                        [self.tableview reloadData];
-                        [self viewWillAppear:YES];
-                    }
-                                        
                 }
             }
-        }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [WarningBox warningBoxHide:YES andView:self.view];
+        }];
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [WarningBox warningBoxHide:YES andView:self.view];
-    }];
-    
     }
     
     
@@ -452,7 +454,7 @@
         danjia1.textAlignment = NSTextAlignmentCenter;
     }
     else{
-        danjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        danjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
         he=1;
         
         danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
@@ -476,7 +478,7 @@
         LXdanjia1.textAlignment = NSTextAlignmentCenter;
     }
     else{
-        LXdanjia1.text =[dixx objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        LXdanjia1.text =[dixx objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
         he=1;
         
         LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
@@ -499,14 +501,16 @@
         quanbu1.textAlignment = NSTextAlignmentCenter;
     }
     else{
-        quanbu1.text =[NSString stringWithFormat:@"%d",[wo[indexPath.row] intValue]*[[dicc objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] intValue]];
+        quanbu1.text =[NSString stringWithFormat:@"%d",[wo[indexPath.row] intValue]*[[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] intValue]];
         he=1;
         
         quanbu1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         quanbu1.font = [UIFont systemFontOfSize:15];
         quanbu1.textAlignment = NSTextAlignmentCenter;
+        
+        [chuancan addObject:quanbu1.text];
     }
-   
+    
     UIView *xian4 = [[UIView alloc]initWithFrame:CGRectMake(0, 180, width, 10)];
     xian4.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
@@ -568,7 +572,7 @@
         [cell.contentView addSubview:quanbu];
         [cell.contentView addSubview:quanbu1];
         [cell.contentView addSubview:xian4];
-
+        
         [cell.contentView addSubview:jia];
         [cell.contentView addSubview:jian];
         
@@ -622,22 +626,29 @@
     }else{
         float m;
         
-        for (int i=0; i<dicc.count; i++) {
-            m+= [wo[i] intValue]*[[dicc objectForKey:[NSString stringWithFormat:@"%d",i]] intValue];
+        for (int i=0; i<chuancan.count; i++) {
+            m+= [chuancan[i] intValue];
         }
-        if (he==0) {
-            [WarningBox warningBoxModeText:@"请稍等～～" andView:self.view];
-        }
-        else{
-        NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
-        NSDictionary*kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
-        
-        QuerenViewController *qu = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"queren"];
-        
-        qu.xixi=[NSString stringWithFormat:@"%@",[kehu objectForKey:@"customerName"]];
-        qu.meme =[NSString stringWithFormat:@"%.2f元",m];
-        [self.navigationController pushViewController:qu animated:YES];
-        
+        if (aa==2) {
+            [WarningBox warningBoxModeText:@"请保存您的数据～" andView:self.view];
+        }else{
+            if (he==0) {
+                [WarningBox warningBoxModeText:@"请稍等～～" andView:self.view];
+            }
+            else{
+                
+                NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
+                NSDictionary*kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
+                
+                QuerenViewController *qu = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"queren"];
+                
+                qu.xixi=[NSString stringWithFormat:@"%@",[kehu objectForKey:@"customerName"]];
+                qu.meme =[NSString stringWithFormat:@"%.2f元",m];
+                [self.navigationController pushViewController:qu animated:YES];
+                
+                
+            }
+            
         }
     }
 }
@@ -738,7 +749,7 @@
 
 - (IBAction)xltianjia:(UIButton *)sender
 {
-   
+    
     if ([_kehumingzi.text isEqualToString: @"请选择客户"]) {
         [WarningBox warningBoxModeText:@"请先选择客户!" andView:self.view];
     }
@@ -748,11 +759,11 @@
         }
         else{
             
-        
-        XuanzeViewController *xuanze = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xuanze"];
-        
-        [self.navigationController pushViewController:xuanze animated:YES];
-    }
+            
+            XuanzeViewController *xuanze = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xuanze"];
+            
+            [self.navigationController pushViewController:xuanze animated:YES];
+        }
     }
 }
 - (IBAction)xuanzekehuii:(id)sender

@@ -81,7 +81,7 @@
     zhi = 1;
     ye=5;
     [self huoququanbu];
-    [self huoqudaishenhe];
+   // [self huoqudaishenhe];
     [self setupre];
 }
 -(void)setupre
@@ -158,7 +158,7 @@
     NSString*pageSize=[NSString stringWithFormat:@"%d",ye];
     NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", @"1",@"pageNo",pageSize,@"pageSize",nil];
        NSString*jsonstring=[writer stringWithObject:datadic];
-
+    
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
 
@@ -197,7 +197,7 @@
     
     //请求地址   地址不同 必须要改
     NSString *url = @"/order/auditList";
-   // [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
+    [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
     //时间戳
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval a=[dat timeIntervalSince1970];
@@ -226,7 +226,7 @@
     
 
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+        [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
         
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
@@ -237,7 +237,8 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"数据加载失败..." andView:self.view];
     }];
     
 }
@@ -715,7 +716,7 @@
             xinxi.isGather = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"isGather"]];
             xinxi.isInvoice = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"isInvoice"]];
             xinxi.isNewRecord = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1]objectForKey:@"isNewRecord"]];
-            
+            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"shen"];
              [self.navigationController pushViewController:xinxi animated:YES];
         }
     }
@@ -727,6 +728,7 @@
             xinxi.isGather = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isGather"]];
             xinxi.isInvoice = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isInvoice"]];
             xinxi.isNewRecord = [NSString stringWithFormat:@"%@",[youbian[indexPath.section]objectForKey:@"isNewRecord"]];
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"shen"];
             [self.navigationController pushViewController:xinxi animated:YES];
         
             }
@@ -762,6 +764,7 @@
         zhi = 2;
         [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"dian"];
         _xiaodian.hidden=YES;
+        [self huoqudaishenhe];
         self.qian.text=nil;
         self.hou.text=nil;
         [self.tableview reloadData];

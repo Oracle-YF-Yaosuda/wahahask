@@ -119,17 +119,36 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
     
-  
-    //[Right addObject:[kehu objectForKey:@"linkmanPhone"]];
-    [Right addObject:@"无字段"];
-    //[Right addObject:[kehu objectForKey:@"warehouseAddress"]];
-    [Right addObject:@"无字段"];
-    //[Right addObject:[kehu objectForKey:@"registerAddress"]];
-    [Right addObject:@"无字段"];
+    
+    if ([kehu objectForKey:@"linkmanPhone"]==nil) {
+         [Right addObject:@""];
+    }else{
+    [Right addObject:[kehu objectForKey:@"linkmanPhone"]];
+    }
+    
+    if ([kehu objectForKey:@"warehouseAddress"]==nil) {
+          [Right addObject:@""];
+    }else{
+    [Right addObject:[kehu objectForKey:@"warehouseAddress"]];
+    }
+    
+    if ([kehu objectForKey:@"registerAddress"]==nil) {
+        [Right addObject:@""];
+    }else{
+    [Right addObject:[kehu objectForKey:@"registerAddress"]];
+    }
+    
+    if ([kehu objectForKey:@"officer"]==nil) {
+        [Right addObject:@""];
+    }else{
     [Right addObject:[kehu objectForKey:@"officer"]];
-    //[Right addObject:@"无字段"];
-    //[Right addObject:[kehu objectForKey:@"linkman"]];
-    [Right addObject:@"无字段"];
+}
+    
+    if ([kehu objectForKey:@"linkman"]==nil) {
+         [Right addObject:@""];
+    }else{
+    [Right addObject:[kehu objectForKey:@"linkman"]];
+    }
 
     
     //创建label

@@ -40,7 +40,7 @@
     self.tableview.dataSource = self;
     yonghu=[yonghuziliao getUserInfo];
     zhanghao=[yonghuziliao getZiJinzhanghao];
-    _ninhao.text=[NSString stringWithFormat:@"您好,%@",[NSString stringWithFormat:@"%@",[yonghu objectForKey:@"loginName"] ]];
+    _ninhao.text=[NSString stringWithFormat:@"您好,%@",[NSString stringWithFormat:@"%@",[yonghu objectForKey:@"name"] ]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -129,7 +129,7 @@
         la3.text = @"手机号";
         
         la11.text = [NSString stringWithFormat:@"%@",[yonghu objectForKey:@"loginName"] ];
-        la22.text =@"写死了";
+        la22.text =[NSString stringWithFormat:@"%@",[yonghu objectForKey:@"name"] ];
         la33.text = [NSString stringWithFormat:@"%@",[yonghu objectForKey:@"mobile"] ];
         
     }
@@ -138,9 +138,9 @@
         la2.text = @"授信额度";
         la3.text = @"资金金额";
         
-        la11.text = @"写死了";
+        la11.text = [NSString stringWithFormat:@"%@",[zhanghao objectForKey:@"name"] ];
         la22.text = [NSString stringWithFormat:@"%@",[zhanghao objectForKey:@"creditFund"]];
-        la33.text = @"写死了 元";
+        la33.text = [NSString stringWithFormat:@"%@",[zhanghao objectForKey:@"preBalance"]];
         
     }
     else if(indexPath.section == 2){
