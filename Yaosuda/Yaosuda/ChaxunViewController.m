@@ -886,15 +886,15 @@
     
     if (result == NSOrderedDescending) {
        
-        //NSLog(@"Date1  is in the future");
+        //Date1  is in the future ;
         return anotherDayStr;
     }
     else if (result == NSOrderedAscending){
         
-        //NSLog(@"Date1 is in the past");
+        //Date1 is in the past ;
         return oneDayStr;
     }else{
-        //NSLog(@"Both dates are the same");
+        //Both dates are the same ;
        
         return oneDayStr;
     }
@@ -915,15 +915,15 @@
     
     if (result == NSOrderedDescending) {
         
-        //NSLog(@"Date1  is in the future");
+        //Date1  is in the future ;
         return oneDayStr;
     }
     else if (result == NSOrderedAscending){
         
-        //NSLog(@"Date1 is in the past");
+        //Date1 is in the past ;
         return anotherDayStr;
     }else{
-        //NSLog(@"Both dates are the same");
+        //Both dates are the same ;
         
         return oneDayStr;
     }

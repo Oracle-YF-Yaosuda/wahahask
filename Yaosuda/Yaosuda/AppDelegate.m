@@ -98,16 +98,21 @@
     //设置应用内的小红点
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"dian"];
 }
-//-(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
-//    NSLog(@"notificationSettings-----%@",notificationSettings);
-//}
+
+
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     NSLog(@"deviceToken-----%@",deviceToken);
     [APService registerDeviceToken:deviceToken];
     
     NSString* alias=[[yonghuziliao getUserInfo] objectForKey:@"id"];
     NSLog(@"别名为：－－－－－－%@",alias);
-    [APService setAlias:alias callbackSelector:nil object:nil];
+    [APService setAlias:alias callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+}
+- (void)tagsAliasCallback:(int)iResCode tags:(NSSet*)tags alias:(NSString*)alias {
+     NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
+    
+//    //用于极光单推的方式2 别名： alias
+//    [[NSUserDefaults standardUserDefaults] setObject:alias forKey:@"alias"];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

@@ -1130,6 +1130,11 @@
 					95F709571C0BDE2400BEC51C = {
 						CreatedOnToolsVersion = 7.0.1;
 						DevelopmentTeam = GP8BUACAG4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					95F709701C0BDE2400BEC51C = {
 						CreatedOnToolsVersion = 7.0.1;

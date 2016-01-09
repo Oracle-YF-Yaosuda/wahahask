@@ -129,7 +129,7 @@
         NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
         [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
-            NSLog(@"%@",responseObject);
+            
             [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.navigationController. view];
             
             if ([[responseObject objectForKey:@"code"] intValue]==0000) {

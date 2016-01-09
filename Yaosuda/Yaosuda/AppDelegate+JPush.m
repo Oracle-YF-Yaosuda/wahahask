@@ -98,7 +98,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
     //    UIApplicationStateInactive,
     //    UIApplicationStateBackground
     
-    
     //  只有再程序 处于不活跃状态才跳转到制定页面
     if(applicationState != UIApplicationStateActive){
         // 跳转
@@ -109,12 +108,9 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
     }
     
 }
-
 - (void)push{
     
-    
     UIViewController * vv ;
-    
     
     // 获取导航控制器
     UITabBarController *tabVC = (UITabBarController *)self.window.rootViewController;
@@ -126,12 +122,5 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
     [pushClassStance pushViewController:vc animated:YES];
     
 }
-
-
-
-
-
-
-
 
 @end
