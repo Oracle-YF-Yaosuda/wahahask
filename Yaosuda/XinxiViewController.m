@@ -14,6 +14,8 @@
 #import "WarningBox.h"
 #import "lianjie.h"
 #import "yonghuziliao.h"
+#import "ChaxunViewController.h"
+
 #define ziticolor [UIColor colorWithHexString:@"3c3c3c" alpha:1];
 #define zitifont [UIFont systemFontOfSize:15];
 @interface XinxiViewController ()
@@ -420,6 +422,12 @@
        
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             
+            
+            ChaxunViewController *chaxun = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
+            [self.navigationController pushViewController:chaxun animated:YES];
+
+            
+            
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -470,6 +478,9 @@
   
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             
+            ChaxunViewController *chaxun = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
+            [self.navigationController pushViewController:chaxun animated:YES];
+
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -572,7 +572,7 @@
           
             lab21.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"orderName"]];
            
-            lab31.text = [NSString stringWithFormat:@"%@",[[zuobian[indexPath.section-1] objectForKey:@"customer"] objectForKey:@"customerName"]];
+            lab31.text = [[zuobian[indexPath.section-1] objectForKey:@"customer"] objectForKey:@"customerName"];
            
             lab41.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"amount"]];
             
@@ -643,7 +643,7 @@
         
         lab11.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderCode"]];
         lab21.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderName"]];
-        lab31.text=[NSString stringWithFormat:@"%@",[[youbian[indexPath.section] objectForKey:@"customer"] objectForKey:@"customerName"]];
+        lab31.text=[[youbian[indexPath.section] objectForKey:@"customer"] objectForKey:@"customerName"];
         lab41.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"amount"]];
         lab51.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"discountAmount"]];
         lab61.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"createDate"]];
@@ -786,10 +786,29 @@
     
     self.beijing.hidden = YES;
     if (zhi == 3) {
-        self.qian.text = destDateString;
-    }
+        if ([_hou.text isEqualToString:@""]) {
+           NSString* xiaode= [self compareOneDay:[NSDate date] withAnotherDay:[self dateFromString:destDateString]];
+            
+        self.qian.text = xiaode;
+
+        }else {
+            NSString* xiaode= [self compareOneDay:[self dateFromString:_hou.text] withAnotherDay:[self dateFromString:destDateString]];
+            
+            self.qian.text = xiaode;
+        }
+           }
     else if (zhi == 4){
-        self.hou.text = destDateString;
+        if ([_qian.text isEqualToString:@""]) {
+            NSString* xiaode= [self compareOneDay:[NSDate date] withAnotherDay:[self dateFromString:destDateString]];
+            
+            self.hou.text = xiaode;
+        }
+        else{
+            NSString* dade= [self compareOneDay:[self dateFromString:_qian.text] Day:[self dateFromString:destDateString]];
+            NSString* xiaode= [self compareOneDay:[self dateFromString:dade] withAnotherDay:[NSDate date]];
+
+        self.hou.text = xiaode;
+        }
     }
 }
 - (IBAction)quxiao:(id)sender
@@ -850,5 +869,76 @@
         [WarningBox warningBoxModeText:@"加载失败～" andView:self.view];
         
     }];
+}
+/**
+ *  取小时间
+ */
+-(NSString*)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    NSComparisonResult result = [dateA compare:dateB];
+    
+    
+    if (result == NSOrderedDescending) {
+       
+        //NSLog(@"Date1  is in the future");
+        return anotherDayStr;
+    }
+    else if (result == NSOrderedAscending){
+        
+        //NSLog(@"Date1 is in the past");
+        return oneDayStr;
+    }else{
+        //NSLog(@"Both dates are the same");
+       
+        return oneDayStr;
+    }
+}
+/**
+ *  取大时间
+ */
+-(NSString*)compareOneDay:(NSDate *)oneDay Day:(NSDate *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    NSComparisonResult result = [dateA compare:dateB];
+    
+    
+    if (result == NSOrderedDescending) {
+        
+        //NSLog(@"Date1  is in the future");
+        return oneDayStr;
+    }
+    else if (result == NSOrderedAscending){
+        
+        //NSLog(@"Date1 is in the past");
+        return anotherDayStr;
+    }else{
+        //NSLog(@"Both dates are the same");
+        
+        return oneDayStr;
+    }
+}
+/**
+ *  NSString 转换成NSDate
+ */
+-(NSDate*)dateFromString:(NSString*)string
+{
+    
+    //设置转换格式
+    NSDateFormatter*formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    //NSString转NSDate
+    NSDate*date=[formatter dateFromString:string];
+    return date;
 }
 @end

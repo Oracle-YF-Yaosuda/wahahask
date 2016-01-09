@@ -73,7 +73,11 @@
     
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
-    
+    //进入前台清空角标
+    if (application.applicationState != UIApplicationStateActive) {
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    }
+    //设置应用内的小红点
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"dian"];
 }
 //如果 App状态为正在前台或者后台运行，那么此函数将被调用，并且可通过AppDelegate的applicationState是否为UIApplicationStateActive判断程序是否在前台运行。此种情况在此函数中处理：
@@ -82,7 +86,16 @@
     NSLog(@"收到通知:xiaxiaxia－－－－%@", userInfo);
     
     [APService handleRemoteNotification:userInfo];
-    
+    //进入前台清空角标
+    /**
+     *  UIApplicationStateActive 为 当前在应用界面
+     *  UIApplicationStateInactive 后台进入前台时
+     *
+     */
+    if (application.applicationState != UIApplicationStateActive) {
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    }
+    //设置应用内的小红点
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"dian"];
 }
 //-(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
