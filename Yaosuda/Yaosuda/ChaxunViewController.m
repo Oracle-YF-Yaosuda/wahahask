@@ -36,7 +36,7 @@
     
 }
 @property (weak, nonatomic) IBOutlet UIImageView *xiaodian;
-@property (weak, nonatomic) IBOutlet UITableView *tableview;
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *fenduan;
 - (IBAction)fenduan:(id)sender;
 @property(strong,nonatomic) UITextField *qian;
@@ -50,6 +50,11 @@
 @end
 
 @implementation ChaxunViewController
+-(void)passTrendValue:(NSArray *)values{
+    [self viewDidLoad];
+    [self viewWillAppear:YES];
+    
+}
 -(void)viewWillAppear:(BOOL)animated{
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"dian"] intValue]==1) {
         
@@ -113,16 +118,15 @@
         [_tableview reloadData];
         [refr endRefreshing];
         
-        
     }
     else{
         ye+=5;
         if (zhi==1) {
-            [self huoququanbu];
+           [self huoququanbu];
         }else
-            [self huoqudaishenhe];
-        [_tableview reloadData];
-        [refr endRefreshing];
+           [self huoqudaishenhe];
+           [_tableview reloadData];
+           [refr endRefreshing];
     }}
 //获取全部订单网络数据
 -(void)huoququanbu
@@ -162,15 +166,11 @@
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
 
-    
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
 
-   
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
  
-   
-    
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
@@ -420,7 +420,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
     
-    
     CGFloat gao = width;
     CGFloat labheight = gao/8;
     
@@ -527,6 +526,7 @@
             
             self.qian = [[UITextField alloc]initWithFrame:CGRectMake(15, 42, (width- 60)/3, 30)];
             self.qian.placeholder = @" 请选择日期";
+            self.qian.text=@"";
             self.qian.font = [UIFont systemFontOfSize:13];
             self.qian.layer.borderColor = [[UIColor colorWithHexString:@"0CB7FF" alpha:1] CGColor];
             self.qian.layer.borderWidth =1;
@@ -539,6 +539,7 @@
             
             self.hou = [[UITextField alloc]initWithFrame:CGRectMake(45+(width- 60)/3, 42,  (width- 60)/3, 30)];
             self.hou.placeholder = @" 请选择日期";
+            self.hou.text=@"";
             self.hou.font = [UIFont systemFontOfSize:13];
             self.hou.layer.borderColor = [[UIColor colorWithHexString:@"0CB7FF" alpha:1] CGColor];
             self.hou.layer.borderWidth =1;
@@ -838,7 +839,7 @@
  
     //出入参数：
     
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",_qian.text,@"startDate",_hou.text,@"endDate", @"",@"state", @"1",@"pageNo",@"10",@"pageSize",nil];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",_qian.text,@"startDate",_hou.text,@"endDate", @"",@"state", @"1",@"pageNo",@"50",@"pageSize",nil];
     NSString*jsonstring=[writer stringWithObject:datadic];
    
     //获取签名

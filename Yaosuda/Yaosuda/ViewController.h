@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *denglu;
 - (IBAction)denglu:(id)sender;
 - (IBAction)genghuan:(id)sender;
+- (IBAction)jizhu:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *diandian;
 
 @end
 

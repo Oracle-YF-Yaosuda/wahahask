@@ -17,23 +17,27 @@
 #import "KeyboardToolBar.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *genghuan;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+   //更换设备    按钮隐藏
+    _genghuan.hidden=YES;
+  
     self.user.delegate = self;
     self.pass.delegate = self;
     //设置圆角
     self.diview.layer.cornerRadius = 5.0;
     self.denglu.layer.cornerRadius = 5.0;
-    /**
-     *  测试专用！！！！
-     */
-    self.user.text = @"chengdu";
-    self.pass.text = @"admin";
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"diandian"] intValue]==1) {
+        [_diandian setImage:[UIImage imageNamed:@"@2x_114副本.png"] forState:UIControlStateNormal];
+        NSString*user=[NSString stringWithFormat:@"%@",[[yonghuziliao getUserInfo] objectForKey:@"password"]];
+        _pass.text=user;
+        
+    }
     
     NSString*path=[NSString stringWithFormat:@"%@/Documents/userInfo.plist",NSHomeDirectory()];
     NSFileManager*fm=[NSFileManager defaultManager];
@@ -207,7 +211,7 @@
     UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示" message:@"更换登录设备,需要联系系统管理员,是否要拨打电话?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction*action1=[UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //调用手机拨打电话
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://15545457012"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://12345678999"]];
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [WarningBox warningBoxModeText:@"如需更换设备请联系我们" andView:self.view];
@@ -219,6 +223,16 @@
         
     }];
     
+}
+
+- (IBAction)jizhu:(id)sender {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"diandian"] intValue]==1) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"diandian"];
+        [_diandian setImage:[UIImage imageNamed:@"@2x_117副本.png"]forState:UIControlStateNormal];
+    }else{
+    [_diandian setImage:[UIImage imageNamed:@"@2x_114副本.png"] forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"diandian"];
+    }
 }
 
 @end

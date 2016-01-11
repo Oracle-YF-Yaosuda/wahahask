@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PassTrendValueDelegate.h"
 
-
-@interface ChaxunViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
-
+@interface ChaxunViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,PassTrendValueDelegate,UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 
 @end

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6AE1516C1C3E57720080C967 /* AppDelegate+JPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE1516B1C3E57720080C967 /* AppDelegate+JPush.m */; };
 		951646011C34C27100A781B7 /* KeyboardToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 951646001C34C27100A781B7 /* KeyboardToolBar.m */; };
 		9521ABD21C11817F0036B052 /* ZizunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9521ABD11C11817F0036B052 /* ZizunViewController.m */; };
 		956160471C155FDC005F92C9 /* KehuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 956160461C155FDC005F92C9 /* KehuViewController.m */; };
@@ -151,6 +150,8 @@
 		95F70A371C0BDE6300BEC51C /* yellow_23.png in Resources */ = {isa = PBXBuildFile; fileRef = 95F709E71C0BDE6300BEC51C /* yellow_23.png */; };
 		D22745C71C3F5604004A1A8D /* dangqianjiekuan_07.png in Resources */ = {isa = PBXBuildFile; fileRef = D22745C61C3F5604004A1A8D /* dangqianjiekuan_07.png */; };
 		D22745CB1C3F591B004A1A8D /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D22745CA1C3F591B004A1A8D /* icon.png */; };
+		D23B37CC1C43814A00F64E1A /* @2x_114副本.png in Resources */ = {isa = PBXBuildFile; fileRef = D23B37CA1C43814A00F64E1A /* @2x_114副本.png */; };
+		D23B37CD1C43814A00F64E1A /* @2x_117副本.png in Resources */ = {isa = PBXBuildFile; fileRef = D23B37CB1C43814A00F64E1A /* @2x_117副本.png */; };
 		D23DC3C11C0EB3C1007C66DF /* mmm5.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C01C0EB3C1007C66DF /* mmm5.m */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
 		D23DC3C41C0EB3D6007C66DF /* URLEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C31C0EB3D6007C66DF /* URLEncode.m */; };
 		D23DC3C81C0EB3E6007C66DF /* lianjie.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C71C0EB3E6007C66DF /* lianjie.m */; };
@@ -212,8 +213,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6AE1516A1C3E57720080C967 /* AppDelegate+JPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+JPush.h"; sourceTree = "<group>"; };
-		6AE1516B1C3E57720080C967 /* AppDelegate+JPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+JPush.m"; sourceTree = "<group>"; };
 		951645FF1C34C27100A781B7 /* KeyboardToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardToolBar.h; sourceTree = "<group>"; };
 		951646001C34C27100A781B7 /* KeyboardToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardToolBar.m; sourceTree = "<group>"; };
 		9521ABD01C11817F0036B052 /* ZizunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZizunViewController.h; sourceTree = "<group>"; };
@@ -405,6 +404,8 @@
 		D21BDF931C112F900031F431 /* PassTrendValueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassTrendValueDelegate.h; sourceTree = "<group>"; };
 		D22745C61C3F5604004A1A8D /* dangqianjiekuan_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dangqianjiekuan_07.png; sourceTree = "<group>"; };
 		D22745CA1C3F591B004A1A8D /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		D23B37CA1C43814A00F64E1A /* @2x_114副本.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "@2x_114副本.png"; sourceTree = "<group>"; };
+		D23B37CB1C43814A00F64E1A /* @2x_117副本.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "@2x_117副本.png"; sourceTree = "<group>"; };
 		D23DC3BF1C0EB3C1007C66DF /* mmm5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmm5.h; sourceTree = "<group>"; };
 		D23DC3C01C0EB3C1007C66DF /* mmm5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mmm5.m; sourceTree = "<group>"; };
 		D23DC3C21C0EB3D6007C66DF /* URLEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLEncode.h; sourceTree = "<group>"; };
@@ -686,8 +687,6 @@
 		95C12C851C0EA18F002A1CDE /* view */ = {
 			isa = PBXGroup;
 			children = (
-				6AE1516A1C3E57720080C967 /* AppDelegate+JPush.h */,
-				6AE1516B1C3E57720080C967 /* AppDelegate+JPush.m */,
 				95F7095E1C0BDE2400BEC51C /* AppDelegate.h */,
 				95F7095F1C0BDE2400BEC51C /* AppDelegate.m */,
 				95F709641C0BDE2400BEC51C /* Main.storyboard */,
@@ -771,6 +770,8 @@
 		95F7098E1C0BDE6300BEC51C /* @2x */ = {
 			isa = PBXGroup;
 			children = (
+				D23B37CA1C43814A00F64E1A /* @2x_114副本.png */,
+				D23B37CB1C43814A00F64E1A /* @2x_117副本.png */,
 				D22745CA1C3F591B004A1A8D /* icon.png */,
 				D22745C61C3F5604004A1A8D /* dangqianjiekuan_07.png */,
 				95D667031C2BBF2E00652F70 /* shancun.jpg */,
@@ -1254,6 +1255,7 @@
 				95F70A1D1C0BDE6300BEC51C /* @3x---切图_13.png in Resources */,
 				95F709F91C0BDE6300BEC51C /* @2x_sp_03.png in Resources */,
 				95F70A171C0BDE6300BEC51C /* 4_MarkMan.png in Resources */,
+				D23B37CD1C43814A00F64E1A /* @2x_117副本.png in Resources */,
 				95F70A041C0BDE6300BEC51C /* @2x_dd_22_22.png in Resources */,
 				9570941A1C0C292C007E27C3 /* 商品详情1.jpg in Resources */,
 				95F70A141C0BDE6300BEC51C /* 1_MarkMan.png in Resources */,
@@ -1272,6 +1274,7 @@
 				95F70A251C0BDE6300BEC51C /* @3x_sh_10_10.png in Resources */,
 				95E7D6C61C0D7B1900E95058 /* 9205.jpg in Resources */,
 				95F709FC1C0BDE6300BEC51C /* @2x_sp_13.png in Resources */,
+				D23B37CC1C43814A00F64E1A /* @2x_114副本.png in Resources */,
 				95F70A111C0BDE6300BEC51C /* tx_03.png in Resources */,
 				95F70A311C0BDE6300BEC51C /* @3x_xd_19.png in Resources */,
 				95F70A341C0BDE6300BEC51C /* @3x_xx_06.png in Resources */,
@@ -1356,7 +1359,6 @@
 				957093DE1C0BF3B6007E27C3 /* AFHTTPRequestOperationManager.m in Sources */,
 				9521ABD21C11817F0036B052 /* ZizunViewController.m in Sources */,
 				957093BA1C0BF3AD007E27C3 /* SBJsonStreamParserAdapter.m in Sources */,
-				6AE1516C1C3E57720080C967 /* AppDelegate+JPush.m in Sources */,
 				D2F336C51C30BF5900FEEB37 /* MJRefreshHeaderView.m in Sources */,
 				D2E833F81C0FD53B00F53E7E /* NSData+ImageContentType.m in Sources */,
 				D2F30C351C0EC33300B07A99 /* WarningBox.m in Sources */,

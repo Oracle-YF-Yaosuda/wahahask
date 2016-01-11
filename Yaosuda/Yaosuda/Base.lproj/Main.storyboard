@@ -136,10 +136,41 @@
                                     <action selector="genghuan:" destination="hWu-xc-F7h" eventType="touchUpInside" id="tQr-bN-P97"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bb-ns-0YG">
+                                <rect key="frame" x="30" y="405" width="15" height="15"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="aqe-io-W3X"/>
+                                    <constraint firstAttribute="height" constant="15" id="pqz-Yt-zXk"/>
+                                </constraints>
+                                <state key="normal" title="Button" backgroundImage="@2x_117副本.png"/>
+                                <connections>
+                                    <action selector="jizhu:" destination="hWu-xc-F7h" eventType="touchUpInside" id="RWW-BU-kMB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cUS-j5-E1M">
+                                <rect key="frame" x="45" y="398" width="60" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="80W-dI-4w8"/>
+                                    <constraint firstAttribute="height" constant="30" id="Ptj-3i-hAn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="记住密码">
+                                    <color key="titleColor" red="0.047058823530000002" green="0.71764705880000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="0.047058823530000002" green="0.71764705880000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="jizhu:" destination="hWu-xc-F7h" eventType="touchUpInside" id="3Cc-sh-RL8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="3bb-ns-0YG" firstAttribute="leading" secondItem="1qe-uR-ggo" secondAttribute="leadingMargin" constant="10" id="3xT-7E-8GP"/>
                             <constraint firstItem="9uW-EL-APC" firstAttribute="top" secondItem="egI-vR-hAY" secondAttribute="bottom" constant="45" id="F1q-eD-ciI"/>
                             <constraint firstAttribute="trailing" secondItem="jE8-8m-z8x" secondAttribute="trailing" constant="30" id="HjS-5w-apK"/>
                             <constraint firstItem="egI-vR-hAY" firstAttribute="top" secondItem="kVk-6q-tLq" secondAttribute="bottom" constant="31" id="Hqg-Jp-5nX"/>
@@ -149,16 +180,21 @@
                             <constraint firstItem="Zx2-ZY-st5" firstAttribute="leading" secondItem="1qe-uR-ggo" secondAttribute="leadingMargin" constant="10" id="Zf5-zI-QsP"/>
                             <constraint firstItem="jE8-8m-z8x" firstAttribute="top" secondItem="Zx2-ZY-st5" secondAttribute="bottom" constant="11" id="gFk-lD-bEH"/>
                             <constraint firstItem="N8d-X0-hqk" firstAttribute="leading" secondItem="1qe-uR-ggo" secondAttribute="leading" id="kNv-ZO-zZA"/>
+                            <constraint firstItem="cUS-j5-E1M" firstAttribute="leading" secondItem="3bb-ns-0YG" secondAttribute="trailing" id="ktS-dU-N2m"/>
                             <constraint firstAttribute="trailing" secondItem="N8d-X0-hqk" secondAttribute="trailing" id="nGc-Kl-LTX"/>
                             <constraint firstItem="9uW-EL-APC" firstAttribute="leading" secondItem="1qe-uR-ggo" secondAttribute="leading" constant="30" id="nJ0-YZ-noP"/>
+                            <constraint firstItem="3bb-ns-0YG" firstAttribute="top" secondItem="Zx2-ZY-st5" secondAttribute="bottom" constant="18" id="pOV-RJ-q0A"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Zx2-ZY-st5" secondAttribute="trailing" constant="10" id="sAP-Ue-RIm"/>
                             <constraint firstItem="NiW-5V-80A" firstAttribute="top" secondItem="N8d-X0-hqk" secondAttribute="bottom" id="tof-5j-VYC"/>
                             <constraint firstItem="Zx2-ZY-st5" firstAttribute="top" secondItem="9uW-EL-APC" secondAttribute="bottom" constant="36" id="wxT-NX-fIJ"/>
+                            <constraint firstItem="cUS-j5-E1M" firstAttribute="top" secondItem="Zx2-ZY-st5" secondAttribute="bottom" constant="11" id="yXr-7q-JQT"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="denglu" destination="Zx2-ZY-st5" id="uQf-Ez-GrE"/>
+                        <outlet property="diandian" destination="3bb-ns-0YG" id="FTY-Zc-NmK"/>
                         <outlet property="diview" destination="9uW-EL-APC" id="pDa-8z-ib4"/>
+                        <outlet property="genghuan" destination="jE8-8m-z8x" id="jtQ-6K-iYY"/>
                         <outlet property="pass" destination="8se-QW-4ie" id="5fG-Bw-hSK"/>
                         <outlet property="user" destination="aZP-RY-cIl" id="rTb-vA-zzO"/>
                     </connections>
@@ -1194,6 +1230,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="@2x_117副本.png" width="36" height="36"/>
         <image name="@2x_dd_22_03.png" width="44" height="44"/>
         <image name="@2x_dd_22_06.png" width="40" height="44"/>
         <image name="@2x_dl_03.png" width="278" height="310"/>

@@ -11,5 +11,4 @@
 
 -(void)passTrendValue:(NSArray *)values;
 
-
 @end

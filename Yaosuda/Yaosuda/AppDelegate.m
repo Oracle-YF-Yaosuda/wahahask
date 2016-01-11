@@ -9,16 +9,18 @@
 #import "AppDelegate.h"
 #import "APService.h"
 #import "yonghuziliao.h"
+#import "ChaxunViewController.h"
+#import "PassTrendValueDelegate.h"
 
 @interface AppDelegate ()
-
+@property (retain , nonatomic) id<PassTrendValueDelegate>trendDelegate;
 @end
 
 @implementation AppDelegate
 /**
  *  注意～   本版本为iOS 9.1   所以极光推送的时候 要在可选设置里  勾选 
  *            content-available 否则 接受不到
- */
+ */ 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -62,7 +64,6 @@
     //[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
-
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
@@ -74,7 +75,7 @@
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
     //进入前台清空角标
-    if (application.applicationState != UIApplicationStateActive) {
+    if (application.applicationState == UIApplicationStateActive) {
         [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     }
     //设置应用内的小红点
@@ -92,18 +93,21 @@
      *  UIApplicationStateInactive 后台进入前台时
      *
      */
-    if (application.applicationState != UIApplicationStateActive) {
+    if (application.applicationState == UIApplicationStateActive) {
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     }
     //设置应用内的小红点
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"dian"];
-}
+    ChaxunViewController*memeda=[[ChaxunViewController alloc] init];
+    self.trendDelegate= memeda;
+    [self.trendDelegate passTrendValue:nil];
 
+}
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     NSLog(@"deviceToken-----%@",deviceToken);
     [APService registerDeviceToken:deviceToken];
-    
+   
     NSString* alias=[[yonghuziliao getUserInfo] objectForKey:@"id"];
     NSLog(@"别名为：－－－－－－%@",alias);
     [APService setAlias:alias callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
