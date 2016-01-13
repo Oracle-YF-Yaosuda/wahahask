@@ -31,7 +31,7 @@
     NSArray*customerList;
     UIImageView *image;
     UIImageView *image1;
-    
+    NSString*count;
    
 }
 @end
@@ -43,7 +43,7 @@
     tulv=[NSMutableArray array];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
-    
+    count = [NSString string];
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
     
@@ -77,7 +77,7 @@
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     //出入参数：
     NSString*pageSize=[NSString stringWithFormat:@"%d",ye];
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",pageSize,@"pageNo",@"50",@"pageSize", nil];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",pageSize,@"pageNo",@"5",@"pageSize", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     
@@ -98,6 +98,7 @@
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
             customerList=[data objectForKey:@"customerList"];
+            count=[NSString stringWithFormat:@"%@",[data objectForKey:@"count"]];
             for (NSDictionary*dd in customerList) {
                 [tulv addObject:dd];
             }
@@ -138,11 +139,18 @@
     }
     else{
         ye+=1;
+        if ((ye-1)*5>=[count intValue]) {
+            [WarningBox warningBoxModeText:@"已经是最后一页了!" andView:self.view];
+        }else{
+       
         
         [self kkk];
         [_tableview reloadData];
         [refr endRefreshing];
-    }}
+        }
+    }
+    [refr endRefreshing];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -252,19 +260,19 @@
     xian4.backgroundColor = xiancolor;
 
     KHmingzi.text = @"客户姓名";
-    KHmingzi1.text = [customerList[indexPath.section] objectForKey:@"customerName" ];
+    KHmingzi1.text = [tulv[indexPath.section] objectForKey:@"customerName" ];
     LXdianhua.text = @"联系电话";
-    LXdianhua1.text =[customerList[indexPath.section] objectForKey:@"linkmanPhone" ];
+    LXdianhua1.text =[tulv[indexPath.section] objectForKey:@"linkmanPhone" ];
     CKdizhi.text = @"仓库地址";
     //CKdizhi1.text = [customerList[indexPath.section] objectForKey:@"warehouseAddress" ];
-    CKdizhi1.text = [customerList[indexPath.section] objectForKey:@"warehouseAddress"];
+    CKdizhi1.text = [tulv[indexPath.section] objectForKey:@"warehouseAddress"];
     ZCdizhi.text = @"注册地址";
-    ZCdizhi1.text = [customerList[indexPath.section] objectForKey:@"registerAddress" ];
+    ZCdizhi1.text = [tulv[indexPath.section] objectForKey:@"registerAddress" ];
     FZren.text = @"负  责  人";
-    FZren1.text = [customerList[indexPath.section] objectForKey:@"officer" ];
+    FZren1.text = [tulv[indexPath.section] objectForKey:@"officer" ];
     LXren.text = @"联  系  人";
    
-    LXren1.text = [customerList[indexPath.section] objectForKey:@"linkman" ];
+    LXren1.text = [tulv[indexPath.section] objectForKey:@"linkman" ];
     
     
     
@@ -277,7 +285,7 @@
     NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
     NSFileManager*fm=[NSFileManager defaultManager];
     if ([fm fileExistsAtPath:pathkehu]) {
-        if ([[customerList[indexPath.section] objectForKey:@"customerName"]  isEqualToString:[[NSDictionary dictionaryWithContentsOfFile:pathkehu] objectForKey:@"customerName"]]) {
+        if ([[tulv[indexPath.section] objectForKey:@"customerName"]  isEqualToString:[[NSDictionary dictionaryWithContentsOfFile:pathkehu] objectForKey:@"customerName"]]) {
             
             [cell.contentView addSubview:image];
             [cell.contentView addSubview:image1];
@@ -317,7 +325,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   
-    NSDictionary* dd=[NSDictionary dictionaryWithDictionary:customerList[indexPath.section]];
+    NSDictionary* dd=[NSDictionary dictionaryWithDictionary:tulv[indexPath.section]];
     NSString *path =[NSHomeDirectory() stringByAppendingString:@"/Documents/kehuxinxi.plist"];
     [dd writeToFile:path atomically:YES];
 
