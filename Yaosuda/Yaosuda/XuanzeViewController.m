@@ -35,7 +35,9 @@
     NSMutableArray*chuande;
     NSArray*productionsList;
     UIButton *jia ;
+    NSString*count;
     int ye;
+    NSMutableArray*xiaolv;
     
 //  数组中存放各个产品的下单  数量
     NSMutableArray *xiadanshuliang;
@@ -76,7 +78,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    xiaolv =[ NSMutableArray array];
     _search.delegate=self;
     _search.showsCancelButton=NO;
 
@@ -91,7 +93,7 @@
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
-    ye=5;
+    ye=1;
     [self xxx:@""];
     [self setupre];
 }
@@ -116,7 +118,7 @@
     //出入参数：
     NSString*pageSize=[NSString stringWithFormat:@"%d",ye];
     NSString *proName=[NSString stringWithFormat:@"%@",zhao];
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",proName,@"proName",@"",@"proCatalog",@"1",@"pageNo",pageSize,@"pageSize", nil];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"qtype",proName,@"proName",@"",@"proCatalog",pageSize,@"pageNo",@"10",@"pageSize", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     
@@ -131,14 +133,16 @@
     
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        
-        
-        //[WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
-        
+      
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
+            count=[NSString stringWithFormat:@"%@",[data objectForKey:@"count"]];
             productionsList=[data objectForKey:@"productionsList"];
-            for (int i=0; i<productionsList.count; i++) {
+            
+            for (NSDictionary*dd in productionsList) {
+                [xiaolv addObject:dd];
+            }
+            for (int i=0; i<xiaolv.count; i++) {
                 [shuzi addObject:[NSString stringWithFormat:@"shuzi%d",i]];
                 [jiahao addObject:[NSString stringWithFormat:@"jiahao%d",i]];
                 
@@ -146,7 +150,7 @@
                 [xiadanshuliang addObject:@"0"];
                 
             }
-            
+           
             
             
             [_tableview reloadData];
@@ -179,7 +183,8 @@
 }
 -(void)done:(MJRefreshBaseView*)refr{
     if (refr.tag==1001) {
-        ye=5;
+        ye=1;
+        xiaolv=[NSMutableArray array];
         [self xxx:_search.text];
         [_tableview reloadData];
         [refr endRefreshing];
@@ -187,18 +192,25 @@
         
     }
     else{
-        ye+=5;
+        ye+=1;
+        
+        if ((ye-1)*10>=[count intValue]) {
+            [WarningBox warningBoxModeText:@"已经是最后一页!" andView:self.view];
+        }else{
         [self xxx:_search.text];
         [_tableview reloadData];
         [refr endRefreshing];
-    }}
+        
+    }
+  }[refr endRefreshing];
+}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return productionsList.count;
+    return xiaolv.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return width/3;//cell高度
@@ -214,7 +226,7 @@
     _imagr = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,width/3 ,width/3)];
    
         
-    tupian=[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"pics"]];
+    tupian=[NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"pics"]];
         
    
         
@@ -324,10 +336,10 @@
     [gengduo setImage:[UIImage imageNamed:@"@2x_sp_16.png"] forState:UIControlStateNormal];
     
    
-    name1.text = [NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"proName" ]];
-    changjia1.text = [NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"proEnterprise" ]];
-    guige1.text =[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"etalon" ]];
-    danwei1.text = [NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"unit" ]];
+    name1.text = [NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"proName" ]];
+    changjia1.text = [NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"proEnterprise" ]];
+    guige1.text =[NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"etalon" ]];
+    danwei1.text = [NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"unit" ]];
   
     [cell.contentView addSubview:_imagr];
 
@@ -356,8 +368,8 @@
 #pragma mark - 点击cell跳转
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     XiangqingViewController *xiangqing = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"xiangqing"];
-    xiangqing.shangID=[NSString stringWithFormat:@"%@",[productionsList[indexPath.row ] objectForKey:@"id"]];
-    NSString * ij=[NSString stringWithFormat:@"%@",[productionsList[indexPath.row] objectForKey:@"pics"]];
+    xiangqing.shangID=[NSString stringWithFormat:@"%@",[xiaolv[indexPath.row ] objectForKey:@"id"]];
+    NSString * ij=[NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"pics"]];
   
     NSArray*arr=[ij componentsSeparatedByString:@"|"];
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
@@ -386,7 +398,7 @@
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     //出入参数：
-    NSString*_shangID=[NSString stringWithFormat:@"%@",[productionsList[tt.tag-2000] objectForKey:@"id"]];
+    NSString*_shangID=[NSString stringWithFormat:@"%@",[xiaolv[tt.tag-2000] objectForKey:@"id"]];
     NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:_shangID,@"productionsId", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
@@ -430,7 +442,7 @@
             if([xiadanshuliang[tt.tag-2000] intValue]==0){
                 [WarningBox warningBoxModeText:@"数量不能为空哟～" andView:self.view];
             }else{
-                NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:productionsList[tt.tag-2000]];
+                NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:xiaolv[tt.tag-2000]];
             [dd setObject:xiadanshuliang[tt.tag-2000] forKey:@"shuliang"];
                 [WarningBox warningBoxModeText:@"添加成功~" andView:self.view];
                 [chuande addObject:dd];
@@ -499,6 +511,7 @@
 
 }
 -(void)diaoyong:(NSString*)zhao{
+    xiaolv=[NSMutableArray array];
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -536,7 +549,11 @@
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
             productionsList=[data objectForKey:@"productionsList"];
-            for (int i=0; i<productionsList.count; i++) {
+            count=[NSString stringWithFormat:@"%@",[data objectForKey:@"count"]];
+            for (NSDictionary*dd in productionsList) {
+                [xiaolv addObject:dd];
+            }
+            for (int i=0; i<xiaolv.count; i++) {
                 [shuzi addObject:[NSString stringWithFormat:@"shuzi%d",i]];
                 [jiahao addObject:[NSString stringWithFormat:@"jiahao%d",i]];
                 //       下单数量默认为0

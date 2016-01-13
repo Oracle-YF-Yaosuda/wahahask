@@ -66,6 +66,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 //如果是使用 iOS 7 的 Remote Notification 特性那么处理函数需要使用
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
@@ -80,6 +82,8 @@
     }
     //设置应用内的小红点
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"dian"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"jie" object:nil];
 }
 //如果 App状态为正在前台或者后台运行，那么此函数将被调用，并且可通过AppDelegate的applicationState是否为UIApplicationStateActive判断程序是否在前台运行。此种情况在此函数中处理：
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -98,11 +102,12 @@
     }
     //设置应用内的小红点
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"dian"];
-    ChaxunViewController*memeda=[[ChaxunViewController alloc] init];
-    self.trendDelegate= memeda;
-    [self.trendDelegate passTrendValue:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"jie" object:nil];
 
 }
+
+
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     NSLog(@"deviceToken-----%@",deviceToken);

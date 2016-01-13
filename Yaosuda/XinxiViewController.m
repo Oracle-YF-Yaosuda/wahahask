@@ -134,6 +134,7 @@
     
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
+        NSLog(@"shangpin  xinxi---------------------------%@",responseObject);
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
             
             
@@ -187,7 +188,7 @@
     }
     if (zhi == 2)
     {
-        return width/8*5;
+        return width/8*6;
     }
     return 0;
 }
@@ -224,46 +225,51 @@
     UIView *xian5 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*6, width-30, 1)];
     xian5.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
 
-    
-    UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 100, gao2/8)];
+    UILabel *lab0 = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 100, gao2/8)];
+    lab0.font = zitifont;
+    lab0.textColor = ziticolor;
+    UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8, 100, gao2/8)];
     lab1.font = zitifont;
     lab1.textColor = ziticolor;
-    UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8, 100, gao2/8)];
+    UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/4, 100, gao2/8)];
     lab2.font = zitifont;
     lab2.textColor = ziticolor;
-    UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/4, 100, gao2/8)];
+    UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*3, 100, gao2/8)];
     lab3.font = zitifont;
     lab3.textColor = ziticolor;
-    UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*3, 100, gao2/8)];
+    UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/2, 100, gao2/8)];
     lab4.font = zitifont;
     lab4.textColor = ziticolor;
-    UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/2, 100, gao2/8)];
+    UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*5, 100, gao2/8)];
     lab5.font = zitifont;
     lab5.textColor = ziticolor;
    
 
-    UILabel *you1 = [[UILabel alloc]initWithFrame:CGRectMake(120, 0, width-30, gao2/8)];
+    UILabel *you0 = [[UILabel alloc]initWithFrame:CGRectMake(120, 0, width-30, gao2/8)];
+    you0.font = zitifont;
+    you0.textColor = ziticolor;
+    UILabel *you1 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8, width-30, gao2/8)];
     you1.font = zitifont;
     you1.textColor = ziticolor;
-    UILabel *you2 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8, width-30, gao2/8)];
+    UILabel *you2 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/4, width-30, gao2/8)];
     you2.font = zitifont;
     you2.textColor = ziticolor;
-    UILabel *you3 = [[UILabel alloc]initWithFrame:CGRectMake(120,  gao2/4, width-30, gao2/8)];
+    UILabel *you3 = [[UILabel alloc]initWithFrame:CGRectMake(120,  gao2/8*3, width-30, gao2/8)];
     you3.font = zitifont;
     you3.textColor = ziticolor;
-    UILabel *you4 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*3, width-30, gao2/8)];
+    UILabel *you4 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/2, width-30, gao2/8)];
     you4.font = zitifont;
     you4.textColor = ziticolor;
-    UILabel *you5 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/2, width-30, gao2/8)];
+    UILabel *you5 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*5, width-30, gao2/8)];
     you5.font = zitifont;
     you5.textColor = ziticolor;
   
     if (zhi == 1)
     {
-        lab1.text = @"订单类型:";
-        lab2.text = @"是否开票:";
-        lab3.text = @"是否收款:";
-        lab4.text = @"是否退货:";
+        lab0.text = @"订单类型:";
+        lab1.text = @"是否开票:";
+        lab2.text = @"是否收款:";
+        lab3.text = @"是否退货:";
         
         NSString *orderType1;//订单类型
         NSString *isGather1;//是否收款
@@ -299,10 +305,10 @@
             isNewRecord1 = @"有退货";
         }
 
-        you1.text = orderType1;
-        you2.text = isInvoice1;
-        you3.text = isGather1;
-        you4.text = isNewRecord1;
+        you0.text = orderType1;
+        you1.text = isInvoice1;
+        you2.text = isGather1;
+        you3.text = isNewRecord1;
         
         [cell.contentView addSubview:xian];
         [cell.contentView addSubview:xian1];
@@ -311,13 +317,14 @@
         
     }
     else if(zhi == 2)
-    {
+    {   lab0.text = @"商品名称:";
         lab1.text = @"订单编码:";
         lab2.text = @"数量:";
         lab3.text = @"联系人价格:";
         lab4.text = @"客户价格:";
         lab5.text = @"总价:";
         
+        you0.text = [NSString stringWithFormat:@"%@",[[orderDetailList [indexPath.section] objectForKey:@"productions"] objectForKey:@"proName"] ];
         you1.text = [orderDetailList [indexPath.section] objectForKey:@"orderCode"];
         you2.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"amount"] ];
         you3.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"favorablePrice"] ];
@@ -331,14 +338,14 @@
         [cell.contentView addSubview:xian4];
 
     }
-
+    [cell.contentView addSubview:lab0];
     [cell.contentView addSubview:lab1];
     [cell.contentView addSubview:lab2];
     [cell.contentView addSubview:lab3];
     [cell.contentView addSubview:lab4];
     [cell.contentView addSubview:lab5];
  
-    
+    [cell.contentView addSubview:you0];
     [cell.contentView addSubview:you1];
     [cell.contentView addSubview:you2];
     [cell.contentView addSubview:you3];

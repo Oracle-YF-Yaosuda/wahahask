@@ -30,10 +30,11 @@
     CGFloat height;
     NSArray*zuobian;
     NSArray*youbian;
+    NSString*count;
     int zhi;
     int ye;
     int index;
-    
+    NSMutableArray*zuojia;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *xiaodian;
 
@@ -55,13 +56,28 @@
     [self viewWillAppear:YES];
     
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"qian"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"hou"];
+}
+-(void)jieshou{
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"dian"] intValue]==1) {
+        
+        _xiaodian.hidden=NO;
+        
+    }else{
+        _xiaodian.hidden=YES;
+    }
+    
+}
 -(void)viewWillAppear:(BOOL)animated{
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"dian"] intValue]==1) {
         
     }else{
         _xiaodian.hidden=YES;
     }
-     _tableview.frame=CGRectMake(0, 0, width, height);
+    _tableview.frame=CGRectMake(0, 0, width, height);
     [_tableview reloadData];
 }
 - (void)viewDidLoad
@@ -73,6 +89,8 @@
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jieshou) name:@"jie" object:nil];
+    zuojia=[NSMutableArray array];
     //获取设备 宽和高
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
@@ -84,54 +102,70 @@
     _tableview.frame=CGRectMake(0, 40, width, height);
     
     zhi = 1;
-    ye=5;
+    ye=1;
     [self huoququanbu];
-   // [self huoqudaishenhe];
+    // [self huoqudaishenhe];
     [self setupre];
 }
 -(void)setupre
 {
-    header=[MJRefreshHeaderView header];
-    header.scrollView=_tableview;
-    header.delegate=self;
-    header.tag=1001;
-    footer=[MJRefreshFooterView footer];
-    footer.scrollView=_tableview;
-    footer.delegate=self;
+    if (zhi==1) {
+        header=[MJRefreshHeaderView header];
+        header.delegate=self;
+        header.tag=1001;
+        footer=[MJRefreshFooterView footer];
+        header.scrollView=_tableview;
+        footer.scrollView=_tableview;
+        footer.delegate=self;
+    }else{
+        
+    }
+    
 }
 - (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
 {
     [self performSelector:@selector(done:) withObject:refreshView afterDelay:0];
-
+    
 }
 -(void)done:(MJRefreshBaseView*)refr
 {
-    if (refr.tag==1001) {
-        ye=5;
-        if (zhi==1) {
-            
-        [self huoququanbu];
-        }
-        else
-        [self huoqudaishenhe];
-     
-        [_tableview reloadData];
-        [refr endRefreshing];
+    if (zhi!=1) {
         
+    }else{
+        if (refr.tag==1001) {
+            ye=1;
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"qian"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"hou"];
+            zuojia=[NSMutableArray array];
+            if (zhi==1) {
+                
+                [self huoququanbu];
+            }
+            
+            [_tableview reloadData];
+            [refr endRefreshing];
+            
+        }
+        else{
+            ye+=1;
+            
+            if ((ye-1)*5>=[count intValue]) {
+                [WarningBox warningBoxModeText:@"已经是最后一页！" andView:self.view];
+            }else{
+                if (zhi==1) {
+                    [self huoququanbu];
+                }
+                [_tableview reloadData];
+                [refr endRefreshing];
+            }
+        }
     }
-    else{
-        ye+=5;
-        if (zhi==1) {
-           [self huoququanbu];
-        }else
-           [self huoqudaishenhe];
-           [_tableview reloadData];
-           [refr endRefreshing];
-    }}
+    [refr endRefreshing];
+}
 //获取全部订单网络数据
 -(void)huoququanbu
-{
- NSString*loginUserID=[[yonghuziliao getUserInfo] objectForKey:@"id"];
+{   count=[NSString string];
+    NSString*loginUserID=[[yonghuziliao getUserInfo] objectForKey:@"id"];
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -142,51 +176,83 @@
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval a=[dat timeIntervalSince1970];
     NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
-
-   
+    
+    
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter *writer = [[SBJsonWriter alloc]init];
     NSString  *Now;
-    NSDateFormatter*ff=[[NSDateFormatter alloc] init];
-    [ff setDateFormat:@"yyyy-MM-dd"];
-    Now=[ff stringFromDate:[NSDate date]];
-    
-    NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
-    NSDate* theDate;
-    theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*3 ];
-    NSString*san=[ff stringFromDate:theDate];
-
-    //出入参数：
+    NSDictionary*datadic;
+    NSString*san;
     NSString*pageSize=[NSString stringWithFormat:@"%d",ye];
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", @"1",@"pageNo",pageSize,@"pageSize",nil];
-       NSString*jsonstring=[writer stringWithObject:datadic];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]==nil||[[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]==nil) {
+        NSDateFormatter*ff=[[NSDateFormatter alloc] init];
+        [ff setDateFormat:@"yyyy-MM-dd"];
+        Now=[ff stringFromDate:[NSDate date]];
+        
+        NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
+        NSDate* theDate;
+        theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*30 ];
+        san=[ff stringFromDate:theDate];
+        
+        datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"N",@"state", pageSize ,@"pageNo",@"5",@"pageSize",nil];
+    }
+    else if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]isEqualToString:@""]&&![[[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]isEqualToString:@""]) {
+        san=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]];
+        Now=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]];
+        datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"N",@"state", pageSize ,@"pageNo",@"5",@"pageSize",nil];
+        [[NSUserDefaults standardUserDefaults]setObject:san forKey:@"qian"];
+        [[NSUserDefaults standardUserDefaults]setObject:Now forKey:@"hou" ];
+        
+        
+    }
+    else{
+        
+        
+        NSDateFormatter*ff=[[NSDateFormatter alloc] init];
+        [ff setDateFormat:@"yyyy-MM-dd"];
+        Now=[ff stringFromDate:[NSDate date]];
+        
+        NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
+        NSDate* theDate;
+        theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*30 ];
+        san=[ff stringFromDate:theDate];
+        datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"N",@"state",pageSize ,@"pageNo",@"5",@"pageSize",nil];
+        
+    }
+    
+    //出入参数：
+    
+    NSString*jsonstring=[writer stringWithObject:datadic];
     
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-
+    
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
-
+    
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
- 
+    
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
-           
-            NSDictionary *datadic = [responseObject valueForKey:@"data"];
-            zuobian=[datadic objectForKey:@"orderList"];
             
+            NSDictionary *datadic = [responseObject valueForKey:@"data"];
+            count=[NSString stringWithFormat:@"%@",[datadic objectForKey:@"count"]];
+            zuobian=[datadic objectForKey:@"orderList"];
+            for (NSDictionary*dd in zuobian) {
+                [zuojia addObject:dd];
+            }
             [_tableview reloadData];
-        
+            
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-       
+        
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"获取数据失败!" andView:self.view];
-
-           }];
+        
+    }];
 }
 //获取待审核数据
 -(void)huoqudaishenhe
@@ -202,15 +268,15 @@
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval a=[dat timeIntervalSince1970];
     NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
-
-   
+    
+    
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter *writer = [[SBJsonWriter alloc]init];
     //出入参数：
-
+    
     NSDictionary*datadic1=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic1];
@@ -224,11 +290,11 @@
     //电泳借口需要上传的数据
     NSDictionary*dic1=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     
-
+    
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
-        
+            
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             youbian=[data1 objectForKey:@"orderList"];
             
@@ -247,11 +313,12 @@
 {
     if (zhi == 1)
     {
-        if (zuobian.count!=0)
+        if (zuojia.count==0)
         {
-            return zuobian.count +1;
-        }else
-        return 0;
+            return 1;
+        }
+        else
+            return zuojia.count +1;
     }
     else if (zhi == 2)
     {
@@ -259,7 +326,7 @@
         {
             return youbian.count;
         }else
-        return 0;
+            return 0;
     }
     return 0;
 }
@@ -299,20 +366,20 @@
     else if(zhi == 2){
         return 32;
     }
-        return 0;
+    return 0;
 }
 //编辑header内容
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     
-
+    
     if (zhi == 1)
     {
         if (section == 0)
         {
             UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
             baseView.backgroundColor = beijingcolor;
-
+            
             return baseView;
         }
         UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
@@ -323,29 +390,32 @@
         groupName.text =@"订单信息";
         groupName.font = [UIFont systemFontOfSize:15];
         
-       
+        
         NSString*huo=[[NSString alloc] init];
         
-            
+        
         
         UILabel *shenhe = [[UILabel alloc]init];
-        if([[zuobian[section-1] objectForKey:@"state"] intValue]==0){
+        
+        
+        if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"0"]){
             huo = @"完成";
-        }else if([[zuobian[section-1] objectForKey:@"state"] intValue]==2){
+        }else if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"2"]){
             huo = @"联系人审核";
-        }else if([[zuobian[section-1] objectForKey:@"state"] intValue]==4){
+        }else if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"4"]){
             huo = @"开票员审核";
-        }else if([[zuobian[section-1] objectForKey:@"state"] intValue]==6){
+        }else if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"6"]){
             shenhe.text = @"财务审核";
-        }else if([[zuobian[section-1] objectForKey:@"state"] intValue]==7){
+        }else if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"7"]){
             huo = @"撤销";
-        }else if([[zuobian[section-1] objectForKey:@"state"] intValue]==8){
+        }else if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"8"]){
             huo = @"退货";
-        }else if([[zuobian[section-1] objectForKey:@"state"] intValue]==9){
+        }else if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"9"]){
             huo = @"退货确认";
         }else{
             huo =@"未审核";
         }
+        
         
         CGRect textRect = [huo boundingRectWithSize:CGSizeMake(100,20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil ];
         shenhe.text=huo;
@@ -353,8 +423,8 @@
         shenhe.font = [UIFont systemFontOfSize:15];
         shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
         
-       UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-30-shenhe.frame.size.width, 8, 20, 20)];
-         [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
+        UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-30-shenhe.frame.size.width, 8, 20, 20)];
+        [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
         [baseView addSubview:shenhe];
         [baseView addSubview:groupName];
         [baseView addSubview:tu];
@@ -362,52 +432,54 @@
         return baseView;
     }
     else if(zhi == 2)
-        {
-           
-
-            UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
-            baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
-            
-            UILabel *groupName = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 35)];
-            groupName.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-            groupName.text =@"订单信息";
-            groupName.font = [UIFont systemFontOfSize:15];
-            
-            NSString*huo=[[NSString alloc] init];
-            
-            UILabel *shenhe = [[UILabel alloc]init];
-            if([[youbian[section] objectForKey:@"state"] intValue]==0){
-                huo = @"完成";
-            }else if([[youbian[section] objectForKey:@"state"] intValue]==2){
-                huo = @"联系人审核";
-            }else if([[zuobian[section] objectForKey:@"state"] intValue]==4){
-                huo = @"开票员审核";
-            }else if([[youbian[section] objectForKey:@"state"] intValue]==6){
-                shenhe.text = @"财务审核";
-            }else if([[youbian[section] objectForKey:@"state"] intValue]==7){
-                huo = @"撤销";
-            }else if([[youbian[section] objectForKey:@"state"] intValue]==8){
-                huo = @"退货";
-            }else if([[youbian[section] objectForKey:@"state"] intValue]==9){
-               huo = @"退货确认";
-            }else{
-                huo =@"未审核";
-            }
-            
-            CGRect textRect = [huo boundingRectWithSize:CGSizeMake(100,20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil ];
-            shenhe.text=huo;
-            shenhe.frame=CGRectMake(width-textRect.size.width-5, 0, textRect.size.width, 35);
-            shenhe.font = [UIFont systemFontOfSize:15];
-            shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-            UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-30-shenhe.frame.size.width, 8, 20,20)];
-            [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
-            
-            [baseView addSubview:shenhe];
-            [baseView addSubview:groupName];
-            [baseView addSubview:tu];
-            return baseView;
+    {
         
+        
+        UIView * baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
+        baseView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+        
+        UILabel *groupName = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 35)];
+        groupName.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
+        groupName.text =@"订单信息";
+        groupName.font = [UIFont systemFontOfSize:15];
+        
+        NSString*huo=[[NSString alloc] init];
+        
+        UILabel *shenhe = [[UILabel alloc]init];
+        if([[youbian[section] objectForKey:@"state"]isEqualToString: @"0"]){
+            huo = @"完成";
+        }else if([[youbian[section] objectForKey:@"state"]isEqualToString: @"2"]){
+            huo = @"联系人审核";
+        }else if([[youbian[section] objectForKey:@"state"]isEqualToString: @"4"]){
+            huo = @"开票员审核";
+        }else if([[youbian[section] objectForKey:@"state"]isEqualToString: @"6"]){
+            shenhe.text = @"财务审核";
+        }else if([[youbian[section] objectForKey:@"state"]isEqualToString: @"7"]){
+            huo = @"撤销";
+        }else if([[youbian[section] objectForKey:@"state"]isEqualToString: @"8"]){
+            huo = @"退货";
+        }else if([[youbian[section] objectForKey:@"state"]isEqualToString: @"9"]){
+            huo = @"退货确认";
+        }else{
+            huo =@"未审核";
         }
+        
+        
+        
+        CGRect textRect = [huo boundingRectWithSize:CGSizeMake(100,20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil ];
+        shenhe.text=huo;
+        shenhe.frame=CGRectMake(width-textRect.size.width-5, 0, textRect.size.width, 35);
+        shenhe.font = [UIFont systemFontOfSize:15];
+        shenhe.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
+        UIButton *tu = [[UIButton alloc] initWithFrame:CGRectMake(width-30-shenhe.frame.size.width, 8, 20,20)];
+        [tu setBackgroundImage:[UIImage imageNamed:@"@2x_dd_22_18.png"] forState:UIControlStateNormal];
+        
+        [baseView addSubview:shenhe];
+        [baseView addSubview:groupName];
+        [baseView addSubview:tu];
+        return baseView;
+        
+    }
     return nil;
 }
 //编辑cell内容
@@ -501,7 +573,7 @@
     lab81.textColor = ziticolor;
     lab81.font = zitifont;
     lab81.textAlignment = NSTextAlignmentCenter;
-
+    
     
     lab1.text = @"订单编号:";
     lab2.text = @"订单名称:";
@@ -512,7 +584,7 @@
     lab7.text = @"更新时间:";
     lab8.text = @"业务人员:";
     
-   
+    
     
     
     if(zhi == 1)
@@ -526,7 +598,15 @@
             
             self.qian = [[UITextField alloc]initWithFrame:CGRectMake(15, 42, (width- 60)/3, 30)];
             self.qian.placeholder = @" 请选择日期";
-            self.qian.text=@"";
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]==nil) {
+                self.qian.text=@"";
+            }
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]isEqualToString:@""]) {
+                self.qian.text=@"";
+            }else{
+                _qian.text=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]];
+            }
+            
             self.qian.font = [UIFont systemFontOfSize:13];
             self.qian.layer.borderColor = [[UIColor colorWithHexString:@"0CB7FF" alpha:1] CGColor];
             self.qian.layer.borderWidth =1;
@@ -539,7 +619,16 @@
             
             self.hou = [[UITextField alloc]initWithFrame:CGRectMake(45+(width- 60)/3, 42,  (width- 60)/3, 30)];
             self.hou.placeholder = @" 请选择日期";
-            self.hou.text=@"";
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]==nil) {
+                self.hou.text=@"";
+            }
+            
+            
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]isEqualToString:@""]) {
+                self.hou.text=@"";
+            }else{
+                _hou.text=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]];
+            }
             self.hou.font = [UIFont systemFontOfSize:13];
             self.hou.layer.borderColor = [[UIColor colorWithHexString:@"0CB7FF" alpha:1] CGColor];
             self.hou.layer.borderWidth =1;
@@ -566,27 +655,28 @@
             [cell.contentView addSubview:self.chaxun];
             
             
-        }else
+        }
+        else
         {
-          
-            lab11.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"orderCode"]];
-          
-            lab21.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"orderName"]];
-           
-            lab31.text = [[zuobian[indexPath.section-1] objectForKey:@"customer"] objectForKey:@"customerName"];
-           
-            lab41.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"amount"]];
             
-            lab51.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"discountAmount"]];
+            lab11.text = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"orderCode"]];
             
-            lab61.text =[NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"createDate"]];
+            lab21.text = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"orderName"]];
             
-            if ([zuobian[indexPath.section-1] objectForKey:@"updateDate"]==nil) {
+            lab31.text = [[zuojia[indexPath.section-1] objectForKey:@"customer"] objectForKey:@"customerName"];
+            
+            lab41.text = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"amount"]];
+            
+            lab51.text = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"discountAmount"]];
+            
+            lab61.text =[NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"createDate"]];
+            
+            if ([zuojia[indexPath.section-1] objectForKey:@"updateDate"]==nil) {
                 lab71.text=@"";
             }else{
-            lab71.text = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"updateDate"]];
+                lab71.text = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"updateDate"]];
             }
-            lab81.text = [NSString stringWithFormat:@"%@",[[zuobian[indexPath.section-1]objectForKey:@"businessperson"] objectForKey:@"name"]];
+            lab81.text = [NSString stringWithFormat:@"%@",[[zuojia[indexPath.section-1]objectForKey:@"businessperson"] objectForKey:@"name"]];
             
             
             
@@ -597,7 +687,7 @@
             imag1.image = [UIImage imageNamed:@"@2x_dd_22_22.png"];
             [cell.contentView addSubview:imag];
             [cell.contentView addSubview:imag1];
-
+            
             
             [cell.contentView addSubview:lab1];
             [cell.contentView addSubview:xian1];
@@ -640,7 +730,7 @@
         imag1.image = [UIImage imageNamed:@"@2x_dd_22_22_22.png"];
         [cell.contentView addSubview:imag];
         [cell.contentView addSubview:imag1];
-//cell  赋值
+        //cell  赋值
         
         lab11.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderCode"]];
         lab21.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderName"]];
@@ -650,8 +740,8 @@
         lab61.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"createDate"]];
         lab71.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"updateDate"]];
         lab81.text=[NSString stringWithFormat:@"%@",[[youbian[indexPath.section] objectForKey:@"businessperson"] objectForKey:@"name"]];
-
-       
+        
+        
         [cell.contentView addSubview:lab1];
         [cell.contentView addSubview:xian1];
         [cell.contentView addSubview:lab11];
@@ -682,8 +772,8 @@
         
         [cell.contentView addSubview:lab8];
         [cell.contentView addSubview:lab81];
-
-    
+        
+        
     }
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -691,7 +781,7 @@
     self.tableview.separatorStyle = UITableViewCellSelectionStyleNone;
     //隐藏滑动条
     self.tableview.showsVerticalScrollIndicator =NO;
-
+    
     
     return cell;
 }
@@ -711,29 +801,29 @@
             
         }else
         {
-            xinxi.orderId=[NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"id"]];
+            xinxi.orderId=[NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"id"]];
             
-            xinxi.orderType = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"orderType"]];
-            xinxi.isGather = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"isGather"]];
-            xinxi.isInvoice = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1] objectForKey:@"isInvoice"]];
-            xinxi.isNewRecord = [NSString stringWithFormat:@"%@",[zuobian[indexPath.section-1]objectForKey:@"isNewRecord"]];
+            xinxi.orderType = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"orderType"]];
+            xinxi.isGather = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"isGather"]];
+            xinxi.isInvoice = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"isInvoice"]];
+            xinxi.isNewRecord = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1]objectForKey:@"isNewRecord"]];
             [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"shen"];
-             [self.navigationController pushViewController:xinxi animated:YES];
+            [self.navigationController pushViewController:xinxi animated:YES];
         }
     }
     else if (zhi == 2){
         
-            xinxi.orderId=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"id"]];
+        xinxi.orderId=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"id"]];
         
-            xinxi.orderType = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderType"]];
-            xinxi.isGather = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isGather"]];
-            xinxi.isInvoice = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isInvoice"]];
-            xinxi.isNewRecord = [NSString stringWithFormat:@"%@",[youbian[indexPath.section]objectForKey:@"isNewRecord"]];
+        xinxi.orderType = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderType"]];
+        xinxi.isGather = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isGather"]];
+        xinxi.isInvoice = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isInvoice"]];
+        xinxi.isNewRecord = [NSString stringWithFormat:@"%@",[youbian[indexPath.section]objectForKey:@"isNewRecord"]];
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"shen"];
-            [self.navigationController pushViewController:xinxi animated:YES];
+        [self.navigationController pushViewController:xinxi animated:YES];
         
-            }
-
+    }
+    
 }
 //textfield点击事件
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
@@ -762,6 +852,7 @@
         [self.tableview reloadData];
     }
     else if(index == 1){
+        [self setupre];
         zhi = 2;
         [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"dian"];
         _xiaodian.hidden=YES;
@@ -770,7 +861,7 @@
         self.hou.text=nil;
         [self.tableview reloadData];
     }
-
+    
 }
 - (IBAction)queding:(id)sender
 {
@@ -783,21 +874,22 @@
     //使用日期格式器格式化时间
     NSString *destDateString = [dataFoematter stringFromDate:selected];
     
-   
+    
     
     self.beijing.hidden = YES;
     if (zhi == 3) {
         if ([_hou.text isEqualToString:@""]) {
-           NSString* xiaode= [self compareOneDay:[NSDate date] withAnotherDay:[self dateFromString:destDateString]];
+            NSString* xiaode= [self compareOneDay:[NSDate date] withAnotherDay:[self dateFromString:destDateString]];
             
-        self.qian.text = xiaode;
-
+            self.qian.text = xiaode;
+            
         }else {
             NSString* xiaode= [self compareOneDay:[self dateFromString:_hou.text] withAnotherDay:[self dateFromString:destDateString]];
             
             self.qian.text = xiaode;
         }
-           }
+        [[NSUserDefaults standardUserDefaults]setObject:_qian.text forKey:@"qian"];
+    }
     else if (zhi == 4){
         if ([_qian.text isEqualToString:@""]) {
             NSString* xiaode= [self compareOneDay:[NSDate date] withAnotherDay:[self dateFromString:destDateString]];
@@ -807,18 +899,21 @@
         else{
             NSString* dade= [self compareOneDay:[self dateFromString:_qian.text] Day:[self dateFromString:destDateString]];
             NSString* xiaode= [self compareOneDay:[self dateFromString:dade] withAnotherDay:[NSDate date]];
-
-        self.hou.text = xiaode;
+            
+            self.hou.text = xiaode;
         }
+        [[NSUserDefaults standardUserDefaults] setObject:_hou.text forKey:@"hou"];
     }
 }
 - (IBAction)quxiao:(id)sender
 {
-     self.beijing.hidden = YES;
+    self.beijing.hidden = YES;
     
 }
 -(void)cha
 {
+    count=[NSString string];
+    zuojia = [NSMutableArray array];
     [WarningBox warningBoxModeIndeterminate:@"正在加载..." andView:self.view];
     NSString*loginUserID=[[yonghuziliao getUserInfo] objectForKey:@"id"];
     //userID    暂时不用改
@@ -836,12 +931,12 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     SBJsonWriter *writer = [[SBJsonWriter alloc]init];
- 
+    
     //出入参数：
     
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",_qian.text,@"startDate",_hou.text,@"endDate", @"",@"state", @"1",@"pageNo",@"50",@"pageSize",nil];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",_qian.text,@"startDate",_hou.text,@"endDate", @"N",@"state", @"1",@"pageNo",@"5",@"pageSize",nil];
     NSString*jsonstring=[writer stringWithObject:datadic];
-   
+    
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
     
@@ -855,14 +950,19 @@
     
     
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
             
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
             zuobian=[datadic objectForKey:@"orderList"];
+            count=[NSString stringWithFormat:@"%@",[datadic objectForKey:@"count"]];
+            for (NSDictionary*dd in zuobian) {
+                [zuojia addObject:dd];
+            }
             zhi=1;
             [_tableview reloadData];
-         
+            
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -886,7 +986,7 @@
     
     
     if (result == NSOrderedDescending) {
-       
+        
         //Date1  is in the future ;
         return anotherDayStr;
     }
@@ -896,7 +996,7 @@
         return oneDayStr;
     }else{
         //Both dates are the same ;
-       
+        
         return oneDayStr;
     }
 }

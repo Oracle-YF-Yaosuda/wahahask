@@ -27,7 +27,7 @@
     CGFloat width;
     CGFloat height;
     int ye;
-    
+    NSMutableArray*tulv;
     NSArray*customerList;
     UIImageView *image;
     UIImageView *image1;
@@ -40,7 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    tulv=[NSMutableArray array];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
     
@@ -49,7 +49,7 @@
     
     //解决tableview多出的白条
     self.automaticallyAdjustsScrollViewInsets = NO;
-    ye=5;
+    ye=1;
  
 
     [self kkk];
@@ -77,7 +77,7 @@
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     //出入参数：
     NSString*pageSize=[NSString stringWithFormat:@"%d",ye];
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",@"1",@"pageNo",pageSize,@"pageSize", nil];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",pageSize,@"pageNo",@"50",@"pageSize", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     
@@ -89,16 +89,19 @@
     
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-    
+    NSLog(@"%@",dic);
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        
+        NSLog(@"%@",responseObject);
         
         
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
             customerList=[data objectForKey:@"customerList"];
-            NSLog(@"%@",customerList);
+            for (NSDictionary*dd in customerList) {
+                [tulv addObject:dd];
+            }
+          
             [_tableview reloadData];
             
         }
@@ -125,7 +128,8 @@
 }
 -(void)done:(MJRefreshBaseView*)refr{
     if (refr.tag==1001) {
-        ye=5;
+        ye=1;
+        tulv=[NSMutableArray array];
         [self kkk];
         [_tableview reloadData];
         [refr endRefreshing];
@@ -133,7 +137,8 @@
         
     }
     else{
-        ye+=5;
+        ye+=1;
+        
         [self kkk];
         [_tableview reloadData];
         [refr endRefreshing];
@@ -144,7 +149,8 @@
     // Dispose of any resources that can be recreated.
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return customerList.count;
+    NSLog(@"tulv---%ld",tulv.count);
+    return tulv.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
