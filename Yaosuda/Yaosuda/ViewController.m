@@ -166,7 +166,7 @@
         SBJsonWriter *writer = [[SBJsonWriter alloc]init];
         //出入参数：
         NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:_user.text,@"loginName",_pass.text,@"password",@"867246020234069"/*imei*/,@"imei", nil];
-        
+      
         NSString*jsonstring=[writer stringWithObject:datadic];
         
         //获取签名

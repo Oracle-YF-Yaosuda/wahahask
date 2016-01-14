@@ -221,7 +221,7 @@
         datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"N",@"state",pageSize ,@"pageNo",@"5",@"pageSize",nil];
         
     }
-    
+   
     //出入参数：
     
     NSString*jsonstring=[writer stringWithObject:datadic];
@@ -235,6 +235,7 @@
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"输出值－－－－－－%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
             
@@ -413,7 +414,7 @@
         }else if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"9"]){
             huo = @"退货确认";
         }else{
-            huo =@"未审核";
+            huo =@"待审核";
         }
         
         
@@ -461,7 +462,7 @@
         }else if([[youbian[section] objectForKey:@"state"]isEqualToString: @"9"]){
             huo = @"退货确认";
         }else{
-            huo =@"未审核";
+            huo =@"待审核";
         }
         
         

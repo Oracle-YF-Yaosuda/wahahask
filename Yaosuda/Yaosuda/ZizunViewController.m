@@ -8,6 +8,8 @@
 
 #import "ZizunViewController.h"
 #import "Color+Hex.h"
+#import "hongdingyi.h"
+#import "UIImageView+WebCache.h"
 #define XianColor [UIColor colorWithHexString:@"dcdcdc" alpha:1]
 @interface ZizunViewController ()
 {
@@ -24,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLog(@"%@",_quanshitu);
     
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
@@ -51,11 +53,20 @@
     //显示在self.view上
     [self.view addSubview:self.tableview];
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section!=0) {
+        return 10;
+    }
+    return 0;
+}
 //返回组数
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
+{   if(_quanshitu!=nil){
+    return _quanshitu.count-1;
+}else{
+    return 0;
+}
+    
 }
 //返回行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -65,7 +76,7 @@
 //cell高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 347;
+    return 300;
 }
 //setion高度
 //cell
@@ -84,27 +95,37 @@
     shang.backgroundColor = XianColor;
     UIView *zhong = [[UIView alloc]initWithFrame:CGRectMake(0, 299, width, 1)];
     zhong.backgroundColor = XianColor;
-    UIView *xia = [[UIView alloc]initWithFrame:CGRectMake(0, 346, width, 1)];
-    xia.backgroundColor = XianColor;
+//    UIView *xia = [[UIView alloc]initWithFrame:CGRectMake(0, 346, width, 1)];
+//    xia.backgroundColor = XianColor;
     //创建image
     UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake(0, 1, width, 298)];
-    image.image = [UIImage imageNamed:@""];
+    
+    NSString*lian=[NSString stringWithFormat:@"%@",service_host];
+    NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",lian,_quanshitu[indexPath.section+1]]];
+    //tempLabel.image=[UIImage imageNamed:@"3.png"];
+    
+    [image sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"1.jpg"]];
+    
+    
+    
+    
+    //image.image = [UIImage imageNamed:@""];
     //创建label
-    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(10, 301, width-20, 40)];
-    lab.textColor =[UIColor colorWithHexString:@"1e1e1e" alpha:1];
-    lab.font = [UIFont systemFontOfSize:13];
-    lab.numberOfLines = 0;
-    lab.text = @"";
+//    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(10, 301, width-20, 40)];
+//    lab.textColor =[UIColor colorWithHexString:@"1e1e1e" alpha:1];
+//    lab.font = [UIFont systemFontOfSize:13];
+//    lab.numberOfLines = 0;
+//    lab.text = @"";
     
     
     //label
-    [cell.contentView addSubview:lab];
+//    [cell.contentView addSubview:lab];
     //image
     [cell.contentView addSubview:image];
     //线
     [cell.contentView addSubview:shang];
     [cell.contentView addSubview:zhong];
-    [cell.contentView addSubview:xia];
+   // [cell.contentView addSubview:xia];
     
     //cell不边灰
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

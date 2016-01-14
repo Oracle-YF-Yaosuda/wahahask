@@ -32,7 +32,7 @@
     UIImageView *image;
     UIImageView *image1;
     NSString*count;
-   
+    
 }
 @end
 
@@ -50,8 +50,8 @@
     //解决tableview多出的白条
     self.automaticallyAdjustsScrollViewInsets = NO;
     ye=1;
- 
-
+    
+    
     [self kkk];
     [self setupre];
     
@@ -77,7 +77,7 @@
     SBJsonWriter* writer=[[SBJsonWriter alloc] init];
     //出入参数：
     NSString*pageSize=[NSString stringWithFormat:@"%d",ye];
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",pageSize,@"pageNo",@"5",@"pageSize", nil];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:businesspersonId,@"businesspersonId",pageSize,@"pageNo",@"3",@"pageSize", nil];
     
     NSString*jsonstring=[writer stringWithObject:datadic];
     
@@ -86,14 +86,12 @@
     
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-    
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     NSLog(@"%@",dic);
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         NSLog(@"%@",responseObject);
-        
         
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
@@ -102,7 +100,7 @@
             for (NSDictionary*dd in customerList) {
                 [tulv addObject:dd];
             }
-          
+            
             [_tableview reloadData];
             
         }
@@ -135,18 +133,17 @@
         [_tableview reloadData];
         [refr endRefreshing];
         
-        
     }
     else{
         ye+=1;
-        if ((ye-1)*5>=[count intValue]) {
+        if ((ye-1)*3>=[count intValue]) {
             [WarningBox warningBoxModeText:@"已经是最后一页了!" andView:self.view];
         }else{
-       
-        
-        [self kkk];
-        [_tableview reloadData];
-        [refr endRefreshing];
+            
+            
+            [self kkk];
+            [_tableview reloadData];
+            [refr endRefreshing];
         }
     }
     [refr endRefreshing];
@@ -206,7 +203,6 @@
     KHmingzi1.textAlignment = NSTextAlignmentCenter;
     KHmingzi1.numberOfLines = 0;
     
-
     UILabel *LXdianhua = [[UILabel alloc]initWithFrame:CGRectMake(5,gao/4, (kuan-10)/4-(kuan-10)/4/4, gao/4)];
     LXdianhua.textColor = ziticolor;
     LXdianhua.font =zitifont;
@@ -215,7 +211,6 @@
     LXdianhua1.textColor = ziticolor;
     LXdianhua1.textAlignment = NSTextAlignmentCenter;
     
-    
     UILabel *CKdizhi = [[UILabel alloc]initWithFrame:CGRectMake(5, gao/2, (kuan-5)/4-15, gao/4)];
     CKdizhi.textColor =ziticolor;
     CKdizhi.font =zitifont;
@@ -223,8 +218,7 @@
     CKdizhi1.textColor = ziticolor;
     CKdizhi1.font = zitifont;
     CKdizhi1.textAlignment = NSTextAlignmentCenter;
-  
-
+    
     UILabel *ZCdizhi = [[UILabel alloc]initWithFrame:CGRectMake(5, gao/4*3, (kuan-5)/4-15, gao/4)];
     ZCdizhi.textColor =ziticolor;
     ZCdizhi.font = zitifont;
@@ -232,7 +226,7 @@
     ZCdizhi1.textColor = ziticolor;
     ZCdizhi1.font = zitifont;
     ZCdizhi1.textAlignment = NSTextAlignmentCenter;
-  
+    
     UILabel *FZren = [[UILabel alloc]initWithFrame:CGRectMake(5, gao, (kuan-10)/4-(kuan-10)/4/4, gao/4)];
     FZren.textColor =ziticolor;
     FZren.font = zitifont;
@@ -240,7 +234,7 @@
     FZren1.font = zitifont;
     FZren1.textColor = ziticolor;
     FZren1.textAlignment = NSTextAlignmentCenter;
-
+    
     UILabel *LXren = [[UILabel alloc]initWithFrame:CGRectMake((kuan-5)/4*2, gao, (kuan-10)/4-(kuan-10)/4/4, gao/4)];
     LXren.textColor = ziticolor;
     LXren.font = zitifont;
@@ -249,7 +243,6 @@
     LXren1.textColor = ziticolor;
     LXren1.textAlignment = NSTextAlignmentCenter;
     
-
     UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, gao/4, kuan, 1)];
     xian1.backgroundColor = xiancolor;
     UIView *xian2 = [[UIView alloc]initWithFrame:CGRectMake(0, gao/2, width, 1)];
@@ -258,7 +251,7 @@
     xian3.backgroundColor = xiancolor;
     UIView *xian4 = [[UIView alloc]initWithFrame:CGRectMake(0, gao, width, 1)];
     xian4.backgroundColor = xiancolor;
-
+    
     KHmingzi.text = @"客户姓名";
     KHmingzi1.text = [tulv[indexPath.section] objectForKey:@"customerName" ];
     LXdianhua.text = @"联系电话";
@@ -271,11 +264,8 @@
     FZren.text = @"负  责  人";
     FZren1.text = [tulv[indexPath.section] objectForKey:@"officer" ];
     LXren.text = @"联  系  人";
-   
+    
     LXren1.text = [tulv[indexPath.section] objectForKey:@"linkman" ];
-    
-    
-    
     
     image = [[UIImageView alloc]initWithFrame:CGRectMake(1, 0, kuan-2, width/2+width/2/4)];
     image.image = [UIImage imageNamed:@"b.png"];
@@ -303,14 +293,11 @@
     [cell.contentView addSubview:FZren1];
     [cell.contentView addSubview:LXren];
     [cell.contentView addSubview:LXren1];
-   
     
     [cell.contentView addSubview:xian1];
     [cell.contentView addSubview:xian2];
     [cell.contentView addSubview:xian3];
     [cell.contentView addSubview:xian4];
-    
-    
     
     //线消失
     self.tableview.separatorStyle = UITableViewCellSelectionStyleNone;
@@ -319,30 +306,22 @@
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    
-    
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  
+    
     NSDictionary* dd=[NSDictionary dictionaryWithDictionary:tulv[indexPath.section]];
     NSString *path =[NSHomeDirectory() stringByAppendingString:@"/Documents/kehuxinxi.plist"];
     [dd writeToFile:path atomically:YES];
-
     
-    
-    
-    
-    
-    
-//返回上一页
+    //返回上一页
     [[self navigationController] popViewControllerAnimated:YES];
     
 }
 
 - (IBAction)fanhui:(id)sender {
     
-      [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 @end

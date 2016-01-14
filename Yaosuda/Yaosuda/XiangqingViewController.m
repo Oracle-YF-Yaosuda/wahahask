@@ -32,6 +32,7 @@
     NSString *shuliangCunFang;
     NSMutableArray *array;
     NSMutableArray *array1;
+    NSArray*zizhi;
 }
 @property(strong,nonatomic) UIScrollView *scrollView;
 
@@ -48,8 +49,8 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1   ];
     
     [self arraychuanjian];
-    arr1=[NSArray array];
-    
+    arr1  = [NSArray array];
+    zizhi = [NSArray array];
     self.automaticallyAdjustsScrollViewInsets = NO;
     shangpin=[[NSMutableDictionary alloc] init];
     //    创建数量存放
@@ -97,7 +98,8 @@
 
             shangpin=(NSMutableDictionary*)[data objectForKey:@"productions"];
             NSString *pic = [shangpin objectForKey:@"pics"];
-            
+            NSString *zi  = [shangpin objectForKey:@"quapics"];
+            zizhi= [zi  componentsSeparatedByString:@"|"];
             arr1 = [pic componentsSeparatedByString:@"|"];
             
            
@@ -598,6 +600,8 @@
     if (indexPath.section == 2)
     {
         ZizunViewController *zixun = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"zixun"];
+        zixun.quanshitu=zizhi;
+        //zixun.quanshitu=[NSArray arrayWithObjects:@"1",@"2",@"3", nil];
         [self.navigationController pushViewController:zixun animated:YES];
     }
     

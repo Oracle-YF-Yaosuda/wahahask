@@ -119,7 +119,7 @@
     //出入参数：
     
     NSDictionary*datadic1=[NSDictionary dictionaryWithObjectsAndKeys:_orderId,@"orderId",nil];
-    
+    NSLog(@"输入值－－－－－%@",datadic1);
     NSString*jsonstring=[writer stringWithObject:datadic1];
     
     //获取签名
