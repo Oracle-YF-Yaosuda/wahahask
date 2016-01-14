@@ -89,14 +89,12 @@
                                     <constraint firstAttribute="trailing" secondItem="qfH-fI-xBS" secondAttribute="trailing" constant="36" id="8wu-fn-klI"/>
                                     <constraint firstAttribute="trailing" secondItem="qfH-fI-xBS" secondAttribute="trailing" constant="40" id="BMV-2E-kwr"/>
                                     <constraint firstAttribute="height" constant="88" id="ExK-Bv-qF2"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="520" id="NG9-D4-EUm"/>
                                     <constraint firstItem="aZP-RY-cIl" firstAttribute="leading" secondItem="AXR-tF-MCD" secondAttribute="trailing" constant="19" id="RLP-Vo-ua4"/>
                                     <constraint firstItem="AXR-tF-MCD" firstAttribute="leading" secondItem="9uW-EL-APC" secondAttribute="leading" constant="8" id="SIn-G7-HrA"/>
                                     <constraint firstItem="qfH-fI-xBS" firstAttribute="top" secondItem="aZP-RY-cIl" secondAttribute="bottom" constant="7" id="TDN-q1-KYA"/>
                                     <constraint firstAttribute="bottom" secondItem="8se-QW-4ie" secondAttribute="bottom" constant="5" id="bRI-cn-zUc"/>
                                     <constraint firstItem="qfH-fI-xBS" firstAttribute="leading" secondItem="9uW-EL-APC" secondAttribute="leading" constant="36" id="eXT-4V-aMd"/>
                                     <constraint firstItem="AXR-tF-MCD" firstAttribute="top" secondItem="9uW-EL-APC" secondAttribute="top" constant="13" id="ejU-E2-KT5"/>
-                                    <constraint firstAttribute="width" constant="540" id="kjy-ec-ie9"/>
                                     <constraint firstItem="aZP-RY-cIl" firstAttribute="top" secondItem="9uW-EL-APC" secondAttribute="top" constant="9" id="r8G-3R-w1D"/>
                                     <constraint firstItem="L6P-BG-5Sc" firstAttribute="leading" secondItem="9uW-EL-APC" secondAttribute="leading" constant="8" id="ujb-4G-GZe"/>
                                 </constraints>
@@ -201,7 +199,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rQa-Kp-axw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-163" y="-87"/>
+            <point key="canvasLocation" x="-127" y="-15"/>
         </scene>
         <!--Navigation-->
         <scene sceneID="7xL-5y-FMh">
@@ -223,7 +221,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VTQ-k6-2ZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="476" y="-87"/>
+            <point key="canvasLocation" x="476" y="-15"/>
         </scene>
         <!--个人中心-->
         <scene sceneID="qBG-PD-miQ">
@@ -320,7 +318,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T1I-nO-ApS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-163" y="555"/>
+            <point key="canvasLocation" x="-127" y="618"/>
         </scene>
         <!--修改密码-->
         <scene sceneID="BpL-j8-h0e">
@@ -489,7 +487,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPD-ID-SJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-799" y="555"/>
+            <point key="canvasLocation" x="-127" y="1252"/>
         </scene>
         <!--订单查询-->
         <scene sceneID="Dxz-1Y-XxE">
@@ -693,7 +691,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36G-Qr-fJI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="489" y="555"/>
+            <point key="canvasLocation" x="476" y="618"/>
         </scene>
         <!--Xinxi View Controller-->
         <scene sceneID="BEb-W4-lOF">
@@ -738,7 +736,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C5I-hF-4SS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="476" y="1225"/>
+            <point key="canvasLocation" x="476" y="1252"/>
         </scene>
         <!--请下单-->
         <scene sceneID="idv-2M-ZTL">
@@ -879,7 +877,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8am-e1-eMY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1233" y="555"/>
+            <point key="canvasLocation" x="1239" y="563"/>
         </scene>
         <!--选择客户-->
         <scene sceneID="97A-NU-MwV">
@@ -925,7 +923,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lZw-24-Ocs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1799" y="411"/>
+            <point key="canvasLocation" x="1839" y="563"/>
         </scene>
         <!--确认下单-->
         <scene sceneID="UjV-1P-W68">
@@ -1068,7 +1066,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="im3-ui-eyi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2428" y="555"/>
+            <point key="canvasLocation" x="2438" y="563"/>
         </scene>
         <!--商品详情-->
         <scene sceneID="qQt-hn-aQ2">
@@ -1139,7 +1137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jaS-36-0Up" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2438" y="1207"/>
+            <point key="canvasLocation" x="2438" y="1195"/>
         </scene>
         <!--Title-->
         <scene sceneID="pia-Up-1L5">
@@ -1165,7 +1163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w7g-cB-c6x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2438" y="1884"/>
+            <point key="canvasLocation" x="1239" y="1195"/>
         </scene>
         <!--选择商品-->
         <scene sceneID="85O-hl-xyl">
@@ -1226,7 +1224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g0K-yN-ChT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1769" y="1312"/>
+            <point key="canvasLocation" x="1839" y="1195"/>
         </scene>
     </scenes>
     <resources>

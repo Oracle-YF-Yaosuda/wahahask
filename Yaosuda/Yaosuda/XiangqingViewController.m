@@ -654,7 +654,7 @@
 {
     if ([shuru.text isEqualToString:@""]||[shuru.text isEqualToString: @"0"]) {
         [WarningBox warningBoxModeText:@"购买数量太少了哟!" andView:self.view];
-    }
+    }else{
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -749,7 +749,7 @@
         [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",error] andView:self.view];
         
     }];
-    
+    }
     
 }
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

@@ -47,6 +47,7 @@
     self.tableview = [[UITableView alloc]init];
     self.tableview.frame = CGRectMake(0, 79, width, height-79);
     self.tableview.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
+    self.tableview.hidden=NO;
     //遵守代理
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -64,6 +65,7 @@
 {   if(_quanshitu!=nil){
     return _quanshitu.count-1;
 }else{
+    _tableview.hidden=YES;
     return 0;
 }
     
