@@ -464,7 +464,6 @@
 // 找到当前 没值 ?
     NSIndexPath *index=[self.tableview indexPathForCell:cell];
 
-
 //计算的
     NSString *shuliang=[NSString stringWithFormat:@"%@", xiadanshuliang[index.row]];
    int shuliangInt=  [shuliang intValue];
@@ -523,7 +522,6 @@
     NSTimeInterval a=[dat timeIntervalSince1970];
     NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
 
-    
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
@@ -574,39 +572,27 @@
 //手动添加下单数量
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
- 
-    
-    
     //找到当前cell
     UITableViewCell *cell=(UITableViewCell*)[[textField superview] superview ];
     
     // 找到当前 没值 ?
     NSIndexPath *index=[self.tableview indexPathForCell:cell];
 
-    
-
-    
-    
     if([string isEqualToString:@""]){
         
         NSString*yuanlai=[NSString stringWithFormat:@"%@",xiadanshuliang[index.row]];
         int x=[yuanlai intValue]/10;
         
         xiadanshuliang[index.row]=[NSString stringWithFormat:@"%d",x];
-        
-    
-        
+      
     }else {
         
         NSString*yuanlai=[NSString stringWithFormat:@"%@",xiadanshuliang[index.row]];
          int x=[yuanlai intValue]*10+[string intValue];
-        
-      
+     
         xiadanshuliang[index.row]=[NSString stringWithFormat:@"%d",x];
        
-        
     }
-    
     
     return YES;
 }

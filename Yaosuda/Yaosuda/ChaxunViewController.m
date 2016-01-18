@@ -196,12 +196,12 @@
         theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*30 ];
         san=[ff stringFromDate:theDate];
         
-        datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"N",@"state", pageSize ,@"pageNo",@"5",@"pageSize",nil];
+        datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", pageSize ,@"pageNo",@"5",@"pageSize",nil];
     }
     else if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]isEqualToString:@""]&&![[[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]isEqualToString:@""]) {
         san=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]];
         Now=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]];
-        datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"N",@"state", pageSize ,@"pageNo",@"5",@"pageSize",nil];
+        datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", pageSize ,@"pageNo",@"5",@"pageSize",nil];
         [[NSUserDefaults standardUserDefaults]setObject:san forKey:@"qian"];
         [[NSUserDefaults standardUserDefaults]setObject:Now forKey:@"hou" ];
         
@@ -218,7 +218,7 @@
         NSDate* theDate;
         theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*30 ];
         san=[ff stringFromDate:theDate];
-        datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"N",@"state",pageSize ,@"pageNo",@"5",@"pageSize",nil];
+        datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state",pageSize ,@"pageNo",@"5",@"pageSize",nil];
         
     }
    
@@ -414,7 +414,7 @@
         }else if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"9"]){
             huo = @"退货确认";
         }else{
-            huo =@"待审核";
+            huo =@"未启动";
         }
         
         
@@ -462,7 +462,7 @@
         }else if([[youbian[section] objectForKey:@"state"]isEqualToString: @"9"]){
             huo = @"退货确认";
         }else{
-            huo =@"待审核";
+            huo =@"未启动";
         }
         
         
@@ -580,7 +580,7 @@
     lab2.text = @"订单名称:";
     lab3.text = @"客户姓名:";
     lab4.text = @"订单金额:";
-    lab5.text = @"优惠金额:";
+    lab5.text = @"业务联系人价格:";
     lab6.text = @"下单时间:";
     lab7.text = @"更新时间:";
     lab8.text = @"业务人员:";
@@ -935,7 +935,7 @@
     
     //出入参数：
     
-    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",_qian.text,@"startDate",_hou.text,@"endDate", @"N",@"state", @"1",@"pageNo",@"5",@"pageSize",nil];
+    NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",_qian.text,@"startDate",_hou.text,@"endDate", @"",@"state", @"1",@"pageNo",@"5",@"pageSize",nil];
     NSString*jsonstring=[writer stringWithObject:datadic];
     
     //获取签名
