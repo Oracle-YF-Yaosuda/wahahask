@@ -406,7 +406,7 @@
         }else if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"4"]){
             huo = @"开票员审核";
         }else if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"6"]){
-            shenhe.text = @"财务审核";
+            huo = @"财务审核";
         }else if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"7"]){
             huo = @"撤销";
         }else if([[zuojia[section-1] objectForKey:@"state"]isEqualToString:@"8"]){
@@ -454,7 +454,7 @@
         }else if([[youbian[section] objectForKey:@"state"]isEqualToString: @"4"]){
             huo = @"开票员审核";
         }else if([[youbian[section] objectForKey:@"state"]isEqualToString: @"6"]){
-            shenhe.text = @"财务审核";
+            huo = @"财务审核";
         }else if([[youbian[section] objectForKey:@"state"]isEqualToString: @"7"]){
             huo = @"撤销";
         }else if([[youbian[section] objectForKey:@"state"]isEqualToString: @"8"]){
@@ -580,7 +580,7 @@
     lab2.text = @"订单名称:";
     lab3.text = @"客户姓名:";
     lab4.text = @"订单金额:";
-    lab5.text = @"业务联系人价格:";
+    lab5.text = @"联系人价格:";
     lab6.text = @"下单时间:";
     lab7.text = @"更新时间:";
     lab8.text = @"业务人员:";
@@ -804,6 +804,21 @@
         {
             xinxi.orderId=[NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"id"]];
             
+            xinxi.chuan1=[NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"orderCode"]];
+            xinxi.chuan2=[NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"orderName"]];
+            xinxi.chuan3=[NSString stringWithFormat:@"%@",[[zuojia[indexPath.section-1] objectForKey:@"customer"] objectForKey:@"customerName"]];
+            xinxi.chuan4=[NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"amount"]];
+            xinxi.chuan5=[NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"discountAmount"]];
+            xinxi.chuan6=[NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"createDate"]];
+            if ([zuojia[indexPath.section-1] objectForKey:@"updateDate"]==nil) {
+                xinxi.chuan7=@"";
+            }else{
+                xinxi.chuan7=[NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"updateDate"]];}
+            xinxi.chuan8=[NSString stringWithFormat:@"%@",[[zuojia[indexPath.section-1] objectForKey:@"businessperson"] objectForKey:@"name"]];
+            
+            
+            
+            
             xinxi.orderType = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"orderType"]];
             xinxi.isGather = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"isGather"]];
             xinxi.isInvoice = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"isInvoice"]];
@@ -815,6 +830,19 @@
     else if (zhi == 2){
         
         xinxi.orderId=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"id"]];
+        
+        xinxi.chuan1=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderCode"]];
+        xinxi.chuan2=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderName"]];
+        xinxi.chuan3=[NSString stringWithFormat:@"%@",[[youbian[indexPath.section] objectForKey:@"customer"] objectForKey:@"customerName"]];
+        xinxi.chuan4=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"amount"]];
+        xinxi.chuan5=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"discountAmount"]];
+        xinxi.chuan6=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"createDate"]];
+        if ([youbian[indexPath.section] objectForKey:@"updateDate"]==nil) {
+            xinxi.chuan7=@"";
+        }else{
+            xinxi.chuan7=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"updateDate"]];}
+        xinxi.chuan8=[NSString stringWithFormat:@"%@",[[youbian[indexPath.section] objectForKey:@"businessperson"] objectForKey:@"name"]];
+        
         
         xinxi.orderType = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderType"]];
         xinxi.isGather = [NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"isGather"]];

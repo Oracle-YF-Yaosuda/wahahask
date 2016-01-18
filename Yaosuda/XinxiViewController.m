@@ -184,7 +184,7 @@
 {
     if(zhi == 1)
     {
-        return width/2;
+        return width/8*12;
     }
     if (zhi == 2)
     {
@@ -224,52 +224,148 @@
     xian4.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
     UIView *xian5 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*6, width-30, 1)];
     xian5.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian6 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*7, width-30, 1)];
+    xian6.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian7 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*8, width-30, 1)];
+    xian7.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian8 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*9, width-30, 1)];
+    xian8.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian9 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*10, width-30, 1)];
+    xian9.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian10 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*11, width-30, 1)];
+    xian10.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian11 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*12, width-30, 1)];
+    xian11.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian12 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*13, width-30, 1)];
+    xian12.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian13 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*14, width-30, 1)];
+    xian13.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    UIView *xian14 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*15, width-30, 1)];
+    xian14.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
 
-    UILabel *lab0 = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 100, gao2/8)];
-    lab0.font = zitifont;
-    lab0.textColor = ziticolor;
-    UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8, 100, gao2/8)];
-    lab1.font = zitifont;
+    
+    
+    
+    
+    UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 100, gao2/8)];
     lab1.textColor = ziticolor;
-    UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/4, 100, gao2/8)];
-    lab2.font = zitifont;
+    lab1.font =zitifont;
+    
+    UILabel *lab111 = [[UILabel alloc]initWithFrame:CGRectMake(120, 0, width-30, gao2/8)];
+    lab111.textColor = ziticolor;
+    lab111.font = zitifont;
+    //lab111.textAlignment = NSTextAlignmentCenter;
+    
+    UILabel *lab2 = [[UILabel  alloc]initWithFrame:CGRectMake(15,gao2/8,100,gao2/8)];
     lab2.textColor = ziticolor;
-    UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*3, 100, gao2/8)];
-    lab3.font = zitifont;
+    lab2.font = zitifont;
+    UILabel *lab21 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8, width-30, gao2/8)];
+    lab21.textColor = ziticolor;
+    lab21.font =zitifont;
+   // lab21.textAlignment = NSTextAlignmentCenter;
+    lab21.numberOfLines = 0;
+    
+    UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/4, 100, gao2/8)];
     lab3.textColor = ziticolor;
-    UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/2, 100, gao2/8)];
-    lab4.font = zitifont;
+    lab3.font = zitifont;
+    UILabel *lab31 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/4, width-30, gao2/8)];
+    lab31.textColor = ziticolor;
+    lab31.font = zitifont;
+    //lab31.textAlignment = NSTextAlignmentCenter;
+    
+    UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*3, 100, gao2/8)];
     lab4.textColor = ziticolor;
-    UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*5, 100, gao2/8)];
-    lab5.font = zitifont;
+    lab4.font = zitifont;
+    UILabel *lab41 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*3, width-30, gao2/8)];
+    lab41.textColor = ziticolor;
+    lab41.font = zitifont;
+    //lab41.textAlignment = NSTextAlignmentCenter;
+    
+    UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(15,  gao2/2, 100, gao2/8)];
     lab5.textColor = ziticolor;
+    lab5.font = zitifont;
+    UILabel *lab51 = [[UILabel alloc]initWithFrame:CGRectMake(120,  gao2/2, width-30, gao2/8)];
+    lab51.textColor = ziticolor;
+    lab51.font = zitifont;
+   // lab51.textAlignment = NSTextAlignmentCenter;
+    
+    UILabel *lab6 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*5, 100, gao2/8)];
+    lab6.textColor = ziticolor;
+    lab6.font = zitifont;
+    UILabel *lab61 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*5, width-30, gao2/8)];
+    lab61.textColor = ziticolor;
+    lab61.font = zitifont;
+   // lab61.textAlignment = NSTextAlignmentCenter;
+    
+    UILabel *lab7 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*6, 100  , gao2/8)];
+    lab7.textColor = ziticolor;
+    lab7.font = zitifont;
+    UILabel *lab71 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*6, width-30, gao2/8)];
+    lab71.textColor = ziticolor;
+    lab71.font = zitifont;
+   // lab71.textAlignment = NSTextAlignmentCenter;
+    
+    UILabel *lab8 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*7, 100, gao2/8)];
+    lab8.textColor = ziticolor;
+    lab8.font = zitifont;
+    UILabel *lab81 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*7, width-30, gao2/8)];
+    lab81.textColor = ziticolor;
+    lab81.font = zitifont;
+  //  lab81.textAlignment = NSTextAlignmentCenter;
+
+    UILabel *lab10 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2, 100, gao2/8)];
+    lab10.font = zitifont;
+    lab10.textColor = ziticolor;
+    UILabel *lab11 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*9, 100, gao2/8)];
+    lab11.font = zitifont;
+    lab11.textColor = ziticolor;
+    UILabel *lab12 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*10, 100, gao2/8)];
+    lab12.font = zitifont;
+    lab12.textColor = ziticolor;
+    UILabel *lab13 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*11, 100, gao2/8)];
+    lab13.font = zitifont;
+    lab13.textColor = ziticolor;
+    UILabel *lab14 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*12, 100, gao2/8)];
+    lab14.font = zitifont;
+    lab14.textColor = ziticolor;
+    UILabel *lab15 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*13, 100, gao2/8)];
+    lab15.font = zitifont;
+    lab15.textColor = ziticolor;
    
 
-    UILabel *you0 = [[UILabel alloc]initWithFrame:CGRectMake(120, 0, width-30, gao2/8)];
+    UILabel *you0 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2, width-30, gao2/8)];
     you0.font = zitifont;
     you0.textColor = ziticolor;
-    UILabel *you1 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8, width-30, gao2/8)];
+    UILabel *you1 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*9, width-30, gao2/8)];
     you1.font = zitifont;
     you1.textColor = ziticolor;
-    UILabel *you2 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/4, width-30, gao2/8)];
+    UILabel *you2 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*10, width-30, gao2/8)];
     you2.font = zitifont;
     you2.textColor = ziticolor;
-    UILabel *you3 = [[UILabel alloc]initWithFrame:CGRectMake(120,  gao2/8*3, width-30, gao2/8)];
+    UILabel *you3 = [[UILabel alloc]initWithFrame:CGRectMake(120,  gao2/8*11, width-30, gao2/8)];
     you3.font = zitifont;
     you3.textColor = ziticolor;
-    UILabel *you4 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/2, width-30, gao2/8)];
+    UILabel *you4 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*12, width-30, gao2/8)];
     you4.font = zitifont;
     you4.textColor = ziticolor;
-    UILabel *you5 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*5, width-30, gao2/8)];
+    UILabel *you5 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*13, width-30, gao2/8)];
     you5.font = zitifont;
     you5.textColor = ziticolor;
   
     if (zhi == 1)
     {
-        lab0.text = @"订单类型:";
-        lab1.text = @"是否开票:";
-        lab2.text = @"是否收款:";
-        lab3.text = @"是否退货:";
+        lab1.text = @"订单编号:";
+        lab2.text = @"订单名称:";
+        lab3.text = @"客户姓名:";
+        lab4.text = @"订单金额:";
+        lab5.text = @"联系人价格:";
+        lab6.text = @"下单时间:";
+        lab7.text = @"更新时间:";
+        lab8.text = @"业务人员:";
+        lab10.text = @"订单类型:";
+        lab11.text = @"是否开票:";
+        lab12.text = @"是否收款:";
+        lab13.text = @"是否退货:";
         
         NSString *orderType1;//订单类型
         NSString *isGather1;//是否收款
@@ -305,6 +401,15 @@
             isNewRecord1 = @"有退货";
         }
 
+        lab111.text = _chuan1;
+        lab21.text = _chuan2;
+        lab31.text = _chuan3;
+        lab41.text = _chuan4;
+        lab51.text = _chuan5;
+        lab61.text = _chuan6;
+        lab71.text = _chuan7;
+        lab81.text = _chuan8;
+        
         you0.text = orderType1;
         you1.text = isInvoice1;
         you2.text = isGather1;
@@ -314,22 +419,33 @@
         [cell.contentView addSubview:xian1];
         [cell.contentView addSubview:xian2];
         [cell.contentView addSubview:xian3];
+        [cell.contentView addSubview:xian4];
+        [cell.contentView addSubview:xian5];
+        [cell.contentView addSubview:xian6];
+        [cell.contentView addSubview:xian7];
+        [cell.contentView addSubview:xian8];
+        [cell.contentView addSubview:xian9];
+        [cell.contentView addSubview:xian10];
+        [cell.contentView addSubview:xian11];
+        
+        
+        
         
     }
     else if(zhi == 2)
-    {   lab0.text = @"商品名称:";
-        lab1.text = @"订单编码:";
-        lab2.text = @"数量:";
-        lab3.text = @"联系人价格:";
-        lab4.text = @"客户价格:";
-        lab5.text = @"总价:";
+    {   lab1.text = @"商品名称:";
+        lab2.text = @"订单编码:";
+        lab3.text = @"数量:";
+        lab4.text = @"联系人价格:";
+        lab5.text = @"客户价格:";
+        lab6.text = @"总价:";
         
-        you0.text = [NSString stringWithFormat:@"%@",[[orderDetailList [indexPath.section] objectForKey:@"productions"] objectForKey:@"proName"] ];
-        you1.text = [orderDetailList [indexPath.section] objectForKey:@"orderCode"];
-        you2.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"amount"] ];
-        you3.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"favorablePrice"] ];
-        you4.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"costPrice"] ];
-        you5.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"totalPrice"] ];
+        lab111.text = [NSString stringWithFormat:@"%@",[[orderDetailList [indexPath.section] objectForKey:@"productions"] objectForKey:@"proName"] ];
+        lab21.text = [orderDetailList [indexPath.section] objectForKey:@"orderCode"];
+        lab31.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"amount"] ];
+        lab41.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"favorablePrice"] ];
+        lab51.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"costPrice"] ];
+        lab61.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"totalPrice"] ];
         
         [cell.contentView addSubview:xian];
         [cell.contentView addSubview:xian1];
@@ -338,13 +454,35 @@
         [cell.contentView addSubview:xian4];
 
     }
-    [cell.contentView addSubview:lab0];
+    
     [cell.contentView addSubview:lab1];
     [cell.contentView addSubview:lab2];
     [cell.contentView addSubview:lab3];
     [cell.contentView addSubview:lab4];
     [cell.contentView addSubview:lab5];
+    [cell.contentView addSubview:lab6];
+    [cell.contentView addSubview:lab7];
+    [cell.contentView addSubview:lab8];
+    
+    [cell.contentView addSubview:lab10];
+    [cell.contentView addSubview:lab11];
+    [cell.contentView addSubview:lab12];
+    [cell.contentView addSubview:lab13];
+    [cell.contentView addSubview:lab14];
+    [cell.contentView addSubview:lab15];
  
+    
+    
+    [cell.contentView addSubview:lab111];
+    [cell.contentView addSubview:lab21];
+    [cell.contentView addSubview:lab31];
+    [cell.contentView addSubview:lab41];
+    [cell.contentView addSubview:lab51];
+    [cell.contentView addSubview:lab61];
+    [cell.contentView addSubview:lab71];
+    [cell.contentView addSubview:lab81];
+    
+    
     [cell.contentView addSubview:you0];
     [cell.contentView addSubview:you1];
     [cell.contentView addSubview:you2];
