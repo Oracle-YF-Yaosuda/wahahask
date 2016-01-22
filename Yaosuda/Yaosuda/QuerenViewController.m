@@ -34,6 +34,7 @@
     
     NSArray*arr;
     NSDictionary*kehu;
+    
 }
 - (IBAction)tijiao:(id)sender;
 @end
@@ -58,6 +59,7 @@
     shuliangji=[NSMutableArray array];
     NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
     arr=[NSArray arrayWithContentsOfFile:path];
+    NSLog(@"arr------------------%@",arr);
     
     for (int i=0; i<arr.count; i++) {
        [ shangid addObject:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"id"]]];
@@ -65,6 +67,7 @@
     }
     NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
     kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
+    NSLog(@"kehu----------------------%@",kehu);
     customerId=[NSString stringWithFormat:@"%@",[kehu objectForKey:@"id"]];
    
     self.tableview.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
@@ -77,11 +80,11 @@
 {
     
     Left = [[NSMutableArray alloc]init];
+    [Left addObject:@"商品名称:"];
+    [Left addObject:@"商品数量:"];
+    [Left addObject:@"单      位:"];
+    [Left addObject:@"商品规格:"];
     [Left addObject:@"联系电话:"];
-    [Left addObject:@"仓库地址:"];
-    [Left addObject:@"注册地址:"];
-    [Left addObject:@"负 责 人 :"];
-    [Left addObject:@"联 系 人 :"];
     Right = [[NSMutableArray alloc]init];
     
 }
@@ -120,34 +123,36 @@
     }
     
     
+//    if ([kehu objectForKey:@"linkmanPhone"]==nil) {
+//         [Right addObject:@""];
+//    }else{
+    [Right addObject:[arr [indexPath.row] objectForKey:@"proName"]];
+  //  }
+//
+//    if ([kehu objectForKey:@"warehouseAddress"]==nil) {
+//          [Right addObject:@""];
+//    }else{
+    [Right addObject:[arr[indexPath.row] objectForKey:@"shuliang"]];
+ //   }
+    
+//    if ([kehu objectForKey:@"registerAddress"]==nil) {
+//        [Right addObject:@""];
+//    }else{
+   [Right addObject:[arr[indexPath.row] objectForKey:@"unit"]];
+    //[Right addObject:@""];
+//    }
+    
+//    if ([kehu objectForKey:@"officer"]==nil) {
+//        [Right addObject:@""];
+//    }else{
+    [Right addObject:[arr [indexPath.row]objectForKey:@"etalon"]];
+     //[Right addObject:@""];
+//}
+    
     if ([kehu objectForKey:@"linkmanPhone"]==nil) {
          [Right addObject:@""];
     }else{
     [Right addObject:[kehu objectForKey:@"linkmanPhone"]];
-    }
-    
-    if ([kehu objectForKey:@"warehouseAddress"]==nil) {
-          [Right addObject:@""];
-    }else{
-    [Right addObject:[kehu objectForKey:@"warehouseAddress"]];
-    }
-    
-    if ([kehu objectForKey:@"registerAddress"]==nil) {
-        [Right addObject:@""];
-    }else{
-    [Right addObject:[kehu objectForKey:@"registerAddress"]];
-    }
-    
-    if ([kehu objectForKey:@"officer"]==nil) {
-        [Right addObject:@""];
-    }else{
-    [Right addObject:[kehu objectForKey:@"officer"]];
-}
-    
-    if ([kehu objectForKey:@"linkman"]==nil) {
-         [Right addObject:@""];
-    }else{
-    [Right addObject:[kehu objectForKey:@"linkman"]];
     }
 
     
@@ -155,10 +160,10 @@
     UILabel *left = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 70, width/8)];
     left.textColor = ziticolor;
     left.font = zitifont;
-    UILabel *right = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, width-90, width/8)];
+    UILabel *right = [[UILabel alloc]initWithFrame:CGRectMake(100, 0, width-90, width/8)];
     right.font = zitifont;
     right.textColor = ziticolor;
-    right.textAlignment = NSTextAlignmentCenter;
+    //right.textAlignment = NSTextAlignmentCenter;
     //label赋值
     left.text = Left[indexPath.section];
     right.text = Right[indexPath.section];

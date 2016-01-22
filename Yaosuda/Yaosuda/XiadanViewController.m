@@ -92,7 +92,8 @@
     for (int i=0; i<jieshou.count; i++) {
         [wo addObject:[jieshou[i] objectForKey:@"shuliang"]];
     }
-    //    NSString*pp=[NSString stringWithFormat:@"%@/Documents/guodu.plist",NSHomeDirectory()];
+        NSString*pp=[NSString stringWithFormat:@"%@/Documents/guodu.plist",NSHomeDirectory()];
+    NSLog(@"%@",pp);
     //    [wo writeToFile:pp atomically:YES];
     //接受客户数据
     NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
