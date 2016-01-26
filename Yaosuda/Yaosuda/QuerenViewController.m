@@ -223,6 +223,7 @@
         [WarningBox warningBoxHide:YES andView:self.view];
        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             [WarningBox warningBoxModeText:@"下单成功" andView:self.navigationController.view];
+           //删除本地文件
             NSFileManager *defaultManager;
             defaultManager = [NSFileManager defaultManager];
             NSString*path=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
