@@ -200,7 +200,7 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
             [WarningBox warningBoxModeText:@"网络连接失败！" andView:self.view];
-            
+            NSLog(@"%@",error);
         }];
     }
 }

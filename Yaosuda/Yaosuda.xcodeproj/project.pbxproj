@@ -150,7 +150,6 @@
 		95F70A361C0BDE6300BEC51C /* rt_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 95F709E61C0BDE6300BEC51C /* rt_03.png */; };
 		95F70A371C0BDE6300BEC51C /* yellow_23.png in Resources */ = {isa = PBXBuildFile; fileRef = 95F709E71C0BDE6300BEC51C /* yellow_23.png */; };
 		D22745C71C3F5604004A1A8D /* dangqianjiekuan_07.png in Resources */ = {isa = PBXBuildFile; fileRef = D22745C61C3F5604004A1A8D /* dangqianjiekuan_07.png */; };
-		D22745CB1C3F591B004A1A8D /* icon0.png in Resources */ = {isa = PBXBuildFile; fileRef = D22745CA1C3F591B004A1A8D /* icon0.png */; };
 		D23B37CC1C43814A00F64E1A /* @2x_114副本.png in Resources */ = {isa = PBXBuildFile; fileRef = D23B37CA1C43814A00F64E1A /* @2x_114副本.png */; };
 		D23B37CD1C43814A00F64E1A /* @2x_117副本.png in Resources */ = {isa = PBXBuildFile; fileRef = D23B37CB1C43814A00F64E1A /* @2x_117副本.png */; };
 		D23DC3C11C0EB3C1007C66DF /* mmm5.m in Sources */ = {isa = PBXBuildFile; fileRef = D23DC3C01C0EB3C1007C66DF /* mmm5.m */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
@@ -405,7 +404,6 @@
 		95F709E71C0BDE6300BEC51C /* yellow_23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_23.png; sourceTree = "<group>"; };
 		D21BDF931C112F900031F431 /* PassTrendValueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassTrendValueDelegate.h; sourceTree = "<group>"; };
 		D22745C61C3F5604004A1A8D /* dangqianjiekuan_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dangqianjiekuan_07.png; sourceTree = "<group>"; };
-		D22745CA1C3F591B004A1A8D /* icon0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon0.png; sourceTree = "<group>"; };
 		D23B37CA1C43814A00F64E1A /* @2x_114副本.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "@2x_114副本.png"; sourceTree = "<group>"; };
 		D23B37CB1C43814A00F64E1A /* @2x_117副本.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "@2x_117副本.png"; sourceTree = "<group>"; };
 		D23DC3BF1C0EB3C1007C66DF /* mmm5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmm5.h; sourceTree = "<group>"; };
@@ -775,7 +773,6 @@
 				95B19EBB1C50BA4300BC9FBD /* icon.png */,
 				D23B37CA1C43814A00F64E1A /* @2x_114副本.png */,
 				D23B37CB1C43814A00F64E1A /* @2x_117副本.png */,
-				D22745CA1C3F591B004A1A8D /* icon0.png */,
 				D22745C61C3F5604004A1A8D /* dangqianjiekuan_07.png */,
 				95D667031C2BBF2E00652F70 /* shancun.jpg */,
 				95E58F441C3A5FDB00E6A248 /* huadong.png */,
@@ -1133,7 +1130,6 @@
 				TargetAttributes = {
 					95F709571C0BDE2400BEC51C = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = GP8BUACAG4;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1181,7 +1177,6 @@
 				9570941B1C0C292C007E27C3 /* 商品详情1_MarkMan.png in Resources */,
 				95F709EF1C0BDE6300BEC51C /* 6.jpg in Resources */,
 				95F70A2C1C0BDE6300BEC51C /* @3x_sp_26.png in Resources */,
-				D22745CB1C3F591B004A1A8D /* icon0.png in Resources */,
 				95F70A2D1C0BDE6300BEC51C /* @3x_xd_03.png in Resources */,
 				95F70A2B1C0BDE6300BEC51C /* @3x_sp_20.png in Resources */,
 				95F70A101C0BDE6300BEC51C /* bg_02.png in Resources */,
@@ -1514,11 +1509,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Yaosuda/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/lib",
@@ -1527,7 +1522,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appleyifeng.Yasd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0d498044-79a8-4c58-b4a1-a4db7bc51ce8";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/lib";
 			};
@@ -1537,11 +1532,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yulan Zhao (4RSNZMG5V8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Yaosuda/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/lib",
@@ -1550,7 +1545,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appleyifeng.Yasd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0d498044-79a8-4c58-b4a1-a4db7bc51ce8";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/lib";
 			};

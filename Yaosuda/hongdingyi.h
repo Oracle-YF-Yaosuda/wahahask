@@ -10,7 +10,10 @@
  *
  *  @return http://125.211.221.232:60080
  */
-#define service_host @"http://125.211.221.232:60080"
+//#define service_host @"http://125.211.221.232:60080"
+
+#define service_host @"http://124.232.153.68:8000/"
+
 //#define service_host @"http://192.168.1.199:8080"
 /**
  *  计算机签名地址，当服务对外使用端口映射时使用，此地址是真实地址
@@ -27,13 +30,14 @@
  *
  *  @return ／anbang
  */
-#define app_name @"/anbang"
+#define app_name @"anbang/"
 /**
  *  接口app地址
  *
  *  @return ／api/rest/1.0
  */
-#define api_url @"/api/rest/1.0"
+//#define api_url @"/api/rest/1.0"
+#define api_url @"a"
 /**
  *  接口访问appkey
  *
