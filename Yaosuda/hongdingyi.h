@@ -12,7 +12,7 @@
  */
 //#define service_host @"http://125.211.221.232:60080"
 
-#define service_host @"http://124.232.153.68:8000/"
+#define service_host @"http://124.232.153.68:8000"
 
 //#define service_host @"http://192.168.1.199:8080"
 /**
@@ -30,21 +30,21 @@
  *
  *  @return ／anbang
  */
-#define app_name @"anbang/"
+#define app_name @"/anbang"
 /**
  *  接口app地址
  *
  *  @return ／api/rest/1.0
  */
 //#define api_url @"/api/rest/1.0"
-#define api_url @"a"
+#define api_url @"/api/rest/1.0"
 /**
  *  接口访问appkey
  *
  *  @return d800528f235e4142b78a8c26c4d537d9
  */
-#define appkey @"a739089463def36753784915"
-//#define appkey @"d800528f235e4142b78a8c26c4d537d9"
+//#define appkey @"a739089463def36753784915"
+#define appkey @"d800528f235e4142b78a8c26c4d537d9"
 /**
  *  借口访问密码
  *
