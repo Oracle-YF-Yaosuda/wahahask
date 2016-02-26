@@ -106,7 +106,7 @@
     NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",lian,_quanshitu[indexPath.section+1]]];
     //tempLabel.image=[UIImage imageNamed:@"3.png"];
     
-    [image sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"1.jpg"]];
+    [image sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"11121.png"]];
     
     
     

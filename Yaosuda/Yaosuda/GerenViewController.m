@@ -90,13 +90,13 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
     
-    UILabel *la1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 8, 60, 30)];
+    UILabel *la1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 8, 65, 30)];
     la1.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
     la1.font = [UIFont systemFontOfSize:15];
-    UILabel *la2 = [[UILabel alloc]initWithFrame:CGRectMake(10, 45, 60, 30)];
+    UILabel *la2 = [[UILabel alloc]initWithFrame:CGRectMake(10, 45, 65, 30)];
     la2.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
     la2.font = [UIFont systemFontOfSize:15];
-    UILabel *la3 = [[UILabel alloc]initWithFrame:CGRectMake(10, 80, 60, 30)];
+    UILabel *la3 = [[UILabel alloc]initWithFrame:CGRectMake(10, 80, 65, 30)];
     la3.textColor = [UIColor colorWithHexString:@"969696" alpha:1];
     la3.font = [UIFont systemFontOfSize:15];
     
@@ -124,9 +124,9 @@
     
     
     if (indexPath.section == 0) {
-        la1.text = @"账号";
-        la2.text = @"姓名";
-        la3.text = @"手机号";
+        la1.text = @"账    号:";
+        la2.text = @"姓    名:";
+        la3.text = @"手机号:";
         
         la11.text = [NSString stringWithFormat:@"%@",[yonghu objectForKey:@"loginName"] ];
         la22.text =[NSString stringWithFormat:@"%@",[yonghu objectForKey:@"name"] ];
@@ -134,13 +134,13 @@
         
     }
     else if (indexPath.section == 1){
-        la1.text = @"账户名称";
-        la2.text = @"授信额度";
-        la3.text = @"资金金额";
+        la1.text = @"账户名称:";
+        la2.text = @"授信额度:";
+        la3.text = @"资金金额:";
         
         la11.text = [NSString stringWithFormat:@"%@",[zhanghao objectForKey:@"name"] ];
-        la22.text = [NSString stringWithFormat:@"%@",[zhanghao objectForKey:@"creditFund"]];
-        la33.text = [NSString stringWithFormat:@"%@",[zhanghao objectForKey:@"preBalance"]];
+        la22.text = [NSString stringWithFormat:@"¥%@",[zhanghao objectForKey:@"creditFund"]];
+        la33.text = [NSString stringWithFormat:@"¥%@",[zhanghao objectForKey:@"balance"]];
         
     }
     else if(indexPath.section == 2){

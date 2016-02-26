@@ -95,7 +95,7 @@
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
-
+            NSLog(@"%@",responseObject);
             shangpin=(NSMutableDictionary*)[data objectForKey:@"productions"];
             NSString *pic = [shangpin objectForKey:@"pics"];
             NSString *zi  = [shangpin objectForKey:@"quapics"];
@@ -107,15 +107,40 @@
             
             [array1 addObject:@" "];
             //商品编码
-            [array1 addObject:[shangpin objectForKey:@"erpProId"]];
+            if ([shangpin objectForKey:@"erpProId"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[shangpin objectForKey:@"erpProId"]];
+            }
+            
             //名称
-            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proName"]];
+            if ([shangpin objectForKey:@"proName"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proName"]];
+            }
+            
             //剂型
-            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"dosageForm"]];
+            if ([shangpin objectForKey:@"dosageForm"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"dosageForm"]];
+            }
+            
             //规格
-            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"etalon"]];
+            if ([shangpin objectForKey:@"etalon"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"etalon"]];
+            }
+            
             //单位
-            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"unit"]];
+            if ([shangpin objectForKey:@"unit"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"unit"]];
+            }
+            
             //通用名称
             if ([shangpin objectForKey:@"commonName"]==nil) {
                 [array1 addObject:@""];
@@ -130,7 +155,12 @@
             }
             
             //供应商
-            [array1 addObject:[[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"provider"] objectForKey:@"corporateName"]];
+            if ([[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"provider"] objectForKey:@"corporateName"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"provider"] objectForKey:@"corporateName"]];
+            }
+            
             //联系人
             if ([shangpin objectForKey:[[shangpin objectForKey:@"provider"] objectForKey:@"linkman"]]==nil) {
                 [array1 addObject:@""];
@@ -169,7 +199,12 @@
             }
             
             //生产企业
-            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"proEnterprise"]];
+            if ([shangpin objectForKey:@"proEnterprise"]==nil) {
+                [array1 addObject:@""];
+            }
+            else{
+            [array1 addObject:[shangpin objectForKey:@"proEnterprise"]];
+            }
             //药品说明书
             if ([shangpin objectForKey:@"specification"]==nil) {
                 [array1 addObject:@""];
@@ -196,7 +231,12 @@
             
             
             //批准文号
-            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"auditingFileNo"]];
+            if ( [shangpin objectForKey:@"auditingFileNo"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"auditingFileNo"]];
+            }
+            
             //质量标准
             if ([shangpin objectForKey:@"qualityStandard"]==nil) {
                 [array1 addObject:@""];
@@ -214,7 +254,12 @@
             
             
             //储存条件
-            [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"storageCondition"]];
+            if ([shangpin objectForKey:@"storageCondition"]==nil) {
+                [array1 addObject:@""];
+            }else{
+                [array1 addObject:[[[responseObject objectForKey:@"data"] objectForKey:@"productions"] objectForKey:@"storageCondition"]];
+            }
+            
             //批件有效期
             if ([shangpin objectForKey:@"approveDate"]==nil) {
                 [array1 addObject:@""];
@@ -403,11 +448,28 @@
         danwei1.font = [UIFont systemFontOfSize:12];
         
         //***************************
+        if ([shangpin objectForKey:@"proName"]==nil) {
+            name1.text=@"";
+        }else{
+            name1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"proName"]];
+        }
         
-        name1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"proName"]];
+        if ([shangpin objectForKey:@"proEnterprise"]==nil) {
+            changjia1.text=@"";
+        }else{
         changjia1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"proEnterprise"]];
-        guige1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"etalon"]];
-        danwei1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"unit"]];
+        }
+        if ([shangpin objectForKey:@"etalon"]==nil) {
+            guige1.text=@"";
+        }else{
+            guige1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"etalon"]];
+        }
+        if ([shangpin objectForKey:@"unit"]==nil) {
+            danwei1.text=@"";
+        }else{
+            danwei1.text = [NSString stringWithFormat:@"%@",[shangpin objectForKey:@"unit"]];
+        }
+        
         
         //****************************
         [viewForHeader addSubview:name];
@@ -446,7 +508,39 @@
     if (indexPath.section == 0)
     {
         if (arr1.count==0) {
+            self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, width, 250) animationDuration:3];
+            //  demo里的scroll
+            NSMutableArray *viewsArray = [[NSMutableArray alloc] init];
+          
+            for (int i = 0; i < 3; ++i)
+            {
+                UIImageView *tempLabel = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, 250)];
+                
+                tempLabel.image=[UIImage imageNamed:@"11121.jpg"];
+                
+                
+                [viewsArray addObject:tempLabel];
+                
+            }
             
+            self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
+            
+            self.mainScorllView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex)
+            {
+                return viewsArray[pageIndex];
+            };
+            int s=3;
+            self.mainScorllView.totalPagesCount = ^NSInteger(void)
+            {
+                return s;
+            };
+            self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex)
+            {
+             
+            };
+            [cell.contentView addSubview:self.mainScorllView];
+            
+
         }else{
         //轮播
         //创建scrollview
@@ -460,7 +554,7 @@
             NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",lian,arr1[1]]];
             //tempLabel.image=[UIImage imageNamed:@"3.png"];
             
-            [tempLabel sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"1.jpg"]];
+            [tempLabel sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"11121.jpg"]];
             [viewsArray addObject:tempLabel];
             
         }

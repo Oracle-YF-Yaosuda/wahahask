@@ -17,7 +17,7 @@
 #import "Color+Hex.h"
 
 #define ziticolor [UIColor colorWithHexString:@"646464" alpha:1];
-#define zitifont [UIFont systemFontOfSize:15];
+#define zitifont [UIFont systemFontOfSize:13];
 #define xiancolor [UIColor colorWithHexString:@"e4e4e4" alpha:1];
 @interface QuerenViewController (){
     NSMutableArray*shangid;
@@ -43,13 +43,14 @@
 @implementation QuerenViewController
 - (void)viewDidLoad
 {
-     [super viewDidLoad];
+    [super viewDidLoad];
+    NSLog(@"\n\n\n\n应付金额\n%@\n\n\n\n\n",_meme);
     _yingfu.text=_meme;
     _shouhuoren.text=_xixi;
     
     self.tableview.dataSource = self;
     self.tableview.delegate = self;
-   
+    
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
     
@@ -62,18 +63,18 @@
     NSLog(@"arr------------------%@",arr);
     
     for (int i=0; i<arr.count; i++) {
-       [ shangid addObject:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"id"]]];
+        [ shangid addObject:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"id"]]];
         [shuliangji addObject:[arr[i] objectForKey:@"shuliang"]];
     }
     NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
     kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
     NSLog(@"kehu----------------------%@",kehu);
     customerId=[NSString stringWithFormat:@"%@",[kehu objectForKey:@"id"]];
-   
+    
     self.tableview.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
     [self makearray];
- 
+    
 }
 
 -(void)makearray
@@ -91,26 +92,24 @@
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 5;
+    return arr.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 5;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return width/8;//cell高度
+    return width/16;//cell高度
 }
 
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return nil;
-}
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0;//section高度
+    return 10;//section高度
 }
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *id1 =@"mycell1";
@@ -121,57 +120,44 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id1];
     }
-    
-    
-//    if ([kehu objectForKey:@"linkmanPhone"]==nil) {
-//         [Right addObject:@""];
-//    }else{
-    [Right addObject:[arr [indexPath.row] objectForKey:@"proName"]];
-  //  }
-//
-//    if ([kehu objectForKey:@"warehouseAddress"]==nil) {
-//          [Right addObject:@""];
-//    }else{
-    [Right addObject:[arr[indexPath.row] objectForKey:@"shuliang"]];
- //   }
-    
-//    if ([kehu objectForKey:@"registerAddress"]==nil) {
-//        [Right addObject:@""];
-//    }else{
-   [Right addObject:[arr[indexPath.row] objectForKey:@"unit"]];
-    //[Right addObject:@""];
-//    }
-    
-//    if ([kehu objectForKey:@"officer"]==nil) {
-//        [Right addObject:@""];
-//    }else{
-    [Right addObject:[arr [indexPath.row]objectForKey:@"etalon"]];
-     //[Right addObject:@""];
-//}
-    
-    if ([kehu objectForKey:@"linkmanPhone"]==nil) {
-         [Right addObject:@""];
-    }else{
-    [Right addObject:[kehu objectForKey:@"linkmanPhone"]];
-    }
-
-    
-    //创建label
-    UILabel *left = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 70, width/8)];
-    left.textColor = ziticolor;
-    left.font = zitifont;
-    UILabel *right = [[UILabel alloc]initWithFrame:CGRectMake(100, 0, width-90, width/8)];
+    UILabel *right = [[UILabel alloc]initWithFrame:CGRectMake(100, 0, width-90, width/16)];
     right.font = zitifont;
     right.textColor = ziticolor;
-    //right.textAlignment = NSTextAlignmentCenter;
-    //label赋值
-    left.text = Left[indexPath.section];
-    right.text = Right[indexPath.section];
-    //自定义线
-    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, width/8-1, width, 1)];
-    xian1.backgroundColor = xiancolor;
+    if (indexPath.row==0) {
+        
+    right.text= [NSString stringWithFormat:@"%@",[arr [indexPath.section] objectForKey:@"proName"]];
+    }else if (indexPath.row==1){
+    right.text= [NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"shuliang"]];
+    }else if(indexPath.row==2){
+    right.text= [NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"unit"]];
+    }else if (indexPath.row==3){
+    right.text= [NSString stringWithFormat:@"%@",[arr [indexPath.section]objectForKey:@"etalon"]];
+    }else if (indexPath.row==4){
+    if ([kehu objectForKey:@"linkmanPhone"]==nil) {
+        right.text= @"";
+    }else{
+        right.text= [NSString stringWithFormat:@"%@",[kehu objectForKey:@"linkmanPhone"]];
+    }
+    }
+  
+
+    
+    
+    
+    //创建label
+    UILabel *left = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 70, width/16)];
+    left.textColor = ziticolor;
+    left.font = zitifont;
+    left.text=Left[indexPath.row];
+    
+    
+
+//    //自定义线
+//    
+//    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, width/16-1, width, 1)];
+//    xian1.backgroundColor = xiancolor;
     //在cell上显示
-    [cell.contentView addSubview:xian1];
+//    [cell.contentView addSubview:xian1];
     [cell.contentView addSubview:left];
     [cell.contentView addSubview:right];
     
@@ -181,14 +167,14 @@
     self.tableview.showsVerticalScrollIndicator =NO;
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    
     return cell;
 }
 
 - (IBAction)tijiao:(id)sender
 {
     
-       
+    
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -199,7 +185,7 @@
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval a=[dat timeIntervalSince1970];
     NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
-
+    
     [WarningBox warningBoxModeIndeterminate:@"正在下单中..." andView:self.view];
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -212,7 +198,7 @@
     
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-  
+    
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
     
@@ -221,33 +207,33 @@
     
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-       if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             [WarningBox warningBoxModeText:@"下单成功" andView:self.navigationController.view];
-           //删除本地文件
+            //删除本地文件
             NSFileManager *defaultManager;
             defaultManager = [NSFileManager defaultManager];
             NSString*path=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
             NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
             [defaultManager removeItemAtPath:path error:NULL];
             [defaultManager removeItemAtPath:path1 error:NULL];
-           
-           //跳转到订单查询
-           
-           ChaxunViewController *chaxun = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
-           [self.navigationController pushViewController:chaxun animated:YES];
-           
-           
+            
+            //跳转到订单查询
+            
+            ChaxunViewController *chaxun = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
+            [self.navigationController pushViewController:chaxun animated:YES];
+            
+            
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
-
+        
     }];
 }
 - (IBAction)fanhui:(id)sender
 {
     
-      [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

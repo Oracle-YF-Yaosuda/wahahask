@@ -135,6 +135,7 @@
         [WarningBox warningBoxHide:YES andView:self.view];
       
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+            NSLog(@"%@",responseObject);
             NSDictionary*data=[responseObject valueForKey:@"data"];
             count=[NSString stringWithFormat:@"%@",[data objectForKey:@"count"]];
             productionsList=[data objectForKey:@"productionsList"];
@@ -225,9 +226,13 @@
     
     _imagr = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,width/3 ,width/3)];
    
-        
+    
+    if ([xiaolv[indexPath.row] objectForKey:@"pics"]==nil) {
+         _imagr.image=[UIImage imageNamed:@"11121.jpg"];
+        tupian=@"";
+    }else{
     tupian=[NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"pics"]];
-        
+    }
    
         
     
@@ -237,14 +242,14 @@
     
     if (tupian.length<10) {
     
-     _imagr.image=[UIImage imageNamed:@"1.jpg"];
+     _imagr.image=[UIImage imageNamed:@"11121.jpg"];
     
     }
      else{
         NSString*lian=[NSString stringWithFormat:@"%@",service_host];
          NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",lian,arr[1]]];
          
-         [_imagr sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"1.jpg"]];
+         [_imagr sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"11121.jpg"]];
      }
  
     
@@ -335,11 +340,28 @@
    
     [gengduo setImage:[UIImage imageNamed:@"@2x_sp_16.png"] forState:UIControlStateNormal];
     
+    if ([xiaolv[indexPath.row] objectForKey:@"proName" ]==nil) {
+        name1.text=@"";
+    }else {
+         name1.text = [NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"proName" ]];
+    }
    
-    name1.text = [NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"proName" ]];
-    changjia1.text = [NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"proEnterprise" ]];
-    guige1.text =[NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"etalon" ]];
-    danwei1.text = [NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"unit" ]];
+    if([xiaolv[indexPath.row] objectForKey:@"proEnterprise" ]==nil){
+        changjia1.text=@"";
+    }else{
+        changjia1.text = [NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"proEnterprise" ]];
+    }
+    if ([xiaolv[indexPath.row] objectForKey:@"etalon" ]==nil) {
+        guige1.text=@"";
+    }else {
+        guige1.text =[NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"etalon" ]];
+    }
+    if ([xiaolv[indexPath.row] objectForKey:@"unit" ]==nil) {
+        danwei1.text=@"";
+    }else{
+        danwei1.text = [NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"unit" ]];
+    }
+    
   
     [cell.contentView addSubview:_imagr];
 

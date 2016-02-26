@@ -83,6 +83,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.tableview.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     //遵守 tableview 代理
@@ -197,6 +198,7 @@
         san=[ff stringFromDate:theDate];
         
         datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state", pageSize ,@"pageNo",@"5",@"pageSize",nil];
+        NSLog(@"%@",san);
     }
     else if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]isEqualToString:@""]&&![[[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]isEqualToString:@""]) {
         san=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]];
@@ -346,11 +348,11 @@
             return 80;
         }
         else
-            return width;
+            return width/8*7;
     }
     else if(zhi == 2)
     {
-        return width;
+        return width/8*7;
     }
     return 0;
 }
@@ -504,7 +506,8 @@
     UILabel *lab11 = [[UILabel alloc]initWithFrame:CGRectMake(100, 0, width-120, labheight)];
     lab11.textColor = ziticolor;
     lab11.font = zitifont;
-    lab11.textAlignment = NSTextAlignmentCenter;
+    lab11.textAlignment = NSTextAlignmentLeft;
+    
     
     UILabel *lab2 = [[UILabel  alloc]initWithFrame:CGRectMake(20, gao/8, 80, labheight)];
     lab2.textColor = ziticolor;
@@ -514,7 +517,7 @@
     UILabel *lab21 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/8, width-40-80, labheight)];
     lab21.textColor = ziticolor;
     lab21.font =zitifont;
-    lab21.textAlignment = NSTextAlignmentCenter;
+    lab21.textAlignment = NSTextAlignmentLeft;
     lab21.numberOfLines = 0;
     
     UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(20, gao/4, 80, labheight)];
@@ -525,7 +528,7 @@
     UILabel *lab31 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/4, width-40-80, labheight)];
     lab31.textColor = ziticolor;
     lab31.font = zitifont;
-    lab31.textAlignment = NSTextAlignmentCenter;
+    lab31.textAlignment = NSTextAlignmentLeft;
     
     UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(20, gao/8*3, 80, labheight)];
     lab4.textColor = ziticolor;
@@ -535,52 +538,46 @@
     UILabel *lab41 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/8*3, width-40-80, labheight)];
     lab41.textColor = ziticolor;
     lab41.font = zitifont;
-    lab41.textAlignment = NSTextAlignmentCenter;
+    lab41.textAlignment = NSTextAlignmentLeft;
     
-    UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(20,  gao/2, 80, labheight)];
-    lab5.textColor = ziticolor;
-    lab5.font = zitifont;
-    UIView *xian5 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/8*5, width-40, 1)];
-    xian5.backgroundColor = xiancolor;
-    UILabel *lab51 = [[UILabel alloc]initWithFrame:CGRectMake(100,  gao/2, width-40-80, labheight)];
-    lab51.textColor = ziticolor;
-    lab51.font = zitifont;
-    lab51.textAlignment = NSTextAlignmentCenter;
-    
-    UILabel *lab6 = [[UILabel alloc]initWithFrame:CGRectMake(20, gao/8*5, 80, labheight)];
+    UILabel *lab6 = [[UILabel alloc]initWithFrame:CGRectMake(20,  gao/2, 80, labheight)];
     lab6.textColor = ziticolor;
     lab6.font = zitifont;
-    UIView *xian6 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/8*6, width-40, 1)];
-    xian6.backgroundColor = xiancolor;
-    UILabel *lab61 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/8*5, width-40-80, labheight)];
+    UIView *xian5 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/8*5, width-40, 1)];
+    xian5.backgroundColor = xiancolor;
+    UILabel *lab61 = [[UILabel alloc]initWithFrame:CGRectMake(100,  gao/2, width-40-80, labheight)];
     lab61.textColor = ziticolor;
     lab61.font = zitifont;
-    lab61.textAlignment = NSTextAlignmentCenter;
+    lab61.textAlignment = NSTextAlignmentLeft;
     
-    UILabel *lab7 = [[UILabel alloc]initWithFrame:CGRectMake(20, gao/8*6, 80, labheight)];
+    UILabel *lab7 = [[UILabel alloc]initWithFrame:CGRectMake(20, gao/8*5, 80, labheight)];
     lab7.textColor = ziticolor;
     lab7.font = zitifont;
-    UIView *xian7 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/8*7, width-40, 1)];
-    xian7.backgroundColor = xiancolor;
-    UILabel *lab71 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/8*6, width-40-80, labheight)];
+    UIView *xian6 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/8*6, width-40, 1)];
+    xian6.backgroundColor = xiancolor;
+    UILabel *lab71 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/8*5, width-40-80, labheight)];
     lab71.textColor = ziticolor;
     lab71.font = zitifont;
-    lab71.textAlignment = NSTextAlignmentCenter;
+    lab71.textAlignment = NSTextAlignmentLeft;
     
-    UILabel *lab8 = [[UILabel alloc]initWithFrame:CGRectMake(20, gao/8*7, 80, labheight)];
+     UILabel *lab8= [[UILabel alloc]initWithFrame:CGRectMake(20, gao/8*6, 80, labheight)];
     lab8.textColor = ziticolor;
     lab8.font = zitifont;
-    UILabel *lab81 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/8*7, width-40-80, labheight)];
+    UIView *xian7 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/8*7, width-40, 1)];
+    xian7.backgroundColor = xiancolor;
+    UILabel *lab81 = [[UILabel alloc]initWithFrame:CGRectMake(100, gao/8*6, width-40-80, labheight)];
     lab81.textColor = ziticolor;
     lab81.font = zitifont;
-    lab81.textAlignment = NSTextAlignmentCenter;
+    lab81.textAlignment = NSTextAlignmentLeft;
+    
+    
     
     
     lab1.text = @"订单编号:";
     lab2.text = @"订单名称:";
     lab3.text = @"客户姓名:";
     lab4.text = @"订单金额:";
-    lab5.text = @"联系人价格:";
+    
     lab6.text = @"下单时间:";
     lab7.text = @"更新时间:";
     lab8.text = @"业务人员:";
@@ -599,15 +596,38 @@
             
             self.qian = [[UITextField alloc]initWithFrame:CGRectMake(15, 42, (width- 60)/3, 30)];
             self.qian.placeholder = @" 请选择日期";
+            
             if ([[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]==nil) {
-                self.qian.text=@"";
+                NSString*san;
+                NSString*Now;
+                NSDateFormatter*ff=[[NSDateFormatter alloc] init];
+                [ff setDateFormat:@"yyyy-MM-dd"];
+               
+                Now=[ff stringFromDate:[NSDate date]];
+                
+                NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
+                NSDate* theDate;
+                theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*30 ];
+                san=[ff stringFromDate:theDate];
+                self.qian.text=[NSString stringWithFormat:@"%@",san];
             }
             else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]isEqualToString:@""]) {
-                self.qian.text=@"";
+                NSDateFormatter*ff=[[NSDateFormatter alloc] init];
+                [ff setDateFormat:@"yyyy-MM-dd"];
+                NSString*san;
+                NSString*Now;
+                Now=[ff stringFromDate:[NSDate date]];
+                
+                NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
+                NSDate* theDate;
+                theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*30 ];
+                san=[ff stringFromDate:theDate];
+                self.qian.text=[NSString stringWithFormat:@"%@",san];
             }else{
                 _qian.text=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]];
             }
-            
+            _qian.textAlignment = NSTextAlignmentCenter;
+           
             self.qian.font = [UIFont systemFontOfSize:13];
             self.qian.layer.borderColor = [[UIColor colorWithHexString:@"0CB7FF" alpha:1] CGColor];
             self.qian.layer.borderWidth =1;
@@ -621,15 +641,41 @@
             self.hou = [[UITextField alloc]initWithFrame:CGRectMake(45+(width- 60)/3, 42,  (width- 60)/3, 30)];
             self.hou.placeholder = @" 请选择日期";
             if ([[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]==nil) {
-                self.hou.text=@"";
+                NSString*san;
+                NSString*Now;
+                NSDateFormatter*ff=[[NSDateFormatter alloc] init];
+                [ff setDateFormat:@"yyyy-MM-dd"];
+                
+                Now=[ff stringFromDate:[NSDate date]];
+                
+                NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
+                NSDate* theDate;
+                theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*30 ];
+                san=[ff stringFromDate:theDate];
+
+                self.hou.text=[NSString stringWithFormat:@"%@",Now];
             }
             
             
             else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]isEqualToString:@""]) {
-                self.hou.text=@"";
+                NSString*san;
+                NSString*Now;
+                NSDateFormatter*ff=[[NSDateFormatter alloc] init];
+                [ff setDateFormat:@"yyyy-MM-dd"];
+                
+                Now=[ff stringFromDate:[NSDate date]];
+                
+                NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
+                NSDate* theDate;
+                theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*30 ];
+                san=[ff stringFromDate:theDate];
+
+                self.hou.text=[NSString stringWithFormat:@"%@",Now];
             }else{
                 _hou.text=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]];
             }
+            
+            _hou.textAlignment = NSTextAlignmentCenter;
             self.hou.font = [UIFont systemFontOfSize:13];
             self.hou.layer.borderColor = [[UIColor colorWithHexString:@"0CB7FF" alpha:1] CGColor];
             self.hou.layer.borderWidth =1;
@@ -666,9 +712,9 @@
             
             lab31.text = [[zuojia[indexPath.section-1] objectForKey:@"customer"] objectForKey:@"customerName"];
             
-            lab41.text = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"amount"]];
+            lab41.text = [NSString stringWithFormat:@"¥ %@",[zuojia[indexPath.section-1] objectForKey:@"amount"]];
             
-            lab51.text = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"discountAmount"]];
+//            lab51.text = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"discountAmount"]];
             
             lab61.text =[NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"createDate"]];
             
@@ -681,10 +727,10 @@
             
             
             
-            UIImageView *imag = [[UIImageView alloc]initWithFrame:CGRectMake(5, 0, width-10, gao)];
+            UIImageView *imag = [[UIImageView alloc]initWithFrame:CGRectMake(5, 0, width-10, gao/8*7)];
             imag.image = [UIImage imageNamed:@"b.png"];
             
-            UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, gao-55, 60, 55)];
+            UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, gao/8*7-55, 60, 55)];
             imag1.image = [UIImage imageNamed:@"@2x_dd_22_22.png"];
             [cell.contentView addSubview:imag];
             [cell.contentView addSubview:imag1];
@@ -706,9 +752,9 @@
             [cell.contentView addSubview:xian4];
             [cell.contentView addSubview:lab41];
             
-            [cell.contentView addSubview:lab5];
+//            [cell.contentView addSubview:lab5];
             [cell.contentView addSubview:xian5];
-            [cell.contentView addSubview:lab51];
+//            [cell.contentView addSubview:lab51];
             
             [cell.contentView addSubview:lab6];
             [cell.contentView addSubview:xian6];
@@ -724,10 +770,10 @@
     }
     else if (zhi == 2)
     {
-        UIImageView *imag = [[UIImageView alloc]initWithFrame:CGRectMake(5, 0, width-10, gao)];
+        UIImageView *imag = [[UIImageView alloc]initWithFrame:CGRectMake(5, 0, width-10, gao/8*7)];
         imag.image = [UIImage imageNamed:@"a.png"];
         
-        UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, gao-55, 60, 55)];
+        UIImageView *imag1 = [[UIImageView alloc]initWithFrame:CGRectMake(width-60, gao/8*7-55, 60, 55)];
         imag1.image = [UIImage imageNamed:@"@2x_dd_22_22_22.png"];
         [cell.contentView addSubview:imag];
         [cell.contentView addSubview:imag1];
@@ -736,8 +782,8 @@
         lab11.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderCode"]];
         lab21.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderName"]];
         lab31.text=[[youbian[indexPath.section] objectForKey:@"customer"] objectForKey:@"customerName"];
-        lab41.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"amount"]];
-        lab51.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"discountAmount"]];
+        lab41.text=[NSString stringWithFormat:@"¥ %@",[youbian[indexPath.section] objectForKey:@"amount"]];
+//        lab51.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"discountAmount"]];
         lab61.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"createDate"]];
         lab71.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"updateDate"]];
         lab81.text=[NSString stringWithFormat:@"%@",[[youbian[indexPath.section] objectForKey:@"businessperson"] objectForKey:@"name"]];
@@ -759,9 +805,9 @@
         [cell.contentView addSubview:xian4];
         [cell.contentView addSubview:lab41];
         
-        [cell.contentView addSubview:lab5];
+//        [cell.contentView addSubview:lab5];
         [cell.contentView addSubview:xian5];
-        [cell.contentView addSubview:lab51];
+//        [cell.contentView addSubview:lab51];
         
         [cell.contentView addSubview:lab6];
         [cell.contentView addSubview:xian6];

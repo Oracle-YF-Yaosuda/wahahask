@@ -72,7 +72,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidLoad];
-    chuancan=[[NSMutableArray alloc] init];
+    
     he=0;
     //   数量修改
     xiuGaiShangPin=[NSMutableArray array];
@@ -200,6 +200,7 @@
 }
 - (void)viewDidLoad
 {
+    chuancan=[[NSMutableArray alloc] init];
     dixx=[NSMutableDictionary dictionary];
     dicc=[NSMutableDictionary dictionary];
     [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -233,7 +234,7 @@
     UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(150, 300, width, 25)];
     lab.font = [UIFont systemFontOfSize:17];
     lab.textColor = [UIColor whiteColor];
-    //lab.textAlignment = NSTextAlignmentCenter;
+    //lab.textAlignment = NSTextAlignmentLeft;
     lab.text = @"*  向左侧拉删除";
     
     [self.view addSubview:di];
@@ -366,7 +367,9 @@
     di.hidden = YES;
     
 }
-
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return jieshou.count;
@@ -388,7 +391,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 190;//cell高度
+    return 160;//cell高度
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -413,7 +416,7 @@
     name1.text = [NSString stringWithFormat:@"%@", [jieshou[indexPath.row] objectForKey:@"proName"]];
     name1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     name1.font = [UIFont systemFontOfSize:15];
-    name1.textAlignment = NSTextAlignmentCenter;
+    name1.textAlignment = NSTextAlignmentLeft;
     
     UILabel *shuliang = [[UILabel alloc]initWithFrame:CGRectMake(20, 40, 80, 30)];
     shuliang.text = @"商品数量:";
@@ -431,14 +434,14 @@
     shuliang1.text = [NSString stringWithFormat:@"%@",[jieshou[indexPath.row] objectForKey:@"shuliang"]];
     shuliang1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     shuliang1.font = [UIFont systemFontOfSize:15];
-    shuliang1.textAlignment = NSTextAlignmentCenter;
+    shuliang1.textAlignment = NSTextAlignmentLeft;
     shuliang1.delegate=self;
     shuliang1.keyboardType = UIKeyboardTypeNumberPad;
     //键盘添加完成
     [KeyboardToolBar registerKeyboardToolBar:shuliang1];
     
     UILabel *danjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 75, 80, 30)];
-    danjia.text = @"客户单价:";
+    danjia.text = @"客户单价:¥";
     danjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     danjia.font = [UIFont systemFontOfSize:15];
     
@@ -452,7 +455,7 @@
         
         danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         danjia1.font = [UIFont systemFontOfSize:15];
-        danjia1.textAlignment = NSTextAlignmentCenter;
+        danjia1.textAlignment = NSTextAlignmentLeft;
     }
     else{
         danjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
@@ -460,61 +463,60 @@
         
         danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         danjia1.font = [UIFont systemFontOfSize:15];
-        danjia1.textAlignment = NSTextAlignmentCenter;
+        danjia1.textAlignment = NSTextAlignmentLeft;
     }
     UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(0, 140, width, 1)];
     xian3.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
-    UILabel *LXdanjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 110, 80, 30)];
-    LXdanjia.text = @"职员单价:";
-    LXdanjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-    LXdanjia.font = [UIFont systemFontOfSize:15];
-    
-    UILabel *LXdanjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 110, width-40-80, 30 )];
-    
-    if (jiage.count!=jieshou.count) {
-        LXdanjia1.text=@"待估价";
-        LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        LXdanjia1.font = [UIFont systemFontOfSize:15];
-        LXdanjia1.textAlignment = NSTextAlignmentCenter;
-    }
-    else{
-        LXdanjia1.text =[dixx objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
-        he=1;
-        
-        LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-        LXdanjia1.font = [UIFont systemFontOfSize:15];
-        LXdanjia1.textAlignment = NSTextAlignmentCenter;
-    }
+//    UILabel *LXdanjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 110, 80, 30)];
+//    LXdanjia.text = @"职员单价:";
+//    LXdanjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
+//    LXdanjia.font = [UIFont systemFontOfSize:15];
+//    
+//    UILabel *LXdanjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 110, width-40-80, 30 )];
+//    
+//    if (jiage.count!=jieshou.count) {
+//        LXdanjia1.text=@"待估价";
+//        LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+//        LXdanjia1.font = [UIFont systemFontOfSize:15];
+//        LXdanjia1.textAlignment = NSTextAlignmentLeft;
+//    }
+//    else{
+//        LXdanjia1.text =[dixx objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+//        he=1;
+//        
+//        LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+//        LXdanjia1.font = [UIFont systemFontOfSize:15];
+//        LXdanjia1.textAlignment = NSTextAlignmentLeft;
+//    }
     
     
     UILabel *quanbu = [[UILabel alloc] init];
-    quanbu.frame = CGRectMake(20, 145, 80, 30);
-    quanbu.text = @"商品总价:";
+    quanbu.frame = CGRectMake(20, 110, 80, 30);
+    quanbu.text = @"商品总价:¥";
     quanbu.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
     quanbu.font = [UIFont systemFontOfSize:15];
     
-    UILabel *quanbu1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 145, width-40-80, 30 )];
+    UILabel *quanbu1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 110, width-40-80, 30 )];
     if (jiage.count!=jieshou.count) {
         quanbu1.text=@"待估价";
         quanbu1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         quanbu1.font = [UIFont systemFontOfSize:15];
-        quanbu1.textAlignment = NSTextAlignmentCenter;
+        quanbu1.textAlignment = NSTextAlignmentLeft;
     }
     else{
-        quanbu1.text =[NSString stringWithFormat:@"%d",[wo[indexPath.row] intValue]*[[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] intValue]];
+        quanbu1.text =[NSString stringWithFormat:@"%.1f",[wo[indexPath.row] floatValue]*[[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] floatValue]];
         he=1;
         
         quanbu1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
         quanbu1.font = [UIFont systemFontOfSize:15];
-        quanbu1.textAlignment = NSTextAlignmentCenter;
+        quanbu1.textAlignment = NSTextAlignmentLeft;
         
         [chuancan addObject:quanbu1.text];
     }
     
-    UIView *xian4 = [[UIView alloc]initWithFrame:CGRectMake(0, 180, width, 10)];
-    xian4.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
-    
+    UIView* vc=[[UIView alloc] initWithFrame:CGRectMake(0, 140, width, 20)];
+    vc.backgroundColor=[UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
     
     if (aa == 1)
@@ -532,17 +534,17 @@
         [cell.contentView addSubview:danjia1];
         [cell.contentView addSubview:xian2];
         
-        [cell.contentView addSubview:LXdanjia];
-        [cell.contentView addSubview:LXdanjia1];
+//        [cell.contentView addSubview:LXdanjia];
+//        [cell.contentView addSubview:LXdanjia1];
         [cell.contentView addSubview:xian3];
         
         [cell.contentView addSubview:quanbu];
         [cell.contentView addSubview:quanbu1];
-        [cell.contentView addSubview:xian4];
+        [cell.contentView addSubview:vc];
         
     }
     else if (aa == 2)
-    {
+    { shuliang1.textAlignment = NSTextAlignmentCenter;
         //   减创建
         jian = [[UIButton alloc]initWithFrame:CGRectMake(width/3*1.5,45 , 20, 20)];
         [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
@@ -566,14 +568,14 @@
         [cell.contentView addSubview:danjia1];
         [cell.contentView addSubview:xian2];
         
-        [cell.contentView addSubview:LXdanjia];
-        [cell.contentView addSubview:LXdanjia1];
+//        [cell.contentView addSubview:LXdanjia];
+//        [cell.contentView addSubview:LXdanjia1];
         [cell.contentView addSubview:xian3];
         
         [cell.contentView addSubview:quanbu];
         [cell.contentView addSubview:quanbu1];
-        [cell.contentView addSubview:xian4];
-        
+      
+        [cell.contentView addSubview:vc];
         [cell.contentView addSubview:jia];
         [cell.contentView addSubview:jian];
         
@@ -625,10 +627,12 @@
     if (jiage.count==0) {
         [WarningBox warningBoxModeText:@"请选择客户及商品！" andView:self.view];
     }else{
-        float m;
+        float m=0;
         
+        NSLog(@"chuancan==\n%@\n\n",chuancan);
         for (int i=0; i<chuancan.count; i++) {
-            m+= [chuancan[i] intValue];
+            m+= [chuancan[i] floatValue];
+            NSLog(@"m==\n%.2f\n\n",m);
         }
         if (aa==2) {
             [WarningBox warningBoxModeText:@"请保存您的数据～" andView:self.view];
@@ -671,7 +675,7 @@
             
             //删除字典内容
             
-            [jieshou removeObjectAtIndex:indexPath.row];
+            [jieshou removeObjectAtIndex:indexPath.section];
             if (jieshou.count==0) {
                 jieshou=nil;
             }

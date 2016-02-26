@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    //更换设备    按钮隐藏
-    _genghuan.hidden=YES;
+   
   
     self.user.delegate = self;
     self.pass.delegate = self;
@@ -209,13 +209,13 @@
 - (IBAction)genghuan:(UIButton *)sender {
     [self.view endEditing:YES];
     
-    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示" message:@"更换登录设备,需要联系系统管理员,是否要拨打电话?" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"联系客服" message:@"确定要拨打电话吗?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //调用手机拨打电话
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://12345678999"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://0731-82890722"]];
     }];
-    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [WarningBox warningBoxModeText:@"如需更换设备请联系我们" andView:self.view];
+    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+       
     }];
     
     [alert addAction:action1];
