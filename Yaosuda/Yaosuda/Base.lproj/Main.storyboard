@@ -255,7 +255,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tx_03.png" translatesAutoresizingMaskIntoConstraints="NO" id="4U6-g4-QtW">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rt_03.png" highlightedImage="rt_03.png" translatesAutoresizingMaskIntoConstraints="NO" id="4U6-g4-QtW">
                                         <rect key="frame" x="262" y="20" width="75" height="75"/>
                                         <animations/>
                                         <constraints>
@@ -1239,6 +1239,6 @@
         <image name="dangqianjiekuan_07.png" width="26" height="26"/>
         <image name="iconcc.png" width="18" height="32"/>
         <image name="logoooo.png" width="1024" height="1024"/>
-        <image name="tx_03.png" width="152" height="152"/>
+        <image name="rt_03.png" width="226" height="226"/>
     </resources>
 </document>
