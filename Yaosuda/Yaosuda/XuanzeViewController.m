@@ -108,7 +108,7 @@
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval a=[dat timeIntervalSince1970];
     NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
-
+    
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -133,8 +133,9 @@
     
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-      
-        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+        @try
+        {
+            if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSLog(@"%@",responseObject);
             NSDictionary*data=[responseObject valueForKey:@"data"];
             count=[NSString stringWithFormat:@"%@",[data objectForKey:@"count"]];
@@ -151,7 +152,7 @@
                 [xiadanshuliang addObject:@"0"];
                 
             }
-           
+            
             
             
             [_tableview reloadData];
@@ -161,7 +162,15 @@
             
             
         }
-        
+
+            
+        }
+        @catch (NSException * e) {
+            
+            [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+            
+        }
+                
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
@@ -225,67 +234,67 @@
     }
     
     _imagr = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,width/3 ,width/3)];
-   
+    
     
     if ([xiaolv[indexPath.row] objectForKey:@"pics"]==nil) {
-         _imagr.image=[UIImage imageNamed:@"11121.jpg"];
+        _imagr.image=[UIImage imageNamed:@"11121.jpg"];
         tupian=@"";
     }else{
-    tupian=[NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"pics"]];
+        tupian=[NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"pics"]];
     }
-   
-        
+    
+    
     
     NSArray*arr=[tupian componentsSeparatedByString:@"|"];
     
     
     
     if (tupian.length<10) {
-    
-     _imagr.image=[UIImage imageNamed:@"11121.jpg"];
-    
+        
+        _imagr.image=[UIImage imageNamed:@"11121.jpg"];
+        
     }
-     else{
+    else{
         NSString*lian=[NSString stringWithFormat:@"%@",service_host];
-         NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",lian,arr[1]]];
-         
-         [_imagr sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"11121.jpg"]];
-     }
- 
+        NSURL*url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",lian,arr[1]]];
+        
+        [_imagr sd_setImageWithURL:url  placeholderImage:[UIImage imageNamed:@"11121.jpg"]];
+    }
     
-   
+    
+    
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, 0,width/3*2/3-15, width/3/6)];
     name.font= zitifont;
     name.text = @"商品名称:";
     name.textColor = ziticolor;
-   
+    
     UILabel *name1 = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15, 0, width-width/3-width/3*2/3+5, width/3/6)];
     name1.font= zitifont;
     name1.textColor = ziticolor;
-   
-
+    
+    
     
     UILabel *changjia = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, width/3/6+3, width/3*2/3-15, width/3/6)];
     changjia.font= zitifont;
     changjia.text = @"生产厂家:";
     changjia.textColor = ziticolor;
-   
+    
     UILabel *changjia1 = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15,width/3/6+3,  width-width/3-width/3*2/3+5, width/3/6)];
     changjia1.font= zitifont;
     changjia1.textColor = ziticolor;
     
-
+    
     
     UILabel *guige = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5, width/3/6*2+6, width/3*2/3-15, width/3/6)];
     guige.font= zitifont;
     guige.text = @"规       格:";
     guige.textColor = ziticolor;
-   
+    
     UILabel *guige1 = [[UILabel alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15, width/3/6*2+6,  width-width/3-width/3*2/3+5-70, width/3/6)];
     guige1.font= zitifont;
     guige1.textColor = ziticolor;
-   
-
+    
+    
     
     
     tianjia = [[UIButton alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+(width-width/3-width/3*2/3+5-70)+15, width/3/6*2+10, width-(width/3+5+width/3*2/3-15)-(width-width/3-width/3*2/3+5-70)-20, width/3/5)];
@@ -308,24 +317,24 @@
     shuliang.font= zitifont;
     shuliang.text = @"下单数量:";
     shuliang.textColor =ziticolor;
-   
     
-//   减创建
+    
+    //   减创建
     jian = [[UIButton alloc]initWithFrame:CGRectMake(width/3+5+width/3*2/3-15, width/3/6*4+12, (width-width/3-width/3*2/3+5-70)/3-10,  width/3/6)];
     [jian setImage:[UIImage imageNamed:@"@2x_sp_11.png"] forState:UIControlStateNormal];
     [jian addTarget:self action:@selector(jian:) forControlEvents:UIControlEventTouchUpInside];
     jian.tag=indexPath.row+20000;
-  
-//   加创建
+    
+    //   加创建
     jia = [[UIButton alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+((width-width/3-width/3*2/3+5-70)/3-10)+(width-width/3-width/3*2/3+5-70)/3-5, width/3/6*4+12, (width-width/3-width/3*2/3+5-70)/3-10,  width/3/6)];
     [jia setImage:[UIImage imageNamed:@"@2x_sp_13.png"] forState:UIControlStateNormal];
     [jia addTarget:self action:@selector(jia:) forControlEvents:UIControlEventTouchUpInside];
     jia.tag=indexPath.row+10000 ;
-  
+    
     
     
     shuru = [[UITextField alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+((width-width/3-width/3*2/3+5-70)/3-10), width/3/6*4+12, (width-width/3-width/3*2/3+5-70)/3-5,width/3/6)];
-//   下单的产品数量
+    //   下单的产品数量
     shuru.text = xiadanshuliang[indexPath.row];
     shuru.delegate=self;
     [shuru setTag:indexPath.row+1000];
@@ -337,15 +346,15 @@
     [KeyboardToolBar registerKeyboardToolBar:shuru];
     
     UIButton *gengduo= [[UIButton alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+(width-width/3-width/3*2/3+5-70)+15,width/3/6*4,width-(width/3+5+width/3*2/3-15)-(width-width/3-width/3*2/3+5-70)-20,width/3/5)];
-   
+    
     [gengduo setImage:[UIImage imageNamed:@"@2x_sp_16.png"] forState:UIControlStateNormal];
     
     if ([xiaolv[indexPath.row] objectForKey:@"proName" ]==nil) {
         name1.text=@"";
     }else {
-         name1.text = [NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"proName" ]];
+        name1.text = [NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"proName" ]];
     }
-   
+    
     if([xiaolv[indexPath.row] objectForKey:@"proEnterprise" ]==nil){
         changjia1.text=@"";
     }else{
@@ -362,9 +371,9 @@
         danwei1.text = [NSString stringWithFormat:@"%@",[xiaolv[indexPath.row] objectForKey:@"unit" ]];
     }
     
-  
+    
     [cell.contentView addSubview:_imagr];
-
+    
     [cell.contentView addSubview:name];
     [cell.contentView addSubview:changjia];
     [cell.contentView addSubview:guige];
@@ -375,7 +384,7 @@
     [cell.contentView addSubview:changjia1];
     [cell.contentView addSubview:guige1];
     [cell.contentView addSubview:danwei1];
-
+    
     [cell.contentView addSubview:tianjia];
     
     [cell.contentView addSubview:jia];
@@ -412,7 +421,7 @@
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval a=[dat timeIntervalSince1970];
     NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
-
+    
     
     
     //将上传对象转换为json格式字符串
@@ -434,42 +443,52 @@
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary*data=[responseObject objectForKey:@"data"];
-       NSString* stockNum=[data objectForKey:@"stockNum"];
-        if ([stockNum intValue]-[xiadanshuliang[tt.tag-2000] intValue]<0) {
-            
-            
-            NSString*message=[NSString stringWithFormat:@"您选择了%@件商品，当前剩余库存为%@件",xiadanshuliang[tt.tag-2000],stockNum];
-           
-            UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"库存不足" message:message preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        @try
+        {
+            NSDictionary*data=[responseObject objectForKey:@"data"];
+            NSString* stockNum=[data objectForKey:@"stockNum"];
+            if ([stockNum intValue]-[xiadanshuliang[tt.tag-2000] intValue]<0) {
                 
                 
-            }];
-            UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                NSString*message=[NSString stringWithFormat:@"您选择了%@件商品，当前剩余库存为%@件",xiadanshuliang[tt.tag-2000],stockNum];
                 
-            }];
-            
-            [alert addAction:action1];
-            [alert addAction:action2];
-            [self presentViewController:alert animated:YES completion:^{
+                UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"库存不足" message:message preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    
+                }];
+                UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
                 
-            }];
-            
-            
+                [alert addAction:action1];
+                [alert addAction:action2];
+                [self presentViewController:alert animated:YES completion:^{
+                    
+                }];
+                
+                
+                
+            }
+            else{
+                
+                if([xiadanshuliang[tt.tag-2000] intValue]==0){
+                    [WarningBox warningBoxModeText:@"数量不能为空哟～" andView:self.view];
+                }else{
+                    NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:xiaolv[tt.tag-2000]];
+                    [dd setObject:xiadanshuliang[tt.tag-2000] forKey:@"shuliang"];
+                    [WarningBox warningBoxModeText:@"添加成功~" andView:self.view];
+                    [chuande addObject:dd];
+                }
+                
+            }
+ 
             
         }
-        else{
-  
-            if([xiadanshuliang[tt.tag-2000] intValue]==0){
-                [WarningBox warningBoxModeText:@"数量不能为空哟～" andView:self.view];
-            }else{
-                NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:xiaolv[tt.tag-2000]];
-            [dd setObject:xiadanshuliang[tt.tag-2000] forKey:@"shuliang"];
-                [WarningBox warningBoxModeText:@"添加成功~" andView:self.view];
-                [chuande addObject:dd];
-            }
-
+        @catch (NSException * e) {
+            
+            [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+            
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -563,8 +582,9 @@
     
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        
-        //[WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
+        @try
+        {
+             //[WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
         
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
@@ -584,7 +604,15 @@
             [_tableview reloadData];
             
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+            
+        }
+        @catch (NSException * e) {
+            
+            [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+            
+        }
+           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
         

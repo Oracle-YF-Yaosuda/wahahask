@@ -24,8 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   //更换设备    按钮隐藏
-   
+//   //更换设备    按钮隐藏
+//    _genghuan.hidden=YES;
   
     self.user.delegate = self;
     self.pass.delegate = self;
@@ -180,8 +180,9 @@
         
         [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
-            
-            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
+            @try
+            {
+                [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
             NSLog(@"登录     /*/*/*/*/*/*/*/*/      %@",responseObject);
             if ([[responseObject objectForKey:@"code"] intValue]==0000) {
                 NSString*path=[NSString stringWithFormat:@"%@/Documents/userInfo.plist",NSHomeDirectory()];
@@ -196,7 +197,15 @@
                 }];
                 
             }
-            
+
+                
+            }
+            @catch (NSException * e) {
+                
+                [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+                
+            }
+                        
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
             [WarningBox warningBoxModeText:@"网络连接失败！" andView:self.view];
@@ -215,7 +224,7 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://0731-82890722"]];
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-       
+        
     }];
     
     [alert addAction:action1];

@@ -223,7 +223,7 @@
         datadic=[NSDictionary dictionaryWithObjectsAndKeys:loginUserID,@"loginUserId",san,@"startDate",Now,@"endDate", @"",@"state",pageSize ,@"pageNo",@"5",@"pageSize",nil];
         
     }
-   
+    
     //出入参数：
     
     NSString*jsonstring=[writer stringWithObject:datadic];
@@ -239,7 +239,10 @@
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"输出值－－－－－－%@",responseObject);
         [WarningBox warningBoxHide:YES andView:self.view];
-        if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
+        @try
+        {
+            
+            if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
             
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
             count=[NSString stringWithFormat:@"%@",[datadic objectForKey:@"count"]];
@@ -250,7 +253,14 @@
             [_tableview reloadData];
             
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+        }
+        @catch (NSException * e) {
+            
+            [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+            
+        }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"获取数据失败!" andView:self.view];
@@ -296,7 +306,10 @@
     
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
+        @try
+        {
+            
+             if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
             
             NSDictionary *data1 = [responseObject valueForKey:@"data"];
             youbian=[data1 objectForKey:@"orderList"];
@@ -304,7 +317,14 @@
             [_tableview reloadData];
             
         }
-        
+
+        }
+        @catch (NSException * e) {
+            
+            [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+            
+        }
+               
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"数据加载失败..." andView:self.view];
@@ -560,7 +580,7 @@
     lab71.font = zitifont;
     lab71.textAlignment = NSTextAlignmentLeft;
     
-     UILabel *lab8= [[UILabel alloc]initWithFrame:CGRectMake(20, gao/8*6, 80, labheight)];
+    UILabel *lab8= [[UILabel alloc]initWithFrame:CGRectMake(20, gao/8*6, 80, labheight)];
     lab8.textColor = ziticolor;
     lab8.font = zitifont;
     UIView *xian7 = [[UIView alloc]initWithFrame:CGRectMake(20, gao/8*7, width-40, 1)];
@@ -602,7 +622,7 @@
                 NSString*Now;
                 NSDateFormatter*ff=[[NSDateFormatter alloc] init];
                 [ff setDateFormat:@"yyyy-MM-dd"];
-               
+                
                 Now=[ff stringFromDate:[NSDate date]];
                 
                 NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
@@ -627,7 +647,7 @@
                 _qian.text=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"qian"]];
             }
             _qian.textAlignment = NSTextAlignmentCenter;
-           
+            
             self.qian.font = [UIFont systemFontOfSize:13];
             self.qian.layer.borderColor = [[UIColor colorWithHexString:@"0CB7FF" alpha:1] CGColor];
             self.qian.layer.borderWidth =1;
@@ -652,7 +672,7 @@
                 NSDate* theDate;
                 theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*30 ];
                 san=[ff stringFromDate:theDate];
-
+                
                 self.hou.text=[NSString stringWithFormat:@"%@",Now];
             }
             
@@ -669,7 +689,7 @@
                 NSDate* theDate;
                 theDate = [[NSDate date] initWithTimeIntervalSinceNow: -oneDay*30 ];
                 san=[ff stringFromDate:theDate];
-
+                
                 self.hou.text=[NSString stringWithFormat:@"%@",Now];
             }else{
                 _hou.text=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"hou"]];
@@ -714,7 +734,7 @@
             
             lab41.text = [NSString stringWithFormat:@"¥ %@",[zuojia[indexPath.section-1] objectForKey:@"amount"]];
             
-//            lab51.text = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"discountAmount"]];
+            //            lab51.text = [NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"discountAmount"]];
             
             lab61.text =[NSString stringWithFormat:@"%@",[zuojia[indexPath.section-1] objectForKey:@"createDate"]];
             
@@ -752,9 +772,9 @@
             [cell.contentView addSubview:xian4];
             [cell.contentView addSubview:lab41];
             
-//            [cell.contentView addSubview:lab5];
+            //            [cell.contentView addSubview:lab5];
             [cell.contentView addSubview:xian5];
-//            [cell.contentView addSubview:lab51];
+            //            [cell.contentView addSubview:lab51];
             
             [cell.contentView addSubview:lab6];
             [cell.contentView addSubview:xian6];
@@ -783,7 +803,7 @@
         lab21.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"orderName"]];
         lab31.text=[[youbian[indexPath.section] objectForKey:@"customer"] objectForKey:@"customerName"];
         lab41.text=[NSString stringWithFormat:@"¥ %@",[youbian[indexPath.section] objectForKey:@"amount"]];
-//        lab51.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"discountAmount"]];
+        //        lab51.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"discountAmount"]];
         lab61.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"createDate"]];
         lab71.text=[NSString stringWithFormat:@"%@",[youbian[indexPath.section] objectForKey:@"updateDate"]];
         lab81.text=[NSString stringWithFormat:@"%@",[[youbian[indexPath.section] objectForKey:@"businessperson"] objectForKey:@"name"]];
@@ -805,9 +825,9 @@
         [cell.contentView addSubview:xian4];
         [cell.contentView addSubview:lab41];
         
-//        [cell.contentView addSubview:lab5];
+        //        [cell.contentView addSubview:lab5];
         [cell.contentView addSubview:xian5];
-//        [cell.contentView addSubview:lab51];
+        //        [cell.contentView addSubview:lab51];
         
         [cell.contentView addSubview:lab6];
         [cell.contentView addSubview:xian6];
@@ -986,8 +1006,7 @@
     
 }
 -(void)cha
-{
-    count=[NSString string];
+{ count=[NSString string];
     zuojia = [NSMutableArray array];
     [WarningBox warningBoxModeIndeterminate:@"正在加载..." andView:self.view];
     NSString*loginUserID=[[yonghuziliao getUserInfo] objectForKey:@"id"];
@@ -1027,7 +1046,8 @@
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [WarningBox warningBoxHide:YES andView:self.view];
-        if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
+        @try
+        { if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
             
             NSDictionary *datadic = [responseObject valueForKey:@"data"];
             zuobian=[datadic objectForKey:@"orderList"];
@@ -1039,7 +1059,16 @@
             [_tableview reloadData];
             
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+            
+            
+        }
+        @catch (NSException * e) {
+            
+            [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+            
+        }
+           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"加载失败～" andView:self.view];

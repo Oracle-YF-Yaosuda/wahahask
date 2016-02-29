@@ -49,17 +49,17 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     self.tableview.backgroundColor = [UIColor clearColor];
     
-//解决tableview多出的白条
+    //解决tableview多出的白条
     self.automaticallyAdjustsScrollViewInsets = NO;
-//获取设备宽和高
+    //获取设备宽和高
     width = [UIScreen mainScreen].bounds.size.width;
     height = [UIScreen mainScreen].bounds.size.height;
-//遵守 tableview 代理协议
+    //遵守 tableview 代理协议
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
     
     zhi = 1;
-
+    
     [self SPxinxi];
     
     [self fenduan];
@@ -90,7 +90,7 @@
         zhi = 2;
         [self.tableview reloadData];
     }
-
+    
 }
 //获取订单信息2.3
 -(void)DDxinxi
@@ -134,7 +134,10 @@
     
     [manager GET:url1 parameters:dic1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        NSLog(@"shangpin  xinxi---------------------------%@",responseObject);
+        @try
+        {
+            
+             NSLog(@"shangpin  xinxi---------------------------%@",responseObject);
         if ([[responseObject objectForKey:@"code"] intValue] == 0000) {
             
             
@@ -147,7 +150,14 @@
             
             
         }
-        
+
+        }
+        @catch (NSException * e) {
+            
+            [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+            
+        }
+               
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"数据加载失败～" andView:self.view];
@@ -166,13 +176,13 @@
         return orderDetailList.count;
     }
     return 0;
-   }
+}
 //tableview 行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   
+    
     return 1;
-
+    
 }
 //setion高度
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -184,11 +194,11 @@
 {
     if(zhi == 1)
     {
-        return width/8*12;
+        return width/8*11;
     }
     if (zhi == 2)
     {
-        return width/8*6;
+        return width/8*5;
     }
     return 0;
 }
@@ -234,15 +244,15 @@
     xian9.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
     UIView *xian10 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*11, width-30, 1)];
     xian10.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian11 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*12, width-30, 1)];
-    xian11.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian12 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*13, width-30, 1)];
-    xian12.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian13 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*14, width-30, 1)];
-    xian13.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-    UIView *xian14 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*15, width-30, 1)];
-    xian14.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
-
+//    UIView *xian11 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*12, width-30, 1)];
+//    xian11.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+//    UIView *xian12 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*13, width-30, 1)];
+//    xian12.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+//    UIView *xian13 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*14, width-30, 1)];
+//    xian13.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+//    UIView *xian14 = [[UIView alloc]initWithFrame:CGRectMake(15, gao2/8*15, width-30, 1)];
+//    xian14.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
+    
     
     
     
@@ -254,7 +264,7 @@
     UILabel *lab111 = [[UILabel alloc]initWithFrame:CGRectMake(120, 0, width-30, gao2/8)];
     lab111.textColor = ziticolor;
     lab111.font = zitifont;
-    //lab111.textAlignment = NSTextAlignmentCenter;
+    //lab111.textAlignment = NSTextAlignmentLeft;
     
     UILabel *lab2 = [[UILabel  alloc]initWithFrame:CGRectMake(15,gao2/8,100,gao2/8)];
     lab2.textColor = ziticolor;
@@ -262,7 +272,7 @@
     UILabel *lab21 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8, width-30, gao2/8)];
     lab21.textColor = ziticolor;
     lab21.font =zitifont;
-   // lab21.textAlignment = NSTextAlignmentCenter;
+    // lab21.textAlignment = NSTextAlignmentLeft;
     lab21.numberOfLines = 0;
     
     UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/4, 100, gao2/8)];
@@ -271,7 +281,7 @@
     UILabel *lab31 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/4, width-30, gao2/8)];
     lab31.textColor = ziticolor;
     lab31.font = zitifont;
-    //lab31.textAlignment = NSTextAlignmentCenter;
+    //lab31.textAlignment = NSTextAlignmentLeft;
     
     UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*3, 100, gao2/8)];
     lab4.textColor = ziticolor;
@@ -279,86 +289,86 @@
     UILabel *lab41 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*3, width-30, gao2/8)];
     lab41.textColor = ziticolor;
     lab41.font = zitifont;
-    //lab41.textAlignment = NSTextAlignmentCenter;
+    //lab41.textAlignment = NSTextAlignmentLeft;
     
-    UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(15,  gao2/2, 100, gao2/8)];
-    lab5.textColor = ziticolor;
-    lab5.font = zitifont;
-    UILabel *lab51 = [[UILabel alloc]initWithFrame:CGRectMake(120,  gao2/2, width-30, gao2/8)];
-    lab51.textColor = ziticolor;
-    lab51.font = zitifont;
-   // lab51.textAlignment = NSTextAlignmentCenter;
-    
-    UILabel *lab6 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*5, 100, gao2/8)];
+    UILabel *lab6 = [[UILabel alloc]initWithFrame:CGRectMake(15,  gao2/2, 100, gao2/8)];
     lab6.textColor = ziticolor;
     lab6.font = zitifont;
-    UILabel *lab61 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*5, width-30, gao2/8)];
+    UILabel *lab61 = [[UILabel alloc]initWithFrame:CGRectMake(120,  gao2/2, width-30, gao2/8)];
     lab61.textColor = ziticolor;
     lab61.font = zitifont;
-   // lab61.textAlignment = NSTextAlignmentCenter;
+    // lab51.textAlignment = NSTextAlignmentLeft;
     
-    UILabel *lab7 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*6, 100  , gao2/8)];
+    UILabel *lab7 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*5, 100, gao2/8)];
     lab7.textColor = ziticolor;
     lab7.font = zitifont;
-    UILabel *lab71 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*6, width-30, gao2/8)];
+    UILabel *lab71 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*5, width-30, gao2/8)];
     lab71.textColor = ziticolor;
     lab71.font = zitifont;
-   // lab71.textAlignment = NSTextAlignmentCenter;
+    // lab61.textAlignment = NSTextAlignmentLeft;
     
-    UILabel *lab8 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*7, 100, gao2/8)];
+    UILabel *lab8 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*6, 100  , gao2/8)];
     lab8.textColor = ziticolor;
     lab8.font = zitifont;
-    UILabel *lab81 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*7, width-30, gao2/8)];
+    UILabel *lab81 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*6, width-30, gao2/8)];
     lab81.textColor = ziticolor;
     lab81.font = zitifont;
-  //  lab81.textAlignment = NSTextAlignmentCenter;
-
-    UILabel *lab10 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2, 100, gao2/8)];
-    lab10.font = zitifont;
+    // lab71.textAlignment = NSTextAlignmentLeft;
+    
+    UILabel *lab10 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*7, 100, gao2/8)];
     lab10.textColor = ziticolor;
-    UILabel *lab11 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*9, 100, gao2/8)];
+    lab10.font = zitifont;
+    UILabel *you0 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*7, width-30, gao2/8)];
+    you0.textColor = ziticolor;
+    you0.font = zitifont;
+      you0.textAlignment = NSTextAlignmentLeft;
+   ////////////
+    UILabel *lab11 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2, 100, gao2/8)];
     lab11.font = zitifont;
     lab11.textColor = ziticolor;
-    UILabel *lab12 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*10, 100, gao2/8)];
+    UILabel *lab12 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*9, 100, gao2/8)];
     lab12.font = zitifont;
     lab12.textColor = ziticolor;
-    UILabel *lab13 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*11, 100, gao2/8)];
+    UILabel *lab13 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*10, 100, gao2/8)];
     lab13.font = zitifont;
     lab13.textColor = ziticolor;
-    UILabel *lab14 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*12, 100, gao2/8)];
+    UILabel *lab14 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*11, 100, gao2/8)];
     lab14.font = zitifont;
-    lab14.textColor = ziticolor;
-    UILabel *lab15 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*13, 100, gao2/8)];
-    lab15.font = zitifont;
-    lab15.textColor = ziticolor;
-   
-
-    UILabel *you0 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2, width-30, gao2/8)];
-    you0.font = zitifont;
-    you0.textColor = ziticolor;
-    UILabel *you1 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*9, width-30, gao2/8)];
+//    lab14.textColor = ziticolor;
+//    UILabel *lab14 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*12, 100, gao2/8)];
+//    lab14.font = zitifont;
+//    lab14.textColor = ziticolor;
+//    UILabel *lab15 = [[UILabel alloc]initWithFrame:CGRectMake(15, gao2/8*13, 100, gao2/8)];
+//    lab15.font = zitifont;
+//    lab15.textColor = ziticolor;
+    
+    
+    UILabel *you1 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2, width-30, gao2/8)];
     you1.font = zitifont;
     you1.textColor = ziticolor;
-    UILabel *you2 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*10, width-30, gao2/8)];
+    UILabel *you2 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*9, width-30, gao2/8)];
     you2.font = zitifont;
     you2.textColor = ziticolor;
-    UILabel *you3 = [[UILabel alloc]initWithFrame:CGRectMake(120,  gao2/8*11, width-30, gao2/8)];
+    UILabel *you3 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*10, width-30, gao2/8)];
     you3.font = zitifont;
     you3.textColor = ziticolor;
-    UILabel *you4 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*12, width-30, gao2/8)];
+    UILabel *you4 = [[UILabel alloc]initWithFrame:CGRectMake(120,  gao2/8*11, width-30, gao2/8)];
     you4.font = zitifont;
     you4.textColor = ziticolor;
-    UILabel *you5 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*13, width-30, gao2/8)];
-    you5.font = zitifont;
-    you5.textColor = ziticolor;
-  
+//    UILabel *you4 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*12, width-30, gao2/8)];
+//    you4.font = zitifont;
+//    you4.textColor = ziticolor;
+//    UILabel *you5 = [[UILabel alloc]initWithFrame:CGRectMake(120, gao2/8*13, width-30, gao2/8)];
+//    you5.font = zitifont;
+//    you5.textColor = ziticolor;
+    
     if (zhi == 1)
     {
         lab1.text = @"订单编号:";
         lab2.text = @"订单名称:";
         lab3.text = @"客户姓名:";
         lab4.text = @"订单金额:";
-        lab5.text = @"联系人价格:";
+        
         lab6.text = @"下单时间:";
         lab7.text = @"更新时间:";
         lab8.text = @"业务人员:";
@@ -400,12 +410,12 @@
         {
             isNewRecord1 = @"有退货";
         }
-
+        
         lab111.text = _chuan1;
         lab21.text = _chuan2;
         lab31.text = _chuan3;
-        lab41.text = _chuan4;
-        lab51.text = _chuan5;
+        lab41.text = [NSString stringWithFormat:@"¥ %@", _chuan4 ];
+        
         lab61.text = _chuan6;
         lab71.text = _chuan7;
         lab81.text = _chuan8;
@@ -426,7 +436,7 @@
         [cell.contentView addSubview:xian8];
         [cell.contentView addSubview:xian9];
         [cell.contentView addSubview:xian10];
-        [cell.contentView addSubview:xian11];
+        
         
         
         
@@ -435,31 +445,31 @@
     else if(zhi == 2)
     {   lab1.text = @"商品名称:";
         lab2.text = @"订单编码:";
-        lab3.text = @"数量:";
-        lab4.text = @"联系人价格:";
-        lab5.text = @"客户价格:";
-        lab6.text = @"总价:";
+        lab3.text = @"数        量:";
+        lab4.text = @"客户价格:  ";
+//        lab5.text = @"联系人价格:";
+        lab6.text = @"总        价:";
         
         lab111.text = [NSString stringWithFormat:@"%@",[[orderDetailList [indexPath.section] objectForKey:@"productions"] objectForKey:@"proName"] ];
         lab21.text = [orderDetailList [indexPath.section] objectForKey:@"orderCode"];
         lab31.text = [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"amount"] ];
-        lab41.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"favorablePrice"] ];
-        lab51.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"costPrice"] ];
-        lab61.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"totalPrice"] ];
+        lab41.text =  [NSString stringWithFormat:@"¥ %@",[orderDetailList [indexPath.section] objectForKey:@"costPrice"]  ];
+//        lab51.text =  [NSString stringWithFormat:@"%@",[orderDetailList [indexPath.section] objectForKey:@"favorablePrice"]];
+        lab61.text =  [NSString stringWithFormat:@"¥ %@",[orderDetailList [indexPath.section] objectForKey:@"totalPrice"] ];
         
         [cell.contentView addSubview:xian];
         [cell.contentView addSubview:xian1];
         [cell.contentView addSubview:xian2];
         [cell.contentView addSubview:xian3];
         [cell.contentView addSubview:xian4];
-
+        
     }
     
     [cell.contentView addSubview:lab1];
     [cell.contentView addSubview:lab2];
     [cell.contentView addSubview:lab3];
     [cell.contentView addSubview:lab4];
-    [cell.contentView addSubview:lab5];
+//    [cell.contentView addSubview:lab5];
     [cell.contentView addSubview:lab6];
     [cell.contentView addSubview:lab7];
     [cell.contentView addSubview:lab8];
@@ -469,15 +479,15 @@
     [cell.contentView addSubview:lab12];
     [cell.contentView addSubview:lab13];
     [cell.contentView addSubview:lab14];
-    [cell.contentView addSubview:lab15];
- 
+//    [cell.contentView addSubview:lab15];
+    
     
     
     [cell.contentView addSubview:lab111];
     [cell.contentView addSubview:lab21];
     [cell.contentView addSubview:lab31];
     [cell.contentView addSubview:lab41];
-    [cell.contentView addSubview:lab51];
+//    [cell.contentView addSubview:lab51];
     [cell.contentView addSubview:lab61];
     [cell.contentView addSubview:lab71];
     [cell.contentView addSubview:lab81];
@@ -488,9 +498,9 @@
     [cell.contentView addSubview:you2];
     [cell.contentView addSubview:you3];
     [cell.contentView addSubview:you4];
-    [cell.contentView addSubview:you5];
-   
-
+//    [cell.contentView addSubview:you5];
+    
+    
     cell.backgroundColor=[UIColor whiteColor];
     //cell不可点击
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -542,7 +552,7 @@
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval a=[dat timeIntervalSince1970];
     NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
-
+    
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -555,32 +565,42 @@
     
     //获取签名
     NSString*sign= [lianjie getSign:url :userID :jsonstring :timeSp ];
-   
+    
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-   
+    
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-      [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.navigationController.view];
-       
+        @try
+        {
+            
+            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.navigationController.view];
+        
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             
             
             ChaxunViewController *chaxun = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
             [self.navigationController pushViewController:chaxun animated:YES];
-
+            
             
             
         }
-        
+
+        }
+        @catch (NSException * e) {
+            
+            [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+            
+        }
+                
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络连接错误～" andView:self.view];
         
     }];
-
+    
     
 }
 -(void)tongguo
@@ -597,8 +617,8 @@
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval a=[dat timeIntervalSince1970];
     NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
-
-   
+    
+    
     
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -611,30 +631,39 @@
     
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-   
+    
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
-   
+    
     //电泳借口需要上传的数据
     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.navigationController.view];
-  
+        @try
+        {
+            
+            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.navigationController.view];
+        
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             
             ChaxunViewController *chaxun = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
             [self.navigationController pushViewController:chaxun animated:YES];
+            
+        }
 
         }
-        
+        @catch (NSException * e) {
+            
+            [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+            
+        }
+                
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络连接错误～" andView:self.view];
-       
+        
     }];
-
+    
     
 }
-
 @end

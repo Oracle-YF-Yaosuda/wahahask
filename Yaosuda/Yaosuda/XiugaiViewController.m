@@ -129,11 +129,20 @@
         NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
         [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
-            
-            [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.navigationController. view];
-            
-            if ([[responseObject objectForKey:@"code"] intValue]==0000) {
-                [self.navigationController popViewControllerAnimated:YES];
+            @try
+            {
+                [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.navigationController. view];
+                
+                if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+
+                
+            }
+            @catch (NSException * e) {
+               
+                [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+               
             }
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

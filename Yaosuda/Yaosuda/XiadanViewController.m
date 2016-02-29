@@ -70,7 +70,7 @@
     
 }
 -(void)viewWillAppear:(BOOL)animated
-{
+{chuancan=[[NSMutableArray alloc] init];
     [super viewDidLoad];
     
     he=0;
@@ -92,7 +92,7 @@
     for (int i=0; i<jieshou.count; i++) {
         [wo addObject:[jieshou[i] objectForKey:@"shuliang"]];
     }
-        NSString*pp=[NSString stringWithFormat:@"%@/Documents/guodu.plist",NSHomeDirectory()];
+    NSString*pp=[NSString stringWithFormat:@"%@/Documents/guodu.plist",NSHomeDirectory()];
     NSLog(@"%@",pp);
     //    [wo writeToFile:pp atomically:YES];
     //接受客户数据
@@ -157,7 +157,9 @@
                     //需要上传的数据
                     NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
                     [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        qq++;
+                        @try
+                        {
+                            qq++;
                         
                         
                         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
@@ -180,7 +182,15 @@
                         }
                         
                         [_tableview reloadData];
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+                            
+                        }
+                        @catch (NSException * e) {
+                            
+                            [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+                            
+                        }
+                                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                         qq++;
                         if (qq==jieshou.count) {
                             [WarningBox warningBoxHide:YES andView:self.view];
@@ -296,61 +306,71 @@
         NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
         [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
-            if ([[responseObject objectForKey:@"code"] intValue]==0000) {
-                NSDictionary*data=[responseObject objectForKey:@"data"];
-                NSArray*list=[data objectForKey:@"list"];
-                int qq=1;
-                for (int i=0; i<list.count; i++) {
-                    if ([[list[i] objectForKey:@"stockNum"] intValue]-[[jieshou[i] objectForKey:@"shuliang"] intValue]<0) {
-                        qq++;
-                        //kucunbuzu
-                        
-                        
-                        
-                        
-                        NSString*message=[NSString stringWithFormat:@"您选择了%d件商品，当前剩余库存为%d件",[[jieshou[i] objectForKey:@"shuliang"] intValue],[[list[i] objectForKey:@"stockNum"] intValue]];
-                        UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"库存不足" message:message preferredStyle:UIAlertControllerStyleAlert];
-                        UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @try
+            {
+                if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+                    NSDictionary*data=[responseObject objectForKey:@"data"];
+                    NSArray*list=[data objectForKey:@"list"];
+                    int qq=1;
+                    for (int i=0; i<list.count; i++) {
+                        if ([[list[i] objectForKey:@"stockNum"] intValue]-[[jieshou[i] objectForKey:@"shuliang"] intValue]<0) {
+                            qq++;
+                            //kucunbuzu
                             
                             
-                        }];
-                        UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                             
-                        }];
-                        
-                        [alert addAction:action1];
-                        [alert addAction:action2];
-                        [self presentViewController:alert animated:YES completion:^{
                             
-                        }];
-                        
-                        
-                        
-                    }else
-                    {
-                        aa=1;
-                        self.navigationItem.rightBarButtonItem = right;
-                        if (qq==1) {
-                            //  保存plist文件 重新写入
-                            NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-                            [jieshou writeToFile:path atomically:YES];
+                            NSString*message=[NSString stringWithFormat:@"您选择了%d件商品，当前剩余库存为%d件",[[jieshou[i] objectForKey:@"shuliang"] intValue],[[list[i] objectForKey:@"stockNum"] intValue]];
+                            UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"库存不足" message:message preferredStyle:UIAlertControllerStyleAlert];
+                            UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                
+                                
+                            }];
+                            UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                                
+                            }];
                             
-                            [self.tableview reloadData];
-                            [self viewWillAppear:YES];
+                            [alert addAction:action1];
+                            [alert addAction:action2];
+                            [self presentViewController:alert animated:YES completion:^{
+                                
+                            }];
+                            
+                            
+                            
+                        }else
+                        {
+                            aa=1;
+                            self.navigationItem.rightBarButtonItem = right;
+                            if (qq==1) {
+                                //  保存plist文件 重新写入
+                                NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+                                [jieshou writeToFile:path atomically:YES];
+                                
+                                [self.tableview reloadData];
+                                [self viewWillAppear:YES];
+                                
+                            }
+                            else{
+                                // NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+                                // jieshou=[NSMutableArray arrayWithContentsOfFile:path];
+                                [self.tableview reloadData];
+                                [self viewWillAppear:YES];
+                            }
                             
                         }
-                        else{
-                            // NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-                            // jieshou=[NSMutableArray arrayWithContentsOfFile:path];
-                            [self.tableview reloadData];
-                            [self viewWillAppear:YES];
-                        }
-                        
                     }
                 }
+                
+
+                
             }
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            @catch (NSException * e) {
+                
+                [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+                
+            }
+                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
         }];
         
@@ -468,27 +488,27 @@
     UIView *xian3 = [[UIView alloc]initWithFrame:CGRectMake(0, 140, width, 1)];
     xian3.backgroundColor = [UIColor colorWithHexString:@"f4f4f4" alpha:1];
     
-//    UILabel *LXdanjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 110, 80, 30)];
-//    LXdanjia.text = @"职员单价:";
-//    LXdanjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
-//    LXdanjia.font = [UIFont systemFontOfSize:15];
-//    
-//    UILabel *LXdanjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 110, width-40-80, 30 )];
-//    
-//    if (jiage.count!=jieshou.count) {
-//        LXdanjia1.text=@"待估价";
-//        LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-//        LXdanjia1.font = [UIFont systemFontOfSize:15];
-//        LXdanjia1.textAlignment = NSTextAlignmentLeft;
-//    }
-//    else{
-//        LXdanjia1.text =[dixx objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
-//        he=1;
-//        
-//        LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
-//        LXdanjia1.font = [UIFont systemFontOfSize:15];
-//        LXdanjia1.textAlignment = NSTextAlignmentLeft;
-//    }
+    //    UILabel *LXdanjia = [[UILabel alloc]initWithFrame:CGRectMake(20, 110, 80, 30)];
+    //    LXdanjia.text = @"职员单价:";
+    //    LXdanjia.textColor = [UIColor colorWithHexString:@"646464" alpha:1];
+    //    LXdanjia.font = [UIFont systemFontOfSize:15];
+    //
+    //    UILabel *LXdanjia1 = [[UILabel alloc]initWithFrame:CGRectMake(100, 110, width-40-80, 30 )];
+    //
+    //    if (jiage.count!=jieshou.count) {
+    //        LXdanjia1.text=@"待估价";
+    //        LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    //        LXdanjia1.font = [UIFont systemFontOfSize:15];
+    //        LXdanjia1.textAlignment = NSTextAlignmentLeft;
+    //    }
+    //    else{
+    //        LXdanjia1.text =[dixx objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+    //        he=1;
+    //
+    //        LXdanjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
+    //        LXdanjia1.font = [UIFont systemFontOfSize:15];
+    //        LXdanjia1.textAlignment = NSTextAlignmentLeft;
+    //    }
     
     
     UILabel *quanbu = [[UILabel alloc] init];
@@ -534,8 +554,8 @@
         [cell.contentView addSubview:danjia1];
         [cell.contentView addSubview:xian2];
         
-//        [cell.contentView addSubview:LXdanjia];
-//        [cell.contentView addSubview:LXdanjia1];
+        //        [cell.contentView addSubview:LXdanjia];
+        //        [cell.contentView addSubview:LXdanjia1];
         [cell.contentView addSubview:xian3];
         
         [cell.contentView addSubview:quanbu];
@@ -568,13 +588,13 @@
         [cell.contentView addSubview:danjia1];
         [cell.contentView addSubview:xian2];
         
-//        [cell.contentView addSubview:LXdanjia];
-//        [cell.contentView addSubview:LXdanjia1];
+        //        [cell.contentView addSubview:LXdanjia];
+        //        [cell.contentView addSubview:LXdanjia1];
         [cell.contentView addSubview:xian3];
         
         [cell.contentView addSubview:quanbu];
         [cell.contentView addSubview:quanbu1];
-      
+        
         [cell.contentView addSubview:vc];
         [cell.contentView addSubview:jia];
         [cell.contentView addSubview:jian];
@@ -675,7 +695,7 @@
             
             //删除字典内容
             
-            [jieshou removeObjectAtIndex:indexPath.section];
+            [jieshou removeObjectAtIndex:indexPath.row];
             if (jieshou.count==0) {
                 jieshou=nil;
             }

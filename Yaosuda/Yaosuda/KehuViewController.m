@@ -91,7 +91,10 @@
     NSLog(@"%@",dic);
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        NSLog(@"%@",responseObject);
+        @try
+        {
+            
+             NSLog(@"%@",responseObject);
         
         if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             NSDictionary*data=[responseObject valueForKey:@"data"];
@@ -105,7 +108,14 @@
             
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+        }
+        @catch (NSException * e) {
+            
+            [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+            
+        }
+           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
         
@@ -248,7 +258,7 @@
     ZCdizhi.textColor =ziticolor;
     ZCdizhi.font = zitifont;
     ZCdizhi1.text = [tulv[indexPath.section] objectForKey:@"registerAddress" ];
-   
+    
     //    FZren.text = @"负  责  人";
     //    FZren1.text = [tulv[indexPath.section] objectForKey:@"officer" ];
     LXren.text = @"联  系  人:";
@@ -273,7 +283,7 @@
     [cell.contentView addSubview:KHmingzi1];
     [cell.contentView addSubview:LXdianhua];
     [cell.contentView addSubview:LXdianhua1];
-   
+    
     [cell.contentView addSubview:ZCdizhi];
     [cell.contentView addSubview:ZCdizhi1];
     

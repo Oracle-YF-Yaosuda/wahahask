@@ -17,7 +17,7 @@
 #import "Color+Hex.h"
 
 #define ziticolor [UIColor colorWithHexString:@"646464" alpha:1];
-#define zitifont [UIFont systemFontOfSize:13];
+#define zitifont [UIFont systemFontOfSize:15];
 #define xiancolor [UIColor colorWithHexString:@"e4e4e4" alpha:1];
 @interface QuerenViewController (){
     NSMutableArray*shangid;
@@ -125,22 +125,22 @@
     right.textColor = ziticolor;
     if (indexPath.row==0) {
         
-    right.text= [NSString stringWithFormat:@"%@",[arr [indexPath.section] objectForKey:@"proName"]];
+        right.text= [NSString stringWithFormat:@"%@",[arr [indexPath.section] objectForKey:@"proName"]];
     }else if (indexPath.row==1){
-    right.text= [NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"shuliang"]];
+        right.text= [NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"shuliang"]];
     }else if(indexPath.row==2){
-    right.text= [NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"unit"]];
+        right.text= [NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"unit"]];
     }else if (indexPath.row==3){
-    right.text= [NSString stringWithFormat:@"%@",[arr [indexPath.section]objectForKey:@"etalon"]];
+        right.text= [NSString stringWithFormat:@"%@",[arr [indexPath.section]objectForKey:@"etalon"]];
     }else if (indexPath.row==4){
-    if ([kehu objectForKey:@"linkmanPhone"]==nil) {
-        right.text= @"";
-    }else{
-        right.text= [NSString stringWithFormat:@"%@",[kehu objectForKey:@"linkmanPhone"]];
+        if ([kehu objectForKey:@"linkmanPhone"]==nil) {
+            right.text= @"";
+        }else{
+            right.text= [NSString stringWithFormat:@"%@",[kehu objectForKey:@"linkmanPhone"]];
+        }
     }
-    }
-  
-
+    
+    
     
     
     
@@ -151,13 +151,13 @@
     left.text=Left[indexPath.row];
     
     
-
-//    //自定义线
-//    
-//    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, width/16-1, width, 1)];
-//    xian1.backgroundColor = xiancolor;
+    
+    //    //自定义线
+    //
+    //    UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, width/16-1, width, 1)];
+    //    xian1.backgroundColor = xiancolor;
     //在cell上显示
-//    [cell.contentView addSubview:xian1];
+    //    [cell.contentView addSubview:xian1];
     [cell.contentView addSubview:left];
     [cell.contentView addSubview:right];
     
@@ -174,7 +174,7 @@
 - (IBAction)tijiao:(id)sender
 {
     
-    
+       
     //userID    暂时不用改
     NSString * userID=@"0";
     
@@ -185,7 +185,7 @@
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval a=[dat timeIntervalSince1970];
     NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
-    
+
     [WarningBox warningBoxModeIndeterminate:@"正在下单中..." andView:self.view];
     //将上传对象转换为json格式字符串
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
@@ -198,7 +198,7 @@
     
     //获取签名
     NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
-    
+  
     NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
     
     
@@ -207,33 +207,43 @@
     
     [manager POST:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+        @try
+        {
+            if ([[responseObject objectForKey:@"code"] intValue]==0000) {
             [WarningBox warningBoxModeText:@"下单成功" andView:self.navigationController.view];
-            //删除本地文件
+           //删除本地文件
             NSFileManager *defaultManager;
             defaultManager = [NSFileManager defaultManager];
             NSString*path=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
             NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
             [defaultManager removeItemAtPath:path error:NULL];
             [defaultManager removeItemAtPath:path1 error:NULL];
-            
-            //跳转到订单查询
-            
-            ChaxunViewController *chaxun = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
-            [self.navigationController pushViewController:chaxun animated:YES];
-            
+           
+           //跳转到订单查询
+           
+           ChaxunViewController *chaxun = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"chaxun"];
+           [self.navigationController pushViewController:chaxun animated:YES];
+           
+           
+        }
+
             
         }
-        
+        @catch (NSException * e) {
+            
+            [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+            
+        }
+               
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络连接失败～" andView:self.view];
-        
+
     }];
 }
 - (IBAction)fanhui:(id)sender
 {
     
-    [self.navigationController popViewControllerAnimated:YES];
+      [self.navigationController popViewControllerAnimated:YES];
 }
 @end
