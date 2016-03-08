@@ -18,7 +18,7 @@
 #import "MJRefresh.h"
 
 #define ziticolor [UIColor colorWithHexString:@"646464" alpha:1];
-#define zitifont [UIFont systemFontOfSize:14];
+#define zitifont [UIFont systemFontOfSize:13];
 #define xiancolor [UIColor colorWithHexString:@"e4e4e4" alpha:1];
 
 @interface KehuViewController ()<MJRefreshBaseViewDelegate>
@@ -204,12 +204,12 @@
     
     
     UILabel *KHmingzi = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, (kuan-10)/4-(kuan-10)/4/4, gao/4)];
-    KHmingzi.textColor = ziticolor;
+    KHmingzi.textColor = [UIColor colorWithHexString:@"0CB7FF" alpha:1];
     KHmingzi.font = zitifont;
     //KHmingzi.backgroundColor = [UIColor redColor];
     UILabel *KHmingzi1  = [[UILabel alloc]initWithFrame:CGRectMake(((kuan-10)/4-(kuan-10)/4/4)+5, 0, kuan-((kuan-10)/4-(kuan-10)/4/4)-10, gao/4)];
     KHmingzi1.font =zitifont;
-    KHmingzi1.textColor = ziticolor;
+    KHmingzi1.textColor = [UIColor colorWithHexString:@"0CB7FF" alpha:1];
     KHmingzi1.textAlignment = NSTextAlignmentLeft;
     KHmingzi1.numberOfLines = 0;
     

@@ -118,8 +118,6 @@
         header.scrollView=_tableview;
         footer.scrollView=_tableview;
         footer.delegate=self;
-    }else{
-        
     }
     
 }
@@ -137,11 +135,9 @@
             ye=1;
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"qian"];
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"hou"];
-            zuojia=[NSMutableArray array];
-            if (zhi==1) {
-                
+            zuojia=[[NSMutableArray alloc] init];
+       
                 [self huoququanbu];
-            }
             
             [_tableview reloadData];
             [refr endRefreshing];
@@ -152,10 +148,10 @@
             
             if ((ye-1)*5>=[count intValue]) {
                 [WarningBox warningBoxModeText:@"已经是最后一页！" andView:self.view];
-            }else{
-                if (zhi==1) {
+                }else{
+                
                     [self huoququanbu];
-                }
+                
                 [_tableview reloadData];
                 [refr endRefreshing];
             }
@@ -165,13 +161,15 @@
 }
 //获取全部订单网络数据
 -(void)huoququanbu
-{   count=[NSString string];
+{
+    count=[NSString string];
     NSString*loginUserID=[[yonghuziliao getUserInfo] objectForKey:@"id"];
     //userID    暂时不用改
     NSString * userID=@"0";
     
     //请求地址   地址不同 必须要改
     NSString *url = @"/order/list";
+    [WarningBox warningBoxHide:YES andView:self.view];
     [WarningBox warningBoxModeIndeterminate:@"加载中..." andView:self.view];
     //时间戳
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
@@ -326,6 +324,7 @@
         }
                
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"数据加载失败..." andView:self.view];
     }];
@@ -944,13 +943,14 @@
         zhi = 1;
         self.qian.text=nil;
         self.hou.text=nil;
-        [self.tableview reloadData];
+       [self.tableview reloadData];
     }
     else if(index == 1){
-        [self setupre];
+        //[self setupre];
         zhi = 2;
         [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"dian"];
         _xiaodian.hidden=YES;
+        
         [self huoqudaishenhe];
         self.qian.text=nil;
         self.hou.text=nil;

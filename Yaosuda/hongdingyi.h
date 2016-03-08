@@ -10,9 +10,11 @@
  *
  *  @return http://125.211.221.232:60080
  */
-#define service_host @"http://125.211.221.232:60080"
-
-//#define service_host @"http://124.232.153.68:8000"
+//#define service_host @"http://125.211.221.232:60080"
+//小冷
+//#define service_host @"http://192.168.1.108:8080"
+//外网
+#define service_host @"http://124.232.153.68:8000"
 
 //#define service_host @"http://192.168.1.199:8080"
 /**

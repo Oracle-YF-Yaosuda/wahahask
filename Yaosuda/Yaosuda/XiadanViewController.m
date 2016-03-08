@@ -61,8 +61,23 @@
         
         NSMutableArray*arp=[NSMutableArray arrayWithContentsOfFile:path];
         NSArray*guo=[NSArray arrayWithArray:values];
+        int bbq=0;
         for (NSDictionary*d in guo) {
-            [arp addObject:d];
+            int ioi=0;
+            for (int q=0; q<arp.count-bbq; q++) {
+                if ([[arp[q] objectForKey:@"id"]isEqual:[d objectForKey:@"id"]]) {
+                    [arp[q] setObject:[NSString stringWithFormat:@"%@",[d objectForKey:@"shuliang"]] forKey:@"shuliang"];
+                    ioi=1;
+                }
+            }
+            if (ioi==0) {
+                
+                    bbq++;
+                    [arp addObject:d];
+                
+            }
+           
+            
         }
         [arp writeToFile:path atomically:YES];
     }
@@ -70,7 +85,7 @@
     
 }
 -(void)viewWillAppear:(BOOL)animated
-{chuancan=[[NSMutableArray alloc] init];
+{   chuancan=[[NSMutableArray alloc] init];
     [super viewDidLoad];
     
     he=0;
@@ -92,13 +107,13 @@
     for (int i=0; i<jieshou.count; i++) {
         [wo addObject:[jieshou[i] objectForKey:@"shuliang"]];
     }
-    NSString*pp=[NSString stringWithFormat:@"%@/Documents/guodu.plist",NSHomeDirectory()];
-    NSLog(@"%@",pp);
+//    NSString*pp=[NSString stringWithFormat:@"%@/Documents/guodu.plist",NSHomeDirectory()];
+
     //    [wo writeToFile:pp atomically:YES];
     //接受客户数据
     NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
     NSDictionary*kehuxinxi=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
-    
+
     
     NSFileManager*fm=[NSFileManager defaultManager];
     if (![fm fileExistsAtPath:pathkehu]) {
@@ -190,7 +205,7 @@
                             [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
                             
                         }
-                                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                         qq++;
                         if (qq==jieshou.count) {
                             [WarningBox warningBoxHide:YES andView:self.view];
@@ -230,6 +245,7 @@
 -(void)bianij
 {
     aa=2;
+    chuancan=[[NSMutableArray alloc] init];
     self.navigationItem.rightBarButtonItem = right1;
     [self.tableview reloadData];
     
@@ -238,13 +254,14 @@
     UIButton *quan = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, width, height)];
     [quan addTarget:self action:@selector(xiaoshi) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImageView *iam = [[UIImageView alloc]initWithFrame:CGRectMake(140, 200, 140, 100)];
+    UIImageView *iam = [[UIImageView alloc]initWithFrame:CGRectMake(width/2-50, height/3, 100 , 100)];
     iam.image = [UIImage imageNamed:@"huadong.png"];
     
-    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(150, 300, width, 25)];
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, height/2, width, 25)];
     lab.font = [UIFont systemFontOfSize:17];
     lab.textColor = [UIColor whiteColor];
-    //lab.textAlignment = NSTextAlignmentLeft;
+//    lab.textAlignment = NSTextAlignmentLeft;
+    lab.textAlignment = NSTextAlignmentCenter;
     lab.text = @"*  向左侧拉删除";
     
     [self.view addSubview:di];
@@ -257,7 +274,7 @@
 }
 -(void)baocun
 {
-    
+      chuancan=[[NSMutableArray alloc] init];
     di.hidden=YES;
     
     if (jieshou.count==0) {
@@ -271,6 +288,7 @@
         
         [defaultManager removeItemAtPath:path1 error:NULL];
     }else{
+      
         // [WarningBox warningBoxModeIndeterminate:@"库存剩余判定中..." andView:self.view];
         //userID    暂时不用改
         NSString * userID=@"0";
@@ -478,7 +496,7 @@
         danjia1.textAlignment = NSTextAlignmentLeft;
     }
     else{
-        danjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+        danjia1.text =[dicc objectForKey:[NSString stringWithFormat:@"%lu",(long)indexPath.row]];
         he=1;
         
         danjia1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
@@ -525,7 +543,7 @@
         quanbu1.textAlignment = NSTextAlignmentLeft;
     }
     else{
-        quanbu1.text =[NSString stringWithFormat:@"%.1f",[wo[indexPath.row] floatValue]*[[dicc objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] floatValue]];
+        quanbu1.text =[NSString stringWithFormat:@"%.1f",[wo[indexPath.row] floatValue]*[[dicc objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]] floatValue]];
         he=1;
         
         quanbu1.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
@@ -533,6 +551,7 @@
         quanbu1.textAlignment = NSTextAlignmentLeft;
         
         [chuancan addObject:quanbu1.text];
+ 
     }
     
     UIView* vc=[[UIView alloc] initWithFrame:CGRectMake(0, 140, width, 20)];
@@ -649,10 +668,10 @@
     }else{
         float m=0;
         
-        NSLog(@"chuancan==\n%@\n\n",chuancan);
-        for (int i=0; i<chuancan.count; i++) {
+   
+        for (int i=0; i<jiage.count ; i++) {
             m+= [chuancan[i] floatValue];
-            NSLog(@"m==\n%.2f\n\n",m);
+       
         }
         if (aa==2) {
             [WarningBox warningBoxModeText:@"请保存您的数据～" andView:self.view];
