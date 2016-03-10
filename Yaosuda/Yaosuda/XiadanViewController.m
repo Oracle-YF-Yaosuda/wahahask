@@ -34,6 +34,9 @@
     UIBarButtonItem *right;
     UIBarButtonItem *right1;
     NSMutableArray*wo;
+    
+    UITextField* shuliang1;
+    
     int aa;
     int he;
     UIButton *jia;
@@ -274,137 +277,222 @@
 }
 -(void)baocun
 {
-      chuancan=[[NSMutableArray alloc] init];
-    di.hidden=YES;
+    if(shuliang1.text.length >0){
     
-    if (jieshou.count==0) {
+//        if(![self mima:shuliang1.text])
+//        {
+//            
+//        [WarningBox warningBoxModeText:@"不能以0开头或输入特殊符号!!" andView:self.view];
+//        
+//        }
+//        else
+//        {
+            chuancan=[[NSMutableArray alloc] init];
+  
+            di.hidden=YES;
+    
+            if (jieshou.count==0) {
         
-        aa=1;
-        self.navigationItem.rightBarButtonItem = right;
-        NSFileManager *defaultManager;
-        defaultManager = [NSFileManager defaultManager];
+                aa=1;
+       
+                self.navigationItem.rightBarButtonItem = right;
+       
+                NSFileManager *defaultManager;
+       
+                defaultManager = [NSFileManager defaultManager];
         
-        NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-        
-        [defaultManager removeItemAtPath:path1 error:NULL];
-    }else{
       
-        // [WarningBox warningBoxModeIndeterminate:@"库存剩余判定中..." andView:self.view];
-        //userID    暂时不用改
-        NSString * userID=@"0";
+                NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
         
-        //请求地址   地址不同 必须要改
-        NSString * url =@"/prod/stockNums";
+       
+                [defaultManager removeItemAtPath:path1 error:NULL];
+   
+            }else{
+      
+       
+                // [WarningBox warningBoxModeIndeterminate:@"库存剩余判定中..." andView:self.view];
         
-        //时间戳
-        NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
-        NSTimeInterval a=[dat timeIntervalSince1970];
-        NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
+                //userID    暂时不用改
+       
+                NSString * userID=@"0";
+        
+       
+                //请求地址   地址不同 必须要改
+       
+                NSString * url =@"/prod/stockNums";
+        
+      
+                //时间戳
+       
+                NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+       
+                NSTimeInterval a=[dat timeIntervalSince1970];
+      
+                NSString *timeSp = [NSString stringWithFormat:@"%.0f",a];
         
         
-        //将上传对象转换为json格式字符串
-        AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
-        manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
-        SBJsonWriter* writer=[[SBJsonWriter alloc] init];
-        //出入参数：
-        NSMutableArray*ids=[NSMutableArray array];
-        for (int i=0; i<jieshou.count; i++) {
-            [ids addObject:[NSString stringWithFormat:@"%@",[jieshou[i] objectForKey:@"id"]]];
-        }
-        NSString*iid=[ids componentsJoinedByString:@","];
-        NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:iid,@"ids", nil];
-        NSString*jsonstring=[writer stringWithObject:datadic];
+       
+                //将上传对象转换为json格式字符串
+       
+                AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+       
+                manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
+       
+                SBJsonWriter* writer=[[SBJsonWriter alloc] init];
+                //出入参数：
+     
+                NSMutableArray*ids=[NSMutableArray array];
+      
+                for (int i=0; i<jieshou.count; i++) {
+         
+                    [ids addObject:[NSString stringWithFormat:@"%@",[jieshou[i] objectForKey:@"id"]]];
+     
+                }
+     
+                NSString*iid=[ids componentsJoinedByString:@","];
+     
+                NSDictionary*datadic=[NSDictionary dictionaryWithObjectsAndKeys:iid,@"ids", nil];
+      
+                NSString*jsonstring=[writer stringWithObject:datadic];
         
-        //获取签名
-        NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
+     
+                //获取签名
+     
+                NSString*sign= [lianjie postSign:url :userID :jsonstring :timeSp ];
         
-        NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
+      
+                NSString *url1=[NSString stringWithFormat:@"%@%@%@%@",service_host,app_name,api_url,url];
         
-        //电泳借口需要上传的数据
-        NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
-        [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [WarningBox warningBoxHide:YES andView:self.view];
-            @try
-            {
-                if ([[responseObject objectForKey:@"code"] intValue]==0000) {
-                    NSDictionary*data=[responseObject objectForKey:@"data"];
-                    NSArray*list=[data objectForKey:@"list"];
-                    int qq=1;
-                    for (int i=0; i<list.count; i++) {
-                        if ([[list[i] objectForKey:@"stockNum"] intValue]-[[jieshou[i] objectForKey:@"shuliang"] intValue]<0) {
-                            qq++;
-                            //kucunbuzu
-                            
-                            
-                            
-                            
-                            NSString*message=[NSString stringWithFormat:@"您选择了%d件商品，当前剩余库存为%d件",[[jieshou[i] objectForKey:@"shuliang"] intValue],[[list[i] objectForKey:@"stockNum"] intValue]];
-                            UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"库存不足" message:message preferredStyle:UIAlertControllerStyleAlert];
-                            UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+      
+                //电泳借口需要上传的数据
+      
+                NSDictionary*dic=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring,@"params",appkey, @"appkey",userID,@"userid",sign,@"sign",timeSp,@"timestamp", nil];
+       
+                [manager GET:url1 parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+                    [WarningBox warningBoxHide:YES andView:self.view];
+         
+                    @try
+       
+                    {
+           
+                        if ([[responseObject objectForKey:@"code"] intValue]==0000) {
+          
+                            NSDictionary*data=[responseObject objectForKey:@"data"];
+         
+                            NSArray*list=[data objectForKey:@"list"];
+           
+                            int qq=1;
+           
+                            for (int i=0; i<list.count; i++) {
+              
+                                if ([[list[i] objectForKey:@"stockNum"] intValue]-[[jieshou[i] objectForKey:@"shuliang"] intValue]<0) {
+               
+                                    qq++;
+               
+                                    //kucunbuzu
+                                    NSString*message=[NSString stringWithFormat:@"您选择了%d件商品，当前剩余库存为%d件",[[jieshou[i] objectForKey:@"shuliang"] intValue],[[list[i]
+                                                                                                                                                           objectForKey:@"stockNum"] intValue]];
+                     
+                                    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"库存不足" message:message preferredStyle:UIAlertControllerStyleAlert];
+                      
+                                    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                    }];
+                       
+                                    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                                 
-                                
-                            }];
-                            UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                                
-                            }];
+                                    }];
                             
-                            [alert addAction:action1];
-                            [alert addAction:action2];
-                            [self presentViewController:alert animated:YES completion:^{
+                                    [alert addAction:action1];
+                                    [alert addAction:action2];
+                                    [self presentViewController:alert animated:YES completion:^{
                                 
-                            }];
+                        
+                                    }];
                             
-                            
-                            
-                        }else
-                        {
-                            aa=1;
-                            self.navigationItem.rightBarButtonItem = right;
-                            if (qq==1) {
-                                //  保存plist文件 重新写入
-                                NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
-                                [jieshou writeToFile:path atomically:YES];
-                                
-                                [self.tableview reloadData];
-                                [self viewWillAppear:YES];
-                                
-                            }
-                            else{
+                                }
+                                else
+                                {
+                                    aa=1;
+                                    self.navigationItem.rightBarButtonItem = right;
+                           
+                                    if (qq==1) {
+                          
+                                        //  保存plist文件 重新写入
+                                        NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+                           
+                                        [jieshou writeToFile:path atomically:YES];
+                                        [self.tableview reloadData];
+                                        [self viewWillAppear:YES];
+                                        
+                                    }
+                                    else{
                                 // NSString*path=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
                                 // jieshou=[NSMutableArray arrayWithContentsOfFile:path];
-                                [self.tableview reloadData];
-                                [self viewWillAppear:YES];
-                            }
                             
+                                        [self.tableview reloadData];
+                           
+                                        [self viewWillAppear:YES];
+                        
+                                    }
+                                }
+                            }
                         }
                     }
-                }
-                
+                    @catch (NSException * e) {
+            
+                        [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
+                 
+                    }
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error)
+                 {
+                    [WarningBox warningBoxHide:YES andView:self.view];
+      
+                }];
+            }
+        }
+//    }
+    else {
+        if(jieshou.count==0){
+            aa=1;
+            di.hidden=YES;
+            self.navigationItem.rightBarButtonItem = right;
+            
+            NSFileManager *defaultManager;
+            
+            defaultManager = [NSFileManager defaultManager];
+            
+            
+            NSString*path1=[NSString stringWithFormat:@"%@/Documents/xiadanmingxi.plist",NSHomeDirectory()];
+            
+            
+            [defaultManager removeItemAtPath:path1 error:NULL];
 
-                
-            }
-            @catch (NSException * e) {
-                
-                [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
-                
-            }
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [WarningBox warningBoxHide:YES andView:self.view];
-        }];
+        }else
+        [WarningBox warningBoxModeText:@"数量不能为空!!" andView:self.view];
         
     }
+}
+
+-(BOOL)mima:(NSString *)pass{
     
-    
-    
-    
+    NSString *password = @"^\?[1-9][0-9]*$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",password];
+    BOOL isMatch = [pred evaluateWithObject:pass];
+    return isMatch;
     
 }
+
 -(void)xiaoshi
 {
     
     di.hidden = YES;
     
 }
+
+
+
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -464,7 +552,7 @@
     UIView *xian1 = [[UIView alloc]initWithFrame:CGRectMake(0, 70, width, 1)];
     xian1.backgroundColor = [UIColor colorWithHexString:@"dcdcdc" alpha:1];
     
-    UITextField* shuliang1 = [[UITextField alloc]initWithFrame:CGRectMake(100, 40, width-40-80, 30 )];
+    shuliang1 = [[UITextField alloc]initWithFrame:CGRectMake(100, 40, width-40-80, 30 )];
     shuliang1.delegate=self;
     
     [shuliang1 addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
@@ -475,6 +563,9 @@
     shuliang1.textAlignment = NSTextAlignmentLeft;
     shuliang1.delegate=self;
     shuliang1.keyboardType = UIKeyboardTypeNumberPad;
+    shuliang1.clearsOnBeginEditing = YES;
+//[shuliang1 addTarget:self action:@selector(changePhone) forControlEvents:UIControlEventEditingChanged];
+    
     //键盘添加完成
     [KeyboardToolBar registerKeyboardToolBar:shuliang1];
     
@@ -635,13 +726,31 @@
 -(void)textFieldDidChange :(UITextField *)theTextField
 {
     
-    UITableViewCell *cell=(UITableViewCell*)[[theTextField superview] superview ];
-    
-    NSIndexPath *index=[self.tableview indexPathForCell:cell];
-    
-    UILabel*oo=[cell viewWithTag:index.row+999];
-    NSString*qw=oo.text;
-    [jieshou[index.row] setObject:qw forKey:@"shuliang"];
+    if ([self mima:theTextField.text] ) {
+        int MaxLen = 4;
+        NSString* szText = theTextField.text;
+        if ([theTextField.text length]> MaxLen)
+        {
+            theTextField.text= [szText substringToIndex:MaxLen];
+        }
+
+        UITableViewCell *cell=(UITableViewCell*)[[theTextField superview] superview ];
+        
+        NSIndexPath *index=[self.tableview indexPathForCell:cell];
+        
+        UILabel*oo=[cell viewWithTag:index.row+999];
+        
+        oo.text=[NSString stringWithFormat:@"%d",[oo.text intValue]];
+        
+        NSString*qw=oo.text;
+        
+        [jieshou[index.row] setObject:qw forKey:@"shuliang"];
+  
+    }
+  
+    else {
+        
+    }
 }
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
@@ -668,29 +777,35 @@
     }else{
         float m=0;
         
-   
-        for (int i=0; i<jiage.count ; i++) {
-            m+= [chuancan[i] floatValue];
-       
-        }
+        
         if (aa==2) {
             [WarningBox warningBoxModeText:@"请保存您的数据～" andView:self.view];
         }else{
+            
+            
+            
             if (he==0) {
                 [WarningBox warningBoxModeText:@"请稍等～～" andView:self.view];
             }
             else{
-                
-                NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
-                NSDictionary*kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
-                
-                QuerenViewController *qu = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"queren"];
-                
-                qu.xixi=[NSString stringWithFormat:@"%@",[kehu objectForKey:@"customerName"]];
-                qu.meme =[NSString stringWithFormat:@"%.2f元",m];
-                [self.navigationController pushViewController:qu animated:YES];
-                
-                
+                if (jieshou.count>chuancan.count) {
+                    [WarningBox warningBoxModeText:@"请仔细核对账单" andView:self.view];
+                }
+                else{
+                    
+                    for (int i=0; i<jiage.count ; i++) {
+                        m+= [chuancan[i] floatValue];
+                    }
+                    NSString*pathkehu=[NSString stringWithFormat:@"%@/Documents/kehuxinxi.plist",NSHomeDirectory()];
+                    NSDictionary*kehu=[NSDictionary dictionaryWithContentsOfFile:pathkehu];
+                    
+                    QuerenViewController *qu = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"queren"];
+                    
+                    qu.xixi=[NSString stringWithFormat:@"%@",[kehu objectForKey:@"customerName"]];
+                    qu.meme =[NSString stringWithFormat:@"%.2f元",m];
+                    [self.navigationController pushViewController:qu animated:YES];
+                    
+                }
             }
             
         }
@@ -751,6 +866,7 @@
     NSIndexPath *index=[self.tableview indexPathForCell:cell];
     
     UILabel*oo=[cell viewWithTag:index.row+999];
+    NSLog(@"%@",oo.text);
     
     NSString*qw=oo.text;
     

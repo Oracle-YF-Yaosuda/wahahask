@@ -502,10 +502,30 @@
         return viewFor;
     }
 }
+
 -(void)tiao:(UIGestureRecognizer*)gg
 {
     
 }
+
+-(void)changePhone1
+{
+//    int MaxLen = 4;
+//    NSString* szText = [shuru text];
+//    if ([shuru.text length]> MaxLen)
+//    {
+//        shuru.text = [szText substringToIndex:MaxLen];
+//    }
+}
+-(BOOL)zhengze:(NSString *)zz
+{
+    NSString *password = @"^\\d{4}$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",password];
+    BOOL isMatch = [pred evaluateWithObject:zz];
+    return isMatch;
+
+}
+
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *id1 =@"cell1";
@@ -629,6 +649,9 @@
         shuru.borderStyle=UITextBorderStyleNone;
         shuru.delegate=self;
         shuru.keyboardType = UIKeyboardTypeNumberPad;
+        //shuru.clearsOnBeginEditing = YES;
+        [shuru addTarget:self action:@selector(changePhone1) forControlEvents:UIControlEventEditingChanged];
+        [self zhengze:shuru.text];
         //键盘添加完成
         [KeyboardToolBar registerKeyboardToolBar:shuru];
         
@@ -756,10 +779,18 @@
     [shuru becomeFirstResponder];
     return YES;
 }
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+   
+    shuru.text=@"";
+     shuliangCunFang=shuru.text;
+    return YES;
+}
+
+
 - (IBAction)tianjia:(id)sender
 {
-    if ([shuru.text isEqualToString:@""]||[shuru.text isEqualToString: @"0"]) {
-        [WarningBox warningBoxModeText:@"购买数量太少了哟!" andView:self.view];
+    if ([shuru.text isEqualToString:@""]||[shuru.text isEqualToString: @"0"]||shuru.text.length>4) {
+        [WarningBox warningBoxModeText:@"购买数量为1-9999之间!" andView:self.view];
     }else{
         
         //用户id

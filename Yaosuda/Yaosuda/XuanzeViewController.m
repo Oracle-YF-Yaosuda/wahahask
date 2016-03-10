@@ -32,7 +32,7 @@
     CGFloat height;
     UIButton *jian;
     UIButton *tianjia;
-    UITextField *shuru;
+    UILabel *shuru;
     NSMutableArray*chuande;
     NSArray*productionsList;
     UIButton *jia ;
@@ -215,7 +215,15 @@
     }
   }[refr endRefreshing];
 }
-
+-(void)changePhone:(UITextField*)xixi
+{
+    int MaxLen = 4;
+    NSString* szText = [xixi text];
+    if ([xixi.text length]> MaxLen)
+    {
+        xixi.text = [szText substringToIndex:MaxLen];
+    }
+}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -334,17 +342,18 @@
     
     
     
-    shuru = [[UITextField alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+((width-width/3-width/3*2/3+5-70)/3-10), width/3/6*4+12, (width-width/3-width/3*2/3+5-70)/3-5,width/3/6)];
+    shuru = [[UILabel alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+((width-width/3-width/3*2/3+5-70)/3-10), width/3/6*4+12, (width-width/3-width/3*2/3+5-70)/3-5,width/3/6)];
     //   下单的产品数量
     shuru.text = xiadanshuliang[indexPath.row];
-    shuru.delegate=self;
+    
+    //shuru.delegate=self;
     [shuru setTag:indexPath.row+1000];
     shuru.textColor = [UIColor colorWithHexString:@"3c3c3c" alpha:1];
     shuru.textAlignment = NSTextAlignmentCenter;
-    shuru.borderStyle=UITextBorderStyleNone;
-    shuru.keyboardType = UIKeyboardTypeNumberPad;
+    //shuru.borderStyle=UITextBorderStyleNone;
+    //shuru.keyboardType = UIKeyboardTypeNumberPad;
     //键盘添加完成
-    [KeyboardToolBar registerKeyboardToolBar:shuru];
+    //[KeyboardToolBar registerKeyboardToolBar:shuru];
     
     UIButton *gengduo= [[UIButton alloc]initWithFrame:CGRectMake((width/3+5+width/3*2/3-15)+(width-width/3-width/3*2/3+5-70)+15,width/3/6*4,width-(width/3+5+width/3*2/3-15)-(width-width/3-width/3*2/3+5-70)-20,width/3/5)];
     
@@ -493,7 +502,7 @@
                     NSDictionary*dic5=[NSDictionary dictionaryWithObjectsAndKeys:jsonstring5,@"params",appkey, @"appkey",userID5,@"userid",sign5,@"sign",timeSp5,@"timestamp", nil];
                     
                     [manager GET:url15 parameters:dic5 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                       
+                        
                         @try
                         {
                             NSDictionary*data=[responseObject objectForKey:@"data"];
@@ -526,21 +535,33 @@
                                 if([xiadanshuliang[tt.tag-2000] intValue]==0){
                                     [WarningBox warningBoxModeText:@"数量不能为空哟～" andView:self.view];
                                 }else{
-                                  
+//                                    //找到当前cell
+//                                    UITableViewCell *cell=[(UITableViewCell *)[tt superview]superview];
+//                                    //找到当前值
+//                                    NSIndexPath *index=[self.tableview indexPathForCell:cell];
+//                                    NSString *zhi=[NSString stringWithFormat:@"%@",xiadanshuliang[index.row]];
+//                                    if ((int)zhi >= 9999) {
+//                                        NSLog(@"zhi**********************************%@",zhi);
+//                                        [WarningBox warningBoxModeText:@"123456789123456789" andView:self.view];
+//                                    }
+//                                    else{
+//                                    }
+//                                    
                                     NSMutableDictionary*dd=[NSMutableDictionary dictionaryWithDictionary:xiaolv[tt.tag-2000]];
                                     [dd setObject:xiadanshuliang[tt.tag-2000] forKey:@"shuliang"];
-                                   
+                                    
                                     [WarningBox warningBoxModeText:@"添加成功~" andView:self.view];
                                     int qubaaoteman=0;
                                     for (int abcd=0; abcd < chuande.count; abcd++) {
                                         if ([[chuande[abcd] objectForKey:@"id"]isEqual:[dd objectForKey:@"id"]]) {
                                             qubaaoteman=1;
                                             [chuande replaceObjectAtIndex:abcd withObject:dd];
-                                         }
+                                        }
                                     }
                                     if (qubaaoteman!=1) {
                                         [chuande addObject:dd];
                                     }
+                            
                                 }
                             }
                         }
@@ -557,7 +578,7 @@
                     }];
                 }
             }
-
+            
             
         }
         @catch (NSException * e) {
@@ -565,15 +586,15 @@
             [WarningBox warningBoxModeText:@"请检查你的网络连接!" andView:self.view];
             
         }
-            }
-    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            
-        }];
-        
-
-
-    
     }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             
+         }];
+    
+    
+    
+    
+}
 -(void)jia:(UIButton*)tt{
 //找到当前cell
      UITableViewCell *cell=(UITableViewCell*)[[tt superview] superview ];
@@ -697,29 +718,31 @@
 }
 //手动添加下单数量
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    
-    //找到当前cell
-    UITableViewCell *cell=(UITableViewCell*)[[textField superview] superview ];
-    
-    // 找到当前 没值 ?
-    NSIndexPath *index=[self.tableview indexPathForCell:cell];
-
-    if([string isEqualToString:@""]){
+   
+        //找到当前cell
+        UITableViewCell *cell=(UITableViewCell*)[[textField superview] superview ];
         
-        NSString*yuanlai=[NSString stringWithFormat:@"%@",xiadanshuliang[index.row]];
-        int x=[yuanlai intValue]/10;
+        // 找到当前 没值 ?
+        NSIndexPath *index=[self.tableview indexPathForCell:cell];
         
-        xiadanshuliang[index.row]=[NSString stringWithFormat:@"%d",x];
-      
-    }else {
-        
-        NSString*yuanlai=[NSString stringWithFormat:@"%@",xiadanshuliang[index.row]];
-         int x=[yuanlai intValue]*10+[string intValue];
-     
-        xiadanshuliang[index.row]=[NSString stringWithFormat:@"%d",x];
-       
-    }
+        if([string isEqualToString:@""]){
+            
+            NSString*yuanlai=[NSString stringWithFormat:@"%@",xiadanshuliang[index.row]];
+            int x=[yuanlai intValue]/10;
+            
+            xiadanshuliang[index.row]=[NSString stringWithFormat:@"%d",x];
+            
+        }else {
+            
+            NSString*yuanlai=[NSString stringWithFormat:@"%@",xiadanshuliang[index.row]];
+            int x=[yuanlai intValue]*10+[string intValue];
+            
+            xiadanshuliang[index.row]=[NSString stringWithFormat:@"%d",x];
+            [self changePhone:textField];
+        }
+return YES;
+  
     
-    return YES;
 }
+
 @end
