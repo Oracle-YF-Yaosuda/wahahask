@@ -20,11 +20,11 @@
 #import "KeyboardToolBar.h"
 #import "yonghuziliao.h"
 
+
 #define ziticolor [UIColor colorWithHexString:@"3c3c3c" alpha:1];
 #define zitifont [UIFont systemFontOfSize:13];
-@interface XuanzeViewController ()<MJRefreshBaseViewDelegate,UITextFieldDelegate>
-{   MJRefreshHeaderView*header;
-    MJRefreshHeaderView*footer;
+@interface XuanzeViewController ()<UITextFieldDelegate>
+{
     NSMutableArray*jiahao;
     NSMutableArray*shuzi;
     CGFloat width;
@@ -179,41 +179,35 @@
     }];
 }
 -(void)setupre{
-    header=[MJRefreshHeaderView header];
-    header.scrollView=_tableview;
-    header.delegate=self;
-    header.tag=1001;
-    footer=[MJRefreshFooterView footer];
-    footer.scrollView=_tableview;
-    footer.delegate=self;
-}
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
-    [self performSelector:@selector(done:) withObject:refreshView afterDelay:0];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+    self.tableview.mj_header = header;
+    // 隐藏时间
+    header.lastUpdatedTimeLabel.hidden = YES;
     
+    MJRefreshAutoNormalFooter*footer=[MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
+    self.tableview.mj_footer = footer;
     
 }
--(void)done:(MJRefreshBaseView*)refr{
-    if (refr.tag==1001) {
-        ye=1;
-        xiaolv=[NSMutableArray array];
+
+-(void)headerRereshing{
+    ye=1;
+    xiaolv=[NSMutableArray array];
+    [self xxx:_search.text];
+    [_tableview reloadData];
+    [self.tableview.mj_header endRefreshing];
+}
+-(void)footerRereshing{
+    ye+=1;
+    
+    if ((ye-1)*10>=[count intValue]) {
+        [WarningBox warningBoxModeText:@"已经是最后一页!" andView:self.view];
+        [self.tableview.mj_footer endRefreshing];
+    }else{
         [self xxx:_search.text];
         [_tableview reloadData];
-        [refr endRefreshing];
-        
-        
+        [self.tableview.mj_footer endRefreshing];
     }
-    else{
-        ye+=1;
-        
-        if ((ye-1)*10>=[count intValue]) {
-            [WarningBox warningBoxModeText:@"已经是最后一页!" andView:self.view];
-        }else{
-        [self xxx:_search.text];
-        [_tableview reloadData];
-        [refr endRefreshing];
-        
-    }
-  }[refr endRefreshing];
+
 }
 -(void)changePhone:(UITextField*)xixi
 {

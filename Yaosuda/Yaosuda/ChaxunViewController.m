@@ -23,9 +23,8 @@
 #define xiancolor [UIColor colorWithHexString:@"e4e4e4" alpha:1];
 #define beijingcolor [UIColor colorWithHexString:@"f4f4f4" alpha:1];
 
-@interface ChaxunViewController ()<MJRefreshBaseViewDelegate>
-{   MJRefreshHeaderView*header;
-    MJRefreshFooterView*footer;
+@interface ChaxunViewController ()
+{
     CGFloat width;
     CGFloat height;
     NSArray*zuobian;
@@ -111,57 +110,58 @@
 -(void)setupre
 {
     if (zhi==1) {
-        header=[MJRefreshHeaderView header];
-        header.delegate=self;
-        header.tag=1001;
-        footer=[MJRefreshFooterView footer];
-        header.scrollView=_tableview;
-        footer.scrollView=_tableview;
-        footer.delegate=self;
+        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+        self.tableview.mj_header = header;
+        // 隐藏时间
+        header.lastUpdatedTimeLabel.hidden = YES;
+        
+        MJRefreshAutoNormalFooter*footer=[MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
+        self.tableview.mj_footer = footer;
     }
     
-}
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
-{
-    [self performSelector:@selector(done:) withObject:refreshView afterDelay:0];
+
     
 }
--(void)done:(MJRefreshBaseView*)refr
-{
+-(void)headerRereshing{
     if (zhi!=1) {
-        
+        [self huoqudaishenhe];
+        [_tableview reloadData];
+        [self.tableview.mj_header endRefreshing];
     }else{
-        if (refr.tag==1001) {
-            ye=1;
-            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"qian"];
-            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"hou"];
-            zuojia=[[NSMutableArray alloc] init];
-       
-                [self huoququanbu];
+        ye=1;
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"qian"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"hou"];
+        zuojia=[[NSMutableArray alloc] init];
+        
+        [self huoququanbu];
+        
+        [_tableview reloadData];
+        [self.tableview.mj_header endRefreshing];
+
+    }
+}
+-(void)footerRereshing{
+    if (zhi!=1) {
+        [self huoqudaishenhe];
+        [_tableview reloadData];
+        [self.tableview.mj_footer endRefreshing];
+    }else{
+        ye+=1;
+        
+        if ((ye-1)*5>=[count intValue]) {
+            [WarningBox warningBoxModeText:@"已经是最后一页！" andView:self.view];
+            [self.tableview.mj_footer endRefreshing];
+        }else{
+            
+            [self huoququanbu];
             
             [_tableview reloadData];
-            [refr endRefreshing];
-            
-        }
-        else{
-            ye+=1;
-            
-            if ((ye-1)*5>=[count intValue]) {
-                [WarningBox warningBoxModeText:@"已经是最后一页！" andView:self.view];
-                }else{
-                
-                    [self huoququanbu];
-                
-                [_tableview reloadData];
-                [refr endRefreshing];
-            }
+            [self.tableview.mj_footer endRefreshing];
         }
     }
-    [refr endRefreshing];
 }
 //获取全部订单网络数据
--(void)huoququanbu
-{
+-(void)huoququanbu{
     count=[NSString string];
     NSString*loginUserID=[[yonghuziliao getUserInfo] objectForKey:@"id"];
     //userID    暂时不用改
@@ -702,7 +702,7 @@
             
             
             
-            self.chaxun = [[UIButton alloc]initWithFrame:CGRectMake(45+(width- 60)/3*2+20, 42, (width- 60)/3-20, 30)];
+            self.chaxun =[[UIButton alloc]initWithFrame:CGRectMake(45+(width- 60)/3*2+20, 42, (width- 60)/3-20, 30)];
             self.chaxun.backgroundColor = [UIColor colorWithHexString:@"0CB7FF" alpha:1];
             [self.chaxun setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [self.chaxun addTarget:self action:@selector(cha) forControlEvents:UIControlEventTouchUpInside];

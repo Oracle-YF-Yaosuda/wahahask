@@ -21,9 +21,8 @@
 #define zitifont [UIFont systemFontOfSize:13];
 #define xiancolor [UIColor colorWithHexString:@"e4e4e4" alpha:1];
 
-@interface KehuViewController ()<MJRefreshBaseViewDelegate>
-{   MJRefreshFooterView*footer;
-    MJRefreshHeaderView*header;
+@interface KehuViewController ()
+{
     CGFloat width;
     CGFloat height;
     int ye;
@@ -122,43 +121,37 @@
     }];
 }
 -(void)setupre{
-    header=[MJRefreshHeaderView header];
-    header.scrollView=_tableview;
-    header.delegate=self;
-    header.tag=1001;
-    footer=[MJRefreshFooterView footer];
-    footer.scrollView=_tableview;
-    footer.delegate=self;
-}
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
-    [self performSelector:@selector(done:) withObject:refreshView afterDelay:0];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewdata)];
+    self.tableview.mj_header = header;
+    // 隐藏时间
+    header.lastUpdatedTimeLabel.hidden = YES;
     
-    
+    MJRefreshAutoNormalFooter*footer=[MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    self.tableview.mj_footer = footer;
+
 }
--(void)done:(MJRefreshBaseView*)refr{
-    if (refr.tag==1001) {
-        ye=1;
-        tulv=[NSMutableArray array];
+-(void)loadNewdata{
+    ye=1;
+    tulv=[NSMutableArray array];
+    [self kkk];
+    [_tableview reloadData];
+    [_tableview.mj_header endRefreshing];
+
+}
+-(void)loadNewData{
+    ye+=1;
+    if ((ye-1)*3>=[count intValue]) {
+        [WarningBox warningBoxModeText:@"已经是最后一页了!" andView:self.view];
+        [_tableview.mj_footer endRefreshing];
+    }else{
+        
+        
         [self kkk];
         [_tableview reloadData];
-        [refr endRefreshing];
-        
+        [_tableview.mj_footer endRefreshing];
     }
-    else{
-        ye+=1;
-        if ((ye-1)*3>=[count intValue]) {
-            [WarningBox warningBoxModeText:@"已经是最后一页了!" andView:self.view];
-        }else{
-            
-            
-            [self kkk];
-            [_tableview reloadData];
-            [refr endRefreshing];
-        }
-    }
-    [refr endRefreshing];
-}
 
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
